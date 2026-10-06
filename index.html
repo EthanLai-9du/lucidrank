@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>LucidRank — 先清醒，再开局。</title>
-<meta name="description" content="LucidRank：为 VALORANT 与 CS2 高分段玩家做的状态工具。10 秒签到、截图识别，找到只属于你的状态规律。">
+<title>LucidRank · 睡醒了再排。</title>
+<meta name="description" content="LucidRank：给 VALORANT 和 CS2 玩家做的状态记录。开打前 10 秒签到，打完传结算截图，几周后看出自己哪天打得好。">
 <meta name="application-name" content="LucidRank">
 <meta name="theme-color" content="#000000">
 <script>(function(){var M={sc:'zh-Hans',tc:'zh-Hant',en:'en'},l=null,d=document.documentElement;
@@ -25,10 +25,10 @@ addEventListener('pageshow',function(e){if(e.persisted)scrollTo(0,0);});})();</s
   --dawn1:#ffc46b;--dawn2:#ff6a3d;--dawn3:#ff2e63;--accent:#ff6a3d;--mint:#45e6c4;
   --grad:linear-gradient(100deg,#ffc46b 0%,#ff6a3d 48%,#ff2e63 100%);
   --ease:cubic-bezier(.16,.84,.24,1);--ease-io:cubic-bezier(.65,0,.35,1);--spring:cubic-bezier(.34,1.56,.64,1);
-  --cjk:"PingFang SC","Hiragino Sans GB","Noto Sans SC","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei";
-  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI Variable Text","Segoe UI",var(--cjk),"Helvetica Neue",Arial,sans-serif;
-  --font-display:"SF Pro Display",-apple-system,BlinkMacSystemFont,"Inter Display","Inter","Segoe UI Variable Display","Segoe UI",var(--cjk),"Helvetica Neue",Arial,sans-serif;
-  --mono:"SF Mono","Geist Mono",ui-monospace,"JetBrains Mono",Menlo,Consolas,"Noto Sans Mono CJK SC",monospace;
+  --cjk:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC","Noto Sans CJK SC";
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,var(--cjk),sans-serif;
+  --font-display:var(--font);
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   /* type scale — fluid, ~1.2 ratio on mobile → ~1.33 on desktop */
   --fs-2xs:11px; --fs-xs:12px; --fs-sm:13.5px; --fs-base:16px;
   --fs-md:clamp(16px,.95rem + .2vw,18px);       /* lead */
@@ -97,15 +97,19 @@ section{position:relative}
 .btn:hover .arr{transform:translateX(4px)}
 
 /* ---------- cursor ---------- */
-.cursor{position:fixed;left:0;top:0;width:0;height:0;z-index:300;pointer-events:none;mix-blend-mode:difference;opacity:0;transition:opacity .3s}
-.cursor i{position:absolute;left:-18px;top:-18px;width:36px;height:36px;transition:transform .45s var(--ease)}
-.cursor i::before,.cursor i::after{content:"";position:absolute;background:#fff}
-.cursor i::before{left:17px;top:0;width:2px;height:36px;clip-path:polygon(0 0,100% 0,100% 36%,0 36%,0 64%,100% 64%,100% 100%,0 100%)}
-.cursor i::after{top:17px;left:0;height:2px;width:36px;clip-path:polygon(0 0,36% 0,36% 100%,0 100%,0 0,64% 0,100% 0,100% 100%,64% 100%)}
-.cursor b{position:absolute;left:-2px;top:-2px;width:4px;height:4px;border-radius:50%;background:#fff;transition:transform .3s var(--ease)}
-.cursor.hover i{transform:scale(1.6)}
-.cursor.hover b{transform:scale(2.2)}
-.cursor.down i{transform:scale(.7)}
+.cursor{position:fixed;left:0;top:0;width:0;height:0;z-index:300;pointer-events:none;opacity:0;transition:opacity .3s;--len:6px;--gap:4px;--o:0px}
+/* classic gap crosshair: 4 equal 2px arms, empty centre, 1px dark outline so it reads on light sections too */
+.cursor i{position:absolute;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.55);border-radius:.5px;transition:transform .35s var(--ease),background .25s}
+.cursor .ct,.cursor .cb{left:-1px;width:2px;height:var(--len)}
+.cursor .cl,.cursor .cr{top:-1px;height:2px;width:var(--len)}
+.cursor .ct{top:calc(-1*(var(--gap) + var(--len)))}.cursor .cb{top:var(--gap)}
+.cursor .cl{left:calc(-1*(var(--gap) + var(--len)))}.cursor .cr{left:var(--gap)}
+.cursor b{position:absolute;left:-1px;top:-1px;width:2px;height:2px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.55);transition:opacity .25s,background .25s}
+.cursor.hover .ct{transform:translateY(-3px)}.cursor.hover .cb{transform:translateY(3px)}
+.cursor.hover .cl{transform:translateX(-3px)}.cursor.hover .cr{transform:translateX(3px)}
+.cursor.hover b{background:var(--accent,#ff6a3d)}
+.cursor.down .ct{transform:translateY(2px)}.cursor.down .cb{transform:translateY(-2px)}
+.cursor.down .cl{transform:translateX(2px)}.cursor.down .cr{transform:translateX(-2px)}
 @media (hover:hover) and (pointer:fine){
   .has-cursor,.has-cursor a,.has-cursor button,.has-cursor [role=button],.has-cursor label{cursor:none}
   .has-cursor .cursor{opacity:1}
@@ -188,10 +192,44 @@ section{position:relative}
 .story{height:560vh;background:#000}
 .story-bg{position:absolute;inset:0;background:radial-gradient(120% 70% at 50% 120%,rgba(255,106,61,.5),rgba(255,46,99,.18) 40%,transparent 70%);opacity:0;will-change:opacity}
 .story-grain{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:28px 28px;mask-image:radial-gradient(ellipse at center,#000 10%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at center,#000 10%,transparent 75%);opacity:.6}
-.feed{position:absolute;right:12vw;top:0;width:min(220px,28vw);display:flex;flex-direction:column;gap:14px;opacity:0;will-change:transform,opacity}
-.feed div{height:130px;border-radius:16px;background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.06)}
-.feed div:nth-child(3n){height:200px}.feed div:nth-child(4n+1){height:90px}
-.feed::after{content:"";position:absolute;inset:-20px;background:linear-gradient(#000,transparent 20%,transparent 80%,#000)}
+/* doom-scroll phone (line 2) — all CSS/SVG, generated by app.js */
+.feed{--pw:clamp(200px,17vw,250px);position:absolute;right:9vw;top:50%;width:var(--pw);height:calc(var(--pw)*2.04);margin-top:calc(var(--pw)*-1.02);opacity:0;pointer-events:none;will-change:opacity}
+.feed::before{content:"";position:absolute;left:50%;top:50%;width:260%;height:150%;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(255,106,61,.16),rgba(255,46,99,.06) 55%,transparent);pointer-events:none}
+.phone{position:absolute;inset:0;border-radius:calc(var(--pw)*.17);background:#0b0b0d;box-shadow:inset 0 0 0 1px rgba(255,255,255,.13),inset 0 0 0 5px #050506,0 40px 90px -30px rgba(0,0,0,.9),0 0 0 1px rgba(0,0,0,.6);will-change:transform}
+.ph-screen{position:absolute;inset:6px;border-radius:calc(var(--pw)*.17 - 6px);overflow:hidden;background:#111;isolation:isolate}
+.ph-screen::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.07),transparent 32%);pointer-events:none;z-index:3}
+.ph-island{position:absolute;left:50%;top:9px;width:30%;height:15px;transform:translateX(-50%);border-radius:99px;background:#000;z-index:4}
+.ph-status{position:absolute;left:0;right:0;top:0;height:34px;display:flex;align-items:center;justify-content:space-between;padding:0 16px 0 20px;font:600 10px/1 var(--mono);letter-spacing:.02em;color:#fff;z-index:4}
+.ph-status svg{width:22px;height:10px}
+.ph-tabs{position:absolute;left:0;right:0;top:38px;display:flex;justify-content:center;gap:10px;z-index:4}
+.ph-tabs i{display:block;width:24px;height:3px;border-radius:2px;background:rgba(255,255,255,.35)}
+.ph-tabs i:last-child{background:#fff;width:28px}
+.ph-track{position:absolute;inset:0;will-change:transform}
+.fc{position:relative;height:100%;overflow:hidden;color:#fff}
+.fc-art{position:absolute;inset:0}
+.fc-art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),transparent 22%,transparent 52%,rgba(0,0,0,.72))}
+.fc-art b{position:absolute;border-radius:50%;filter:blur(24px);mix-blend-mode:screen}
+.fc-art s{position:absolute;left:-10%;right:-10%;height:1px;background:rgba(255,255,255,.35);text-decoration:none}
+.fc-art u{position:absolute;border-radius:50%;text-decoration:none}
+.fc-play{position:absolute;left:50%;top:44%;width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:grid;place-items:center}
+.fc-play svg{width:14px;height:14px;margin-left:2px}
+.fc-rail{position:absolute;right:8px;bottom:62px;display:flex;flex-direction:column;align-items:center;gap:10px;font:600 8.5px/1 var(--mono);letter-spacing:0}
+.fc-rail span{display:flex;flex-direction:column;align-items:center;gap:3px;text-shadow:0 1px 3px rgba(0,0,0,.4)}
+.fc-rail svg{width:19px;height:19px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+.fc-rail .liked svg{color:#ff3d6e}
+.fc-disc{width:20px;height:20px;border-radius:50%;background:conic-gradient(from 30deg,#222,#555,#222,#444,#222);box-shadow:0 0 0 3px rgba(0,0,0,.35);position:relative}
+.fc-disc::after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--dc,#ff6a3d)}
+.fc-meta{position:absolute;left:11px;right:46px;bottom:18px;display:flex;flex-direction:column;gap:6px}
+.fc-who{display:flex;align-items:center;gap:6px;font:600 9.5px/1 var(--font);letter-spacing:.01em}
+.fc-who i{width:16px;height:16px;border-radius:50%;flex:none;box-shadow:0 0 0 1.5px rgba(255,255,255,.85)}
+.fc-who em{font-style:normal;font-weight:500;font-size:8px;padding:2px 5px;border-radius:4px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5);opacity:.9}
+.fc-cap{display:block;height:5px;border-radius:3px;background:rgba(255,255,255,.78)}
+.fc-cap+.fc-cap{background:rgba(255,255,255,.45)}
+.fc-snd{display:flex;align-items:center;gap:5px;opacity:.8}
+.fc-snd svg{width:9px;height:9px;flex:none}
+.fc-snd i{display:block;height:4px;border-radius:2px;background:rgba(255,255,255,.5)}
+.fc-prog{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(255,255,255,.18)}
+.fc-prog i{display:block;height:100%;background:#fff}
 .story-clock{position:absolute;left:var(--pad);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;font-family:var(--mono)}
 .sc-label{font-size:11px;letter-spacing:.24em;color:var(--t3)}
 .sc-time{font-size:clamp(22px,2vw,30px);font-weight:400;letter-spacing:.02em;color:var(--t1);font-variant-numeric:tabular-nums}
@@ -204,6 +242,7 @@ section{position:relative}
 .sl{position:absolute;left:0;right:0;top:50%;margin:0;padding:0 var(--pad) 0 calc(var(--pad) + 18vw);font-family:var(--font-display);font-size:var(--fs-4xl);font-weight:600;line-height:var(--lh-head);letter-spacing:-.005em;opacity:0;transform:translateY(-50%);will-change:transform,opacity}
 .sl em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .sl .dim{color:var(--t3)}
+@media (min-width:961px){.sl:nth-child(2){padding-right:calc(clamp(200px,17vw,250px) + 9vw + 48px)}}
 .sl-final{font-size:clamp(32px,1.2rem + 3.4vw,62px);padding-left:var(--pad);text-align:center;padding-right:var(--pad)}
 .sl-final u{text-decoration:none;position:relative;display:inline-block}
 .sl-final u::after{content:"";position:absolute;left:-.04em;right:-.04em;bottom:.02em;height:.09em;background:var(--grad);border-radius:1em;transform:scaleX(var(--u,0));transform-origin:0 50%}
@@ -589,7 +628,7 @@ section{position:relative}
   .sl{padding-left:var(--pad)}
   .story-clock{top:96px;transform:none;flex-direction:row;align-items:center;gap:14px}
   .sc-bar{width:70px}
-  .feed{right:-30px;width:180px}
+  .feed{--pw:min(46vw,190px);right:auto;left:50%;margin-left:calc(var(--pw)*-.5);top:auto;bottom:calc(var(--pw)*-.9);margin-top:0}
 }
 @media (max-width:600px){
   body{font-size:16px}
@@ -704,7 +743,7 @@ section{position:relative}
 .checkin{overflow:hidden}
 
 /* ===== i18n: language switcher + per-language typography ===== */
-html[lang=zh-Hant]{--cjk:"PingFang TC","PingFang HK","Noto Sans TC","Noto Sans CJK TC","Noto Sans CJK HK","Source Han Sans TC","Microsoft JhengHei"}
+html[lang=zh-Hant]{--cjk:"PingFang HK","PingFang TC","Microsoft JhengHei","Noto Sans TC","Noto Sans CJK TC"}
 .story-foot b{color:#fff}
 /* segmented control: 简 / 繁 / EN */
 .lang{--li:0;position:relative;flex:none;display:grid;grid-template-columns:repeat(3,1fr);padding:3px;border-radius:99px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);transition:box-shadow .5s}
@@ -789,11 +828,65 @@ html[lang=en] .hero-sub{letter-spacing:0}
 html[lang=en] .trust-line{letter-spacing:-.01em}
 .sum div:last-child:nth-child(odd){grid-column:auto}.sum div.wide,.sum div.wide:last-child:nth-child(odd){grid-column:1/-1}
 
+/* ===== v3: plain, natural — system fonts, normal tracking, no glows/grain/gradient text/badges ===== */
+:root{
+  --fs-2xl:clamp(20px,1rem + .9vw,26px);
+  --fs-3xl:clamp(26px,1rem + 1.6vw,38px);
+  --fs-4xl:clamp(28px,1rem + 2vw,44px);
+  --fs-display:clamp(44px,1.6rem + 4vw,80px);
+  --lh-head:1.3;--lh-body:1.65;
+}
+*,*::before,*::after{letter-spacing:normal!important}
+body{font-family:var(--font)}
+.h2,.join h2,.sl,.hero-next,.q-text,.ins-stmt,.step h3,.tr-item h3,.ac h3{font-weight:700}
+html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] .sl{line-height:1.2}
+.sl-final{font-size:clamp(30px,1rem + 2.4vw,50px)}
+/* mono only where it's a number */
+.sc-label,.hero-meta,.step .sn,.ac-num,.tr-item .tn,.foot-bottom,.shot-file,.q-idx,.nav-current .n,.sheet a .n,.ph-status,.fc-rail{font-family:var(--font)}
+.sc-label{font-size:13px;color:var(--t2)}
+.q-idx{font-size:12px}
+/* glows, grain, noise: off */
+.hero-glow,.story-bg,.story-grain,.join-glow,.hero-meta,.feed::before{display:none!important}
+.hero .sticky::before,.hero .sticky::after,.join::after,.academy::after,.scan::after{content:none}
+.btn-light:hover{box-shadow:none;background:#fff}
+.btn-accent{background:var(--accent);box-shadow:none}
+.btn-accent:hover{background:#ff7c55}
+/* gradient text → plain accent colour */
+.grad-text,.sl em,.ins-stmt em{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--accent)}
+.sl-final u::after{background:var(--accent);height:.07em}
+.nav-progress i,.sc-bar i,.ci-progress i::after,.tier.on .ti i,.bar-row.bad i{background:var(--accent)}
+/* wordmark: no blur-in / gradient fill */
+.wordmark{background:none;color:#fff;-webkit-background-clip:border-box;background-clip:border-box;filter:none;font-weight:700}
+.wordmark .wm-a{font-weight:700}
+.wordmark .wm-b{font-weight:700;background:none;color:rgba(255,255,255,.5)}
+.wm-b{font-weight:600}
+/* hero eyebrow: plain line, not a frosted pill */
+.hero-eyebrow{padding:0;background:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;color:var(--t2);font-size:var(--fs-sm)}
+.hero-promise{font-weight:600}
+.hero-sub{font-size:var(--fs-md);color:var(--t2);max-width:34em;line-height:1.6}
+/* numbering + badges: gone */
+.nav-current .n,.sheet a .n{display:none}
+.tag-demo{padding:0;background:none;color:var(--t3);font-weight:400;font-size:12px}
+[data-theme=light] .tag-demo,.tasks .tag-demo{color:var(--d3)}
+.tag-demo::before{display:none}
+.q-tag{border:0;padding:0;color:var(--dawn1);font-size:12px}
+.ac-ranks{background:none;padding:0;font-size:13px}
+.task .tk{color:var(--d3)}
+.tr-item{grid-template-columns:1fr 36px}
+@media (max-width:600px){.tr-item{grid-template-columns:1fr}}
+/* manifesto: plain paragraph */
+.lit-text{font-size:clamp(22px,1rem + 1.3vw,32px);line-height:1.45;font-weight:700;max-width:30em}
+.lit-text .mf-sub{display:block;margin-top:.7em;font-size:.6em;font-weight:500;line-height:1.6;color:var(--d2)}
+/* phone UI uses the system sans like a real app */
+.fc-rail{font-weight:600;font-size:9px}
+.ph-status{font-size:10.5px}
+[data-r]{transform:translateY(16px)}
+
 </style>
 </head>
 <body>
 <a class="skip" href="#checkin" data-i18n="skip">跳到互动演示</a>
-<div class="cursor" aria-hidden="true"><i></i><b></b></div>
+<div class="cursor" aria-hidden="true"><i class="ct"></i><i class="cb"></i><i class="cl"></i><i class="cr"></i><b></b></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="gradStroke" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffc46b"/><stop offset=".5" stop-color="#ff6a3d"/><stop offset="1" stop-color="#ff2e63"/></linearGradient>
@@ -827,14 +920,14 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
   <div class="nav-progress" aria-hidden="true"><i></i></div>
 </header>
 <div class="sheet" id="sheet" aria-hidden="true">
-  <a href="#story" data-nav="story"><span class="n">01</span><span data-i18n="nav.story">故事</span></a>
-  <a href="#checkin" data-nav="checkin"><span class="n">02</span><span data-i18n="nav.checkin">签到</span></a>
-  <a href="#scan" data-nav="scan"><span class="n">03</span><span data-i18n="nav.scan">识别</span></a>
-  <a href="#insights" data-nav="insights"><span class="n">04</span><span data-i18n="nav.insights">洞察</span></a>
-  <a href="#tasks" data-nav="tasks"><span class="n">05</span><span data-i18n="nav.tasks">任务</span></a>
-  <a href="#academy" data-nav="academy"><span class="n">06</span><span data-i18n="nav.academy">学院</span></a>
-  <a href="#trust" data-nav="trust"><span class="n">07</span><span data-i18n="nav.trust">原则</span></a>
-  <a href="#join" data-nav="join"><span class="n">→</span><span data-i18n="nav.cta">加入候补</span></a>
+  <a href="#story" data-nav="story"><span data-i18n="nav.story">故事</span></a>
+  <a href="#checkin" data-nav="checkin"><span data-i18n="nav.checkin">签到</span></a>
+  <a href="#scan" data-nav="scan"><span data-i18n="nav.scan">识别</span></a>
+  <a href="#insights" data-nav="insights"><span data-i18n="nav.insights">洞察</span></a>
+  <a href="#tasks" data-nav="tasks"><span data-i18n="nav.tasks">任务</span></a>
+  <a href="#academy" data-nav="academy"><span data-i18n="nav.academy">学院</span></a>
+  <a href="#trust" data-nav="trust"><span data-i18n="nav.trust">原则</span></a>
+  <a href="#join" data-nav="join"><span data-i18n="nav.cta">加入候补</span></a>
   <div class="lang lang-lg" role="group" aria-label="语言" data-i18n-attr="aria-label:lang.group">
     <button type="button" data-lang="sc" lang="zh-Hans" aria-pressed="true">简体中文</button>
     <button type="button" data-lang="tc" lang="zh-Hant" aria-pressed="false">繁體中文</button>
@@ -849,10 +942,10 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
     <canvas id="heroCanvas" aria-hidden="true"></canvas>
     <div class="hero-glow" aria-hidden="true"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow"><span class="eb-dot" aria-hidden="true"></span><span data-i18n="hero.eb">为 VALORANT 与 CS2 高分段玩家</span><span class="eb-long"><i>·</i><span data-i18n="hero.eb2">状态工具</span></span></p>
-      <h1 class="hero-title"><span class="wordmark" aria-hidden="true"><span class="wm-a">Lucid</span><span class="wm-b">Rank</span></span><span class="sr-only">LucidRank — <span data-i18n="tagline">先清醒，再开局。</span></span></h1>
-      <p class="hero-promise" aria-hidden="true" data-i18n="tagline">先清醒，再开局。</p>
-      <p class="hero-sub" data-i18n="hero.sub">10 秒签到<i>·</i>截图识别<i>·</i>你的状态规律</p>
+      <p class="hero-eyebrow"><span data-i18n="hero.eb">给 VALORANT 和 CS2 玩家做的状态记录</span></p>
+      <h1 class="hero-title"><span class="wordmark" aria-hidden="true"><span class="wm-a">Lucid</span><span class="wm-b">Rank</span></span><span class="sr-only">LucidRank — <span data-i18n="tagline">睡醒了再排。</span></span></h1>
+      <p class="hero-promise" aria-hidden="true" data-i18n="tagline">睡醒了再排。</p>
+      <p class="hero-sub" data-i18n="hero.sub">开打前花 10 秒签到，打完传一张结算截图。<br class="d-only">记上两三周，就能看出自己哪天打得好。</p>
       <div class="hero-ctas">
         <a class="btn btn-light magnetic" href="#join" data-i18n="nav.cta">加入候补</a>
         <a class="btn btn-ghost magnetic" href="#checkin"><span data-i18n="hero.try">试试签到</span> <span class="arr">→</span></a>
@@ -860,7 +953,6 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
     </div>
     <p class="hero-next" aria-hidden="true" data-i18n="hero.next">卡分，<br class="m-only">不一定是枪法问题。</p>
     <div class="scroll-cue" aria-hidden="true"><span data-i18n="hero.scroll">向下滚动</span><i></i></div>
-    <div class="hero-meta" aria-hidden="true"><span>CONCEPT · v0.2</span><span>HONG KONG · 2026</span></div>
   </div>
 </section>
 
@@ -869,7 +961,7 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
   <div class="sticky">
     <div class="story-grain" aria-hidden="true"></div>
     <div class="story-bg" aria-hidden="true"></div>
-    <div class="feed" aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div class="feed" aria-hidden="true"></div>
     <div class="story-clock" aria-hidden="true">
       <span class="sc-label" data-i18n="story.day">某个周六</span>
       <span class="sc-time num">07:42</span>
@@ -883,32 +975,29 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
       <p class="sl" data-time="12:05" data-i18n="story.l4">连输三把。<br><span class="dim">怪队友，怪网络。</span></p>
       <p class="sl sl-final" data-time="—" data-i18n="story.l5">输掉的那几局，<br><u>可能</u>早上就定了。</p>
     </div>
-    <p class="story-foot" data-i18n="story.foot">只是“可能”。答案在<b>你自己</b>的数据里。</p>
+    <p class="story-foot" data-i18n="story.foot">只是可能。记几周就知道了。</p>
   </div>
 </section>
 
 <!-- ============ MANIFESTO ============ -->
 <section id="manifesto" class="manifesto" data-theme="light" data-label="story" data-n="01">
   <div class="wrap">
-    <p class="lit-text" id="litText" data-i18n-skip="mf.lit">到了高分段，枪法和意识都差不多。<br>拼的是<span data-hl>状态</span>。</p>
+    <p class="lit-text" id="litText" data-r data-i18n="mf.lit">枪法没变，有些天就是打不准。<span class="mf-sub">多半跟状态有关：睡了多久，几点起，起床后干了什么。</span></p>
     <div class="steps">
       <div class="step" data-r style="--i:0">
         <svg class="si" viewBox="0 0 44 44" aria-hidden="true"><rect x="10" y="4" width="24" height="36" rx="6" fill="none" stroke="#1d1d1f" stroke-width="1.6"/><circle cx="22" cy="18" r="3" fill="#ff6a3d"/><path d="M16 27h12M16 32h8" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <span class="sn">STEP 01</span>
         <h3 data-i18n="mf.s1h">签到<b>10 秒</b></h3>
         <p data-i18n="mf.s1p">开局前，点 8 下。</p>
       </div>
       <div class="step" data-r style="--i:1">
         <svg class="si" viewBox="0 0 44 44" aria-hidden="true"><rect x="4" y="9" width="36" height="26" rx="5" fill="none" stroke="#1d1d1f" stroke-width="1.6"/><path d="M4 22h36" stroke="#45e6c4" stroke-width="1.6"/><path d="M10 15v-2h4M34 15v-2h-4M10 29v2h4M34 29v2h-4" stroke="#1d1d1f" stroke-width="1.6" fill="none"/></svg>
-        <span class="sn">STEP 02</span>
         <h3 data-i18n="mf.s2h">截图<b>5 秒</b></h3>
-        <p data-i18n="mf.s2p">上传结算页，AI 读数。</p>
+        <p data-i18n="mf.s2p">上传结算页，数据自动读出来。</p>
       </div>
       <div class="step" data-r style="--i:2">
         <svg class="si" viewBox="0 0 44 44" aria-hidden="true"><path d="M5 34l9-10 7 6 9-13 9 8" fill="none" stroke="#1d1d1f" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="30" cy="17" r="3" fill="#ff6a3d"/></svg>
-        <span class="sn">STEP 03</span>
         <h3 data-i18n="mf.s3h">规律<b>2–3 周</b></h3>
-        <p data-i18n="mf.s3p">攒够数据，看清自己。</p>
+        <p data-i18n="mf.s3p">记两三周，规律就出来了。</p>
       </div>
     </div>
   </div>
@@ -918,15 +1007,14 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
 <section id="checkin" class="checkin" data-theme="light" data-label="checkin" data-n="02">
   <div class="wrap grid-2">
     <div class="ci-copy">
-      <p class="eyebrow" data-r data-i18n="ci.eb">每日签到</p>
-      <h2 class="h2 rv"><span class="ln"><span data-i18n="ci.h2">10 秒，点完。</span></span></h2>
-      <p class="lead" data-r data-i18n="ci.lead">开局前，凭感觉点。</p>
+      <h2 class="h2 rv"><span class="ln"><span data-i18n="ci.h2">开打前点 8 下</span></span></h2>
+      <p class="lead" data-r data-i18n="ci.lead">不用想太久，凭感觉点就行。</p>
       <ul class="ci-points" data-r>
         <li><b class="num">8</b><span data-i18n="ci.p1">道题</span></li>
         <li><b class="num">≈10</b><span data-i18n="ci.p2">秒</span></li>
         <li><b class="num">0</b><span data-i18n="ci.p3">打字</span></li>
       </ul>
-      <div class="ci-q3" data-r><span class="dot"></span><span data-i18n="ci.q3"><b>别家不问：</b>醒来后，在床上刷了多久手机？</span></div>
+      <div class="ci-q3" data-r><span class="dot"></span><span data-i18n="ci.q3"><b>有一题比较少见：</b>醒来后在床上刷了多久手机。</span></div>
     </div>
     <div class="ci-demo" data-r>
       <div class="device" id="device" role="group" aria-label="每日签到演示" data-i18n-attr="aria-label:ci.aria">
@@ -943,9 +1031,8 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
 <section id="scan" class="scan" data-theme="dark" data-label="scan" data-n="03">
   <div class="wrap">
     <header class="sec-head center">
-      <p class="eyebrow" data-r data-i18n="scan.eb">截图识别</p>
-      <h2 class="h2 rv"><span class="ln"><span data-i18n="scan.h2">截图，<span class="grad-text">就够了。</span></span></span></h2>
-      <p class="lead" data-r data-i18n="scan.lead">不绑账号，不装插件。上传结算页即可。</p>
+      <h2 class="h2 rv"><span class="ln"><span data-i18n="scan.h2">传张截图就行</span></span></h2>
+      <p class="lead" data-r data-i18n="scan.lead">不用绑账号或装插件，传结算页就行。</p>
     </header>
     <div class="gtoggle" role="group" aria-label="选择游戏" data-i18n-attr="aria-label:game.aria" data-r>
       <button type="button" data-game="val" aria-pressed="true">VALORANT</button>
@@ -982,9 +1069,8 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
 <section id="insights" class="insights" data-theme="dark" data-label="insights" data-n="04">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow" data-r data-i18n="ins.eb">个人洞察</p>
-      <h2 class="h2 rv"><span class="ln"><span data-i18n="ins.h2">只和<span class="grad-text">自己</span>比。</span></span></h2>
-      <p class="lead" data-r data-i18n="ins.lead">签到和战绩，自动配对。<br class="m-only">下面是虚构玩家的 21 天。</p>
+      <h2 class="h2 rv"><span class="ln"><span data-i18n="ins.h2">只看你自己的数据</span></span></h2>
+      <p class="lead" data-r data-i18n="ins.lead">签到和战绩会自动对上。<br class="m-only">下面是一个虚构玩家的 21 天。</p>
     </header>
     <div class="ins-grid">
       <div class="card-d" data-r>
@@ -1023,25 +1109,24 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
 <section id="tasks" class="tasks" data-theme="light" data-label="tasks" data-n="05">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow" data-r data-i18n="tk.eb">每日任务</p>
-      <h2 class="h2 rv"><span class="ln"><span data-i18n="tk.h2">每天，三件事。</span></span></h2>
-      <p class="lead" data-r data-i18n="tk.lead">少，才做得到。</p>
+      <h2 class="h2 rv"><span class="ln"><span data-i18n="tk.h2">每天三件小事</span></span></h2>
+      <p class="lead" data-r data-i18n="tk.lead">少一点，才真的会去做。</p>
     </header>
     <div class="task-layout">
       <div class="task-list" id="taskList">
         <button class="task" role="checkbox" aria-checked="false" data-r style="--i:0">
           <span class="chk"><svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span>
-          <span><span class="tk" data-i18n="tk.1k">训练 <span class="pill pill-drill">靶场</span></span><h3 data-i18n="tk.1h">急停点射</h3><p data-i18n="tk.1p">每组 30 发，停稳再开枪。</p><p class="why" data-i18n="tk.1w">依据：近 5 局首杀偏少（示例）</p></span>
+          <span><span class="tk" data-i18n="tk.1k">训练 · 靶场</span><h3 data-i18n="tk.1h">急停点射</h3><p data-i18n="tk.1p">每组 30 发，停稳再开枪。</p><p class="why" data-i18n="tk.1w">依据：近 5 局首杀偏少（示例）</p></span>
           <span class="tm" data-i18n="tk.1t">15 min</span>
         </button>
         <button class="task" role="checkbox" aria-checked="false" data-r style="--i:1">
           <span class="chk"><svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span>
-          <span><span class="tk" data-i18n="tk.2k">对局专注 <span class="pill pill-focus">前 3 局</span></span><h3 data-i18n="tk.2h">转角先预瞄</h3><p data-i18n="tk.2p">过拐角前，准星压在头线。</p><p class="why" data-i18n="tk.2w">对应：准度 · 第 1 课</p></span>
+          <span><span class="tk" data-i18n="tk.2k">对局 · 前 3 局</span><h3 data-i18n="tk.2h">转角先预瞄</h3><p data-i18n="tk.2p">过拐角前，准星压在头线。</p><p class="why" data-i18n="tk.2w">对应：准度 · 第 1 课</p></span>
           <span class="tm" data-i18n="tk.2t">3 局</span>
         </button>
         <button class="task" role="checkbox" aria-checked="false" data-r style="--i:2">
           <span class="chk"><svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span>
-          <span><span class="tk" data-i18n="tk.3k">生活 <span class="pill pill-life">明早</span></span><h3 data-i18n="tk.3h">闹钟响，5 分钟内起床</h3><p data-i18n="tk.3p">今晚把手机放远点充电。</p><p class="why" data-i18n="tk.3w">依据：你数据里关联最明显（示例）</p></span>
+          <span><span class="tk" data-i18n="tk.3k">生活 · 明早</span><h3 data-i18n="tk.3h">闹钟响，5 分钟内起床</h3><p data-i18n="tk.3p">今晚把手机放远点充电。</p><p class="why" data-i18n="tk.3w">依据：你数据里关联最明显（示例）</p></span>
           <span class="tm" data-i18n="tk.3t">明早</span>
         </button>
       </div>
@@ -1072,9 +1157,8 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
 <section id="academy" class="academy" data-theme="dark" data-label="academy" data-n="06">
   <div class="wrap">
     <header class="sec-head center">
-      <p class="eyebrow" data-r data-i18n="ac.eb">LucidRank 学院</p>
-      <h2 class="h2 rv"><span class="ln"><span data-i18n="ac.h2">高分段，学细节。</span></span></h2>
-      <p class="lead" data-r data-i18n="ac.lead">每课约 10 分钟，配练习。两个游戏分开讲。</p>
+      <h2 class="h2 rv"><span class="ln"><span data-i18n="ac.h2">学点下一局就能用的</span></span></h2>
+      <p class="lead" data-r data-i18n="ac.lead">每节课十分钟左右，带一个练习。VALORANT 和 CS2 分开讲。</p>
     </header>
     <div class="gtoggle" role="group" aria-label="选择游戏" data-i18n-attr="aria-label:game.aria" data-r>
       <button type="button" data-game="val" aria-pressed="true">VALORANT</button>
@@ -1082,10 +1166,10 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
     </div>
     <div class="ac-grid" id="acGridVal" data-game="val">
       <article class="ac" data-r style="--i:0;--tc:#45e6c4" tabindex="0">
-        <div class="ac-top"><span class="ac-num">MODULE 01</span><span class="ac-ranks" data-i18n="ac.solo">个人</span></div>
+        <div class="ac-top"><span class="ac-ranks" data-i18n="ac.solo">个人</span></div>
         <div class="ac-art" aria-hidden="true"><svg viewBox="0 0 300 170"><g class="spin"><circle cx="150" cy="85" r="58" fill="none" stroke="rgba(255,255,255,.18)" stroke-dasharray="2 6"/></g><circle cx="150" cy="85" r="30" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/><path d="M150 40v26M150 104v26M105 85h26M169 85h26" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="150" cy="85" r="3" fill="#ff6a3d"/></svg></div>
         <h3 data-i18n="ac.v1h">准度</h3>
-        <p class="tagline" data-i18n="ac.v1t">先把每一枪打对。</p>
+        <p class="tagline" data-i18n="ac.v1t">把基本功练扎实。</p>
         <ul class="lessons">
           <li><span data-i18n="ac.v1l#0">准星高度与预瞄点位</span><span>10:24</span></li>
           <li><span data-i18n="ac.v1l#1">急停与点射节奏</span><span>08:51</span></li>
@@ -1095,10 +1179,10 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
         <div class="ac-foot"><span data-i18n="ac.sample" data-i18n-args='{"n":14}'>14 节课 · 示例课程表</span><span class="go">→</span></div>
       </article>
       <article class="ac" data-r style="--i:1;--tc:#ffc46b" tabindex="0">
-        <div class="ac-top"><span class="ac-num">MODULE 02</span><span class="ac-ranks" data-i18n="ac.team">团队</span></div>
+        <div class="ac-top"><span class="ac-ranks" data-i18n="ac.team">团队</span></div>
         <div class="ac-art" aria-hidden="true"><svg viewBox="0 0 300 170"><g class="spin"><circle cx="150" cy="85" r="66" fill="none" stroke="rgba(255,255,255,.16)" stroke-dasharray="1 5"/></g><g class="spin r2"><path d="M150 37a48 48 0 0148 48" fill="none" stroke="#45e6c4" stroke-width="1.5"/><path d="M150 133a48 48 0 01-48-48" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/></g><circle cx="150" cy="85" r="22" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/><circle cx="104" cy="58" r="4" fill="rgba(255,255,255,.7)"/><circle cx="198" cy="118" r="4" fill="rgba(255,255,255,.7)"/><path d="M104 58L150 85L198 118" stroke="rgba(255,255,255,.25)" stroke-dasharray="3 4"/><circle cx="150" cy="85" r="3" fill="#ff6a3d"/></svg></div>
         <h3 data-i18n="ac.v2h">体系</h3>
-        <p class="tagline" data-i18n="ac.v2t">一个人强，不如五个人对。</p>
+        <p class="tagline" data-i18n="ac.v2t">五个人怎么打配合。</p>
         <ul class="lessons">
           <li><span data-i18n="ac.v2l#0">道具配合与出手时机</span><span>11:05</span></li>
           <li><span data-i18n="ac.v2l#1">清点顺序与交叉火力</span><span>09:37</span></li>
@@ -1108,10 +1192,10 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
         <div class="ac-foot"><span data-i18n="ac.sample" data-i18n-args='{"n":16}'>16 节课 · 示例课程表</span><span class="go">→</span></div>
       </article>
       <article class="ac" data-r style="--i:2;--tc:#ff4d6d" tabindex="0">
-        <div class="ac-top"><span class="ac-num">MODULE 03</span><span class="ac-ranks" data-i18n="ac.review">复盘</span></div>
+        <div class="ac-top"><span class="ac-ranks" data-i18n="ac.review">复盘</span></div>
         <div class="ac-art" aria-hidden="true"><svg viewBox="0 0 300 170"><g class="spin"><circle cx="150" cy="85" r="72" fill="none" stroke="rgba(255,255,255,.14)" stroke-dasharray="1 4"/></g><g class="spin r2"><circle cx="150" cy="85" r="52" fill="none" stroke="url(#gradStroke)" stroke-width="1.5" stroke-dasharray="60 22"/></g><circle cx="150" cy="85" r="32" fill="none" stroke="rgba(255,255,255,.35)"/><circle cx="150" cy="85" r="14" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/><path d="M60 85h60M180 85h60" stroke="rgba(255,255,255,.2)"/><path d="M70 120c30-10 50 8 80-8s50-30 80-12" fill="none" stroke="#45e6c4" stroke-width="1.2" opacity=".7"/><circle cx="150" cy="85" r="3" fill="#ff6a3d"/></svg></div>
         <h3 data-i18n="ac.v3h">细节</h3>
-        <p class="tagline" data-i18n="ac.v3t">赢在别人看不见的地方。</p>
+        <p class="tagline" data-i18n="ac.v3t">节奏、残局和复盘。</p>
         <ul class="lessons">
           <li><span data-i18n="ac.v3l#0">回合节奏与信息差</span><span>12:10</span></li>
           <li><span data-i18n="ac.v3l#1">反清与残局处理</span><span>11:28</span></li>
@@ -1123,10 +1207,10 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
     </div>
     <div class="ac-grid" id="acGridCs2" data-game="cs2" hidden>
       <article class="ac" data-r style="--i:0;--tc:#8fb7ff" tabindex="0">
-        <div class="ac-top"><span class="ac-num">MODULE 01</span><span class="ac-ranks" data-i18n="ac.solo">个人</span></div>
+        <div class="ac-top"><span class="ac-ranks" data-i18n="ac.solo">个人</span></div>
         <div class="ac-art" aria-hidden="true"><svg viewBox="0 0 300 170"><g class="spin"><circle cx="150" cy="85" r="64" fill="none" stroke="rgba(255,255,255,.14)" stroke-dasharray="1 5"/></g><path d="M96 132V60h56" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.5"/><path d="M152 60V40M96 60H80" stroke="rgba(255,255,255,.2)"/><path d="M112 116L194 72" stroke="#8fb7ff" stroke-width="1.2" stroke-dasharray="3 5"/><circle cx="196" cy="71" r="12" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M196 52v8M196 82v8M177 71h8M207 71h8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="112" cy="116" r="4" fill="#ff6a3d"/></svg></div>
         <h3 data-i18n="ac.c1h">预瞄与站位</h3>
-        <p class="tagline" data-i18n="ac.c1t">先到位，再开枪。</p>
+        <p class="tagline" data-i18n="ac.c1t">站对位置，提前瞄好。</p>
         <ul class="lessons">
           <li><span data-i18n="ac.c1l#0">常见点位的预瞄线</span><span>09:48</span></li>
           <li><span data-i18n="ac.c1l#1">站位：别给对面双架</span><span>10:16</span></li>
@@ -1136,10 +1220,10 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
         <div class="ac-foot"><span data-i18n="ac.sample" data-i18n-args='{"n":12}'>12 节课 · 示例课程表</span><span class="go">→</span></div>
       </article>
       <article class="ac" data-r style="--i:1;--tc:#ffc46b" tabindex="0">
-        <div class="ac-top"><span class="ac-num">MODULE 02</span><span class="ac-ranks" data-i18n="ac.team">团队</span></div>
+        <div class="ac-top"><span class="ac-ranks" data-i18n="ac.team">团队</span></div>
         <div class="ac-art" aria-hidden="true"><svg viewBox="0 0 300 170"><g class="spin"><circle cx="150" cy="85" r="70" fill="none" stroke="rgba(255,255,255,.12)" stroke-dasharray="1 4"/></g><path d="M76 132Q128 18 186 84" fill="none" stroke="rgba(255,255,255,.4)" stroke-dasharray="3 5"/><circle cx="76" cy="132" r="3.5" fill="#ff6a3d"/><g class="spin r2"><circle cx="194" cy="94" r="24" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.5)" stroke-width="1.2"/><circle cx="215" cy="79" r="17" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.3)"/><circle cx="176" cy="75" r="14" fill="rgba(255,255,255,.04)" stroke="#ffc46b" stroke-width="1.2"/></g></svg></div>
         <h3 data-i18n="ac.c2h">道具练习</h3>
-        <p class="tagline" data-i18n="ac.c2t">一颗烟，换一个回合。</p>
+        <p class="tagline" data-i18n="ac.c2t">每张图该会的道具。</p>
         <ul class="lessons">
           <li><span data-i18n="ac.c2l#0">每张图必会的 10 颗道具</span><span>12:02</span></li>
           <li><span data-i18n="ac.c2l#1">跳投与同步投掷</span><span>09:24</span></li>
@@ -1149,10 +1233,10 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
         <div class="ac-foot"><span data-i18n="ac.sample" data-i18n-args='{"n":18}'>18 节课 · 示例课程表</span><span class="go">→</span></div>
       </article>
       <article class="ac" data-r style="--i:2;--tc:#45e6c4" tabindex="0">
-        <div class="ac-top"><span class="ac-num">MODULE 03</span><span class="ac-ranks" data-i18n="ac.call">决策</span></div>
+        <div class="ac-top"><span class="ac-ranks" data-i18n="ac.call">决策</span></div>
         <div class="ac-art" aria-hidden="true"><svg viewBox="0 0 300 170"><g class="spin"><circle cx="150" cy="85" r="68" fill="none" stroke="rgba(255,255,255,.12)" stroke-dasharray="1 4"/></g><path d="M98 130h104" stroke="rgba(255,255,255,.3)"/><rect x="106" y="98" width="14" height="32" rx="3" fill="rgba(255,255,255,.22)"/><rect x="128" y="74" width="14" height="56" rx="3" fill="rgba(255,255,255,.45)"/><rect x="150" y="106" width="14" height="24" rx="3" fill="rgba(255,255,255,.18)"/><rect x="172" y="60" width="14" height="70" rx="3" fill="url(#gradStroke)"/><g class="spin r2"><circle cx="210" cy="50" r="13" fill="none" stroke="#45e6c4" stroke-width="1.5"/><circle cx="210" cy="50" r="6" fill="none" stroke="#45e6c4" stroke-width="1.2" stroke-dasharray="2 3"/></g></svg></div>
         <h3 data-i18n="ac.c3h">回合经济</h3>
-        <p class="tagline" data-i18n="ac.c3t">钱怎么花，回合就怎么打。</p>
+        <p class="tagline" data-i18n="ac.c3t">起枪、ECO 和强起。</p>
         <ul class="lessons">
           <li><span data-i18n="ac.c3l#0">起枪还是 ECO</span><span>08:36</span></li>
           <li><span data-i18n="ac.c3l#1">强起的时机</span><span>09:50</span></li>
@@ -1170,16 +1254,14 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
 <section id="trust" class="trust" data-theme="light" data-label="trust" data-n="07">
   <div class="wrap trust-grid">
     <header class="trust-head">
-      <p class="eyebrow" data-r data-i18n="tr.eb">原则</p>
-      <h2 class="h2 rv trust-h"><span class="ln"><span data-i18n="tr.h2">只说实话。</span></span></h2>
-      <p class="lead" data-r data-i18n="tr.lead">写在第一行代码之前。</p>
-      <p class="trust-line" data-r data-i18n="tr.line">让自律成为实力的一部分。</p>
+      <h2 class="h2 rv trust-h"><span class="ln"><span data-i18n="tr.h2">几条规矩</span></span></h2>
+      <p class="lead" data-r data-i18n="tr.lead">写代码之前就定好了。</p>
     </header>
     <ol class="tr-list">
-      <li class="tr-item" data-r><span class="tn">01</span><div><h3 data-i18n="tr.1h">不承诺上分</h3><p data-i18n="tr.1p">只说“在你身上是这样”，不说“科学证明”。</p></div><svg class="ti" viewBox="0 0 46 46" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="23" cy="23" r="18"/><path d="M15 23h16" stroke="#ff6a3d" stroke-width="2" stroke-linecap="round"/></svg></li>
-      <li class="tr-item" data-r><span class="tn">02</span><div><h3 data-i18n="tr.2h">不预测分数</h3><p data-i18n="tr.2p">不算隐藏分，不猜段位和分数。遵守 Riot 与 Valve 的开发者条款。</p></div><svg class="ti" viewBox="0 0 46 46" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 34l9-10 7 6 9-13 7 6" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 6l34 34" stroke="#ff6a3d" stroke-width="2" stroke-linecap="round"/></svg></li>
-      <li class="tr-item" data-r><span class="tn">03</span><div><h3 data-i18n="tr.3h">数据够了才开口</h3><p data-i18n="tr.3p">不满一周只记录。每条结论都标明天数。</p></div><svg class="ti" viewBox="0 0 46 46" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="9" cy="23" r="3"/><circle cx="21" cy="23" r="5"/><circle cx="36" cy="23" r="8" stroke="#ff6a3d"/></svg></li>
-      <li class="tr-item" data-r><span class="tn">04</span><div><h3 data-i18n="tr.4h">数据归你</h3><p data-i18n="tr.4p">原图可删，记录可导出、可清空。不卖数据。</p></div><svg class="ti" viewBox="0 0 46 46" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="10" y="20" width="26" height="19" rx="4"/><path d="M16 20v-5a7 7 0 0114 0v5"/><circle cx="23" cy="29" r="2" fill="#ff6a3d" stroke="none"/></svg></li>
+      <li class="tr-item" data-r><div><h3 data-i18n="tr.1h">不承诺上分</h3><p data-i18n="tr.1p">我们只会说“你的数据里是这样”，不会把它说成科学结论。</p></div><svg class="ti" viewBox="0 0 46 46" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="23" cy="23" r="18"/><path d="M15 23h16" stroke="#ff6a3d" stroke-width="2" stroke-linecap="round"/></svg></li>
+      <li class="tr-item" data-r><div><h3 data-i18n="tr.2h">不预测分数</h3><p data-i18n="tr.2p">不算隐藏分，不猜段位和分数。遵守 Riot 与 Valve 的开发者条款。</p></div><svg class="ti" viewBox="0 0 46 46" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 34l9-10 7 6 9-13 7 6" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 6l34 34" stroke="#ff6a3d" stroke-width="2" stroke-linecap="round"/></svg></li>
+      <li class="tr-item" data-r><div><h3 data-i18n="tr.3h">数据够了才下结论</h3><p data-i18n="tr.3p">不满一周只记录。每条结论都标明天数。</p></div><svg class="ti" viewBox="0 0 46 46" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="9" cy="23" r="3"/><circle cx="21" cy="23" r="5"/><circle cx="36" cy="23" r="8" stroke="#ff6a3d"/></svg></li>
+      <li class="tr-item" data-r><div><h3 data-i18n="tr.4h">数据归你</h3><p data-i18n="tr.4p">原图可删，记录可导出、可清空。不卖数据。</p></div><svg class="ti" viewBox="0 0 46 46" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="10" y="20" width="26" height="19" rx="4"/><path d="M16 20v-5a7 7 0 0114 0v5"/><circle cx="23" cy="29" r="2" fill="#ff6a3d" stroke="none"/></svg></li>
     </ol>
   </div>
 </section>
@@ -1189,8 +1271,8 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
   <div class="join-glow" aria-hidden="true"></div>
   <svg class="join-xh" aria-hidden="true"><use href="#xh"/></svg>
   <div class="wrap">
-    <h2 class="rv"><span class="ln"><span data-i18n="join.h2">明早，先别刷手机。</span></span></h2>
-    <p class="lead" data-r data-i18n="join.lead">第一版开发中，国服优先。留个邮箱，内测见。</p>
+    <h2 class="rv"><span class="ln"><span data-i18n="join.h2">明早起来，先别碰手机</span></span></h2>
+    <p class="lead" data-r data-i18n="join.lead">第一版还在做，先支持国服。留个邮箱，内测开了通知你。</p>
     <form class="form" id="form" novalidate data-r>
       <div class="form-inner">
         <div class="chips" role="group" aria-label="你主要玩哪个服" data-i18n-attr="aria-label:join.srvAria">
@@ -1221,7 +1303,7 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
     <div class="foot-top">
       <div>
         <a class="brand" href="#hero" aria-label="LucidRank"><svg class="brand-mark"><use href="#xh"/></svg><span class="brand-name" aria-hidden="true"><span class="wm-a">Lucid</span><span class="wm-b">Rank</span></span></a>
-        <p class="foot-tag" data-i18n="tagline">先清醒，再开局。</p>
+        <p class="foot-tag" data-i18n="tagline">睡醒了再排。</p>
       </div>
       <div class="foot-links">
         <div><b data-i18n="ft.product">产品</b><a href="#checkin" data-i18n="ft.checkin">每日签到</a><a href="#scan" data-i18n="ft.scan">截图识别</a><a href="#insights" data-i18n="ft.insights">个人洞察</a></div>
@@ -1233,7 +1315,7 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
       <p data-i18n="ft.legal1">LucidRank 为独立概念产品，与 Riot Games、Valve、腾讯、完美世界均无关联，亦未获其认可。VALORANT、无畏契约 为 Riot Games, Inc. 的商标；Counter-Strike、CS2 为 Valve Corporation 的商标。</p>
       <p data-i18n="ft.legal2">页面图表、数值、截图与课程均为示例数据。不构成医疗或健康建议。</p>
     </div>
-    <div class="foot-bottom"><span data-i18n="ft.ver">© 2026 LucidRank · 网页初版 v0.2</span><span>MADE IN HONG KONG</span></div>
+    <div class="foot-bottom"><span data-i18n="ft.ver">© 2026 LucidRank · 网页初版 v0.2</span><span>Made in Hong Kong</span></div>
   </div>
 </footer>
 
@@ -1244,12 +1326,12 @@ html[lang=en] .trust-line{letter-spacing:-.01em}
    - Values may contain simple HTML (<br>, <b>, <em>, <span class="…">).
    - {name} = runtime variable (number, email…). Keep it in every language.
    - Arrays = lists (options, weekdays…). Keep the same length & order.
-   - LucidRank / {"sc": "先清醒，再开局。", "tc": "先醒神，再開局。", "en": "Wake up. Then queue up."} are filled by build.py (tagline lives there).
+   - LucidRank / {"sc": "睡醒了再排。", "tc": "睡醒了才排位。", "en": "Wake up before you queue."} are filled by build.py (tagline lives there).
    ============================================================ */
 const I18N = {
   /* ---- meta / chrome ---- */
-  tagline: {"sc": "先清醒，再开局。", "tc": "先醒神，再開局。", "en": "Wake up. Then queue up."},
-  desc: {"sc": "LucidRank：为 VALORANT 与 CS2 高分段玩家做的状态工具。10 秒签到、截图识别，找到只属于你的状态规律。", "tc": "LucidRank：為 VALORANT 與 CS2 高分段玩家而設的狀態工具。10 秒簽到、截圖識別，找出只屬於你的狀態規律。", "en": "LucidRank: a readiness tool for high-elo VALORANT and CS2 players. 10-second check-ins, screenshot scan, patterns that are yours alone."},
+  tagline: {"sc": "睡醒了再排。", "tc": "睡醒了才排位。", "en": "Wake up before you queue."},
+  desc: {"sc": "LucidRank：给 VALORANT 和 CS2 玩家做的状态记录。开打前 10 秒签到，打完传结算截图，几周后看出自己哪天打得好。", "tc": "LucidRank：寫給 VALORANT 和 CS2 玩家的狀態記錄。開打前 10 秒簽到，打完上載結算截圖，幾個星期後看得出自己哪天打得好。", "en": "LucidRank: a check-in tool for VALORANT and CS2 players. 10 seconds before you play, a screenshot after, and in a few weeks you'll see which days you play well."},
   'lang.group': {sc:'语言', tc:'語言', en:'Language'},
   skip: {sc:'跳到互动演示', tc:'跳至互動示範', en:'Skip to demo'},
   'nav.aria': {sc:'页面分区', tc:'頁面分區', en:'Sections'},
@@ -1269,12 +1351,12 @@ const I18N = {
   demo: {sc:'示例数据', tc:'示例數據', en:'Sample data'},
 
   /* ---- hero ---- */
-  'hero.eb': {sc:'为 VALORANT 与 CS2 高分段玩家', tc:'為 VALORANT 與 CS2 高分段玩家', en:'For high-elo VALORANT & CS2 players'},
+  'hero.eb': {sc:'给 VALORANT 和 CS2 玩家做的状态记录', tc:'寫給 VALORANT 和 CS2 玩家的狀態記錄', en:'A check-in tool for VALORANT and CS2 players'},
   'hero.eb2': {sc:'状态工具', tc:'狀態工具', en:'Readiness tool'},
-  'hero.sub': {sc:'10 秒签到<i>·</i>截图识别<i>·</i>你的状态规律', tc:'10 秒簽到<i>·</i>截圖識別<i>·</i>你的狀態規律', en:'<span>10-sec check-in</span><i>·</i><span>Screenshot scan</span><i>·</i><span>Your patterns</span>'},
+  'hero.sub': {sc:'开打前花 10 秒签到，打完传一张结算截图。<br class="d-only">记上两三周，就能看出自己哪天打得好。', tc:'開打前用 10 秒簽到，打完上載一張結算截圖。<br class="d-only">記錄兩三個星期，就看得出自己哪天打得好。', en:'Check in for 10 seconds before you play. Upload your end screen after.<br class="d-only"> Give it two or three weeks and you’ll see which days you play well.'},
   'hero.try': {sc:'试试签到', tc:'試試簽到', en:'Try check-in'},
   'hero.next': {sc:'卡分，<br class="m-only">不一定是枪法问题。', tc:'卡分，<br class="m-only">未必是槍法問題。', en:'Hardstuck?<br class="m-only"> It might not be your aim.'},
-  'hero.scroll': {sc:'向下滚动', tc:'向下捲動', en:'SCROLL'},
+  'hero.scroll': {sc:'向下滚动', tc:'向下捲動', en:'Scroll'},
 
   /* ---- story ---- */
   'story.aria': {sc:'一个普通的早上', tc:'一個普通的早上', en:'An ordinary morning'},
@@ -1284,27 +1366,25 @@ const I18N = {
   'story.l3': {sc:'第一局。<br>准星<span class="dim">慢半拍</span>。', tc:'第一局。<br>準星<span class="dim">慢半拍</span>。', en:'First match.<br>Your aim is <span class="dim">a beat late</span>.'},
   'story.l4': {sc:'连输三把。<br><span class="dim">怪队友，怪网络。</span>', tc:'連輸三局。<br><span class="dim">怪隊友，怪網絡。</span>', en:'Three losses in a row.<br><span class="dim">Blame the team. Blame the ping.</span>'},
   'story.l5': {sc:'输掉的那几局，<br><u>可能</u>早上就定了。', tc:'輸掉的那幾局，<br><u>可能</u>早上已經注定。', en:'Those losses <u>may</u> have<br>started this morning.'},
-  'story.foot': {sc:'只是“可能”。答案在<b>你自己</b>的数据里。', tc:'只是「可能」。答案在<b>你自己</b>的數據裡。', en:'Only “may.” The answer is in <b>your</b> data.'},
+  'story.foot': {sc:'只是可能。记几周就知道了。', tc:'只是可能。記錄幾個星期就知道。', en:'Maybe. Log a few weeks and you’ll know.'},
 
   /* ---- manifesto ---- */
-  'mf.lit': {sc:'到了高分段，枪法和意识都差不多。<br>拼的是<span data-hl>状态</span>。',
-             tc:'到了高分段，槍法和意識都差不多。<br>拼的是<span data-hl>狀態</span>。',
-             en:'At high elo, everyone can aim and read the game.<br>The edge is <span data-hl>your state</span>.'},
+  'mf.lit': {sc:'枪法没变，有些天就是打不准。<span class="mf-sub">多半跟状态有关：睡了多久，几点起，起床后干了什么。</span>', tc:'槍法沒變，有些日子就是打不中。<span class="mf-sub">多數跟狀態有關：睡了多久，幾點起身，起床後做了甚麼。</span>', en:'Your aim didn’t change, but some days nothing hits.<span class="mf-sub">Usually it comes down to how you slept, when you got up, and what you did next.</span>'},
   'mf.s1h': {sc:'签到<b>10 秒</b>', tc:'簽到<b>10 秒</b>', en:'Check in<b>10 sec</b>'},
   'mf.s1p': {sc:'开局前，点 8 下。', tc:'開局前，點 8 下。', en:'Eight taps before you queue.'},
   'mf.s2h': {sc:'截图<b>5 秒</b>', tc:'截圖<b>5 秒</b>', en:'Screenshot<b>5 sec</b>'},
-  'mf.s2p': {sc:'上传结算页，AI 读数。', tc:'上載結算頁，AI 讀數。', en:'Upload the end screen. AI reads it.'},
+  'mf.s2p': {sc:'上传结算页，数据自动读出来。', tc:'上載結算頁，數據自動讀取。', en:'Upload the end screen and the stats get read for you.'},
   'mf.s3h': {sc:'规律<b>2–3 周</b>', tc:'規律<b>2–3 週</b>', en:'Patterns<b>2–3 wks</b>'},
-  'mf.s3p': {sc:'攒够数据，看清自己。', tc:'儲夠數據，看清自己。', en:'Enough data to see yourself clearly.'},
+  'mf.s3p': {sc:'记两三周，规律就出来了。', tc:'記錄兩三個星期，規律就會出來。', en:'After two or three weeks, patterns show up.'},
 
   /* ---- check-in ---- */
   'ci.eb': {sc:'每日签到', tc:'每日簽到', en:'Daily check-in'},
-  'ci.h2': {sc:'10 秒，点完。', tc:'10 秒，點完。', en:'Ten seconds. Done.'},
-  'ci.lead': {sc:'开局前，凭感觉点。', tc:'開局前，憑感覺點。', en:'Before you queue. Go with your gut.'},
+  'ci.h2': {sc:'开打前点 8 下', tc:'開打前點 8 下', en:'Eight taps before you play'},
+  'ci.lead': {sc:'不用想太久，凭感觉点就行。', tc:'不用想太久，憑感覺點就可以。', en:'Don’t overthink it. Go with your gut.'},
   'ci.p1': {sc:'道题', tc:'條問題', en:'questions'},
   'ci.p2': {sc:'秒', tc:'秒', en:'seconds'},
   'ci.p3': {sc:'打字', tc:'打字', en:'typing'},
-  'ci.q3': {sc:'<b>别家不问：</b>醒来后，在床上刷了多久手机？', tc:'<b>別家不會問：</b>醒來後，在床上滑了多久手機？', en:'<b>Only we ask:</b> how long did you scroll in bed?'},
+  'ci.q3': {sc:'<b>有一题比较少见：</b>醒来后在床上刷了多久手机。', tc:'<b>有一題比較少見：</b>醒來後在床上滑了多久手機。', en:'<b>One question you won’t see elsewhere:</b> how long you scrolled in bed.'},
   'ci.aria': {sc:'每日签到演示', tc:'每日簽到示範', en:'Daily check-in demo'},
   'ci.day': {sc:'今天 · 开局前', tc:'今天 · 開局前', en:'Today · Pre-game'},
   'ci.sec': {sc:'{n} 秒', tc:'{n} 秒', en:'{n} s'},
@@ -1318,7 +1398,7 @@ const I18N = {
   'ci.multi': {sc:'可多选', tc:'可多選', en:'Pick any'},
   'ci.next': {sc:'下一题 →', tc:'下一題 →', en:'Next →'},
   'ci.sep': {sc:'、', tc:'、', en:', '},
-  'q.tag': {sc:'别家不问', tc:'別家不會問', en:'Only we ask'},
+  'q.tag': {sc:'少见的一题', tc:'少見的一題', en:'Rare one'},
   'q.bed': {sc:'昨晚几点睡？', tc:'昨晚幾點睡？', en:'When did you go to bed?'},
   'q.bed.o': {sc:['23 点前','23–0 点','0–1 点','1–2 点','2 点后'], tc:['23 點前','23–0 點','0–1 點','1–2 點','2 點後'], en:['Before 11 pm','11–12','12–1 am','1–2 am','After 2 am']},
   'q.bed.s': {sc:'入睡', tc:'入睡', en:'Bedtime'},
@@ -1349,8 +1429,8 @@ const I18N = {
 
   /* ---- scan ---- */
   'scan.eb': {sc:'截图识别', tc:'截圖識別', en:'Screenshot scan'},
-  'scan.h2': {sc:'截图，<span class="grad-text">就够了。</span>', tc:'截圖，<span class="grad-text">就夠了。</span>', en:'One screenshot. <span class="grad-text">That’s it.</span>'},
-  'scan.lead': {sc:'不绑账号，不装插件。上传结算页即可。', tc:'不綁帳號，不裝程式。上載結算頁就可以。', en:'No account linking. No plugins. Just the end screen.'},
+  'scan.h2': {sc:'传张截图就行', tc:'上載一張截圖就可以', en:'Just upload a screenshot'},
+  'scan.lead': {sc:'不用绑账号或装插件，传结算页就行。', tc:'不用綁帳號或裝外掛，上載結算頁就可以。', en:'No account linking or plugins. Upload the end screen and you’re done.'},
   'scan.drop': {sc:'拖入对局截图', tc:'拖入對局截圖', en:'Drop a match screenshot'},
   'scan.kinds': {sc:'结算页 · 计分板 · 生涯页', tc:'結算頁 · 計分板 · 生涯頁', en:'End screen · Scoreboard · Career'},
   'scan.sample': {sc:'用示例截图', tc:'用示例截圖', en:'Use sample'},
@@ -1401,8 +1481,8 @@ const I18N = {
 
   /* ---- insights ---- */
   'ins.eb': {sc:'个人洞察', tc:'個人洞察', en:'Insights'},
-  'ins.h2': {sc:'只和<span class="grad-text">自己</span>比。', tc:'只跟<span class="grad-text">自己</span>比。', en:'Just <span class="grad-text">you</span> vs. you.'},
-  'ins.lead': {sc:'签到和战绩，自动配对。<br class="m-only">下面是虚构玩家的 21 天。', tc:'簽到和戰績，自動配對。<br class="m-only">以下是虛構玩家的 21 天。', en:'Check-ins and stats, paired for you.<br class="m-only"> Here’s 21 days of a fictional player.'},
+  'ins.h2': {sc:'只看你自己的数据', tc:'只看你自己的數據', en:'Only your own data'},
+  'ins.lead': {sc:'签到和战绩会自动对上。<br class="m-only">下面是一个虚构玩家的 21 天。', tc:'簽到和戰績會自動對上。<br class="m-only">以下是一個虛構玩家的 21 天。', en:'Check-ins and match stats get matched up for you.<br class="m-only"> Below: 21 days of a made-up player.'},
   'ins.q': {sc:'哪件事影响最大？', tc:'哪件事影響最大？', en:'What matters most?'},
   'ins.tabs': {sc:'影响因素', tc:'影響因素', en:'Factors'},
   'ins.tab.phone': {sc:'醒后刷手机', tc:'醒後滑手機', en:'Phone'},
@@ -1448,19 +1528,19 @@ const I18N = {
 
   /* ---- tasks ---- */
   'tk.eb': {sc:'每日任务', tc:'每日任務', en:'Daily tasks'},
-  'tk.h2': {sc:'每天，三件事。', tc:'每天，三件事。', en:'Three things a day.'},
-  'tk.lead': {sc:'少，才做得到。', tc:'少，才做得到。', en:'Few enough to actually do.'},
-  'tk.1k': {sc:'训练 <span class="pill pill-drill">靶场</span>', tc:'訓練 <span class="pill pill-drill">靶場</span>', en:'Drill <span class="pill pill-drill">Range</span>'},
+  'tk.h2': {sc:'每天三件小事', tc:'每天三件小事', en:'Three small things a day'},
+  'tk.lead': {sc:'少一点，才真的会去做。', tc:'少一點，才會真的去做。', en:'Keep the list short and you’ll actually do it.'},
+  'tk.1k': {sc:'训练 · 靶场', tc:'訓練 · 靶場', en:'Drill · Range'},
   'tk.1h': {sc:'急停点射', tc:'急停點射', en:'Counter-strafe taps'},
   'tk.1p': {sc:'每组 30 发，停稳再开枪。', tc:'每組 30 發，停定再開槍。', en:'30 shots a set. Stop, then shoot.'},
   'tk.1w': {sc:'依据：近 5 局首杀偏少（示例）', tc:'依據：近 5 局首殺偏少（示例）', en:'Why: few first kills in your last 5 (sample)'},
   'tk.1t': {sc:'15 min', tc:'15 min', en:'15 min'},
-  'tk.2k': {sc:'对局专注 <span class="pill pill-focus">前 3 局</span>', tc:'對局專注 <span class="pill pill-focus">頭 3 局</span>', en:'Focus <span class="pill pill-focus">First 3 games</span>'},
+  'tk.2k': {sc:'对局 · 前 3 局', tc:'對局 · 頭 3 局', en:'In game · First 3 games'},
   'tk.2h': {sc:'转角先预瞄', tc:'轉角先預瞄', en:'Pre-aim every corner'},
   'tk.2p': {sc:'过拐角前，准星压在头线。', tc:'過轉角前，準星壓在頭線。', en:'Crosshair at head height before you turn.'},
   'tk.2w': {sc:'对应：准度 · 第 1 课', tc:'對應：準度 · 第 1 課', en:'From: Precision · Lesson 1'},
   'tk.2t': {sc:'3 局', tc:'3 局', en:'3 games'},
-  'tk.3k': {sc:'生活 <span class="pill pill-life">明早</span>', tc:'生活 <span class="pill pill-life">明早</span>', en:'Life <span class="pill pill-life">Morning</span>'},
+  'tk.3k': {sc:'生活 · 明早', tc:'生活 · 明早', en:'Life · Tomorrow morning'},
   'tk.3h': {sc:'闹钟响，5 分钟内起床', tc:'鬧鐘響，5 分鐘內起床', en:'Up within 5 min of the alarm'},
   'tk.3p': {sc:'今晚把手机放远点充电。', tc:'今晚把手機放遠一點充電。', en:'Charge your phone across the room tonight.'},
   'tk.3w': {sc:'依据：你数据里关联最明显（示例）', tc:'依據：你數據裡關聯最明顯（示例）', en:'Why: strongest link in your data (sample)'},
@@ -1480,40 +1560,40 @@ const I18N = {
 
   /* ---- academy ---- */
   'ac.eb': {sc:'LucidRank 学院', tc:'LucidRank 學院', en:'LucidRank Academy'},
-  'ac.h2': {sc:'高分段，学细节。', tc:'高分段，學細節。', en:'High elo is in the details.'},
-  'ac.lead': {sc:'每课约 10 分钟，配练习。两个游戏分开讲。', tc:'每課約 10 分鐘，配練習。兩個遊戲分開講。', en:'About 10 minutes a lesson, each with a drill. Each game taught on its own.'},
+  'ac.h2': {sc:'学点下一局就能用的', tc:'學些下一局就用得上的', en:'Stuff you can use next game'},
+  'ac.lead': {sc:'每节课十分钟左右，带一个练习。VALORANT 和 CS2 分开讲。', tc:'每堂課十分鐘左右，附一個練習。VALORANT 和 CS2 分開講。', en:'About 10 minutes a lesson, each with a drill. VALORANT and CS2 are covered separately.'},
   'ac.solo': {sc:'个人', tc:'個人', en:'Solo'},
   'ac.team': {sc:'团队', tc:'團隊', en:'Team'},
   'ac.review': {sc:'复盘', tc:'復盤', en:'Review'},
   'ac.call': {sc:'决策', tc:'決策', en:'Calls'},
   'ac.sample': {sc:'{n} 节课 · 示例课程表', tc:'{n} 節課 · 示例課程表', en:'{n} lessons · Sample syllabus'},
   'ac.v1h': {sc:'准度', tc:'準度', en:'Precision'},
-  'ac.v1t': {sc:'先把每一枪打对。', tc:'先把每一槍打好。', en:'Make every shot count.'},
+  'ac.v1t': {sc:'把基本功练扎实。', tc:'把基本功練好。', en:'Get the basics solid.'},
   'ac.v1l': {sc:['准星高度与预瞄点位','急停与点射节奏','首枪：慢一点，反而快','赛前 15 分钟热身'],
              tc:['準星高度與預瞄位置','急停與點射節奏','第一槍：慢一點，反而快','賽前 15 分鐘熱身'],
              en:['Crosshair height & pre-aim','Counter-strafing & tap rhythm','First bullet: slow is fast','A 15-minute warm-up']},
   'ac.v2h': {sc:'体系', tc:'體系', en:'Systems'},
-  'ac.v2t': {sc:'一个人强，不如五个人对。', tc:'一個人強，不如五個人齊心。', en:'Five in sync beat one hero.'},
+  'ac.v2t': {sc:'五个人怎么打配合。', tc:'五個人怎樣打配合。', en:'How five people play together.'},
   'ac.v2l': {sc:['道具配合与出手时机','清点顺序与交叉火力','中期决策：转点还是硬打','有效报点：说什么，不说什么'],
              tc:['技能配合與出手時機','清點順序與交叉火力','中段決策：轉點還是硬打','有效報點：講甚麼，不講甚麼'],
              en:['Utility combos & timing','Clearing order & crossfires','Mid-round: rotate or commit','Callouts that actually help']},
   'ac.v3h': {sc:'细节', tc:'細節', en:'Details'},
-  'ac.v3t': {sc:'赢在别人看不见的地方。', tc:'贏在別人看不見的地方。', en:'Win where no one is looking.'},
+  'ac.v3t': {sc:'节奏、残局和复盘。', tc:'節奏、殘局和復盤。', en:'Tempo, clutches and review.'},
   'ac.v3l': {sc:['回合节奏与信息差','反清与残局处理','识别上头：何时该停','用数据复盘自己的录像'],
              tc:['回合節奏與資訊差','反清與殘局處理','察覺上頭：幾時應該停','用數據復盤自己的影片'],
              en:['Round tempo & info edge','Retakes & clutches','Spot tilt: when to stop','Review your VODs with data']},
   'ac.c1h': {sc:'预瞄与站位', tc:'預瞄與站位', en:'Pre-aim & positions'},
-  'ac.c1t': {sc:'先到位，再开枪。', tc:'先到位，再開槍。', en:'Be there before you shoot.'},
+  'ac.c1t': {sc:'站对位置，提前瞄好。', tc:'站對位置，預先瞄好。', en:'Stand in the right spot and aim early.'},
   'ac.c1l': {sc:['常见点位的预瞄线','站位：别给对面双架','急停与压枪节奏','赛前死斗 15 分钟'],
              tc:['常見點位的預瞄線','站位：別讓對面雙架','急停與壓槍節奏','賽前死鬥 15 分鐘'],
              en:['Pre-aim lines for common spots','Positions: never get double-peeked','Counter-strafe & spray control','15 minutes of deathmatch']},
   'ac.c2h': {sc:'道具练习', tc:'道具練習', en:'Utility'},
-  'ac.c2t': {sc:'一颗烟，换一个回合。', tc:'一顆煙，換一個回合。', en:'One smoke can buy a round.'},
+  'ac.c2t': {sc:'每张图该会的道具。', tc:'每張圖要識的道具。', en:'The utility you need on every map.'},
   'ac.c2l': {sc:['每张图必会的 10 颗道具','跳投与同步投掷','闪光配合：谁闪谁进','残局里的道具管理'],
              tc:['每張圖必學的 10 顆道具','跳投與同步投擲','閃光配合：誰閃誰進','殘局裡的道具管理'],
              en:['10 nades per map','Jump-throws & synced utility','Flash for the entry','Utility in clutches']},
   'ac.c3h': {sc:'回合经济', tc:'回合經濟', en:'Round economy'},
-  'ac.c3t': {sc:'钱怎么花，回合就怎么打。', tc:'錢怎麼花，回合就怎麼打。', en:'Spend right, play right.'},
+  'ac.c3t': {sc:'起枪、ECO 和强起。', tc:'起槍、ECO 和強起。', en:'Buys, ecos and forces.'},
   'ac.c3l': {sc:['起枪还是 ECO','强起的时机','经济和站位一起想','用 demo 复盘经济'],
              tc:['起槍還是 ECO','強起的時機','經濟和站位一起想','用 demo 復盤經濟'],
              en:['Full buy or eco','When to force','Economy shapes positions','Review buys in your demos']},
@@ -1521,21 +1601,21 @@ const I18N = {
 
   /* ---- principles ---- */
   'tr.eb': {sc:'原则', tc:'原則', en:'Principles'},
-  'tr.h2': {sc:'只说实话。', tc:'只講真話。', en:'Just the truth.'},
-  'tr.lead': {sc:'写在第一行代码之前。', tc:'寫在第一行程式碼之前。', en:'Written before the first line of code.'},
+  'tr.h2': {sc:'几条规矩', tc:'幾條規矩', en:'A few rules we stick to'},
+  'tr.lead': {sc:'写代码之前就定好了。', tc:'寫程式之前已經定好。', en:'We set these before writing any code.'},
   'tr.line': {sc:'让自律成为实力的一部分。', tc:'讓自律成為實力的一部分。', en:'Make discipline part of your skill.'},
   'tr.1h': {sc:'不承诺上分', tc:'不承諾上分', en:'No rank-up promises'},
-  'tr.1p': {sc:'只说“在你身上是这样”，不说“科学证明”。', tc:'只說「在你身上是這樣」，不說「科學證明」。', en:'We say “true for you,” never “science says.”'},
+  'tr.1p': {sc:'我们只会说“你的数据里是这样”，不会把它说成科学结论。', tc:'我們只會說「你的數據裡是這樣」，不會當成科學結論。', en:'We’ll only say “this is what your data shows.” We won’t dress it up as science.'},
   'tr.2h': {sc:'不预测分数', tc:'不預測分數', en:'No score predictions'},
   'tr.2p': {sc:'不算隐藏分，不猜段位和分数。遵守 Riot 与 Valve 的开发者条款。', tc:'不算隱藏分，不猜段位和分數。遵守 Riot 與 Valve 的開發者條款。', en:'No MMR math. No rank or rating guesses. We follow Riot and Valve developer terms.'},
-  'tr.3h': {sc:'数据够了才开口', tc:'數據夠了才開口', en:'Data first, then talk'},
+  'tr.3h': {sc:'数据够了才下结论', tc:'數據夠了才下結論', en:'Enough data before any conclusion'},
   'tr.3p': {sc:'不满一周只记录。每条结论都标明天数。', tc:'未滿一週只作記錄。每條結論都標明天數。', en:'Under a week, we just log. Every insight shows its day count.'},
   'tr.4h': {sc:'数据归你', tc:'數據屬於你', en:'Your data is yours'},
   'tr.4p': {sc:'原图可删，记录可导出、可清空。不卖数据。', tc:'原圖可刪，記錄可匯出、可清空。不賣數據。', en:'Delete screenshots. Export or wipe your log. We never sell data.'},
 
   /* ---- join ---- */
-  'join.h2': {sc:'明早，先别刷手机。', tc:'明早，先別滑手機。', en:'Tomorrow, skip the scroll.'},
-  'join.lead': {sc:'第一版开发中，国服优先。留个邮箱，内测见。', tc:'第一版開發中，國服優先。留個電郵，內測見。', en:'v1 is in the works, CN servers first. Leave your email. See you in beta.'},
+  'join.h2': {sc:'明早起来，先别碰手机', tc:'明早起身，先別碰手機', en:'Tomorrow morning, leave your phone alone for a bit'},
+  'join.lead': {sc:'第一版还在做，先支持国服。留个邮箱，内测开了通知你。', tc:'第一版還在開發，先支援國服。留個電郵，內測開始時通知你。', en:'v1 is still being built, CN servers first. Leave your email and we’ll tell you when beta opens.'},
   'join.srvAria': {sc:'你主要玩哪个游戏', tc:'你主要玩哪個遊戲', en:'Which game do you play?'},
   'join.srv': {sc:['VALORANT','CS2','都玩'], tc:['VALORANT','CS2','兩個都玩'], en:['VALORANT','CS2','Both']},
   'join.srvName': {sc:['VALORANT','CS2','VALORANT 和 CS2'], tc:['VALORANT','CS2','VALORANT 和 CS2'], en:['VALORANT','CS2','VALORANT + CS2']},
@@ -1611,7 +1691,7 @@ const metaDesc=document.querySelector('meta[name=description]');
 function setLang(l,save){
   if(!LANGS[l]) return;
   LANG=l; root.lang=LANGS[l]; root.dataset.lang=l;
-  document.title='LucidRank — '+raw('tagline');
+  document.title='LucidRank · '+raw('tagline');
   if(metaDesc) metaDesc.content=raw('desc');
   applyI18n();
   $$('.lang').forEach(g=>{ g.style.setProperty('--li',LANG_KEYS.indexOf(l)); $$('button',g).forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===l)); });
@@ -1630,6 +1710,30 @@ function measure(){
   scenes.forEach(s=>{ const r=s.el.getBoundingClientRect(); s.top=r.top+scrollY; s.h=s.el.offsetHeight; });
   sections.forEach(s=>{ s.top=s.el.getBoundingClientRect().top+scrollY; s.h=s.el.offsetHeight; });
   docH=document.documentElement.scrollHeight;
+  buildStops();
+}
+/* ---------------- wheel paging: scroll "stops" ---------------- */
+// hero: start + the moment the "next" line is fully in · story: one stop per line when it's fully in + the final state
+// normal sections: their top, plus evenly spaced stops (≤ ~85vh apart) down to bottom−vh when taller than the viewport
+let stops=[0];
+const HERO_NEXT_P=.78, STORY_LINE_LOC=.4, STORY_FINAL_P=.96;
+function buildStops(){
+  const out=[0], maxY=Math.max(0,docH-vh);
+  sections.forEach(s=>{
+    if(s.el===heroEl){ out.push(s.top, s.top+(s.h-vh)*HERO_NEXT_P); return; }
+    if(s.el===story){
+      const n=lines.length, span=.9/n, run=s.h-vh;
+      if(RM||run<=0){ out.push(s.top); return; }
+      for(let i=0;i<n-1;i++) out.push(s.top+run*(i+STORY_LINE_LOC)*span);
+      out.push(s.top+run*STORY_FINAL_P);
+      return;
+    }
+    out.push(s.top);
+    const extra=s.h-vh;
+    if(extra>vh*.2){ const k=Math.ceil(extra/(vh*.85)); for(let i=1;i<=k;i++) out.push(s.top+extra*i/k); }
+  });
+  out.push(maxY);
+  stops=out.map(y=>Math.round(clamp(y,0,maxY))).sort((a,b)=>a-b).filter((y,i,a)=>i===0||y-a[i-1]>8);
 }
 let docH=1;
 const sections=$$('main > section, footer').map(el=>({el,id:el.id,theme:el.dataset.theme,label:el.dataset.label,n:el.dataset.n}));
@@ -1723,7 +1827,7 @@ scenes.push({el:heroEl,update(p){
   const a=range(p,0,.42);
   heroContent.style.opacity=1-a;
   heroContent.style.transform=`translate3d(0,${-a*90}px,0) scale(${1-a*.07})`;
-  cue.style.opacity=1-range(p,0,.12); $('.hero-meta').style.opacity=1-range(p,0,.2);
+  cue.style.opacity=1-range(p,0,.12);
   const n=range(p,.42,.72), out=range(p,.9,1);
   heroNext.style.opacity=n*(1-out);
   heroNext.style.transform=`translate3d(0,calc(-50% + ${(1-easeOut(n))*50 - out*40}px),0)`;
@@ -1731,6 +1835,44 @@ scenes.push({el:heroEl,update(p){
   heroGlow.style.transform=`translate3d(-50%,${-p*22}vh,0)`;
 }});
 
+/* doom-scroll feed (story line 2): abstract short-video cards, CSS + inline SVG only */
+const FEED_N=12, FEED_SWIPES=10;
+(function buildFeed(){
+  const el=$('.feed'); if(!el) return;
+  let seed=11; const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647, pick=a=>a[Math.floor(rnd()*a.length)];
+  // palettes: [base, blob1, blob2, accent]
+  const PAL=[['#2a0f14','#ff6a3d','#ff2e63','#ffc46b'],['#0f1024','#5b4bff','#ff4d8d','#9fb4ff'],['#08201d','#45e6c4','#2a7bff','#c9fff2'],['#24160a','#ffb347','#ff5e3a','#fff1c9'],['#1a0b1f','#c04dff','#ff6a3d','#ffd1f0'],['#0c1419','#2fb8ff','#45e6c4','#d6f4ff'],['#200a10','#ff2e63','#7a2bff','#ffc0cf'],['#121212','#ff8a5b','#3a3a46','#ffe2d1']];
+  const HANDLES=['nightqueue','aim.daily','lofi.room','flick.lab','clip.cuts','late.lobby','sunset.loop','soft.focus','one.more','spray.notes','quiet.hours','replay.club'];
+  const ic={
+    heart:'<svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-7.5-10.1A4.3 4.3 0 0112 7.6a4.3 4.3 0 017.5 2.8c0 5.5-7.5 10.1-7.5 10.1z" fill="currentColor"/></svg>',
+    msg:'<svg viewBox="0 0 24 24"><path d="M4.5 11.6c0-3.9 3.4-6.6 7.5-6.6s7.5 2.7 7.5 6.6-3.4 6.6-7.5 6.6c-1 0-1.9-.1-2.8-.4L5 19.4l1.2-3.4a6.2 6.2 0 01-1.7-4.4z" fill="currentColor"/></svg>',
+    share:'<svg viewBox="0 0 24 24"><path d="M13.5 5.5l7 6.5-7 6.5v-3.8c-4.6 0-7.4 1.3-9.5 4.3.6-4.7 3.2-8.6 9.5-9.3z" fill="currentColor"/></svg>',
+    play:'<svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z" fill="#fff"/></svg>',
+    note:'<svg viewBox="0 0 24 24"><path d="M9 18.5a2.5 2.5 0 11-2.5-2.5H9V5l11-2v12.5a2.5 2.5 0 11-2.5-2.5H20" fill="none" stroke="#fff" stroke-width="2.2"/></svg>'};
+  const k=n=>n>=1e4?(n/1e3).toFixed(n>=1e5?0:1).replace(/\.0$/,'')+'k':n>=1e3?(n/1e3).toFixed(1)+'k':String(n);
+  let cards='';
+  for(let i=0;i<FEED_N;i++){
+    const [bg,c1,c2,c3]=PAL[(i*3)%PAL.length];
+    const ang=Math.round(150+rnd()*60);
+    let art=`<b style="left:${-20+rnd()*50}%;top:${5+rnd()*40}%;width:${70+rnd()*50}%;height:${40+rnd()*25}%;background:${c1};opacity:.62"></b>`+
+            `<b style="left:${30+rnd()*40}%;top:${35+rnd()*35}%;width:${60+rnd()*40}%;height:${35+rnd()*25}%;background:${c2};opacity:.5"></b>`;
+    const motif=i%4;
+    if(motif===0) art+=`<u style="left:50%;top:${26+rnd()*12}%;width:34%;aspect-ratio:1;transform:translateX(-50%);background:radial-gradient(circle at 40% 35%,${c3},${c1} 70%);box-shadow:0 0 40px ${c1}"></u><s style="top:${56+rnd()*6}%"></s>`;
+    else if(motif===1) art+=`<u style="left:12%;right:12%;top:30%;height:26%;border-radius:12px;background:linear-gradient(${ang}deg,rgba(255,255,255,.22),rgba(255,255,255,.04));box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)"></u>`;
+    else if(motif===2) art+=`<s style="top:44%;opacity:.5"></s><s style="top:52%;opacity:.3"></s><s style="top:60%;opacity:.18"></s>`;
+    else art+=`<u style="left:${20+rnd()*30}%;top:${22+rnd()*20}%;width:46%;aspect-ratio:1;border:1px solid rgba(255,255,255,.35);background:none"></u><u style="left:${10+rnd()*50}%;top:${50+rnd()*10}%;width:6px;height:6px;background:${c3}"></u>`;
+    const likes=Math.round(800+rnd()*rnd()*240000), com=Math.round(20+rnd()*rnd()*4000), sh=Math.round(10+rnd()*rnd()*9000), liked=i%5===2;
+    const capW1=55+rnd()*35, capW2=25+rnd()*40, sndW=40+rnd()*35;
+    cards+=`<div class="fc"><div class="fc-art" style="background:linear-gradient(${ang}deg,${bg},#08080a)">${art}</div>`+
+      (i%3===1?`<div class="fc-play">${ic.play}</div>`:'')+
+      `<div class="fc-rail"><span class="${liked?'liked':''}">${ic.heart}${k(likes+(liked?1:0))}</span><span>${ic.msg}${k(com)}</span><span>${ic.share}${k(sh)}</span><i class="fc-disc" style="--dc:${c1}"></i></div>`+
+      `<div class="fc-meta"><div class="fc-who"><i style="background:linear-gradient(135deg,${c3},${c2})"></i>@${HANDLES[i%HANDLES.length]}${i%4===0?'<em>+</em>':''}</div><span class="fc-cap" style="width:${capW1}%"></span><span class="fc-cap" style="width:${capW2}%"></span><div class="fc-snd">${ic.note}<i style="width:${sndW}%"></i></div></div>`+
+      `<div class="fc-prog"><i style="width:${Math.round(8+rnd()*85)}%"></i></div></div>`;
+  }
+  el.innerHTML=`<div class="phone"><div class="ph-screen"><div class="ph-track">${cards}</div><div class="ph-island"></div><div class="ph-status"><span class="ph-time num">07:43</span><svg viewBox="0 0 22 10"><rect x="0.5" y="0.5" width="18" height="9" rx="2.5" fill="none" stroke="#fff" stroke-opacity=".5"/><rect x="2" y="2" width="11" height="6" rx="1.3" fill="#fff"/><rect x="19.6" y="3.3" width="1.6" height="3.4" rx=".8" fill="#fff" fill-opacity=".5"/></svg></div><div class="ph-tabs"><i></i><i></i></div></div></div>`;
+})();
+const phone=$('.feed .phone'), phTrack=$('.feed .ph-track'), phTime=$('.feed .ph-time');
+let lastPhT='';
 const story=$('#story'), lines=$$('.sl',story), clockT=$('.sc-time'), clockBar=$('.sc-bar i'), steps=$$('.sc-steps b'), sbg=$('.story-bg'), sfoot=$('.story-foot'), feed=$('.feed');
 let finalU=$('.sl-final u'); langHooks.push(()=>{ finalU=$('.sl-final u'); });
 let lastTime='';
@@ -1752,8 +1894,17 @@ scenes.push({el:story,update(p){
   clockBar.style.transform=`scaleX(${clamp(p/.9)})`;
   // feed: visible on line 2
   const fl=(p-span)/span; const fo=range(fl,0,.2)*(1-range(fl,.8,1));
-  feed.style.opacity=fo*.9;
-  feed.style.transform=`translate3d(0,${-clamp(fl,0,1)*900}px,0)`;
+  feed.style.opacity=fo;
+  if(fo>0){
+    // swipe card-by-card (dwell, then a quick eased flick) and drift the phone upward
+    const kk=range(fl,.06,.9)*FEED_SWIPES, base=Math.floor(kk), fr=kk-base;
+    const pos=Math.min(FEED_N-1,base+easeIO(clamp((fr-.55)/.45)));
+    phTrack.style.transform=`translate3d(0,${-pos*100}%,0)`;
+    const ent=easeOut(range(fl,0,.25));
+    phone.style.transform=`translate3d(0,${(1-ent)*60 - clamp(fl)*36}px,0) rotate(${(1-ent)*3}deg)`;
+    const mins=43+Math.round(clamp(fl)*47), tt=mins<60?`07:${String(mins).padStart(2,'0')}`:`08:${String(mins-60).padStart(2,'0')}`;
+    if(tt!==lastPhT){ phTime.textContent=tt; lastPhT=tt; }
+  }
   const fin=range(p,.72,.95);
   sbg.style.opacity=fin;
   finalU.style.setProperty('--u',range(p,.8,.92));
@@ -1762,33 +1913,7 @@ scenes.push({el:story,update(p){
   $('.story-clock').style.opacity=1-range(p,.74,.8);
 }});
 
-// lit text
-const lit=$('#litText');
-let litChars=[], litOn=-1;
-function renderLit(){ // CJK: light up per character · English: per word
-  const src=document.createElement('div'); src.innerHTML=t('mf.lit');
-  const frag=document.createDocumentFragment(), words=LANG==='en';
-  src.childNodes.forEach(node=>{
-    if(node.nodeName==='BR'){ frag.appendChild(node.cloneNode()); return; }
-    const hl=node.nodeType===1;
-    (words?node.textContent.split(/(\s+)/):[...node.textContent]).forEach(ch=>{
-      if(!ch) return;
-      if(words&&/^\s+$/.test(ch)){ frag.appendChild(document.createTextNode(ch)); return; }
-      const s=document.createElement('span'); s.className='c'+(hl?' hl':''); s.textContent=ch; frag.appendChild(s);
-    });
-  });
-  lit.textContent=''; lit.appendChild(frag);
-  litChars=$$('.c',lit); litOn=-1;
-  if(RM) litChars.forEach(c=>c.classList.add('on'));
-}
-renderLit(); langHooks.push(renderLit);
-scenes.push({el:lit,offset:true,update(_p,top,h){
-  // custom progress: start when top hits 85% vh, end when bottom hits 45% vh
-  const start=top-vh*.85, end=top+h-vh*.45;
-  const p=RM?1:range(sy,start,end);
-  const k=Math.round(p*litChars.length);
-  if(k!==litOn){ litChars.forEach((c,i)=>c.classList.toggle('on',i<k)); litOn=k; }
-}});
+// manifesto line: plain text, fades in via [data-r] (translated by applyI18n)
 
 /* ---------------- main loop ---------------- */
 let navCur='';
@@ -1803,7 +1928,7 @@ function setNav(id){
 }
 function frame(now){
   ty=scrollY;
-  sy=RM?ty:lerp(sy,ty,.12); if(Math.abs(ty-sy)<.3) sy=ty;
+  sy=RM?ty:lerp(sy,ty,.26); if(Math.abs(ty-sy)<.3) sy=ty;
   for(const s of scenes){
     if(sy+vh<s.top-vh*.2 || sy>s.top+s.h+vh*.2) continue;
     const p=clamp((sy-s.top)/Math.max(1,s.h-vh));
@@ -1838,7 +1963,7 @@ if(fine && !RM){
   addEventListener('pointermove',e=>{ if(e.pointerType!=='mouse'||(e.clientX===0&&e.clientY===0)) return; cx=e.clientX; cy=e.clientY; if(!root.classList.contains('cur-on')){ root.classList.add('cur-on'); px=cx; py=cy; } const t=e.target.closest('a,button,label,[role=button],input[type=range],.ac,.opt,.face'); cur.classList.toggle('hover',!!t); },{passive:true});
   addEventListener('pointerdown',()=>cur.classList.add('down')); addEventListener('pointerup',()=>cur.classList.remove('down'));
   document.documentElement.addEventListener('mouseleave',()=>root.classList.remove('cur-on'));
-  (function loop(){ px=lerp(px,cx,.28); py=lerp(py,cy,.28); cur.style.transform=`translate3d(${px}px,${py}px,0)`; requestAnimationFrame(loop); })();
+  (function loop(){ px=lerp(px,cx,.28); py=lerp(py,cy,.28); cur.style.transform=`translate3d(${Math.round(px)}px,${Math.round(py)}px,0)`; requestAnimationFrame(loop); })();
   $$('.magnetic').forEach(b=>{
     b.addEventListener('pointermove',e=>{ const r=b.getBoundingClientRect(); const x=e.clientX-r.left-r.width/2, y=e.clientY-r.top-r.height/2; b.style.transform=`translate(${x*.18}px,${y*.3}px)`; });
     b.addEventListener('pointerleave',()=>{ b.style.transform=''; });
@@ -1854,14 +1979,74 @@ sheetLinks.forEach(a=>a.addEventListener('click',()=>toggleMenu(false)));
 addEventListener('keydown',e=>{ if(e.key==='Escape') toggleMenu(false); });
 
 /* ---------------- anchor smooth scroll ---------------- */
+let anim=null, quietT=0, settling=false;
+function stopAnim(){ if(anim){ cancelAnimationFrame(anim.raf); anim=null; } }
+function scrollToY(y,dur){
+  stopAnim();
+  const from=scrollY, to=Math.round(clamp(y,0,Math.max(0,docH-vh))), d=to-from;
+  if(RM||Math.abs(d)<2){ window.scrollTo(0,to); return; }
+  const t0=performance.now();
+  anim={from,to,raf:0};
+  const step=now=>{
+    if(!anim) return;
+    const k=clamp((now-t0)/dur), e=easeIO(k);
+    window.scrollTo(0,Math.round(from+d*e));
+    if(k<1) anim.raf=requestAnimationFrame(step);
+    else { anim=null; settling=true; clearTimeout(quietT); quietT=setTimeout(()=>{ settling=false; },150); }
+  };
+  anim.raf=requestAnimationFrame(step);
+}
+const pageDur=dist=>clamp(640+dist/vh*120,680,800);
+function page(dir){
+  const y=anim?anim.to:scrollY;
+  const tgt=dir>0?stops.find(s=>s>y+4):[...stops].reverse().find(s=>s<y-4);
+  if(tgt===undefined) return false;
+  scrollToY(tgt,pageDur(Math.abs(tgt-y)));
+  return true;
+}
+// anchors: hero → 0, story → its first line, others → section top (all are stops)
 $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
   const id=a.getAttribute('href'); if(id.length<2) return; const t=$(id); if(!t) return;
   e.preventDefault();
+  measure();
   let y=t.getBoundingClientRect().top+scrollY;
-  if(id==='#story') y+=vh*.05;
-  else if(id!=='#hero') y-=0;
-  window.scrollTo({top:y,behavior:RM?'auto':'smooth'});
+  if(id==='#hero') y=0;
+  else if(id==='#story') y=stops.find(s=>s>=y-2)??y;
+  scrollToY(y,clamp(700+Math.abs(y-scrollY)/vh*60,700,1300));
 }));
+function canScrollInside(el,dir){
+  for(let n=el;n&&n!==document.body&&n!==root;n=n.parentElement){
+    if(n.nodeType!==1) continue;
+    const cs=getComputedStyle(n), oy=cs.overflowY;
+    if((oy==='auto'||oy==='scroll')&&n.scrollHeight>n.clientHeight+1){
+      if(dir>0?n.scrollTop+n.clientHeight<n.scrollHeight-1:n.scrollTop>0) return true;
+    }
+  }
+  return false;
+}
+addEventListener('wheel',e=>{
+  if(RM||e.ctrlKey||document.body.classList.contains('menu-open')) return;
+  let dy=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?vh:1);
+  if(Math.abs(dy)<Math.abs(e.deltaX)||dy===0) return;            // horizontal gesture: leave native
+  const dir=dy>0?1:-1;
+  if(canScrollInside(e.target,dir)) return;
+  e.preventDefault();
+  if(anim) return;                                                  // ignore while gliding
+  if(settling){ clearTimeout(quietT); quietT=setTimeout(()=>{ settling=false; },150); return; }  // trackpad inertia tail
+  page(dir);
+},{passive:false});
+addEventListener('keydown',e=>{
+  if(RM||e.defaultPrevented||e.altKey||e.ctrlKey||e.metaKey) return;
+  const k=e.key; let dir=0;
+  if(k==='PageDown'||k==='ArrowDown'||(k===' '&&!e.shiftKey)) dir=1;
+  else if(k==='PageUp'||k==='ArrowUp'||(k===' '&&e.shiftKey)) dir=-1;
+  if(!dir) return;
+  const tg=e.target;
+  if(tg&&tg.closest&&(tg.closest('input,textarea,select,[contenteditable=""],[contenteditable=true],#device,[role=tablist],.lang,.gtoggle,.chips,.sheet')||(k===' '&&tg.closest('a,button,label,[role=button],[tabindex]')))) return;
+  e.preventDefault();
+  if(!anim) page(dir);
+});
+['mousedown','touchstart'].forEach(ev=>addEventListener(ev,()=>{ if(anim) stopAnim(); },{passive:true}));
 
 /* ================= CHECK-IN ================= */
 // question text / options / summary label: I18N['q.<k>'], ['q.<k>.o'], ['q.<k>.s']
