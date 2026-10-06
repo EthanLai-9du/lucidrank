@@ -11,7 +11,11 @@
 try{var q=(new URLSearchParams(location.search).get('lang')||'').toLowerCase();if(M[q])l=q;}catch(e){}
 if(!l){try{var s=localStorage.getItem('lr-lang');if(M[s])l=s;}catch(e){}}
 if(!l){var n=(navigator.language||'').toLowerCase();l=/^zh-(tw|hk|mo|hant)/.test(n)?'tc':/^zh/.test(n)?'sc':'en';}
-d.lang=M[l];d.setAttribute('data-lang',l);})();</script>
+d.lang=M[l];d.setAttribute('data-lang',l);})();
+(function(){try{history.scrollRestoration='manual';}catch(e){}
+if(location.hash){try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
+scrollTo(0,0);addEventListener('load',function(){scrollTo(0,0);});
+addEventListener('pageshow',function(e){if(e.persisted)scrollTo(0,0);});})();</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23000'/%3E%3Ccircle cx='12' cy='12' r='6' fill='none' stroke='%23fff' stroke-width='1.6'/%3E%3Cpath d='M12 3v4M12 17v4M3 12h4M17 12h4' stroke='%23fff' stroke-width='1.6' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='1.6' fill='%23ff6a3d'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -1857,7 +1861,6 @@ $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
   if(id==='#story') y+=vh*.05;
   else if(id!=='#hero') y-=0;
   window.scrollTo({top:y,behavior:RM?'auto':'smooth'});
-  history.replaceState(null,'',id);
 }));
 
 /* ================= CHECK-IN ================= */
@@ -1905,13 +1908,13 @@ function updProg(){
   back.disabled=qi===0||done; count.textContent=done?t('ci.done'):`${cs+1} / ${STEPS}`;
 }
 function show(i,dir=1){
-  const old=$('.qcard,.ci-done',stage);
+  const olds=$$('.qcard:not(.leave),.ci-done:not(.leave)',stage);
   const card=document.createElement('div');
   card.className='qcard enter'+(dir<0?' back':'');
   card.innerHTML=qHTML(i);
   stage.appendChild(card);
   requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.remove('enter','back')));
-  if(old){ old.classList.add('leave'); if(dir<0) old.classList.add('back'); setTimeout(()=>old.remove(),600); }
+  olds.forEach(old=>{ old.classList.add('leave'); if(dir<0) old.classList.add('back'); setTimeout(()=>old.remove(),600); });
   qi=i; updProg();
 }
 function setTimer(n){ setT(timerEl,'ci.sec',{n}); }
@@ -1942,7 +1945,7 @@ function finish(){
   cancelAnimationFrame(tRAF); device.classList.remove('timing');
   const secs=((performance.now()-tStart)/1000).toFixed(1);
   setTimer(secs);
-  const old=$('.qcard',stage); if(old){ old.classList.add('leave'); setTimeout(()=>old.remove(),600); }
+  $$('.qcard:not(.leave)',stage).forEach(old=>{ old.classList.add('leave'); setTimeout(()=>old.remove(),600); });
   qi=Q.length; updProg();
   const d=document.createElement('div'); d.className='ci-done';
   const val=(q,i)=>q.multi?ans[i].map(j=>tag('q.'+q.k+'.o#'+j)).join(tag('ci.sep')):tag('q.'+q.k+'.o#'+ans[i]);
