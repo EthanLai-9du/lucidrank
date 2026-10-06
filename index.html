@@ -473,51 +473,6 @@ section{position:relative}
 .legend .lg-c{width:18px;height:0;border-top:1.5px dashed var(--mint);border-radius:0}
 
 /* ---------- tasks ---------- */
-.tasks{background:var(--paper);color:var(--d1);padding:clamp(110px,14vw,200px) 0}
-.task-layout{display:grid;grid-template-columns:1.6fr 1fr;gap:clamp(16px,2vw,24px)}
-.task-list{display:flex;flex-direction:column;gap:clamp(12px,1.4vw,16px)}
-.task{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:flex-start;text-align:left;padding:24px 26px;border-radius:var(--r-lg);background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.03);transition:transform .6s var(--ease),box-shadow .6s var(--ease),background .4s;width:100%}
-@media (hover:hover){.task:hover{transform:translateY(-3px);box-shadow:0 24px 50px -28px rgba(0,0,0,.25)}}
-.task .chk{width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 1.5px #c9c9ce;display:grid;place-items:center;transition:box-shadow .3s,background .4s var(--ease),transform .5s var(--spring);margin-top:2px}
-.task .chk svg{width:14px;height:14px;stroke:#fff;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .5s var(--ease) .1s}
-.task[aria-checked=true] .chk{background:var(--d1);box-shadow:none;transform:scale(1.08)}
-.task[aria-checked=true] .chk svg{stroke-dashoffset:0}
-.task .tk{font-size:var(--fs-xs);font-weight:500;letter-spacing:.06em;color:var(--d3);margin-bottom:6px;display:flex;gap:10px;align-items:center}
-.task .tk .pill{letter-spacing:0;font-weight:600;padding:3px 9px;border-radius:99px;font-size:11.5px}
-.pill-drill{background:#e8f8f4;color:#117a66}.pill-focus{background:#eef0ff;color:#4450c8}.pill-life{background:#fff0ea;color:#c2441a}
-.task h3{margin:0 0 4px;font-size:var(--fs-lg);font-weight:600;letter-spacing:0;line-height:1.4;transition:color .4s}
-.task p{margin:0;color:var(--d2);font-size:15px;line-height:1.6}
-.task .why{margin-top:10px;font-size:var(--fs-xs);color:var(--d3)}
-.task .tm{font-family:var(--mono);font-size:12px;color:var(--d3);white-space:nowrap;margin-top:6px}
-.task[aria-checked=true] h3{color:var(--d3);text-decoration:line-through;text-decoration-thickness:1.5px}
-.task-side{display:flex;flex-direction:column;gap:clamp(12px,1.4vw,16px)}
-.side-card{border-radius:var(--r-lg);background:#fff;padding:26px}
-.ring-card{display:flex;align-items:center;gap:24px;background:var(--d1);color:#fff;position:relative;overflow:hidden}
-.ring{position:relative;width:96px;height:96px;flex:none}
-.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
-.ring circle{fill:none;stroke-width:6}
-.ring .bg{stroke:rgba(255,255,255,.1)}
-.ring .fg{stroke:url(#gradStroke);stroke-linecap:round;stroke-dasharray:289;stroke-dashoffset:289;transition:stroke-dashoffset 1s var(--ease)}
-.ring .rv{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-display);font-size:26px;font-weight:400;font-variant-numeric:tabular-nums}
-.ring .rv small{font-size:14px;color:var(--t3);font-weight:500}
-.ring-card h4{margin:0 0 4px;font-size:var(--fs-lg);font-weight:600}
-.ring-card p{margin:0;font-size:14px;color:var(--t2)}
-.burst{position:absolute;left:74px;top:50%;width:0;height:0;pointer-events:none}
-.burst i{position:absolute;width:2px;height:12px;left:-1px;top:-6px;background:var(--dawn1);border-radius:2px;opacity:0}
-.allDone .burst i{animation:burst .9s var(--ease) forwards}
-@keyframes burst{0%{opacity:1;transform:rotate(var(--a)) translateY(-40px) scaleY(.4)}100%{opacity:0;transform:rotate(var(--a)) translateY(-86px) scaleY(1)}}
-.goal h4{margin:0 0 4px;font-size:var(--fs-xs);color:var(--d3);font-weight:500;letter-spacing:.06em;display:flex;justify-content:space-between;align-items:center}
-.goal .gt{font-size:var(--fs-lg);font-weight:600;margin:8px 0 18px;line-height:1.45;letter-spacing:0}
-.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-.week div{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:11.5px;color:var(--d3)}
-.week i{width:100%;aspect-ratio:1;max-width:28px;border-radius:50%;background:#efeff2;display:block;transition:background .4s,transform .5s var(--spring)}
-.week .y i{background:var(--d1)}
-.week .n i{background:#ffd9cc}
-.week .t i{box-shadow:inset 0 0 0 2px var(--d1);background:#fff}
-.week .t.y i{background:var(--d1)}
-.goal .gp{margin-top:16px;font-size:13px;color:var(--d2)}
-.no-predict{font-size:13px;color:var(--d2);line-height:1.6;display:flex;gap:12px;align-items:flex-start}
-.no-predict svg{flex:none;width:20px;height:20px;margin-top:2px}
 
 /* ---------- academy ---------- */
 .academy{background:#000;padding:clamp(110px,14vw,200px) 0;overflow:hidden}
@@ -617,9 +572,6 @@ section{position:relative}
   .scan-demo{grid-template-columns:1fr}
   .dropzone{min-height:420px}
   .ins-grid{grid-template-columns:1fr}
-  .task-layout{grid-template-columns:1fr}
-  .task-side{display:grid;grid-template-columns:1fr 1fr}
-  .no-predict{grid-column:1/-1}
   .ac-grid{grid-template-columns:1fr;max-width:620px;margin:0 auto}
   .ac{min-height:0}
   .ac-art{height:120px}
@@ -648,12 +600,6 @@ section{position:relative}
   .ci-points{gap:22px}
   .dropzone{min-height:380px}
   .mock{font-size:8.5px}
-  .task{grid-template-columns:auto 1fr;padding:20px 18px;gap:14px}
-  .task .tm{grid-column:2;margin-top:-6px}
-  .task-side{grid-template-columns:1fr}
-  .ring-card{padding:24px}
-  .ring{width:84px;height:84px}
-  .burst{left:66px}
   .tr-grid{grid-template-columns:1fr}
   .field-row{flex-direction:column;border-radius:var(--r-lg);padding:6px}
   .field-row input{height:48px}
@@ -867,11 +813,10 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
 /* numbering + badges: gone */
 .nav-current .n,.sheet a .n{display:none}
 .tag-demo{padding:0;background:none;color:var(--t3);font-weight:400;font-size:12px}
-[data-theme=light] .tag-demo,.tasks .tag-demo{color:var(--d3)}
+[data-theme=light] .tag-demo{color:var(--d3)}
 .tag-demo::before{display:none}
 .q-tag{border:0;padding:0;color:var(--dawn1);font-size:12px}
 .ac-ranks{background:none;padding:0;font-size:13px}
-.task .tk{color:var(--d3)}
 .tr-item{grid-template-columns:1fr 36px}
 @media (max-width:600px){.tr-item{grid-template-columns:1fr}}
 /* manifesto: plain paragraph */
@@ -888,7 +833,6 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
 .adv-who-l{font-size:14px;color:var(--t3)}
 .adv-profiles{display:flex;gap:8px;flex-wrap:wrap}
 .adv-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:16px}
-.adv-last{grid-column:1/-1}
 .adv-habit{font-size:var(--fs-xl);font-weight:600;line-height:1.45;margin:0 0 26px;max-width:24em;color:var(--t1)}
 .adv-habit em{font-style:normal;color:var(--accent)}
 .adv-m{margin:0 0 12px;font-size:13px;color:var(--t3)}
@@ -914,13 +858,11 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
 .adv-day:not(:disabled):hover{background:rgba(255,255,255,.08)}
 .adv-status{margin:14px 0 0;font-size:13.5px;color:var(--t2)}
 .adv-status.ok{color:var(--mint)}
-.adv-last .ct{margin-bottom:14px}
-.adv-last-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.adv-last-goal{margin:0;font-size:var(--fs-lg);font-weight:600;color:var(--t1)}
-.adv-last-stats{display:flex;gap:8px}
+.adv-last-goal{margin:0 0 14px;font-size:var(--fs-lg);font-weight:600;line-height:1.45;color:var(--t1)}
+.adv-last-stats{display:flex;gap:8px;flex-wrap:wrap}
 .adv-last-stats span{font-size:14px;font-weight:600;padding:6px 12px;border-radius:10px;background:rgba(255,255,255,.06);color:var(--t1)}
 .adv-last-stats span:last-child{background:rgba(69,230,196,.12);color:var(--mint)}
-.adv-last-v{margin:10px 0 0;font-size:14px;color:var(--t2)}
+.adv-last-v{margin:14px 0 0;font-size:14px;color:var(--t2)}
 .adv-note{margin:22px 0 0;font-size:13px;color:var(--t3)}
 @media (max-width:860px){.adv-grid{grid-template-columns:1fr}}
 @media (max-width:600px){.adv-day{padding:8px 0 6px;font-size:11px}.adv-day i{width:20px;height:20px}.adv-week{gap:4px}}
@@ -1037,6 +979,29 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
 /* nav: 9 links → switch to the menu sheet a bit earlier */
 @media (max-width:1180px){.nav-links{display:none}.nav-current{display:flex}.nav-menu{display:flex}.nav>.lang{display:none}.lang-lg{display:grid}}
 
+/* daily tasks (inside the weekly plan) */
+.adv-tasks{display:flex;flex-direction:column;gap:6px}
+.adv-task{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;text-align:left;padding:12px 12px;border-radius:12px;background:rgba(255,255,255,.035);transition:background .25s}
+.adv-task:hover{background:rgba(255,255,255,.07)}
+.adv-task .chk{width:22px;height:22px;margin-top:1px;border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.28);display:grid;place-items:center;transition:background .25s}
+.adv-task .chk svg{width:12px;height:12px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .2s}
+.adv-task[aria-checked=true] .chk{background:var(--accent);box-shadow:none}
+.adv-task[aria-checked=true] .chk svg{opacity:1}
+.adv-task-b{display:flex;flex-direction:column;gap:2px;min-width:0}
+.adv-task-k{font-size:12px;color:var(--t3)}
+.adv-task b{font-size:15px;font-weight:600;line-height:1.4;color:var(--t1)}
+.adv-task[aria-checked=true] b{color:var(--t3);text-decoration:line-through}
+.adv-task small{font-size:12.5px;color:var(--t3);line-height:1.5}
+.adv-task.life .adv-task-k{color:var(--accent)}
+.adv-task-tm{font-size:12.5px;color:var(--t3);white-space:nowrap;margin-top:2px}
+.done-ring .fg{stroke:var(--accent)}
+.adv-grid{align-items:start}
+.adv-col{display:flex;flex-direction:column;gap:16px;min-width:0}
+@media (max-width:860px){
+  .adv-col{display:contents}
+  .adv-found{order:1}.adv-goal{order:2}.adv-today{order:3}.adv-last{order:4}
+}
+
 </style>
 </head>
 <body>
@@ -1059,8 +1024,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
     <a href="#checkin" data-nav="checkin"><span class="n">02</span><span data-i18n="nav.checkin">签到</span></a>
     <a href="#scan" data-nav="scan"><span class="n">03</span><span data-i18n="nav.scan">识别</span></a>
     <a href="#insights" data-nav="insights"><span class="n">04</span><span data-i18n="nav.insights">洞察</span></a>
-    <a href="#tasks" data-nav="tasks"><span class="n">05</span><span data-i18n="nav.tasks">任务</span></a>
-    <a href="#advice" data-nav="advice"><span class="n">06</span><span data-i18n="nav.advice">建议</span></a>
+    <a href="#advice" data-nav="advice"><span class="n">05</span><span data-i18n="nav.plan">计划</span></a>
     <a href="#lineups" data-nav="lineups"><span class="n">07</span><span data-i18n="nav.lineups">点位</span></a>
     <a href="#academy" data-nav="academy"><span class="n">08</span><span data-i18n="nav.academy">学院</span></a>
     <a href="#trust" data-nav="trust"><span class="n">09</span><span data-i18n="nav.trust">原则</span></a>
@@ -1081,8 +1045,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
   <a href="#checkin" data-nav="checkin"><span data-i18n="nav.checkin">签到</span></a>
   <a href="#scan" data-nav="scan"><span data-i18n="nav.scan">识别</span></a>
   <a href="#insights" data-nav="insights"><span data-i18n="nav.insights">洞察</span></a>
-  <a href="#tasks" data-nav="tasks"><span data-i18n="nav.tasks">任务</span></a>
-  <a href="#advice" data-nav="advice"><span data-i18n="nav.advice">建议</span></a>
+  <a href="#advice" data-nav="advice"><span data-i18n="nav.plan">计划</span></a>
   <a href="#lineups" data-nav="lineups"><span data-i18n="nav.lineups">点位</span></a>
   <a href="#academy" data-nav="academy"><span data-i18n="nav.academy">学院</span></a>
   <a href="#trust" data-nav="trust"><span data-i18n="nav.trust">原则</span></a>
@@ -1102,7 +1065,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
     <div class="hero-glow" aria-hidden="true"></div>
     <div class="hero-content">
       <p class="hero-eyebrow"><span data-i18n="hero.eb">给 VALORANT 和 CS2 玩家做的状态记录</span></p>
-      <h1 class="hero-title"><span class="wordmark" aria-hidden="true"><span class="wm-a">Lucid</span><span class="wm-b">Rank</span></span><span class="sr-only">LucidRank — <span data-i18n="tagline">睡醒了再排。</span></span></h1>
+      <h1 class="hero-title"><span class="wordmark" aria-hidden="true"><span class="wm-a">Lucid</span><span class="wm-b">Rank</span></span><span class="sr-only">LucidRank · <span data-i18n="tagline">睡醒了再排。</span></span></h1>
       <p class="hero-promise" aria-hidden="true" data-i18n="tagline">睡醒了再排。</p>
       <p class="hero-sub" data-i18n="hero.sub">开打前花 10 秒签到，打完传一张结算截图。<br class="d-only">记上两三周，就能看出自己哪天打得好。</p>
       <div class="hero-ctas">
@@ -1141,7 +1104,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
 <!-- ============ MANIFESTO ============ -->
 <section id="manifesto" class="manifesto" data-theme="light" data-label="story" data-n="01">
   <div class="wrap">
-    <p class="lit-text" id="litText" data-r data-i18n="mf.lit">枪法没变，有些天就是打不准。<span class="mf-sub">多半跟状态有关：睡了多久，几点起，起床后干了什么。</span></p>
+    <p class="lit-text" id="litText" data-r data-i18n="mf.lit">枪法没变，有些天就是打不准。<br>多半跟状态有关：睡了多久，几点起，起床后干了什么。</p>
     <div class="steps">
       <div class="step" data-r style="--i:0">
         <svg class="si" viewBox="0 0 44 44" aria-hidden="true"><rect x="10" y="4" width="24" height="36" rx="6" fill="none" stroke="#1d1d1f" stroke-width="1.6"/><circle cx="22" cy="18" r="3" fill="#ff6a3d"/><path d="M16 27h12M16 32h8" stroke="#1d1d1f" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -1242,7 +1205,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
         </div>
         <p class="ins-stmt" id="insStmt" aria-live="polite"></p>
         <div class="bars" id="bars"></div>
-        <p class="ins-note" data-i18n="ins.note">指标：当日平均表现分（示例为 VALORANT Performance Score；CS2 用 ADR）。只看你自己的规律，不做科学结论。</p>
+        <p class="ins-note" data-i18n="ins.note">指标：当天的平均 ACS（CS2 用 ADR）。只看你自己的规律，不当科学结论。</p>
       </div>
       <div class="card-d tier-card" data-r style="--i:1">
         <div class="ct"><h3 data-i18n="ins.trust">结论可信吗？</h3><span class="tag-demo" data-i18n="demo">示例数据</span></div>
@@ -1256,68 +1219,20 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
         </div>
       </div>
       <div class="card-d trend" data-r>
-        <div class="ct"><h3 data-i18n="ins.trend">每日表现分 · 21 天</h3><span class="tag-demo" data-i18n="demo">示例数据</span></div>
-        <svg class="chart" id="chart" viewBox="0 0 1000 300" role="img" aria-label="21 天每日表现分示例折线图" data-i18n-attr="aria-label:ins.chart"></svg>
+        <div class="ct"><h3 data-i18n="ins.trend">每日 ACS · 21 天</h3><span class="tag-demo" data-i18n="demo">示例数据</span></div>
+        <svg class="chart" id="chart" viewBox="0 0 1000 300" role="img" aria-label="21 天每日 ACS 示例折线图" data-i18n-attr="aria-label:ins.chart"></svg>
         <div class="legend"><span><i class="lg-a"></i><span data-i18n="ins.lgA">醒后刷手机 &gt;30 分钟</span></span><span><i class="lg-b"></i><span data-i18n="ins.lgB">其他日子</span></span><span><i class="lg-c"></i><span data-i18n="ins.lgC">个人基线</span></span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ TASKS ============ -->
-<section id="tasks" class="tasks" data-theme="light" data-label="tasks" data-n="05">
-  <div class="wrap">
-    <header class="sec-head">
-      <h2 class="h2 rv"><span class="ln"><span data-i18n="tk.h2">每天三件小事</span></span></h2>
-      <p class="lead" data-r data-i18n="tk.lead">少一点，才真的会去做。</p>
-    </header>
-    <div class="task-layout">
-      <div class="task-list" id="taskList">
-        <button class="task" role="checkbox" aria-checked="false" data-r style="--i:0">
-          <span class="chk"><svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span>
-          <span><span class="tk" data-i18n="tk.1k">训练 · 靶场</span><h3 data-i18n="tk.1h">急停点射</h3><p data-i18n="tk.1p">每组 30 发，停稳再开枪。</p><p class="why" data-i18n="tk.1w">依据：近 5 局首杀偏少（示例）</p></span>
-          <span class="tm" data-i18n="tk.1t">15 min</span>
-        </button>
-        <button class="task" role="checkbox" aria-checked="false" data-r style="--i:1">
-          <span class="chk"><svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span>
-          <span><span class="tk" data-i18n="tk.2k">对局 · 前 3 局</span><h3 data-i18n="tk.2h">转角先预瞄</h3><p data-i18n="tk.2p">过拐角前，准星压在头线。</p><p class="why" data-i18n="tk.2w">对应：准度 · 第 1 课</p></span>
-          <span class="tm" data-i18n="tk.2t">3 局</span>
-        </button>
-        <button class="task" role="checkbox" aria-checked="false" data-r style="--i:2">
-          <span class="chk"><svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span>
-          <span><span class="tk" data-i18n="tk.3k">生活 · 明早</span><h3 data-i18n="tk.3h">闹钟响，5 分钟内起床</h3><p data-i18n="tk.3p">今晚把手机放远点充电。</p><p class="why" data-i18n="tk.3w">依据：你数据里关联最明显（示例）</p></span>
-          <span class="tm" data-i18n="tk.3t">明早</span>
-        </button>
-      </div>
-      <aside class="task-side">
-        <div class="side-card ring-card" id="ringCard" data-r style="--i:1">
-          <div class="ring"><svg viewBox="0 0 110 110"><circle class="bg" cx="55" cy="55" r="46"/><circle class="fg" id="ringFg" cx="55" cy="55" r="46"/></svg><div class="rv"><span><span id="ringN">0</span><small> / 3</small></span></div></div>
-          <div class="burst" aria-hidden="true"></div>
-          <div><h4 id="ringT" data-i18n="ring.t">今日 3 件</h4><p id="ringP" data-i18n="ring.p0">点一下，完成一件。</p></div>
-        </div>
-        <div class="side-card goal" data-r style="--i:2">
-          <h4><span data-i18n="goal.h">本周目标</span><span class="tag-demo" data-i18n="demo">示例数据</span></h4>
-          <p class="gt" data-i18n="goal.t">醒后刷手机 ≤ 30 分钟<br>至少 4 天</p>
-          <div class="week" aria-label="本周进度：周一、周三达成，周二未达成，今天周四待定" data-i18n-attr="aria-label:goal.aria">
-            <div class="y"><i></i><span data-i18n="goal.wk#0">一</span></div><div class="n"><i></i><span data-i18n="goal.wk#1">二</span></div><div class="y"><i></i><span data-i18n="goal.wk#2">三</span></div><div class="t" id="todayDot"><i></i><span data-i18n="goal.wk#3">四</span></div><div><i></i><span data-i18n="goal.wk#4">五</span></div><div><i></i><span data-i18n="goal.wk#5">六</span></div><div><i></i><span data-i18n="goal.wk#6">日</span></div>
-          </div>
-          <p class="gp" id="goalP" data-i18n="goal.p2">已达成 2 / 4 天</p>
-        </div>
-        <div class="side-card no-predict" data-r style="--i:3">
-          <svg viewBox="0 0 20 20" fill="none" stroke="#1d1d1f" stroke-width="1.5" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="M10 6v5M10 13.5v.5" stroke-linecap="round"/></svg>
-          <span data-i18n="tk.np"><b>不预测</b>分数、隐藏分或段位。只管你能控制的事。</span>
-        </div>
-      </aside>
-    </div>
-  </div>
-</section>
-
 <!-- ============ ADVICE ============ -->
-<section id="advice" class="advice" data-theme="dark" data-label="advice" data-n="06">
+<section id="advice" class="advice" data-theme="dark" data-label="plan" data-n="05">
   <div class="wrap">
     <header class="sec-head">
       <h2 class="h2 rv"><span class="ln"><span data-i18n="adv.h2">这周只改一件事</span></span></h2>
-      <p class="lead" data-r data-i18n="adv.lead"></p>
+      <p class="lead" data-r data-i18n="adv.lead">签到满一两周后，它会用你自己的战绩找出最拖后腿的习惯，给你一个这周的小目标。每天的三件小事也跟着这个目标走，下周再看有没有用。</p>
     </header>
     <div class="adv-who" data-r>
       <span class="adv-who-l" data-i18n="adv.who">换个玩家看看</span>
@@ -1328,29 +1243,32 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
       </div>
     </div>
     <div class="adv-grid" data-r>
-      <article class="card-d adv-found">
+      <div class="adv-col"><article class="card-d adv-found">
         <div class="ct"><h3 data-i18n="adv.foundH">最拖后腿的习惯</h3><span class="tag-demo" data-i18n="demo">示例数据</span></div>
         <p class="adv-habit" id="advHabit" aria-live="polite"></p>
         <div class="adv-bars" id="advBars"></div>
         <p class="adv-n" id="advN"></p>
       </article>
-      <article class="card-d adv-goal">
+      <article class="card-d adv-last">
+        <div class="ct"><h3 data-i18n="adv.lastH">上周结果</h3></div>
+        <p class="adv-last-goal" id="advLast"></p>
+        <div class="adv-last-stats"><span id="advLastDays"></span><span id="advLastDelta"></span></div>
+        <p class="adv-last-v" id="advLastV"></p>
+      </article>
+      </div><div class="adv-col"><article class="card-d adv-goal">
         <div class="ct"><h3 data-i18n="adv.goalH">这周目标</h3><span class="adv-count num" id="advCount">1 / 3</span></div>
         <p class="adv-goal-t" id="advGoal"></p>
         <p class="adv-why" id="advWhy"></p>
         <div class="adv-week" id="advWeek" role="group" aria-label="本周打卡" data-i18n-attr="aria-label:adv.weekAria"></div>
         <p class="adv-status" id="advStatus" aria-live="polite"></p>
       </article>
-      <article class="card-d adv-last">
-        <div class="ct"><h3 data-i18n="adv.lastH">上周结果</h3></div>
-        <div class="adv-last-row">
-          <p class="adv-last-goal" id="advLast"></p>
-          <div class="adv-last-stats"><span id="advLastDays"></span><span id="advLastDelta"></span></div>
-        </div>
-        <p class="adv-last-v" id="advLastV"></p>
-      </article>
+      <article class="card-d adv-today" id="today">
+        <div class="ct"><h3 data-i18n="adv.todayH">今天的三件小事</h3><span class="adv-count num" id="advTodayN">0 / 3</span></div>
+        <div class="adv-tasks" id="advTasks"></div>
+        <p class="adv-status" id="advTodayS" aria-live="polite"></p>
+      </article></div>
     </div>
-    <p class="adv-note" data-r data-i18n="adv.note"></p>
+    <p class="adv-note" data-r data-i18n="adv.note">只给作息、运动、吃饭这类生活建议，不推荐任何药物或补剂。</p>
   </div>
 </section>
 
@@ -1359,8 +1277,8 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
   <div class="wrap">
     <header class="sec-head">
       <h2 class="h2 rv"><span class="ln"><span data-i18n="lu.h2">打到一半，切出来查点位</span></span></h2>
-      <p class="lead" data-r data-i18n="lu.lead"></p>
-      <p class="lu-trust" data-r><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2l6 2.5v5c0 4-2.6 7-6 8.5-3.4-1.5-6-4.5-6-8.5v-5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 10l2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="lu.trust"></span></p>
+      <p class="lead" data-r data-i18n="lu.lead">桌面版有个单独的小窗口，比打到一半掏手机查攻略快。</p>
+      <p class="lu-trust" data-r><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2l6 2.5v5c0 4-2.6 7-6 8.5-3.4-1.5-6-4.5-6-8.5v-5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 10l2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="lu.trust">不盖在游戏画面上，也不读游戏数据或内存。只看游戏有没有启动，好帮你切到对应游戏和上次用的地图。</span></p>
     </header>
     <div class="lu-win" id="luWin" data-r>
       <div class="lu-title"><span class="lu-title-l"><svg class="brand-mark" aria-hidden="true"><use href="#xh"/></svg><span data-i18n="lu.win">LucidRank · 点位</span></span><span class="lu-ctrls" aria-hidden="true"><i class="min"></i><i class="max"></i><i class="cls"></i></span></div>
@@ -1385,7 +1303,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
       </div>
       <div class="lu-status"><span class="lu-dot"></span><span id="luDetect"></span><span class="lu-hint" data-i18n="lu.hint">Alt + Tab 切回游戏</span></div>
     </div>
-    <p class="lu-note" data-r data-i18n="lu.note"></p>
+    <p class="lu-note" data-r data-i18n="lu.note">点位都是示例数据，地图是示意图，不是游戏原图。</p>
   </div>
 </section>
 
@@ -1508,7 +1426,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
   <svg class="join-xh" aria-hidden="true"><use href="#xh"/></svg>
   <div class="wrap">
     <h2 class="rv"><span class="ln"><span data-i18n="join.h2">明早起来，先别碰手机</span></span></h2>
-    <p class="lead" data-r data-i18n="join.lead">第一版还在做，先支持国服。留个邮箱，内测开了通知你。</p>
+    <p class="lead" data-r data-i18n="join.lead">第一版还在做。留个邮箱，内测开了通知你。</p>
     <form class="form" id="form" novalidate data-r>
       <div class="form-inner">
         <div class="chips" role="group" aria-label="你主要玩哪个服" data-i18n-attr="aria-label:join.srvAria">
@@ -1543,7 +1461,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
       </div>
       <div class="foot-links">
         <div><b data-i18n="ft.product">产品</b><a href="#checkin" data-i18n="ft.checkin">每日签到</a><a href="#scan" data-i18n="ft.scan">截图识别</a><a href="#insights" data-i18n="ft.insights">个人洞察</a></div>
-        <div><b data-i18n="ft.grow">成长</b><a href="#tasks" data-i18n="ft.tasks">每日任务</a><a href="#advice" data-i18n="ft.advice">本周建议</a><a href="#lineups" data-i18n="ft.lineups">点位助手</a><a href="#academy" data-i18n="ft.academy">LucidRank 学院</a><a href="#trust" data-i18n="ft.trust">我们的原则</a></div>
+        <div><b data-i18n="ft.grow">成长</b><a href="#advice" data-i18n="ft.plan">每周计划</a><a href="#lineups" data-i18n="ft.lineups">点位助手</a><a href="#academy" data-i18n="ft.academy">LucidRank 学院</a><a href="#trust" data-i18n="ft.trust">我们的原则</a></div>
         <div><b data-i18n="ft.join">加入</b><a href="#join" data-i18n="ft.list">候补名单</a><a href="#hero" data-i18n="ft.top">回到顶部 ↑</a></div>
       </div>
     </div>
@@ -1577,10 +1495,9 @@ const I18N = {
   'nav.checkin': {sc:'签到', tc:'簽到', en:'Check-in'},
   'nav.scan': {sc:'识别', tc:'識別', en:'Scan'},
   'nav.insights': {sc:'洞察', tc:'洞察', en:'Insights'},
-  'nav.tasks': {sc:'任务', tc:'任務', en:'Tasks'},
+  'nav.plan': {sc:'计划', tc:'計劃', en:'Plan'},
   'nav.academy': {sc:'学院', tc:'學院', en:'Academy'},
   'nav.trust': {sc:'原则', tc:'原則', en:'Principles'},
-  'nav.advice': {sc:'建议', tc:'建議', en:'Advice'},
   'nav.lineups': {sc:'点位', tc:'點位', en:'Lineups'},
   'nav.join': {sc:'加入', tc:'加入', en:'Join'},
   'nav.cta': {sc:'加入候补', tc:'加入候補', en:'Join waitlist'},
@@ -1607,7 +1524,7 @@ const I18N = {
   'story.foot': {sc:'只是可能。记几周就知道了。', tc:'只是可能。記錄幾個星期就知道。', en:'Maybe. Log a few weeks and you’ll know.'},
 
   /* ---- manifesto ---- */
-  'mf.lit': {sc:'枪法没变，有些天就是打不准。<span class="mf-sub">多半跟状态有关：睡了多久，几点起，起床后干了什么。</span>', tc:'槍法沒變，有些日子就是打不中。<span class="mf-sub">多數跟狀態有關：睡了多久，幾點起身，起床後做了甚麼。</span>', en:'Your aim didn’t change, but some days nothing hits.<span class="mf-sub">Usually it comes down to how you slept, when you got up, and what you did next.</span>'},
+  'mf.lit': {sc:'枪法没变，有些天就是打不准。<br>多半跟状态有关：睡了多久，几点起，起床后干了什么。', tc:'槍法沒變，有些日子就是打不中。<br>多數跟狀態有關：睡了多久，幾點起身，起床後做了甚麼。', en:'Your aim didn’t change, but some days nothing hits.<br>Usually it comes down to how you slept, when you got up, and what you did next.'},
   'mf.s1h': {sc:'签到<b>10 秒</b>', tc:'簽到<b>10 秒</b>', en:'Check in<b>10 sec</b>'},
   'mf.s1p': {sc:'开局前，点 8 下。', tc:'開局前，點 8 下。', en:'Eight taps before you queue.'},
   'mf.s2h': {sc:'截图<b>5 秒</b>', tc:'截圖<b>5 秒</b>', en:'Screenshot<b>5 sec</b>'},
@@ -1694,28 +1611,28 @@ const I18N = {
   'mk.pts': {sc:'得分', tc:'得分', en:'Pts'},
   'mk.you': {sc:'你', tc:'你', en:'YOU'},
   'mk.player': {sc:'玩家', tc:'玩家', en:'Player'},
-  'mk.ps': {sc:'表现分', tc:'表現分', en:'Score'},
+  'mk.ps': {sc:'ACS', tc:'ACS', en:'ACS'},
   'mk.fk': {sc:'首杀', tc:'首殺', en:'FK'},
-  'mk.me': {sc:'你 · 捷风', tc:'你 · 捷風', en:'You · Jett'},
+  'mk.me': {sc:'你 · 捷风', tc:'你 · Jett', en:'You · Jett'},
   'f.kad': {sc:'K / A / D', tc:'K / A / D', en:'K / A / D'},
   'f.hs': {sc:'爆头率', tc:'爆頭率', en:'HS%'},
   'f.adr': {sc:'总伤害 → ADR', tc:'總傷害 → ADR', en:'Damage → ADR'},
   'f.mvp': {sc:'MVP', tc:'MVP', en:'MVPs'},
   'f.pts': {sc:'得分', tc:'得分', en:'Score'},
-  'fv.mapCS': {sc:'荒漠迷城', tc:'荒漠迷城', en:'Mirage'},
+  'fv.mapCS': {sc:'荒漠迷城', tc:'Mirage', en:'Mirage'},
   'f.res': {sc:'对局结果', tc:'對局結果', en:'Result'},
   'f.score': {sc:'比分', tc:'比分', en:'Rounds'},
   'f.map': {sc:'地图', tc:'地圖', en:'Map'},
   'f.mode': {sc:'模式', tc:'模式', en:'Mode'},
   'f.agent': {sc:'特工', tc:'特工', en:'Agent'},
   'f.kda': {sc:'K / D / A', tc:'K / D / A', en:'K / D / A'},
-  'f.ps': {sc:'Performance Score', tc:'Performance Score', en:'Performance Score'},
+  'f.ps': {sc:'ACS', tc:'ACS', en:'ACS'},
   'f.fk': {sc:'首杀', tc:'首殺', en:'First kills'},
   'fv.res': {sc:'胜利', tc:'勝利', en:'Victory'},
   'fv.resMock': {sc:'胜利', tc:'勝利', en:'VICTORY'},
-  'fv.map': {sc:'亚海悬城', tc:'亞海懸城', en:'Ascent'},
+  'fv.map': {sc:'亚海悬城', tc:'Ascent', en:'Ascent'},
   'fv.mode': {sc:'竞技模式', tc:'競技模式', en:'Competitive'},
-  'fv.agent': {sc:'捷风', tc:'捷風', en:'Jett'},
+  'fv.agent': {sc:'捷风', tc:'Jett', en:'Jett'},
 
   /* ---- insights ---- */
   'ins.eb': {sc:'个人洞察', tc:'個人洞察', en:'Insights'},
@@ -1729,7 +1646,7 @@ const I18N = {
   'ins.tab.caf': {sc:'咖啡因', tc:'咖啡因', en:'Caffeine'},
   'ins.collect': {sc:'<span class="muted">收集中。</span>{n} 天，还不够下结论。', tc:'<span class="muted">收集中。</span>{n} 天，還不夠下結論。', en:'<span class="muted">Collecting.</span> {n} days is too early to tell.'},
   'ins.same': {sc:'{n} 天里，{thing}<em>看不出差别</em>。这也是答案。', tc:'{n} 天裡，{thing}<em>看不出分別</em>。這也是答案。', en:'{n} days in, {thing} <em>makes no difference</em>. That’s an answer too.'},
-  'ins.diff': {sc:'{thing}的日子，表现分{dir} <em>{d} 分</em>{early}。', tc:'{thing}的日子，表現分{dir} <em>{d} 分</em>{early}。', en:'{Thing}, you score <em>{d} pts {dir}</em>{early}.'},
+  'ins.diff': {sc:'{thing}的日子，ACS 平均{dir} <em>{d}</em>{early}。', tc:'{thing}的日子，ACS 平均{dir} <em>{d}</em>{early}。', en:'{Thing}, your ACS is <em>{d} {dir}</em>{early}.'},
   'ins.lower': {sc:'低', tc:'低', en:'lower'},
   'ins.higher': {sc:'高', tc:'高', en:'higher'},
   'ins.early': {sc:'<span class="muted">（初步）</span>', tc:'<span class="muted">（初步）</span>', en:'<span class="muted"> (early)</span>'},
@@ -1742,7 +1659,7 @@ const I18N = {
   'F.dur': {sc:{thing:'睡不到 6 小时',A:'睡不到 6 小时',B:'睡了 6 小时以上'}, tc:{thing:'睡不足 6 小時',A:'睡不足 6 小時',B:'睡夠 6 小時'}, en:{thing:'sleeping under 6 h',Thing:'After under 6 h of sleep',A:'Under 6 h',B:'6 h or more'}},
   'F.bed': {sc:{thing:'2 点后睡',A:'2 点后才睡',B:'2 点前睡'}, tc:{thing:'2 點後才睡',A:'2 點後才睡',B:'2 點前睡'}, en:{thing:'a 2 am+ bedtime',Thing:'After a 2 am+ bedtime',A:'After 2 am',B:'Before 2 am'}},
   'F.caf': {sc:{thing:'喝咖啡因饮料',A:'喝了',B:'没喝'}, tc:{thing:'喝咖啡因飲品',A:'有喝',B:'沒喝'}, en:{thing:'caffeine',Thing:'With caffeine',A:'Had some',B:'None'}},
-  'ins.note': {sc:'指标：当日平均表现分（示例为 VALORANT Performance Score；CS2 用 ADR）。只看你自己的规律，不做科学结论。', tc:'指標：當日平均表現分（示例為 VALORANT Performance Score；CS2 用 ADR）。只看你自己的規律，不作科學結論。', en:'Metric: daily average score (VALORANT Performance Score here; ADR for CS2). Your patterns only. Not science.'},
+  'ins.note': {sc:'指标：当天的平均 ACS（CS2 用 ADR）。只看你自己的规律，不当科学结论。', tc:'指標：當天的平均 ACS（CS2 用 ADR）。只看你自己的規律，不當科學結論。', en:'Metric: average ACS for the day (ADR for CS2). Your own patterns only, not science.'},
   'ins.trust': {sc:'结论可信吗？', tc:'結論可信嗎？', en:'Can you trust it?'},
   'ins.days': {sc:'天数据', tc:'天數據', en:'days of data'},
   'ins.drag': {sc:'拖动试试', tc:'拖動試試', en:'Drag to try'},
@@ -1756,8 +1673,8 @@ const I18N = {
   'tier.3h': {sc:'较有把握', tc:'較有把握', en:'Fairly sure'},
   'tier.3p': {sc:'可以调整', tc:'可以調整', en:'Time to adjust'},
   'tier.3r': {sc:'15 天+', tc:'15 天+', en:'Day 15+'},
-  'ins.trend': {sc:'每日表现分 · 21 天', tc:'每日表現分 · 21 天', en:'Daily score · 21 days'},
-  'ins.chart': {sc:'21 天每日表现分示例折线图', tc:'21 天每日表現分示例折線圖', en:'Sample line chart: daily score over 21 days'},
+  'ins.trend': {sc:'每日 ACS · 21 天', tc:'每日 ACS · 21 天', en:'Daily ACS · 21 days'},
+  'ins.chart': {sc:'21 天每日 ACS 示例折线图', tc:'21 天每日 ACS 示例折線圖', en:'Sample line chart: daily ACS over 21 days'},
   'ins.dayN': {sc:'第{d}天', tc:'第{d}天', en:'Day {d}'},
   'ins.base': {sc:'基线 {m}', tc:'基線 {m}', en:'Baseline {m}'},
   'ins.lgA': {sc:'醒后刷手机 &gt;30 分钟', tc:'醒後滑手機 &gt;30 分鐘', en:'30+ min phone after waking'},
@@ -1765,36 +1682,7 @@ const I18N = {
   'ins.lgC': {sc:'个人基线', tc:'個人基線', en:'Your baseline'},
 
   /* ---- tasks ---- */
-  'tk.eb': {sc:'每日任务', tc:'每日任務', en:'Daily tasks'},
-  'tk.h2': {sc:'每天三件小事', tc:'每天三件小事', en:'Three small things a day'},
-  'tk.lead': {sc:'少一点，才真的会去做。', tc:'少一點，才會真的去做。', en:'Keep the list short and you’ll actually do it.'},
-  'tk.1k': {sc:'训练 · 靶场', tc:'訓練 · 靶場', en:'Drill · Range'},
-  'tk.1h': {sc:'急停点射', tc:'急停點射', en:'Counter-strafe taps'},
-  'tk.1p': {sc:'每组 30 发，停稳再开枪。', tc:'每組 30 發，停定再開槍。', en:'30 shots a set. Stop, then shoot.'},
-  'tk.1w': {sc:'依据：近 5 局首杀偏少（示例）', tc:'依據：近 5 局首殺偏少（示例）', en:'Why: few first kills in your last 5 (sample)'},
-  'tk.1t': {sc:'15 min', tc:'15 min', en:'15 min'},
-  'tk.2k': {sc:'对局 · 前 3 局', tc:'對局 · 頭 3 局', en:'In game · First 3 games'},
-  'tk.2h': {sc:'转角先预瞄', tc:'轉角先預瞄', en:'Pre-aim every corner'},
-  'tk.2p': {sc:'过拐角前，准星压在头线。', tc:'過轉角前，準星壓在頭線。', en:'Crosshair at head height before you turn.'},
-  'tk.2w': {sc:'对应：准度 · 第 1 课', tc:'對應：準度 · 第 1 課', en:'From: Precision · Lesson 1'},
-  'tk.2t': {sc:'3 局', tc:'3 局', en:'3 games'},
-  'tk.3k': {sc:'生活 · 明早', tc:'生活 · 明早', en:'Life · Tomorrow morning'},
-  'tk.3h': {sc:'闹钟响，5 分钟内起床', tc:'鬧鐘響，5 分鐘內起床', en:'Up within 5 min of the alarm'},
-  'tk.3p': {sc:'今晚把手机放远点充电。', tc:'今晚把手機放遠一點充電。', en:'Charge your phone across the room tonight.'},
-  'tk.3w': {sc:'依据：你数据里关联最明显（示例）', tc:'依據：你數據裡關聯最明顯（示例）', en:'Why: strongest link in your data (sample)'},
-  'tk.3t': {sc:'明早', tc:'明早', en:'Tomorrow'},
-  'ring.t': {sc:'今日 3 件', tc:'今日 3 件', en:'3 for today'},
-  'ring.all': {sc:'全部完成', tc:'全部完成', en:'All done'},
-  'ring.p0': {sc:'点一下，完成一件。', tc:'點一下，完成一件。', en:'Tap one to tick it off.'},
-  'ring.p3': {sc:'明天见，先签到。', tc:'明天見，先簽到。', en:'See you tomorrow. Check in first.'},
-  'ring.pn': {sc:'还剩 {n} 件', tc:'還剩 {n} 件', en:'{n} to go'},
-  'goal.h': {sc:'本周目标', tc:'本週目標', en:'This week'},
-  'goal.t': {sc:'醒后刷手机 ≤ 30 分钟<br>至少 4 天', tc:'醒後滑手機 ≤ 30 分鐘<br>最少 4 天', en:'Phone ≤ 30 min after waking<br>on 4 days'},
-  'goal.aria': {sc:'本周进度：周一、周三达成，周二未达成，今天周四待定', tc:'本週進度：星期一、三達成，星期二未達成，今天星期四待定', en:'This week: hit Mon and Wed, missed Tue, today (Thu) pending'},
   'goal.wk': {sc:['一','二','三','四','五','六','日'], tc:['一','二','三','四','五','六','日'], en:['M','T','W','T','F','S','S']},
-  'goal.p2': {sc:'已达成 2 / 4 天', tc:'已達成 2 / 4 天', en:'2 of 4 days hit'},
-  'goal.p3': {sc:'已达成 3 / 4 天 · 还差 1 天', tc:'已達成 3 / 4 天 · 還差 1 天', en:'3 of 4 days hit · 1 to go'},
-  'tk.np': {sc:'<b>不预测</b>分数、隐藏分或段位。只管你能控制的事。', tc:'<b>不預測</b>分數、隱藏分或段位。只管你控制得到的事。', en:'<b>No predictions</b> of score, MMR or rank. Only what you control.'},
 
   /* ---- academy ---- */
   'ac.eb': {sc:'LucidRank 学院', tc:'LucidRank 學院', en:'LucidRank Academy'},
@@ -1853,7 +1741,7 @@ const I18N = {
 
   /* ---- join ---- */
   'join.h2': {sc:'明早起来，先别碰手机', tc:'明早起身，先別碰手機', en:'Tomorrow morning, leave your phone alone for a bit'},
-  'join.lead': {sc:'第一版还在做，先支持国服。留个邮箱，内测开了通知你。', tc:'第一版還在開發，先支援國服。留個電郵，內測開始時通知你。', en:'v1 is still being built, CN servers first. Leave your email and we’ll tell you when beta opens.'},
+  'join.lead': {sc:'第一版还在做。留个邮箱，内测开了通知你。', tc:'第一版還在開發。留個電郵，內測開始時通知你。', en:'v1 is still being built. Leave your email and we’ll let you know when beta opens.'},
   'join.srvAria': {sc:'你主要玩哪个游戏', tc:'你主要玩哪個遊戲', en:'Which game do you play?'},
   'join.srv': {sc:['VALORANT','CS2','都玩'], tc:['VALORANT','CS2','兩個都玩'], en:['VALORANT','CS2','Both']},
   'join.srvName': {sc:['VALORANT','CS2','VALORANT 和 CS2'], tc:['VALORANT','CS2','VALORANT 和 CS2'], en:['VALORANT','CS2','VALORANT + CS2']},
@@ -1874,9 +1762,8 @@ const I18N = {
   'ft.scan': {sc:'截图识别', tc:'截圖識別', en:'Screenshot scan'},
   'ft.insights': {sc:'个人洞察', tc:'個人洞察', en:'Insights'},
   'ft.grow': {sc:'成长', tc:'成長', en:'Grow'},
-  'ft.tasks': {sc:'每日任务', tc:'每日任務', en:'Daily tasks'},
+  'ft.plan': {sc:'每周计划', tc:'每週計劃', en:'Weekly plan'},
   'ft.academy': {sc:'LucidRank 学院', tc:'LucidRank 學院', en:'LucidRank Academy'},
-  'ft.advice': {sc:'本周建议', tc:'本週建議', en:'Weekly advice'},
   'ft.lineups': {sc:'点位助手', tc:'點位助手', en:'Lineup assistant'},
   'ft.trust': {sc:'我们的原则', tc:'我們的原則', en:'Our principles'},
   'ft.join': {sc:'加入', tc:'加入', en:'Join'},
@@ -1890,21 +1777,34 @@ const I18N = {
 
   /* ---- weekly advice (numbers live in ADVICE_PROFILES in app.js) ---- */
   'adv.h2': {sc:'这周只改一件事', tc:'這星期只改一件事', en:'Change one thing this week'},
-  'adv.lead': {sc:'签到满一两周后，它会用你自己的战绩找出最拖后腿的习惯，给你一个小目标，下周再看有没有用。', tc:'簽到滿一兩個星期後，它會用你自己的戰績找出最拖後腿的習慣，給你一個小目標，下星期再看有沒有用。', en:'After a week or two of check-ins, it uses your own matches to find the habit that hurts most, gives you one small goal, and checks next week whether it helped.'},
+  'adv.lead': {sc:'签到满一两周后，它会用你自己的战绩找出最拖后腿的习惯，给你一个这周的小目标。每天的三件小事也跟着这个目标走，下周再看有没有用。', tc:'簽到滿一兩個星期後，它會用你自己的戰績找出最拖後腿的習慣，給你一個這星期的小目標。每天的三件小事也跟著這個目標走，下星期再看有沒有用。', en:'After a week or two of check-ins, it uses your own matches to find the habit that hurts most and gives you one small goal for the week. Your three daily tasks follow that goal, and next week it checks whether it helped.'},
   'adv.who': {sc:'换个玩家看看', tc:'換個玩家看看', en:'Try another player'},
   'adv.p.night': {sc:'夜猫子', tc:'夜貓子', en:'Night owl'},
   'adv.p.meals': {sc:'饭点不固定', tc:'三餐不定時', en:'Skips meals'},
-  'adv.p.move': {sc:'基本不运动', tc:'甚少運動', en:'Never exercises'},
+  'adv.p.move': {sc:'基本不运动', tc:'甚少運動', en:'Rarely moves'},
   'adv.foundH': {sc:'最拖后腿的习惯', tc:'最拖後腿的習慣', en:'What’s hurting you most'},
   'adv.goalH': {sc:'这周目标', tc:'這星期目標', en:'This week’s goal'},
   'adv.lastH': {sc:'上周结果', tc:'上星期結果', en:'Last week'},
-  'adv.weekAria': {sc:'本周打卡，点一天标记完成', tc:'本週打卡，點一天標記完成', en:'This week, tap a day to mark it done'},
-  'adv.n': {sc:'来自最近 12 天、{n} 局排位', tc:'來自最近 12 天、{n} 局排位', en:'From your last 12 days, {n} ranked games'},
+  'adv.todayH': {sc:'今天的三件小事', tc:'今天的三件小事', en:'Today’s three small things'},
+  'adv.allDone': {sc:'今天的都做完了，明天见。', tc:'今天的都做完了，明天見。', en:'All done for today. See you tomorrow.'},
+  'tk.drill.k': {sc:'训练', tc:'訓練', en:'Drill'},
+  'tk.drill.h': {sc:'急停点射，每组 30 发', tc:'急停點射，每組 30 發', en:'Counter-strafe taps, 30 a set'},
+  'tk.drill.w': {sc:'开打前当热身', tc:'開打前當熱身', en:'As a warm-up before you queue'},
+  'tk.drill.t': {sc:'15 分钟', tc:'15 分鐘', en:'15 min'},
+  'tk.focus.k': {sc:'对局', tc:'對局', en:'In game'},
+  'tk.focus.h': {sc:'过转角前，准星先压在头线', tc:'過轉角前，準星先壓在頭線', en:'Crosshair at head height before every corner'},
+  'tk.focus.w': {sc:'对应学院：准度第 1 课', tc:'對應學院：準度第 1 課', en:'From Academy: Precision, lesson 1'},
+  'tk.focus.t': {sc:'前 3 局', tc:'頭 3 局', en:'First 3 games'},
+  'tk.life.k': {sc:'生活', tc:'生活', en:'Life'},
+  'tk.life.w': {sc:'来自这周目标，勾上会记进今天', tc:'來自這星期目標，剔了會記入今天', en:'From this week’s goal. Ticking it counts for today'},
+  'adv.weekAria': {sc:'本周打卡，点一天标记完成', tc:'這星期打卡，點一天標記完成', en:'This week, tap a day to mark it done'},
+  'adv.n': {sc:'来自最近 14 天、{n} 局排位', tc:'來自最近 14 天、{n} 局排位', en:'From your last 14 days, {n} ranked games'},
   'adv.games': {sc:'{n} 局', tc:'{n} 局', en:'{n} games'},
   'adv.m.win': {sc:'胜率', tc:'勝率', en:'Win rate'},
   'adv.m.acs': {sc:'平均 ACS', tc:'平均 ACS', en:'Avg ACS'},
   'adv.left': {sc:'还差 {n} 次', tc:'還差 {n} 次', en:'{n} to go'},
   'adv.left.one': {en:'1 to go'},
+  'adv.tLeft': {sc:'还剩 {n} 件', tc:'還剩 {n} 件', en:'{n} left for today'},
   'adv.done': {sc:'这周的目标做到了。下周一看效果。', tc:'這星期的目標做到了。下星期一看效果。', en:'Goal done for the week. Results next Monday.'},
   'adv.future': {sc:'还没到', tc:'未到', en:'Not yet'},
   'adv.today': {sc:'今天', tc:'今天', en:'Today'},
@@ -1916,23 +1816,29 @@ const I18N = {
   'adv.night.B': {sc:'12 点前睡', tc:'12 點前睡', en:'Before midnight'},
   'adv.night.goal': {sc:'这周有 4 晚在 1:30 前睡', tc:'這星期有 4 晚在 1:30 前睡', en:'In bed by 1:30 on 4 nights this week'},
   'adv.night.why': {sc:'你平时 2 点左右睡。先提前半小时，不用一下跳到 11 点。', tc:'你平時 2 點左右睡。先提早半小時，不用一下子跳到 11 點。', en:'You usually sleep around 2. Start with half an hour earlier, not 11 pm.'},
-  'adv.night.last': {sc:'上周：醒来 15 分钟内放下手机', tc:'上星期：醒來 15 分鐘內放低手機', en:'Last week: phone down within 15 min of waking'},
+  'adv.night.last': {sc:'醒来 15 分钟内放下手机', tc:'醒來 15 分鐘內放低手機', en:'Phone down within 15 min of waking'},
+  'adv.night.today': {sc:'今晚 1:30 前上床', tc:'今晚 1:30 前上床', en:'In bed by 1:30 tonight'},
+  'adv.night.todayT': {sc:'今晚', tc:'今晚', en:'Tonight'},
   'adv.meals.habit': {sc:'空着肚子开打的日子，平均 ACS <em>{a}</em>。吃过一顿正经饭的是 <em>{b}</em>。', tc:'空肚開打的日子，平均 ACS <em>{a}</em>。有好好吃一餐的是 <em>{b}</em>。', en:'On days you played on an empty stomach, your average ACS was <em>{a}</em>. After a proper meal: <em>{b}</em>.'},
   'adv.meals.A': {sc:'空腹开打', tc:'空肚開打', en:'Empty stomach'},
   'adv.meals.B': {sc:'吃过饭', tc:'吃過飯', en:'Had a meal'},
   'adv.meals.goal': {sc:'这周 3 次，开打前 1 小时吃顿正经饭', tc:'這星期 3 次，開打前 1 小時吃一餐正經飯', en:'Eat a real meal an hour before playing, 3 times this week'},
   'adv.meals.why': {sc:'别的饭先不管，只管开打前这一顿。', tc:'其他餐暫時不用理，只管開打前這一餐。', en:'Leave your other meals alone for now. Just this one.'},
-  'adv.meals.last': {sc:'上周：每天喝够 4 杯水', tc:'上星期：每天喝夠 4 杯水', en:'Last week: 4 glasses of water a day'},
+  'adv.meals.last': {sc:'每天喝够 4 杯水', tc:'每天喝夠 4 杯水', en:'4 glasses of water a day'},
+  'adv.meals.today': {sc:'开打前 1 小时吃顿正经饭', tc:'開打前 1 小時吃一餐正經飯', en:'A real meal an hour before playing'},
+  'adv.meals.todayT': {sc:'开打前', tc:'開打前', en:'Before playing'},
   'adv.move.habit': {sc:'一整天没动过的日子，胜率 <em>{a}%</em>。哪怕只散了个步，也有 <em>{b}%</em>。', tc:'一整天沒動過的日子，勝率 <em>{a}%</em>。就算只是散個步，也有 <em>{b}%</em>。', en:'On days you didn’t move at all, you won <em>{a}%</em>. Even after a short walk: <em>{b}%</em>.'},
   'adv.move.A': {sc:'整天没动', tc:'整天沒動', en:'No movement'},
   'adv.move.B': {sc:'散步或拉伸', tc:'散步或伸展', en:'Walk or stretch'},
   'adv.move.goal': {sc:'这周 3 次，开打前拉伸 5 分钟', tc:'這星期 3 次，開打前伸展 5 分鐘', en:'Stretch for 5 minutes before playing, 3 times this week'},
   'adv.move.why': {sc:'你现在基本不运动。先从 5 分钟开始，不用办健身卡。', tc:'你現在差不多不運動。先由 5 分鐘開始，不用買健身會籍。', en:'You barely move right now. Start with 5 minutes. No gym needed.'},
-  'adv.move.last': {sc:'上周：1 点前睡', tc:'上星期：1 點前睡', en:'Last week: asleep before 1 am'},
+  'adv.move.last': {sc:'1 点前睡', tc:'1 點前睡', en:'Asleep before 1 am'},
+  'adv.move.today': {sc:'开打前拉伸 5 分钟', tc:'開打前伸展 5 分鐘', en:'Stretch 5 minutes before playing'},
+  'adv.move.todayT': {sc:'5 分钟', tc:'5 分鐘', en:'5 min'},
 
   /* ---- lineup assistant (lineups live in LINEUPS in app.js) ---- */
   'lu.h2': {sc:'打到一半，切出来查点位', tc:'打到一半，切出來查點位', en:'Alt-tab mid-match, look up a lineup'},
-  'lu.lead': {sc:'桌面版会有一个单独的小窗口。跟对局里掏手机看攻略差不多，就是快一点。', tc:'桌面版會有一個獨立小視窗。跟對局中拿手機看攻略差不多，只是快一點。', en:'The desktop app gets its own small window. Like checking a guide on your phone mid-game, just quicker.'},
+  'lu.lead': {sc:'桌面版有个单独的小窗口，比打到一半掏手机查攻略快。', tc:'桌面版有個獨立小視窗，比打到一半拿手機查攻略快。', en:'The desktop app has its own small window. Quicker than digging out your phone mid-match.'},
   'lu.trust': {sc:'不盖在游戏画面上，也不读游戏数据或内存。只看游戏有没有启动，好帮你切到对应游戏和上次用的地图。', tc:'不會蓋住遊戲畫面，也不讀取遊戲數據或記憶體。只會偵測遊戲有沒有開啟，幫你切到對應遊戲和上次用的地圖。', en:'It doesn’t overlay the game or read game data or memory. It only checks whether the game is running, to open the right game and your last map.'},
   'lu.win': {sc:'LucidRank · 点位', tc:'LucidRank · 點位', en:'LucidRank · Lineups'},
   'lu.map': {sc:'地图', tc:'地圖', en:'Map'},
@@ -1958,6 +1864,14 @@ const I18N = {
   'lu.detect': {sc:'检测到 {g} 已启动', tc:'偵測到 {g} 已開啟', en:'{g} is running'},
   'lu.hint': {sc:'Alt + Tab 切回游戏', tc:'Alt + Tab 返回遊戲', en:'Alt + Tab back to the game'},
   'lu.note': {sc:'点位都是示例数据，地图是示意图，不是游戏原图。', tc:'點位均為示例數據，地圖為示意圖，並非遊戲原圖。', en:'Lineups are sample data. Maps are rough sketches, not game art.'},
+  'lu.m.nuke': {sc:'核子危机', tc:'Nuke', en:'Nuke'},
+  'lu.m.inferno': {sc:'炼狱小镇', tc:'Inferno', en:'Inferno'},
+  'lu.m.mirage': {sc:'荒漠迷城', tc:'Mirage', en:'Mirage'},
+  'lu.m.lotus': {sc:'莲华古城', tc:'Lotus', en:'Lotus'},
+  'lu.m.split': {sc:'霓虹町', tc:'Split', en:'Split'},
+  'lu.m.haven': {sc:'隐世修所', tc:'Haven', en:'Haven'},
+  'lu.m.bind': {sc:'源工重镇', tc:'Bind', en:'Bind'},
+  'lu.m.ascent': {sc:'亚海悬城', tc:'Ascent', en:'Ascent'},
   'lu.sc.exec_a': {sc:'A 点进攻', tc:'A 點進攻', en:'A exec'},
   'lu.sc.exec_b': {sc:'B 点进攻', tc:'B 點進攻', en:'B exec'},
   'lu.sc.exec_c': {sc:'C 点进攻', tc:'C 點進攻', en:'C exec'},
@@ -2683,32 +2597,19 @@ const insIO=new IntersectionObserver(es=>{ if(es[0].isIntersecting){ insIO.disco
 insIO.observe($('.tier-card'));
 langHooks.push(renderIns);
 
-/* ================= TASKS ================= */
-const tasks=$$('.task'), ringFg=$('#ringFg'), ringN=$('#ringN'), ringCard=$('#ringCard'), burst=$('.burst');
-for(let i=0;i<14;i++){ const b=document.createElement('i'); b.style.setProperty('--a',(i/14*360)+'deg'); b.style.background=i%2?'#ff6a3d':'#ffc46b'; burst.appendChild(b); }
-function updTasks(){
-  const n=tasks.filter(t=>t.getAttribute('aria-checked')==='true').length;
-  ringN.textContent=n; ringFg.style.strokeDashoffset=289*(1-n/3);
-  setT($('#ringT'),n===3?'ring.all':'ring.t');
-  if(n===0||n===3) setT($('#ringP'),n===0?'ring.p0':'ring.p3'); else setT($('#ringP'),'ring.pn',{n:3-n});
-  ringCard.classList.remove('allDone'); if(n===3){ void ringCard.offsetWidth; ringCard.classList.add('allDone'); }
-  const life=tasks[2].getAttribute('aria-checked')==='true';
-  $('#todayDot').classList.toggle('y',life);
-  setT($('#goalP'),life?'goal.p3':'goal.p2');
-}
-tasks.forEach(t=>t.addEventListener('click',()=>{ t.setAttribute('aria-checked',t.getAttribute('aria-checked')!=='true'); updTasks(); }));
-
 /* ================= WEEKLY ADVICE ================= */
 // Example profiles. Text: I18N['adv.<id>.habit|A|B|goal|why|last'] · metric: 'win' (%) or 'acs'
 // a = habit days, b = other days · done = weekday indexes already ticked (0 = Mon) · today = Thu
+// Daily tasks: two in-game ones from match stats (I18N 'tk.<k>.*') + one life task taken from the weekly goal ('adv.<id>.today')
 const ADVICE_PROFILES={
   night:{metric:'win',a:{v:41,n:23},b:{v:58,n:19},target:4,done:[0],last:{days:5,of:7,metric:'acs',delta:12}},
   meals:{metric:'acs',a:{v:198,n:14},b:{v:231,n:26},target:3,done:[1],last:{days:6,of:7,metric:'acs',delta:9}},
   move:{metric:'win',a:{v:44,n:31},b:{v:56,n:9},target:3,done:[0],last:{days:4,of:7,metric:'win',delta:6}},
 };
+const DAILY_GAME_TASKS=['drill','focus'];
 const ADV_TODAY=3;
-let advP='night', advDone=new Set(ADVICE_PROFILES.night.done);
-const advEl={habit:$('#advHabit'),bars:$('#advBars'),n:$('#advN'),goal:$('#advGoal'),why:$('#advWhy'),week:$('#advWeek'),count:$('#advCount'),status:$('#advStatus'),last:$('#advLast'),lastDays:$('#advLastDays'),lastDelta:$('#advLastDelta'),lastV:$('#advLastV')};
+let advP='night', advDone=new Set(ADVICE_PROFILES.night.done), taskDone=new Set();
+const advEl={tasks:$('#advTasks'),todayN:$('#advTodayN'),todayS:$('#advTodayS'),habit:$('#advHabit'),bars:$('#advBars'),n:$('#advN'),goal:$('#advGoal'),why:$('#advWhy'),week:$('#advWeek'),count:$('#advCount'),status:$('#advStatus'),last:$('#advLast'),lastDays:$('#advLastDays'),lastDelta:$('#advLastDelta'),lastV:$('#advLastV')};
 function renderAdv(){
   const P=ADVICE_PROFILES[advP], k='adv.'+advP+'.', pct=P.metric==='win';
   advEl.habit.innerHTML=t(k+'habit',{a:P.a.v,b:P.b.v});
@@ -2718,13 +2619,41 @@ function renderAdv(){
   advEl.goal.textContent=raw(k+'goal'); advEl.why.textContent=raw(k+'why');
   const wk=raw('goal.wk');
   advEl.week.innerHTML=wk.map((d,i)=>{ const fut=i>ADV_TODAY, on=advDone.has(i);
-    return `<button type="button" class="adv-day${on?' on':''}${i===ADV_TODAY?' today':''}" data-d="${i}" aria-pressed="${on}"${fut?` disabled title="${esc(t('adv.future'))}"`:''}><i>${on?'<svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg>':''}</i><span>${esc(d)}</span></button>`; }).join('');
+    return `<button type="button" class="adv-day${on?' on':''}${i===ADV_TODAY?' today':''}" data-d="${i}" aria-pressed="${on}"${fut?` disabled title="${esc(t('adv.future'))}"`:''}><i>${on?CHK:''}</i><span>${esc(d)}</span></button>`; }).join('');
   updAdvCount();
   advEl.last.textContent=raw(k+'last');
   advEl.lastDays.textContent=t('adv.lastDays',{d:P.last.days,of:P.last.of});
   advEl.lastDelta.textContent=(P.last.metric==='win'?t('adv.m.win'):'ACS')+' +'+P.last.delta+(P.last.metric==='win'?'%':'');
   advEl.lastV.textContent=t('adv.lastV');
+  renderTasks();
 }
+const CHK='<svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg>';
+function renderTasks(){
+  const k='adv.'+advP+'.';
+  const rows=[...DAILY_GAME_TASKS.map(id=>({id,kind:raw('tk.'+id+'.k'),h:raw('tk.'+id+'.h'),why:raw('tk.'+id+'.w'),tm:raw('tk.'+id+'.t'),on:taskDone.has(id)})),
+    {id:'life',kind:raw('tk.life.k'),h:raw(k+'today'),why:raw('tk.life.w'),tm:raw(k+'todayT'),on:advDone.has(ADV_TODAY)}];
+  advEl.tasks.innerHTML=rows.map(r=>`<button type="button" class="adv-task${r.id==='life'?' life':''}" role="checkbox" aria-checked="${r.on}" data-t="${r.id}"><span class="chk">${CHK}</span><span class="adv-task-b"><span class="adv-task-k">${esc(r.kind)}</span><b>${esc(r.h)}</b><small>${esc(r.why)}</small></span><span class="adv-task-tm">${esc(r.tm)}</span></button>`).join('');
+  updTasks();
+}
+function updTasks(){
+  const n=$$('.adv-task[aria-checked=true]',advEl.tasks).length;
+  advEl.todayN.textContent=`${n} / 3`;
+  advEl.todayS.textContent=n===3?t('adv.allDone'):t('adv.tLeft',{n:3-n});
+  advEl.todayS.classList.toggle('ok',n===3);
+}
+function setDay(d,on){
+  on?advDone.add(d):advDone.delete(d);
+  const b=$(`.adv-day[data-d="${d}"]`,advEl.week); if(b){ b.classList.toggle('on',on); b.setAttribute('aria-pressed',on); $('i',b).innerHTML=on?CHK:''; }
+  if(d===ADV_TODAY){ const life=$('.adv-task.life',advEl.tasks); if(life) life.setAttribute('aria-checked',on); updTasks(); }
+  updAdvCount();
+}
+advEl.tasks.addEventListener('click',e=>{
+  const b=e.target.closest('.adv-task'); if(!b) return;
+  const on=b.getAttribute('aria-checked')!=='true';
+  if(b.dataset.t==='life'){ setDay(ADV_TODAY,on); return; }   // the life task is today's step toward the weekly goal
+  on?taskDone.add(b.dataset.t):taskDone.delete(b.dataset.t);
+  b.setAttribute('aria-checked',on); updTasks();
+});
 function updAdvCount(){
   const P=ADVICE_PROFILES[advP], n=advDone.size;
   advEl.count.textContent=`${Math.min(n,P.target)} / ${P.target}`;
@@ -2733,10 +2662,7 @@ function updAdvCount(){
 }
 advEl.week.addEventListener('click',e=>{
   const b=e.target.closest('.adv-day'); if(!b||b.disabled) return;
-  const d=+b.dataset.d; advDone.has(d)?advDone.delete(d):advDone.add(d);
-  const on=advDone.has(d); b.classList.toggle('on',on); b.setAttribute('aria-pressed',on);
-  $('i',b).innerHTML=on?'<svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg>':'';
-  updAdvCount();
+  const d=+b.dataset.d; setDay(d,!advDone.has(d));
 });
 $$('.adv-profiles .chip').forEach(c=>c.addEventListener('click',()=>{
   if(c.dataset.p===advP) return;
@@ -2749,16 +2675,16 @@ renderAdv(); langHooks.push(renderAdv);
 // Abstract map sketches (0–100 grid, not game art): area rects [x,y,w,h] + links between areas
 const LU_MAPS={
   val:{
-    ascent:{name:'Ascent',areas:{def_spawn:[38,4,24,11],a_site:[6,17,26,22],b_site:[68,19,26,22],mid:[40,38,20,24],a_main:[8,52,16,26],b_main:[76,52,16,26],atk_spawn:[36,84,28,11]},links:[['atk_spawn','a_main'],['atk_spawn','b_main'],['atk_spawn','mid'],['a_main','a_site'],['b_main','b_site'],['mid','a_site'],['mid','b_site'],['def_spawn','a_site'],['def_spawn','b_site']]},
-    bind:{name:'Bind',areas:{def_spawn:[40,4,20,11],a_site:[6,15,28,24],b_site:[66,14,28,26],a_main:[10,52,18,26],b_main:[72,50,18,28],atk_spawn:[38,84,24,11]},links:[['atk_spawn','a_main'],['atk_spawn','b_main'],['a_main','a_site'],['b_main','b_site'],['a_main','b_main'],['def_spawn','a_site'],['def_spawn','b_site']]},
-    haven:{name:'Haven',areas:{def_spawn:[38,4,24,11],a_site:[4,18,22,20],b_site:[40,24,20,17],c_site:[74,18,22,20],a_main:[6,52,16,26],mid:[40,50,20,18],c_main:[78,52,16,26],atk_spawn:[36,84,28,11]},links:[['atk_spawn','a_main'],['atk_spawn','mid'],['atk_spawn','c_main'],['a_main','a_site'],['mid','b_site'],['c_main','c_site'],['def_spawn','a_site'],['def_spawn','b_site'],['def_spawn','c_site']]},
-    split:{name:'Split',areas:{def_spawn:[38,4,24,11],a_site:[6,14,26,24],b_site:[68,14,26,24],mid:[38,36,24,24],a_main:[8,52,18,26],b_main:[74,52,18,26],atk_spawn:[36,84,28,11]},links:[['atk_spawn','a_main'],['atk_spawn','b_main'],['atk_spawn','mid'],['a_main','a_site'],['b_main','b_site'],['mid','a_site'],['mid','b_site'],['def_spawn','a_site'],['def_spawn','b_site']]},
-    lotus:{name:'Lotus',areas:{def_spawn:[38,4,24,11],a_site:[4,20,22,20],b_site:[39,22,22,18],c_site:[74,20,22,20],a_main:[6,54,16,24],b_main:[40,52,20,18],c_main:[78,54,16,24],atk_spawn:[36,84,28,11]},links:[['atk_spawn','a_main'],['atk_spawn','b_main'],['atk_spawn','c_main'],['a_main','a_site'],['b_main','b_site'],['c_main','c_site'],['def_spawn','a_site'],['def_spawn','b_site'],['def_spawn','c_site']]},
+    ascent:{areas:{def_spawn:[38,4,24,11],a_site:[6,17,26,22],b_site:[68,19,26,22],mid:[40,38,20,24],a_main:[8,52,16,26],b_main:[76,52,16,26],atk_spawn:[36,84,28,11]},links:[['atk_spawn','a_main'],['atk_spawn','b_main'],['atk_spawn','mid'],['a_main','a_site'],['b_main','b_site'],['mid','a_site'],['mid','b_site'],['def_spawn','a_site'],['def_spawn','b_site']]},
+    bind:{areas:{def_spawn:[40,4,20,11],a_site:[6,15,28,24],b_site:[66,14,28,26],a_main:[10,52,18,26],b_main:[72,50,18,28],atk_spawn:[38,84,24,11]},links:[['atk_spawn','a_main'],['atk_spawn','b_main'],['a_main','a_site'],['b_main','b_site'],['a_main','b_main'],['def_spawn','a_site'],['def_spawn','b_site']]},
+    haven:{areas:{def_spawn:[38,4,24,11],a_site:[4,18,22,20],b_site:[40,24,20,17],c_site:[74,18,22,20],a_main:[6,52,16,26],mid:[40,50,20,18],c_main:[78,52,16,26],atk_spawn:[36,84,28,11]},links:[['atk_spawn','a_main'],['atk_spawn','mid'],['atk_spawn','c_main'],['a_main','a_site'],['mid','b_site'],['c_main','c_site'],['def_spawn','a_site'],['def_spawn','b_site'],['def_spawn','c_site']]},
+    split:{areas:{def_spawn:[38,4,24,11],a_site:[6,14,26,24],b_site:[68,14,26,24],mid:[38,36,24,24],a_main:[8,52,18,26],b_main:[74,52,18,26],atk_spawn:[36,84,28,11]},links:[['atk_spawn','a_main'],['atk_spawn','b_main'],['atk_spawn','mid'],['a_main','a_site'],['b_main','b_site'],['mid','a_site'],['mid','b_site'],['def_spawn','a_site'],['def_spawn','b_site']]},
+    lotus:{areas:{def_spawn:[38,4,24,11],a_site:[4,20,22,20],b_site:[39,22,22,18],c_site:[74,20,22,20],a_main:[6,54,16,24],b_main:[40,52,20,18],c_main:[78,54,16,24],atk_spawn:[36,84,28,11]},links:[['atk_spawn','a_main'],['atk_spawn','b_main'],['atk_spawn','c_main'],['a_main','a_site'],['b_main','b_site'],['c_main','c_site'],['def_spawn','a_site'],['def_spawn','b_site'],['def_spawn','c_site']]},
   },
   cs2:{
-    mirage:{name:'Mirage',areas:{def_spawn:[8,8,22,13],b_site:[64,10,28,22],a_site:[6,40,26,24],mid:[40,36,20,26],a_main:[10,72,18,18],b_main:[70,42,18,24],atk_spawn:[62,82,30,11]},links:[['atk_spawn','a_main'],['atk_spawn','mid'],['atk_spawn','b_main'],['a_main','a_site'],['mid','a_site'],['mid','b_site'],['b_main','b_site'],['def_spawn','a_site'],['def_spawn','b_site']]},
-    inferno:{name:'Inferno',areas:{def_spawn:[42,6,16,12],b_site:[8,8,24,22],a_site:[64,14,26,22],mid:[40,40,20,20],b_main:[14,40,14,30],a_main:[66,50,18,24],atk_spawn:[38,82,26,12]},links:[['atk_spawn','b_main'],['atk_spawn','mid'],['atk_spawn','a_main'],['b_main','b_site'],['mid','a_site'],['a_main','a_site'],['def_spawn','a_site'],['def_spawn','b_site']]},
-    nuke:{name:'Nuke',areas:{def_spawn:[70,6,22,13],a_site:[30,24,34,22],b_site:[30,58,34,18],a_main:[6,28,16,30],b_main:[72,46,18,24],atk_spawn:[6,80,28,12]},links:[['atk_spawn','a_main'],['a_main','a_site'],['atk_spawn','b_main'],['b_main','b_site'],['def_spawn','a_site'],['def_spawn','b_main'],['a_site','b_site']]},
+    mirage:{areas:{def_spawn:[8,8,22,13],b_site:[64,10,28,22],a_site:[6,40,26,24],mid:[40,36,20,26],a_main:[10,72,18,18],b_main:[70,42,18,24],atk_spawn:[62,82,30,11]},links:[['atk_spawn','a_main'],['atk_spawn','mid'],['atk_spawn','b_main'],['a_main','a_site'],['mid','a_site'],['mid','b_site'],['b_main','b_site'],['def_spawn','a_site'],['def_spawn','b_site']]},
+    inferno:{areas:{def_spawn:[42,6,16,12],b_site:[8,8,24,22],a_site:[64,14,26,22],mid:[40,40,20,20],b_main:[14,40,14,30],a_main:[66,50,18,24],atk_spawn:[38,82,26,12]},links:[['atk_spawn','b_main'],['atk_spawn','mid'],['atk_spawn','a_main'],['b_main','b_site'],['mid','a_site'],['a_main','a_site'],['def_spawn','a_site'],['def_spawn','b_site']]},
+    nuke:{areas:{def_spawn:[70,6,22,13],a_site:[30,24,34,22],b_site:[30,58,34,18],a_main:[6,28,16,30],b_main:[72,46,18,24],atk_spawn:[6,80,28,12]},links:[['atk_spawn','a_main'],['a_main','a_site'],['atk_spawn','b_main'],['b_main','b_site'],['def_spawn','a_site'],['def_spawn','b_main'],['a_site','b_site']]},
   },
 };
 const LU_PICKS={val:['sova','viper','brim','kj'],cs2:['smoke','flash','molly']};
@@ -2824,7 +2750,7 @@ function luFiltered(){ return luBase().filter(l=>(lu.pick==='all'||l.pick===lu.p
 const chip=(attr,v,label,on,dis)=>`<button type="button" class="lu-chip" data-${attr}="${v}" aria-pressed="${on}"${dis?' disabled':''}>${label}</button>`;
 function renderLu(){
   const G=LU_MAPS[lu.game], curMap=lu.map[lu.game];
-  luEl.maps.innerHTML=Object.entries(G).map(([k,m])=>`<button type="button" data-m="${k}" aria-pressed="${k===curMap}">${m.name}</button>`).join('');
+  luEl.maps.innerHTML=Object.keys(G).map(k=>`<button type="button" data-m="${k}" aria-pressed="${k===curMap}">${esc(raw('lu.m.'+k))}</button>`).join('');
   $$('#luSides button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.s===lu.side));
   $$('.lu-game button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.g===lu.game));
   $('.lu-game').style.setProperty('--gi',lu.game==='cs2'?1:0);
@@ -2854,7 +2780,7 @@ function luMapSVG(l){
   const big=['smoke','orb'].includes(l.util), fire=['molly','incen','snake','swarm'].includes(l.util);
   const areas=Object.entries(A).map(([k,[x,y,w,h]])=>{ const site=/_site$/.test(k); return `<rect class="lu-area${site?' site':''}${/spawn/.test(k)?' spawn':''}" x="${x}" y="${y}" width="${w}" height="${h}" rx="2.5"/>${site?`<text x="${x+w/2}" y="${y+h/2+3.5}" text-anchor="middle">${k[0].toUpperCase()}</text>`:''}`; }).join('');
   const links=M.links.map(([a,b])=>{ const p=c(a),q=c(b); return `<line class="lu-link" x1="${p[0]}" y1="${p[1]}" x2="${q[0]}" y2="${q[1]}"/>`; }).join('');
-  const label=t('lu.mapAria',{map:M.name,from:raw('lu.a.'+l.from),to:raw('lu.a.'+l.to)});
+  const label=t('lu.mapAria',{map:raw('lu.m.'+l.map),from:raw('lu.a.'+l.from),to:raw('lu.a.'+l.to)});
   return `<svg class="lu-map" viewBox="0 0 100 100" role="img" aria-label="${esc(label)}">${links}${areas}
     <path class="lu-path" d="${path}"/>${rings}
     ${big?`<circle class="lu-zone smoke" cx="${e[0]}" cy="${e[1]}" r="6.5"/>`:fire?`<circle class="lu-zone fire" cx="${e[0]}" cy="${e[1]}" r="4.5"/>`:l.util==='flash'?`<circle class="lu-zone flash" cx="${e[0]}" cy="${e[1]}" r="5"/>`:`<circle class="lu-zone scan" cx="${e[0]}" cy="${e[1]}" r="9"/>`}
@@ -2866,7 +2792,7 @@ function renderLuDetail(){
   const l=LINEUPS.find(x=>x.id===lu.sel);
   if(!l){ luEl.detail.innerHTML=''; return; }
   const stand=raw('lu.a.'+l.from)+(LANG==='en'?', ':'，')+raw('lu.st.'+l.stand);
-  luEl.detail.innerHTML=`<div class="lu-d-head"><div><h3>${esc(luName(l))}</h3><p>${esc(LU_MAPS[l.game][l.map].name)} · ${esc(raw('lu.ag.'+l.pick))} · ${esc(raw('lu.sc.'+l.scen))}</p></div><span class="tag-demo">${t('demo')}</span></div>
+  luEl.detail.innerHTML=`<div class="lu-d-head"><div><h3>${esc(luName(l))}</h3><p>${esc(raw('lu.m.'+l.map))} · ${esc(raw('lu.ag.'+l.pick))} · ${esc(raw('lu.sc.'+l.scen))}</p></div><span class="tag-demo">${t('demo')}</span></div>
   <div class="lu-viz">${luMapSVG(l)}<div class="lu-aim-w">${luAimSVG(l)}<span>${t('lu.lgAim')}</span></div></div>
   <div class="lu-legend"><span><i class="lg-s"></i>${t('lu.lgStand')}</span><span><i class="lg-l"></i>${t('lu.lgLand')}</span></div>
   <ol class="lu-steps"><li><b>${t('lu.sStand')}</b><span>${esc(LANG==='en'?cap(stand):stand)}</span></li><li><b>${t('lu.sAim')}</b><span>${esc(raw('lu.aim.'+l.aim))}</span></li><li><b>${t('lu.sThrow')}</b><span>${esc(luThrow(l))}</span></li></ol>
