@@ -882,6 +882,161 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
 .ph-status{font-size:10.5px}
 [data-r]{transform:translateY(16px)}
 
+/* ===== weekly advice ===== */
+.advice{background:#0b0b0e;padding:clamp(100px,12vw,180px) 0}
+.adv-who{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.adv-who-l{font-size:14px;color:var(--t3)}
+.adv-profiles{display:flex;gap:8px;flex-wrap:wrap}
+.adv-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:16px}
+.adv-last{grid-column:1/-1}
+.adv-habit{font-size:var(--fs-xl);font-weight:600;line-height:1.45;margin:0 0 26px;max-width:24em;color:var(--t1)}
+.adv-habit em{font-style:normal;color:var(--accent)}
+.adv-m{margin:0 0 12px;font-size:13px;color:var(--t3)}
+.adv-bar{margin-bottom:14px}
+.adv-bl{display:flex;align-items:baseline;gap:10px;margin-bottom:7px;font-size:14px;color:var(--t2)}
+.adv-bl small{font-size:12px;color:var(--t3)}
+.adv-bl b{margin-left:auto;font-size:18px;font-weight:600;color:var(--t1)}
+.adv-track{height:8px;border-radius:4px;background:rgba(255,255,255,.07);overflow:hidden}
+.adv-track i{display:block;height:100%;border-radius:4px;background:rgba(255,255,255,.55);transform-origin:0 50%;transition:transform .7s var(--ease)}
+.adv-bar.bad .adv-track i{background:var(--accent)}
+.adv-n{margin:16px 0 0;font-size:12.5px;color:var(--t3)}
+.adv-count{font-size:15px;font-weight:600;color:var(--t1)}
+.adv-goal-t{font-size:var(--fs-lg);font-weight:600;line-height:1.45;margin:0 0 8px;color:var(--t1)}
+.adv-why{margin:0 0 24px;font-size:14.5px;color:var(--t2);line-height:1.6}
+.adv-week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.adv-day{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 0 8px;border-radius:12px;background:rgba(255,255,255,.04);font-size:12px;color:var(--t3);transition:background .25s,color .25s}
+.adv-day i{width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.22);display:grid;place-items:center}
+.adv-day svg{width:12px;height:12px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.adv-day.on{color:var(--t1)}
+.adv-day.on i{background:var(--accent);box-shadow:none}
+.adv-day.today{box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.adv-day:disabled{opacity:.4;cursor:default}
+.adv-day:not(:disabled):hover{background:rgba(255,255,255,.08)}
+.adv-status{margin:14px 0 0;font-size:13.5px;color:var(--t2)}
+.adv-status.ok{color:var(--mint)}
+.adv-last .ct{margin-bottom:14px}
+.adv-last-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.adv-last-goal{margin:0;font-size:var(--fs-lg);font-weight:600;color:var(--t1)}
+.adv-last-stats{display:flex;gap:8px}
+.adv-last-stats span{font-size:14px;font-weight:600;padding:6px 12px;border-radius:10px;background:rgba(255,255,255,.06);color:var(--t1)}
+.adv-last-stats span:last-child{background:rgba(69,230,196,.12);color:var(--mint)}
+.adv-last-v{margin:10px 0 0;font-size:14px;color:var(--t2)}
+.adv-note{margin:22px 0 0;font-size:13px;color:var(--t3)}
+@media (max-width:860px){.adv-grid{grid-template-columns:1fr}}
+@media (max-width:600px){.adv-day{padding:8px 0 6px;font-size:11px}.adv-day i{width:20px;height:20px}.adv-week{gap:4px}}
+
+/* ===== lineup assistant ===== */
+.lineups{background:var(--paper);color:var(--d1);padding:clamp(100px,12vw,180px) 0}
+.lu-trust{display:flex;align-items:flex-start;gap:9px;margin:18px 0 0;max-width:40em;font-size:14.5px;line-height:1.55;color:var(--d1)}
+.lu-trust svg{flex:none;width:19px;height:19px;margin-top:1px;color:#117a66}
+.lu-win{background:#151519;color:var(--t1);border-radius:14px;box-shadow:0 30px 70px -30px rgba(0,0,0,.45),0 0 0 1px rgba(0,0,0,.12);overflow:hidden;font-size:14px}
+.lu-title{display:flex;align-items:center;justify-content:space-between;height:36px;padding:0 0 0 14px;background:#1d1d22;border-bottom:1px solid rgba(255,255,255,.06);font-size:12.5px;color:var(--t2)}
+.lu-title-l{display:flex;align-items:center;gap:8px}
+.lu-title .brand-mark{width:14px;height:14px;color:#fff}
+.lu-ctrls{display:flex;height:100%}
+.lu-ctrls i{width:44px;height:100%;position:relative}
+.lu-ctrls i::before,.lu-ctrls i::after{content:"";position:absolute;left:50%;top:50%;background:rgba(255,255,255,.6)}
+.lu-ctrls .min::before{width:10px;height:1px;margin-left:-5px}
+.lu-ctrls .max::before{width:9px;height:9px;margin:-5px 0 0 -5px;background:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.6)}
+.lu-ctrls .cls::before,.lu-ctrls .cls::after{width:12px;height:1px;margin-left:-6px;transform:rotate(45deg)}
+.lu-ctrls .cls::after{transform:rotate(-45deg)}
+.lu-body{display:grid;grid-template-columns:172px 1fr;min-height:540px}
+.lu-side{padding:16px 14px;background:#18181d;border-right:1px solid rgba(255,255,255,.06)}
+.lu-game{margin:0 0 18px;width:100%}
+.lu-game button{padding:0 8px;font-size:11px}
+.lu-lbl{margin:0 0 8px;font-size:12px;color:var(--t3)}
+.lu-maps{display:flex;flex-direction:column;gap:2px;margin-bottom:18px}
+.lu-maps button{text-align:left;padding:8px 10px;border-radius:8px;color:var(--t2);font-size:14px;transition:background .2s,color .2s}
+.lu-maps button:hover{background:rgba(255,255,255,.05);color:var(--t1)}
+.lu-maps button[aria-pressed=true]{background:rgba(255,255,255,.1);color:var(--t1);font-weight:600}
+.lu-sides{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:3px;border-radius:9px;background:rgba(255,255,255,.05)}
+.lu-sides button{padding:6px 0;border-radius:7px;font-size:13px;color:var(--t2)}
+.lu-sides button[aria-pressed=true]{background:#fff;color:#000;font-weight:600}
+.lu-main{display:flex;flex-direction:column;min-width:0}
+.lu-filters{padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;gap:8px}
+.lu-row{display:flex;align-items:center;gap:12px}
+.lu-row .lu-lbl{margin:0;width:44px;flex:none}
+.lu-chips{display:flex;gap:6px;flex-wrap:wrap}
+.lu-chip{font-size:13px;padding:5px 12px;border-radius:99px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);color:var(--t2);transition:background .2s,color .2s}
+.lu-chip:hover{color:var(--t1)}
+.lu-chip[aria-pressed=true]{background:var(--accent);box-shadow:none;color:#fff}
+.lu-chip:disabled{opacity:.3;cursor:default}
+.lu-split{display:grid;grid-template-columns:minmax(200px,240px) 1fr;flex:1;min-height:0}
+.lu-list-w{border-right:1px solid rgba(255,255,255,.06);padding:12px 10px;min-width:0}
+.lu-count{margin:0 6px 8px;font-size:12px;color:var(--t3)}
+.lu-list{display:flex;flex-direction:column;gap:4px}
+.lu-card{position:relative;text-align:left;display:flex;flex-direction:column;gap:3px;padding:10px 12px;border-radius:10px;transition:background .2s}
+.lu-card:hover{background:rgba(255,255,255,.04)}
+.lu-card[aria-selected=true]{background:rgba(255,255,255,.09)}
+.lu-card-t{font-size:14px;font-weight:600;color:var(--t1);padding-right:34px}
+.lu-card-s{font-size:12px;color:var(--t3)}
+.lu-marks{position:absolute;right:10px;top:10px;display:flex;gap:4px;font-size:12px;font-style:normal}
+.lu-marks i{font-style:normal}.mk-fav{color:#ffc46b}.mk-ok{color:var(--mint)}
+.lu-empty{margin:6px;font-size:13px;color:var(--t3);line-height:1.6}
+.lu-detail{padding:16px 18px 18px;min-width:0}
+.lu-d-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px}
+.lu-d-head h3{margin:0;font-size:17px;font-weight:700}
+.lu-d-head p{margin:2px 0 0;font-size:12.5px;color:var(--t3)}
+.lu-viz{position:relative;border-radius:10px;background:#0e0e11;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);padding:10px}
+.lu-map{width:100%;max-width:300px;height:auto;margin:0 auto;aspect-ratio:1}
+.lu-area{fill:rgba(255,255,255,.05);stroke:rgba(255,255,255,.14);stroke-width:.4}
+.lu-area.site{fill:rgba(255,255,255,.08);stroke:rgba(255,255,255,.28)}
+.lu-area.spawn{fill:none;stroke-dasharray:1.5 1.5}
+.lu-map text{font-size:7px;font-weight:700;fill:rgba(255,255,255,.28);font-family:var(--font)}
+.lu-link{stroke:rgba(255,255,255,.06);stroke-width:4;stroke-linecap:round}
+.lu-path{fill:none;stroke:#fff;stroke-width:.7;stroke-dasharray:2 1.6;stroke-linecap:round;animation:luDash 1.4s linear infinite}
+@keyframes luDash{to{stroke-dashoffset:-7.2}}
+.lu-bounce{fill:#151519;stroke:#fff;stroke-width:.5}
+.lu-zone.smoke{fill:rgba(200,205,215,.22);stroke:rgba(255,255,255,.35);stroke-width:.4}
+.lu-zone.fire{fill:rgba(255,106,61,.25);stroke:rgba(255,106,61,.6);stroke-width:.4}
+.lu-zone.flash{fill:rgba(255,240,200,.18);stroke:rgba(255,240,200,.5);stroke-width:.4;stroke-dasharray:1 1}
+.lu-zone.scan{fill:none;stroke:rgba(255,106,61,.5);stroke-width:.4;stroke-dasharray:1.2 1.2}
+.lu-land{fill:var(--accent)}
+.lu-stand{fill:#45e6c4}.lu-stand-r{fill:rgba(69,230,196,.18)}
+.lu-aim-w{position:absolute;right:10px;bottom:10px;width:120px;border-radius:8px;background:rgba(0,0,0,.6);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);padding:4px 4px 2px}
+.lu-aim{width:100%;height:auto}
+.lu-aim>path{fill:none;stroke:rgba(255,255,255,.45);stroke-width:1.2;stroke-linejoin:round}
+.lu-aim .xh{stroke:#45e6c4;stroke-width:1.6;stroke-linecap:round;fill:none}.lu-aim .xd{fill:#45e6c4}
+.lu-aim-w span{display:block;text-align:center;font-size:10.5px;color:var(--t3);margin-top:1px}
+.lu-legend{display:flex;gap:16px;margin:8px 2px 12px;font-size:12px;color:var(--t3)}
+.lu-legend span{display:flex;align-items:center;gap:6px}
+.lu-legend i{width:8px;height:8px;border-radius:50%}.lg-s{background:#45e6c4}.lg-l{background:var(--accent)}
+.lu-steps{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-direction:column;gap:8px;counter-reset:s}
+.lu-steps li{display:grid;grid-template-columns:64px 1fr;gap:10px;font-size:14px;line-height:1.5;color:var(--t1)}
+.lu-steps b{font-weight:600;color:var(--t3);font-size:13px}
+.lu-steps b::before{counter-increment:s;content:counter(s) " ";color:var(--t3)}
+.lu-acts{display:flex;gap:8px;flex-wrap:wrap}
+.lu-act{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border-radius:99px;font-size:13px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);color:var(--t2);transition:background .2s,color .2s}
+.lu-act:hover{color:var(--t1)}
+.lu-act[data-act=fav][aria-pressed=true]{background:rgba(255,196,107,.14);color:#ffc46b;box-shadow:none}
+.lu-act[data-act=learned][aria-pressed=true]{background:rgba(69,230,196,.14);color:var(--mint);box-shadow:none}
+.lu-status{display:flex;align-items:center;gap:8px;height:30px;padding:0 14px;background:#1d1d22;border-top:1px solid rgba(255,255,255,.06);font-size:12px;color:var(--t3)}
+.lu-dot{width:7px;height:7px;border-radius:50%;background:var(--mint)}
+.lu-hint{margin-left:auto}
+.lu-note{margin:18px 0 0;font-size:13px;color:var(--d3)}
+.rm .lu-path{animation:none}
+@media (max-width:1100px){.lu-split{grid-template-columns:200px 1fr}}
+@media (max-width:860px){
+  .lu-body{grid-template-columns:1fr}
+  .lu-side{border-right:0;border-bottom:1px solid rgba(255,255,255,.06);display:grid;grid-template-columns:auto 1fr;gap:10px 14px;align-items:center}
+  .lu-side .lu-lbl{margin:0}
+  .lu-game{grid-column:1/-1;margin:0;width:max-content}
+  .lu-maps{flex-direction:row;flex-wrap:wrap;margin:0}
+  .lu-maps button{padding:5px 10px;font-size:13px}
+  .lu-sides{width:max-content;grid-template-columns:auto auto}
+  .lu-sides button{padding:5px 14px}
+}
+@media (max-width:640px){
+  .lu-split{grid-template-columns:1fr}
+  .lu-list-w{border-right:0;border-bottom:1px solid rgba(255,255,255,.06)}
+  .lu-detail{padding:14px}
+  .lu-hint{display:none}
+  .lu-aim-w{width:96px}
+  .lu-steps li{grid-template-columns:56px 1fr}
+}
+/* nav: 9 links → switch to the menu sheet a bit earlier */
+@media (max-width:1180px){.nav-links{display:none}.nav-current{display:flex}.nav-menu{display:flex}.nav>.lang{display:none}.lang-lg{display:grid}}
+
 </style>
 </head>
 <body>
@@ -905,8 +1060,10 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
     <a href="#scan" data-nav="scan"><span class="n">03</span><span data-i18n="nav.scan">识别</span></a>
     <a href="#insights" data-nav="insights"><span class="n">04</span><span data-i18n="nav.insights">洞察</span></a>
     <a href="#tasks" data-nav="tasks"><span class="n">05</span><span data-i18n="nav.tasks">任务</span></a>
-    <a href="#academy" data-nav="academy"><span class="n">06</span><span data-i18n="nav.academy">学院</span></a>
-    <a href="#trust" data-nav="trust"><span class="n">07</span><span data-i18n="nav.trust">原则</span></a>
+    <a href="#advice" data-nav="advice"><span class="n">06</span><span data-i18n="nav.advice">建议</span></a>
+    <a href="#lineups" data-nav="lineups"><span class="n">07</span><span data-i18n="nav.lineups">点位</span></a>
+    <a href="#academy" data-nav="academy"><span class="n">08</span><span data-i18n="nav.academy">学院</span></a>
+    <a href="#trust" data-nav="trust"><span class="n">09</span><span data-i18n="nav.trust">原则</span></a>
     <span class="nav-ind" aria-hidden="true"></span>
   </nav>
   <span class="nav-current" aria-hidden="true"><span class="n">00</span><span class="t">首页</span></span>
@@ -925,6 +1082,8 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
   <a href="#scan" data-nav="scan"><span data-i18n="nav.scan">识别</span></a>
   <a href="#insights" data-nav="insights"><span data-i18n="nav.insights">洞察</span></a>
   <a href="#tasks" data-nav="tasks"><span data-i18n="nav.tasks">任务</span></a>
+  <a href="#advice" data-nav="advice"><span data-i18n="nav.advice">建议</span></a>
+  <a href="#lineups" data-nav="lineups"><span data-i18n="nav.lineups">点位</span></a>
   <a href="#academy" data-nav="academy"><span data-i18n="nav.academy">学院</span></a>
   <a href="#trust" data-nav="trust"><span data-i18n="nav.trust">原则</span></a>
   <a href="#join" data-nav="join"><span data-i18n="nav.cta">加入候补</span></a>
@@ -1153,6 +1312,83 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
   </div>
 </section>
 
+<!-- ============ ADVICE ============ -->
+<section id="advice" class="advice" data-theme="dark" data-label="advice" data-n="06">
+  <div class="wrap">
+    <header class="sec-head">
+      <h2 class="h2 rv"><span class="ln"><span data-i18n="adv.h2">这周只改一件事</span></span></h2>
+      <p class="lead" data-r data-i18n="adv.lead"></p>
+    </header>
+    <div class="adv-who" data-r>
+      <span class="adv-who-l" data-i18n="adv.who">换个玩家看看</span>
+      <div class="chips adv-profiles" role="group" aria-label="示例玩家" data-i18n-attr="aria-label:adv.who">
+        <button type="button" class="chip" aria-pressed="true" data-p="night" data-i18n="adv.p.night">夜猫子</button>
+        <button type="button" class="chip" aria-pressed="false" data-p="meals" data-i18n="adv.p.meals">饭点不固定</button>
+        <button type="button" class="chip" aria-pressed="false" data-p="move" data-i18n="adv.p.move">基本不运动</button>
+      </div>
+    </div>
+    <div class="adv-grid" data-r>
+      <article class="card-d adv-found">
+        <div class="ct"><h3 data-i18n="adv.foundH">最拖后腿的习惯</h3><span class="tag-demo" data-i18n="demo">示例数据</span></div>
+        <p class="adv-habit" id="advHabit" aria-live="polite"></p>
+        <div class="adv-bars" id="advBars"></div>
+        <p class="adv-n" id="advN"></p>
+      </article>
+      <article class="card-d adv-goal">
+        <div class="ct"><h3 data-i18n="adv.goalH">这周目标</h3><span class="adv-count num" id="advCount">1 / 3</span></div>
+        <p class="adv-goal-t" id="advGoal"></p>
+        <p class="adv-why" id="advWhy"></p>
+        <div class="adv-week" id="advWeek" role="group" aria-label="本周打卡" data-i18n-attr="aria-label:adv.weekAria"></div>
+        <p class="adv-status" id="advStatus" aria-live="polite"></p>
+      </article>
+      <article class="card-d adv-last">
+        <div class="ct"><h3 data-i18n="adv.lastH">上周结果</h3></div>
+        <div class="adv-last-row">
+          <p class="adv-last-goal" id="advLast"></p>
+          <div class="adv-last-stats"><span id="advLastDays"></span><span id="advLastDelta"></span></div>
+        </div>
+        <p class="adv-last-v" id="advLastV"></p>
+      </article>
+    </div>
+    <p class="adv-note" data-r data-i18n="adv.note"></p>
+  </div>
+</section>
+
+<!-- ============ LINEUPS ============ -->
+<section id="lineups" class="lineups" data-theme="light" data-label="lineups" data-n="07">
+  <div class="wrap">
+    <header class="sec-head">
+      <h2 class="h2 rv"><span class="ln"><span data-i18n="lu.h2">打到一半，切出来查点位</span></span></h2>
+      <p class="lead" data-r data-i18n="lu.lead"></p>
+      <p class="lu-trust" data-r><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2l6 2.5v5c0 4-2.6 7-6 8.5-3.4-1.5-6-4.5-6-8.5v-5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 10l2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="lu.trust"></span></p>
+    </header>
+    <div class="lu-win" id="luWin" data-r>
+      <div class="lu-title"><span class="lu-title-l"><svg class="brand-mark" aria-hidden="true"><use href="#xh"/></svg><span data-i18n="lu.win">LucidRank · 点位</span></span><span class="lu-ctrls" aria-hidden="true"><i class="min"></i><i class="max"></i><i class="cls"></i></span></div>
+      <div class="lu-body">
+        <aside class="lu-side">
+          <div class="gtoggle lu-game" role="group" aria-label="选择游戏" data-i18n-attr="aria-label:game.aria"><button type="button" data-g="val" aria-pressed="true">VALORANT</button><button type="button" data-g="cs2" aria-pressed="false">CS2</button></div>
+          <p class="lu-lbl" data-i18n="lu.map">地图</p>
+          <div class="lu-maps" id="luMaps" role="group" aria-label="地图" data-i18n-attr="aria-label:lu.map"></div>
+          <p class="lu-lbl" data-i18n="lu.side">攻防</p>
+          <div class="lu-sides" id="luSides" role="group" aria-label="攻防" data-i18n-attr="aria-label:lu.side"><button type="button" data-s="atk" aria-pressed="true" data-i18n="lu.atk">进攻</button><button type="button" data-s="def" aria-pressed="false" data-i18n="lu.def">防守</button></div>
+        </aside>
+        <div class="lu-main">
+          <div class="lu-filters">
+            <div class="lu-row"><span class="lu-lbl" id="luPickL" data-i18n="lu.agent">特工</span><div class="lu-chips" id="luPick" role="group" aria-labelledby="luPickL"></div></div>
+            <div class="lu-row"><span class="lu-lbl" id="luScenL" data-i18n="lu.scen">场景</span><div class="lu-chips" id="luScen" role="group" aria-labelledby="luScenL"></div></div>
+          </div>
+          <div class="lu-split">
+            <div class="lu-list-w"><p class="lu-count" id="luCount"></p><div class="lu-list" id="luList" role="listbox" aria-labelledby="luCount"></div></div>
+            <div class="lu-detail" id="luDetail" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+      <div class="lu-status"><span class="lu-dot"></span><span id="luDetect"></span><span class="lu-hint" data-i18n="lu.hint">Alt + Tab 切回游戏</span></div>
+    </div>
+    <p class="lu-note" data-r data-i18n="lu.note"></p>
+  </div>
+</section>
+
 <!-- ============ ACADEMY ============ -->
 <section id="academy" class="academy" data-theme="dark" data-label="academy" data-n="06">
   <div class="wrap">
@@ -1307,7 +1543,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
       </div>
       <div class="foot-links">
         <div><b data-i18n="ft.product">产品</b><a href="#checkin" data-i18n="ft.checkin">每日签到</a><a href="#scan" data-i18n="ft.scan">截图识别</a><a href="#insights" data-i18n="ft.insights">个人洞察</a></div>
-        <div><b data-i18n="ft.grow">成长</b><a href="#tasks" data-i18n="ft.tasks">每日任务</a><a href="#academy" data-i18n="ft.academy">LucidRank 学院</a><a href="#trust" data-i18n="ft.trust">我们的原则</a></div>
+        <div><b data-i18n="ft.grow">成长</b><a href="#tasks" data-i18n="ft.tasks">每日任务</a><a href="#advice" data-i18n="ft.advice">本周建议</a><a href="#lineups" data-i18n="ft.lineups">点位助手</a><a href="#academy" data-i18n="ft.academy">LucidRank 学院</a><a href="#trust" data-i18n="ft.trust">我们的原则</a></div>
         <div><b data-i18n="ft.join">加入</b><a href="#join" data-i18n="ft.list">候补名单</a><a href="#hero" data-i18n="ft.top">回到顶部 ↑</a></div>
       </div>
     </div>
@@ -1344,6 +1580,8 @@ const I18N = {
   'nav.tasks': {sc:'任务', tc:'任務', en:'Tasks'},
   'nav.academy': {sc:'学院', tc:'學院', en:'Academy'},
   'nav.trust': {sc:'原则', tc:'原則', en:'Principles'},
+  'nav.advice': {sc:'建议', tc:'建議', en:'Advice'},
+  'nav.lineups': {sc:'点位', tc:'點位', en:'Lineups'},
   'nav.join': {sc:'加入', tc:'加入', en:'Join'},
   'nav.cta': {sc:'加入候补', tc:'加入候補', en:'Join waitlist'},
   'menu.open': {sc:'打开菜单', tc:'打開選單', en:'Open menu'},
@@ -1638,6 +1876,8 @@ const I18N = {
   'ft.grow': {sc:'成长', tc:'成長', en:'Grow'},
   'ft.tasks': {sc:'每日任务', tc:'每日任務', en:'Daily tasks'},
   'ft.academy': {sc:'LucidRank 学院', tc:'LucidRank 學院', en:'LucidRank Academy'},
+  'ft.advice': {sc:'本周建议', tc:'本週建議', en:'Weekly advice'},
+  'ft.lineups': {sc:'点位助手', tc:'點位助手', en:'Lineup assistant'},
   'ft.trust': {sc:'我们的原则', tc:'我們的原則', en:'Our principles'},
   'ft.join': {sc:'加入', tc:'加入', en:'Join'},
   'ft.list': {sc:'候补名单', tc:'候補名單', en:'Waitlist'},
@@ -1647,6 +1887,131 @@ const I18N = {
                 en:'LucidRank is an independent concept, not affiliated with or endorsed by Riot Games, Valve, Tencent or Perfect World. VALORANT and <span class="nw">无畏契约</span> are trademarks of Riot Games, Inc. Counter-Strike and CS2 are trademarks of Valve Corporation.'},
   'ft.legal2': {sc:'页面图表、数值、截图与课程均为示例数据。不构成医疗或健康建议。', tc:'頁面上的圖表、數值、截圖與課程均為示例數據，不構成醫療或健康建議。', en:'All charts, numbers, screenshots and lessons are sample data. Not medical or health advice.'},
   'ft.ver': {sc:'© 2026 LucidRank · 网页初版 v0.2', tc:'© 2026 LucidRank · 網頁初版 v0.2', en:'© 2026 LucidRank · Web preview v0.2'},
+
+  /* ---- weekly advice (numbers live in ADVICE_PROFILES in app.js) ---- */
+  'adv.h2': {sc:'这周只改一件事', tc:'這星期只改一件事', en:'Change one thing this week'},
+  'adv.lead': {sc:'签到满一两周后，它会用你自己的战绩找出最拖后腿的习惯，给你一个小目标，下周再看有没有用。', tc:'簽到滿一兩個星期後，它會用你自己的戰績找出最拖後腿的習慣，給你一個小目標，下星期再看有沒有用。', en:'After a week or two of check-ins, it uses your own matches to find the habit that hurts most, gives you one small goal, and checks next week whether it helped.'},
+  'adv.who': {sc:'换个玩家看看', tc:'換個玩家看看', en:'Try another player'},
+  'adv.p.night': {sc:'夜猫子', tc:'夜貓子', en:'Night owl'},
+  'adv.p.meals': {sc:'饭点不固定', tc:'三餐不定時', en:'Skips meals'},
+  'adv.p.move': {sc:'基本不运动', tc:'甚少運動', en:'Never exercises'},
+  'adv.foundH': {sc:'最拖后腿的习惯', tc:'最拖後腿的習慣', en:'What’s hurting you most'},
+  'adv.goalH': {sc:'这周目标', tc:'這星期目標', en:'This week’s goal'},
+  'adv.lastH': {sc:'上周结果', tc:'上星期結果', en:'Last week'},
+  'adv.weekAria': {sc:'本周打卡，点一天标记完成', tc:'本週打卡，點一天標記完成', en:'This week, tap a day to mark it done'},
+  'adv.n': {sc:'来自最近 12 天、{n} 局排位', tc:'來自最近 12 天、{n} 局排位', en:'From your last 12 days, {n} ranked games'},
+  'adv.games': {sc:'{n} 局', tc:'{n} 局', en:'{n} games'},
+  'adv.m.win': {sc:'胜率', tc:'勝率', en:'Win rate'},
+  'adv.m.acs': {sc:'平均 ACS', tc:'平均 ACS', en:'Avg ACS'},
+  'adv.left': {sc:'还差 {n} 次', tc:'還差 {n} 次', en:'{n} to go'},
+  'adv.left.one': {en:'1 to go'},
+  'adv.done': {sc:'这周的目标做到了。下周一看效果。', tc:'這星期的目標做到了。下星期一看效果。', en:'Goal done for the week. Results next Monday.'},
+  'adv.future': {sc:'还没到', tc:'未到', en:'Not yet'},
+  'adv.today': {sc:'今天', tc:'今天', en:'Today'},
+  'adv.lastDays': {sc:'{d}/{of} 天做到', tc:'{d}/{of} 天做到', en:'{d}/{of} days'},
+  'adv.lastV': {sc:'有用，所以这周换下一个习惯。上周的继续保持就行。', tc:'有用，所以這星期換下一個習慣。上星期的繼續保持就可以。', en:'It helped, so this week moves on to the next habit. Keep last week’s going.'},
+  'adv.note': {sc:'只给作息、运动、吃饭这类生活建议，不推荐任何药物或补剂。', tc:'只會給作息、運動、飲食這類生活建議，不會推薦任何藥物或補充品。', en:'Sleep, movement and meals only. No meds, pills or supplements.'},
+  'adv.night.habit': {sc:'1 点后才睡的晚上，第二天胜率只有 <em>{a}%</em>。12 点前睡的是 <em>{b}%</em>。', tc:'凌晨 1 點後才睡，第二天勝率只有 <em>{a}%</em>。12 點前睡的是 <em>{b}%</em>。', en:'After nights you slept past 1 am, you won <em>{a}%</em> of games. Before midnight: <em>{b}%</em>.'},
+  'adv.night.A': {sc:'1 点后睡', tc:'1 點後睡', en:'After 1 am'},
+  'adv.night.B': {sc:'12 点前睡', tc:'12 點前睡', en:'Before midnight'},
+  'adv.night.goal': {sc:'这周有 4 晚在 1:30 前睡', tc:'這星期有 4 晚在 1:30 前睡', en:'In bed by 1:30 on 4 nights this week'},
+  'adv.night.why': {sc:'你平时 2 点左右睡。先提前半小时，不用一下跳到 11 点。', tc:'你平時 2 點左右睡。先提早半小時，不用一下子跳到 11 點。', en:'You usually sleep around 2. Start with half an hour earlier, not 11 pm.'},
+  'adv.night.last': {sc:'上周：醒来 15 分钟内放下手机', tc:'上星期：醒來 15 分鐘內放低手機', en:'Last week: phone down within 15 min of waking'},
+  'adv.meals.habit': {sc:'空着肚子开打的日子，平均 ACS <em>{a}</em>。吃过一顿正经饭的是 <em>{b}</em>。', tc:'空肚開打的日子，平均 ACS <em>{a}</em>。有好好吃一餐的是 <em>{b}</em>。', en:'On days you played on an empty stomach, your average ACS was <em>{a}</em>. After a proper meal: <em>{b}</em>.'},
+  'adv.meals.A': {sc:'空腹开打', tc:'空肚開打', en:'Empty stomach'},
+  'adv.meals.B': {sc:'吃过饭', tc:'吃過飯', en:'Had a meal'},
+  'adv.meals.goal': {sc:'这周 3 次，开打前 1 小时吃顿正经饭', tc:'這星期 3 次，開打前 1 小時吃一餐正經飯', en:'Eat a real meal an hour before playing, 3 times this week'},
+  'adv.meals.why': {sc:'别的饭先不管，只管开打前这一顿。', tc:'其他餐暫時不用理，只管開打前這一餐。', en:'Leave your other meals alone for now. Just this one.'},
+  'adv.meals.last': {sc:'上周：每天喝够 4 杯水', tc:'上星期：每天喝夠 4 杯水', en:'Last week: 4 glasses of water a day'},
+  'adv.move.habit': {sc:'一整天没动过的日子，胜率 <em>{a}%</em>。哪怕只散了个步，也有 <em>{b}%</em>。', tc:'一整天沒動過的日子，勝率 <em>{a}%</em>。就算只是散個步，也有 <em>{b}%</em>。', en:'On days you didn’t move at all, you won <em>{a}%</em>. Even after a short walk: <em>{b}%</em>.'},
+  'adv.move.A': {sc:'整天没动', tc:'整天沒動', en:'No movement'},
+  'adv.move.B': {sc:'散步或拉伸', tc:'散步或伸展', en:'Walk or stretch'},
+  'adv.move.goal': {sc:'这周 3 次，开打前拉伸 5 分钟', tc:'這星期 3 次，開打前伸展 5 分鐘', en:'Stretch for 5 minutes before playing, 3 times this week'},
+  'adv.move.why': {sc:'你现在基本不运动。先从 5 分钟开始，不用办健身卡。', tc:'你現在差不多不運動。先由 5 分鐘開始，不用買健身會籍。', en:'You barely move right now. Start with 5 minutes. No gym needed.'},
+  'adv.move.last': {sc:'上周：1 点前睡', tc:'上星期：1 點前睡', en:'Last week: asleep before 1 am'},
+
+  /* ---- lineup assistant (lineups live in LINEUPS in app.js) ---- */
+  'lu.h2': {sc:'打到一半，切出来查点位', tc:'打到一半，切出來查點位', en:'Alt-tab mid-match, look up a lineup'},
+  'lu.lead': {sc:'桌面版会有一个单独的小窗口。跟对局里掏手机看攻略差不多，就是快一点。', tc:'桌面版會有一個獨立小視窗。跟對局中拿手機看攻略差不多，只是快一點。', en:'The desktop app gets its own small window. Like checking a guide on your phone mid-game, just quicker.'},
+  'lu.trust': {sc:'不盖在游戏画面上，也不读游戏数据或内存。只看游戏有没有启动，好帮你切到对应游戏和上次用的地图。', tc:'不會蓋住遊戲畫面，也不讀取遊戲數據或記憶體。只會偵測遊戲有沒有開啟，幫你切到對應遊戲和上次用的地圖。', en:'It doesn’t overlay the game or read game data or memory. It only checks whether the game is running, to open the right game and your last map.'},
+  'lu.win': {sc:'LucidRank · 点位', tc:'LucidRank · 點位', en:'LucidRank · Lineups'},
+  'lu.map': {sc:'地图', tc:'地圖', en:'Map'},
+  'lu.side': {sc:'攻防', tc:'攻守', en:'Side'},
+  'lu.atk': {sc:'进攻', tc:'進攻', en:'Attack'},
+  'lu.def': {sc:'防守', tc:'防守', en:'Defense'},
+  'lu.agent': {sc:'特工', tc:'特工', en:'Agent'},
+  'lu.util': {sc:'道具', tc:'道具', en:'Utility'},
+  'lu.scen': {sc:'场景', tc:'場景', en:'Situation'},
+  'lu.all': {sc:'全部', tc:'全部', en:'All'},
+  'lu.count': {sc:'{n} 个点位', tc:'{n} 個點位', en:'{n} lineups'},
+  'lu.count.one': {en:'1 lineup'},
+  'lu.empty': {sc:'这个组合还没有示例点位，换一个试试。', tc:'這個組合暫時沒有示例點位，換一個試試。', en:'No sample lineups for this combo yet. Try another.'},
+  'lu.sStand': {sc:'站哪', tc:'站哪裡', en:'Stand'},
+  'lu.sAim': {sc:'瞄哪', tc:'瞄哪裡', en:'Aim'},
+  'lu.sThrow': {sc:'怎么丢', tc:'怎樣丟', en:'Throw'},
+  'lu.fav': {sc:'收藏', tc:'收藏', en:'Save'},
+  'lu.learned': {sc:'练会了', tc:'練熟了', en:'Learned'},
+  'lu.lgStand': {sc:'站位', tc:'站位', en:'Stand'},
+  'lu.lgLand': {sc:'落点', tc:'落點', en:'Lands'},
+  'lu.lgAim': {sc:'瞄点', tc:'瞄點', en:'Aim point'},
+  'lu.mapAria': {sc:'{map} 示意小地图：从{from}丢到{to}', tc:'{map} 示意小地圖：由{from}丟到{to}', en:'{map} sketch: thrown from {from} to {to}'},
+  'lu.detect': {sc:'检测到 {g} 已启动', tc:'偵測到 {g} 已開啟', en:'{g} is running'},
+  'lu.hint': {sc:'Alt + Tab 切回游戏', tc:'Alt + Tab 返回遊戲', en:'Alt + Tab back to the game'},
+  'lu.note': {sc:'点位都是示例数据，地图是示意图，不是游戏原图。', tc:'點位均為示例數據，地圖為示意圖，並非遊戲原圖。', en:'Lineups are sample data. Maps are rough sketches, not game art.'},
+  'lu.sc.exec_a': {sc:'A 点进攻', tc:'A 點進攻', en:'A exec'},
+  'lu.sc.exec_b': {sc:'B 点进攻', tc:'B 點進攻', en:'B exec'},
+  'lu.sc.exec_c': {sc:'C 点进攻', tc:'C 點進攻', en:'C exec'},
+  'lu.sc.post': {sc:'残局封包', tc:'殘局封包', en:'Post-plant'},
+  'lu.sc.retake_a': {sc:'A 点回防', tc:'A 點回防', en:'A retake'},
+  'lu.sc.retake_b': {sc:'B 点回防', tc:'B 點回防', en:'B retake'},
+  'lu.sc.retake_c': {sc:'C 点回防', tc:'C 點回防', en:'C retake'},
+  'lu.sc.hold': {sc:'守点拖时间', tc:'守點拖時間', en:'Hold & delay'},
+  /* names: agents, utility, generic callouts, stand / aim anchors, throw styles */
+  'lu.ag.sova': {sc:'猎枭', tc:'Sova', en:'Sova'},
+  'lu.ag.viper': {sc:'蝰蛇', tc:'Viper', en:'Viper'},
+  'lu.ag.brim': {sc:'炼狱', tc:'Brimstone', en:'Brimstone'},
+  'lu.ag.kj': {sc:'奇乐', tc:'Killjoy', en:'Killjoy'},
+  'lu.ag.smoke': {sc:'烟雾弹', tc:'煙霧彈', en:'Smokes'},
+  'lu.ag.flash': {sc:'闪光弹', tc:'閃光彈', en:'Flashes'},
+  'lu.ag.molly': {sc:'燃烧瓶', tc:'燃燒瓶', en:'Molotovs'},
+  'lu.u.recon': {sc:'侦察箭', tc:'偵察箭', en:'Recon Bolt'},
+  'lu.u.shock': {sc:'震荡箭', tc:'震盪箭', en:'Shock Bolt'},
+  'lu.u.snake': {sc:'蛇咬', tc:'蛇咬', en:'Snake Bite'},
+  'lu.u.orb': {sc:'毒云', tc:'毒雲', en:'Poison Cloud'},
+  'lu.u.incen': {sc:'燃烧弹', tc:'燃燒彈', en:'Incendiary'},
+  'lu.u.swarm': {sc:'纳米蜂群', tc:'納米蜂群', en:'Nanoswarm'},
+  'lu.u.smoke': {sc:'烟', tc:'煙', en:'Smoke'},
+  'lu.u.flash': {sc:'闪', tc:'閃', en:'Flash'},
+  'lu.u.molly': {sc:'火', tc:'火', en:'Molly'},
+  'lu.a.a_site': {sc:'A 点', tc:'A 點', en:'A site'},
+  'lu.a.b_site': {sc:'B 点', tc:'B 點', en:'B site'},
+  'lu.a.c_site': {sc:'C 点', tc:'C 點', en:'C site'},
+  'lu.a.a_main': {sc:'A 大道', tc:'A 大道', en:'A main'},
+  'lu.a.b_main': {sc:'B 大道', tc:'B 大道', en:'B main'},
+  'lu.a.c_main': {sc:'C 大道', tc:'C 大道', en:'C main'},
+  'lu.a.mid': {sc:'中路', tc:'中路', en:'mid'},
+  'lu.a.atk_spawn': {sc:'进攻方出生点', tc:'進攻方出生點', en:'attacker spawn'},
+  'lu.a.def_spawn': {sc:'防守方出生点', tc:'防守方出生點', en:'defender spawn'},
+  'lu.st.wall_l': {sc:'背贴左边的墙', tc:'背貼左邊牆', en:'back against the left wall'},
+  'lu.st.box': {sc:'贴着箱子右边', tc:'貼住箱子右邊', en:'right side of the box'},
+  'lu.st.corner': {sc:'卡进墙角', tc:'卡進牆角', en:'tucked into the corner'},
+  'lu.st.door': {sc:'站在门框正中', tc:'站在門框正中', en:'middle of the doorway'},
+  'lu.st.seam': {sc:'脚踩地上那条接缝', tc:'腳踩地上那條接縫', en:'feet on the floor seam'},
+  'lu.st.pillar': {sc:'贴着柱子左边', tc:'貼住柱子左邊', en:'left side of the pillar'},
+  'lu.aim.roof': {sc:'准星对准屋顶左上角', tc:'準星對準屋頂左上角', en:'Crosshair on the top-left corner of the roof'},
+  'lu.aim.pole': {sc:'准星压在杆子顶端', tc:'準星壓在柱頂', en:'Crosshair on the tip of the pole'},
+  'lu.aim.arch': {sc:'准星放在拱门正中间', tc:'準星放在拱門正中', en:'Crosshair in the middle of the arch'},
+  'lu.aim.edge': {sc:'准星贴着墙顶那条线', tc:'準星貼住牆頂那條線', en:'Crosshair on the top edge of the wall'},
+  'lu.aim.window': {sc:'准星对准右边窗户的下沿', tc:'準星對準右邊窗的下沿', en:'Crosshair on the bottom of the right window'},
+  'lu.aim.antenna': {sc:'准星对准天线尖', tc:'準星對準天線尖', en:'Crosshair on the tip of the antenna'},
+  'lu.th.bolt': {sc:'蓄力 {c} 格，弹 {b} 次', tc:'蓄力 {c} 格，反彈 {b} 次', en:'Charge {c}, {b} bounces'},
+  'lu.th.bolt1': {sc:'蓄力 {c} 格，弹 1 次', tc:'蓄力 {c} 格，反彈 1 次', en:'Charge {c}, 1 bounce'},
+  'lu.th.bolt0': {sc:'蓄力 {c} 格，不弹', tc:'蓄力 {c} 格，不反彈', en:'Charge {c}, no bounce'},
+  'lu.th.stand': {sc:'站定，左键丢', tc:'站定，左鍵丟出', en:'Stand still, left-click'},
+  'lu.th.jump': {sc:'跳起来，到最高点再丢', tc:'跳起，到最高點才丟', en:'Jump, throw at the peak'},
+  'lu.th.run': {sc:'往前走两步再丢', tc:'向前行兩步再丟', en:'Two steps forward, then throw'},
+  'lu.th.lob': {sc:'右键轻抛', tc:'右鍵輕拋', en:'Right-click lob'},
+  'lu.th.jt': {sc:'跳投（建议绑个跳投键）', tc:'跳投（建議綁定跳投鍵）', en:'Jump-throw (worth binding)'},
 };
 
 (()=>{
@@ -2042,7 +2407,7 @@ addEventListener('keydown',e=>{
   else if(k==='PageUp'||k==='ArrowUp'||(k===' '&&e.shiftKey)) dir=-1;
   if(!dir) return;
   const tg=e.target;
-  if(tg&&tg.closest&&(tg.closest('input,textarea,select,[contenteditable=""],[contenteditable=true],#device,[role=tablist],.lang,.gtoggle,.chips,.sheet')||(k===' '&&tg.closest('a,button,label,[role=button],[tabindex]')))) return;
+  if(tg&&tg.closest&&(tg.closest('input,textarea,select,[contenteditable=""],[contenteditable=true],#device,#luWin,[role=tablist],.lang,.gtoggle,.chips,.sheet')||(k===' '&&tg.closest('a,button,label,[role=button],[tabindex]')))) return;
   e.preventDefault();
   if(!anim) page(dir);
 });
@@ -2239,12 +2604,12 @@ dz.addEventListener('drop',e=>handleFile(e.dataTransfer.files[0]));
 /* game toggle (VALORANT / CS2): shared by the scan demo and the academy */
 function setGame(g){
   if(g===game||!GAMES[g]) return; game=g; FIELDS=GAMES[g].fields;
-  $$('.gtoggle').forEach(el=>{ el.style.setProperty('--gi',g==='cs2'?1:0); $$('button',el).forEach(b=>b.setAttribute('aria-pressed',b.dataset.game===g)); });
+  $$('.gtoggle:not(.lu-game)').forEach(el=>{ el.style.setProperty('--gi',g==='cs2'?1:0); $$('button',el).forEach(b=>b.setAttribute('aria-pressed',b.dataset.game===g)); });
   $$('.ac-grid').forEach(el=>{ el.hidden=el.dataset.game!==g; });
   if(lastShot) runScan(lastShot.own?lastShot.content:mockHTML(),lastShot.own); else resetFields();
   measure();
 }
-$$('.gtoggle button').forEach(b=>b.addEventListener('click',()=>setGame(b.dataset.game)));
+$$('.gtoggle:not(.lu-game) button').forEach(b=>b.addEventListener('click',()=>setGame(b.dataset.game)));
 
 /* ================= INSIGHTS ================= */
 // 21 days demo: [phone(0 none,1 <=30,2 >30), dur(0 <6h,1 6-8,2 8+), bed(0 <12,1 12-2,2 >2), caf(0 none,1+), ps]
@@ -2332,6 +2697,192 @@ function updTasks(){
   setT($('#goalP'),life?'goal.p3':'goal.p2');
 }
 tasks.forEach(t=>t.addEventListener('click',()=>{ t.setAttribute('aria-checked',t.getAttribute('aria-checked')!=='true'); updTasks(); }));
+
+/* ================= WEEKLY ADVICE ================= */
+// Example profiles. Text: I18N['adv.<id>.habit|A|B|goal|why|last'] · metric: 'win' (%) or 'acs'
+// a = habit days, b = other days · done = weekday indexes already ticked (0 = Mon) · today = Thu
+const ADVICE_PROFILES={
+  night:{metric:'win',a:{v:41,n:23},b:{v:58,n:19},target:4,done:[0],last:{days:5,of:7,metric:'acs',delta:12}},
+  meals:{metric:'acs',a:{v:198,n:14},b:{v:231,n:26},target:3,done:[1],last:{days:6,of:7,metric:'acs',delta:9}},
+  move:{metric:'win',a:{v:44,n:31},b:{v:56,n:9},target:3,done:[0],last:{days:4,of:7,metric:'win',delta:6}},
+};
+const ADV_TODAY=3;
+let advP='night', advDone=new Set(ADVICE_PROFILES.night.done);
+const advEl={habit:$('#advHabit'),bars:$('#advBars'),n:$('#advN'),goal:$('#advGoal'),why:$('#advWhy'),week:$('#advWeek'),count:$('#advCount'),status:$('#advStatus'),last:$('#advLast'),lastDays:$('#advLastDays'),lastDelta:$('#advLastDelta'),lastV:$('#advLastV')};
+function renderAdv(){
+  const P=ADVICE_PROFILES[advP], k='adv.'+advP+'.', pct=P.metric==='win';
+  advEl.habit.innerHTML=t(k+'habit',{a:P.a.v,b:P.b.v});
+  const max=pct?100:300, row=(cls,label,d)=>`<div class="adv-bar ${cls}"><div class="adv-bl"><span>${esc(label)}</span><small>${t('adv.games',{n:d.n})}</small><b class="num">${d.v}${pct?'%':''}</b></div><div class="adv-track"><i style="transform:scaleX(${(d.v/max).toFixed(3)})"></i></div></div>`;
+  advEl.bars.innerHTML=`<p class="adv-m">${t('adv.m.'+P.metric)}</p>`+row('bad',raw(k+'A'),P.a)+row('good',raw(k+'B'),P.b);
+  advEl.n.textContent=t('adv.n',{n:P.a.n+P.b.n});
+  advEl.goal.textContent=raw(k+'goal'); advEl.why.textContent=raw(k+'why');
+  const wk=raw('goal.wk');
+  advEl.week.innerHTML=wk.map((d,i)=>{ const fut=i>ADV_TODAY, on=advDone.has(i);
+    return `<button type="button" class="adv-day${on?' on':''}${i===ADV_TODAY?' today':''}" data-d="${i}" aria-pressed="${on}"${fut?` disabled title="${esc(t('adv.future'))}"`:''}><i>${on?'<svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg>':''}</i><span>${esc(d)}</span></button>`; }).join('');
+  updAdvCount();
+  advEl.last.textContent=raw(k+'last');
+  advEl.lastDays.textContent=t('adv.lastDays',{d:P.last.days,of:P.last.of});
+  advEl.lastDelta.textContent=(P.last.metric==='win'?t('adv.m.win'):'ACS')+' +'+P.last.delta+(P.last.metric==='win'?'%':'');
+  advEl.lastV.textContent=t('adv.lastV');
+}
+function updAdvCount(){
+  const P=ADVICE_PROFILES[advP], n=advDone.size;
+  advEl.count.textContent=`${Math.min(n,P.target)} / ${P.target}`;
+  advEl.status.textContent=n>=P.target?t('adv.done'):t('adv.left',{n:P.target-n});
+  advEl.status.classList.toggle('ok',n>=P.target);
+}
+advEl.week.addEventListener('click',e=>{
+  const b=e.target.closest('.adv-day'); if(!b||b.disabled) return;
+  const d=+b.dataset.d; advDone.has(d)?advDone.delete(d):advDone.add(d);
+  const on=advDone.has(d); b.classList.toggle('on',on); b.setAttribute('aria-pressed',on);
+  $('i',b).innerHTML=on?'<svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg>':'';
+  updAdvCount();
+});
+$$('.adv-profiles .chip').forEach(c=>c.addEventListener('click',()=>{
+  if(c.dataset.p===advP) return;
+  $$('.adv-profiles .chip').forEach(x=>x.setAttribute('aria-pressed',x===c));
+  advP=c.dataset.p; advDone=new Set(ADVICE_PROFILES[advP].done); renderAdv();
+}));
+renderAdv(); langHooks.push(renderAdv);
+
+/* ================= LINEUP ASSISTANT ================= */
+// Abstract map sketches (0–100 grid, not game art): area rects [x,y,w,h] + links between areas
+const LU_MAPS={
+  val:{
+    ascent:{name:'Ascent',areas:{def_spawn:[38,4,24,11],a_site:[6,17,26,22],b_site:[68,19,26,22],mid:[40,38,20,24],a_main:[8,52,16,26],b_main:[76,52,16,26],atk_spawn:[36,84,28,11]},links:[['atk_spawn','a_main'],['atk_spawn','b_main'],['atk_spawn','mid'],['a_main','a_site'],['b_main','b_site'],['mid','a_site'],['mid','b_site'],['def_spawn','a_site'],['def_spawn','b_site']]},
+    bind:{name:'Bind',areas:{def_spawn:[40,4,20,11],a_site:[6,15,28,24],b_site:[66,14,28,26],a_main:[10,52,18,26],b_main:[72,50,18,28],atk_spawn:[38,84,24,11]},links:[['atk_spawn','a_main'],['atk_spawn','b_main'],['a_main','a_site'],['b_main','b_site'],['a_main','b_main'],['def_spawn','a_site'],['def_spawn','b_site']]},
+    haven:{name:'Haven',areas:{def_spawn:[38,4,24,11],a_site:[4,18,22,20],b_site:[40,24,20,17],c_site:[74,18,22,20],a_main:[6,52,16,26],mid:[40,50,20,18],c_main:[78,52,16,26],atk_spawn:[36,84,28,11]},links:[['atk_spawn','a_main'],['atk_spawn','mid'],['atk_spawn','c_main'],['a_main','a_site'],['mid','b_site'],['c_main','c_site'],['def_spawn','a_site'],['def_spawn','b_site'],['def_spawn','c_site']]},
+    split:{name:'Split',areas:{def_spawn:[38,4,24,11],a_site:[6,14,26,24],b_site:[68,14,26,24],mid:[38,36,24,24],a_main:[8,52,18,26],b_main:[74,52,18,26],atk_spawn:[36,84,28,11]},links:[['atk_spawn','a_main'],['atk_spawn','b_main'],['atk_spawn','mid'],['a_main','a_site'],['b_main','b_site'],['mid','a_site'],['mid','b_site'],['def_spawn','a_site'],['def_spawn','b_site']]},
+    lotus:{name:'Lotus',areas:{def_spawn:[38,4,24,11],a_site:[4,20,22,20],b_site:[39,22,22,18],c_site:[74,20,22,20],a_main:[6,54,16,24],b_main:[40,52,20,18],c_main:[78,54,16,24],atk_spawn:[36,84,28,11]},links:[['atk_spawn','a_main'],['atk_spawn','b_main'],['atk_spawn','c_main'],['a_main','a_site'],['b_main','b_site'],['c_main','c_site'],['def_spawn','a_site'],['def_spawn','b_site'],['def_spawn','c_site']]},
+  },
+  cs2:{
+    mirage:{name:'Mirage',areas:{def_spawn:[8,8,22,13],b_site:[64,10,28,22],a_site:[6,40,26,24],mid:[40,36,20,26],a_main:[10,72,18,18],b_main:[70,42,18,24],atk_spawn:[62,82,30,11]},links:[['atk_spawn','a_main'],['atk_spawn','mid'],['atk_spawn','b_main'],['a_main','a_site'],['mid','a_site'],['mid','b_site'],['b_main','b_site'],['def_spawn','a_site'],['def_spawn','b_site']]},
+    inferno:{name:'Inferno',areas:{def_spawn:[42,6,16,12],b_site:[8,8,24,22],a_site:[64,14,26,22],mid:[40,40,20,20],b_main:[14,40,14,30],a_main:[66,50,18,24],atk_spawn:[38,82,26,12]},links:[['atk_spawn','b_main'],['atk_spawn','mid'],['atk_spawn','a_main'],['b_main','b_site'],['mid','a_site'],['a_main','a_site'],['def_spawn','a_site'],['def_spawn','b_site']]},
+    nuke:{name:'Nuke',areas:{def_spawn:[70,6,22,13],a_site:[30,24,34,22],b_site:[30,58,34,18],a_main:[6,28,16,30],b_main:[72,46,18,24],atk_spawn:[6,80,28,12]},links:[['atk_spawn','a_main'],['a_main','a_site'],['atk_spawn','b_main'],['b_main','b_site'],['def_spawn','a_site'],['def_spawn','b_main'],['a_site','b_site']]},
+  },
+};
+const LU_PICKS={val:['sova','viper','brim','kj'],cs2:['smoke','flash','molly']};
+const LU_BOLTS=['recon','shock'];
+// [id, game, map, pick (agent / utility type), utility, side, situation, from, to, stand anchor, aim anchor, throw]
+// throw: bolts → [charge, bounces]; others → stand | jump | run | lob | jt
+const LINEUPS=[
+  ['as1','val','ascent','sova','recon','atk','exec_a','a_main','a_site','wall_l','roof',[2,1]],
+  ['as2','val','ascent','brim','incen','atk','post','a_main','a_site','box','edge','jump'],
+  ['as3','val','ascent','viper','orb','atk','exec_b','b_main','b_site','door','arch','run'],
+  ['as4','val','ascent','sova','shock','atk','post','b_main','b_site','corner','pole',[1,2]],
+  ['as5','val','ascent','kj','swarm','def','hold','a_site','a_main','pillar','window','stand'],
+  ['as6','val','ascent','sova','recon','def','retake_b','def_spawn','b_site','seam','antenna',[3,0]],
+  ['bi1','val','bind','sova','recon','atk','exec_b','b_main','b_site','wall_l','roof',[1,1]],
+  ['bi2','val','bind','viper','snake','atk','post','a_main','a_site','corner','edge','stand'],
+  ['bi3','val','bind','brim','incen','atk','post','b_main','b_site','box','window','jump'],
+  ['bi4','val','bind','kj','swarm','def','hold','b_site','b_main','pillar','edge','stand'],
+  ['bi5','val','bind','sova','shock','def','retake_a','def_spawn','a_site','door','pole',[2,1]],
+  ['ha1','val','haven','sova','recon','atk','exec_c','c_main','c_site','wall_l','antenna',[2,0]],
+  ['ha2','val','haven','viper','orb','atk','exec_a','a_main','a_site','seam','arch','run'],
+  ['ha3','val','haven','brim','incen','atk','post','c_main','c_site','box','edge','stand'],
+  ['ha4','val','haven','kj','swarm','def','hold','a_site','a_main','corner','window','stand'],
+  ['ha5','val','haven','sova','recon','def','retake_c','def_spawn','c_site','pillar','roof',[3,1]],
+  ['sp1','val','split','sova','recon','atk','exec_a','a_main','a_site','corner','roof',[1,0]],
+  ['sp2','val','split','viper','snake','atk','post','b_main','b_site','wall_l','edge','jump'],
+  ['sp3','val','split','kj','swarm','def','hold','b_site','b_main','door','window','stand'],
+  ['sp4','val','split','brim','incen','def','retake_a','def_spawn','a_site','box','pole','jump'],
+  ['lo1','val','lotus','sova','recon','atk','exec_b','b_main','b_site','seam','arch',[2,1]],
+  ['lo2','val','lotus','viper','orb','atk','exec_c','c_main','c_site','wall_l','edge','run'],
+  ['lo3','val','lotus','kj','swarm','def','hold','a_site','a_main','pillar','window','stand'],
+  ['lo4','val','lotus','sova','shock','def','retake_c','def_spawn','c_site','corner','antenna',[2,2]],
+  ['mi1','cs2','mirage','smoke','smoke','atk','exec_a','atk_spawn','a_site','wall_l','antenna','jt'],
+  ['mi2','cs2','mirage','flash','flash','atk','exec_a','a_main','a_site','corner','edge','lob'],
+  ['mi3','cs2','mirage','molly','molly','atk','post','a_main','a_site','box','roof','stand'],
+  ['mi4','cs2','mirage','smoke','smoke','def','hold','b_site','mid','door','arch','stand'],
+  ['mi5','cs2','mirage','flash','flash','def','retake_a','def_spawn','a_site','pillar','edge','lob'],
+  ['in1','cs2','inferno','smoke','smoke','atk','exec_b','b_main','b_site','seam','roof','jt'],
+  ['in2','cs2','inferno','molly','molly','atk','post','b_main','b_site','corner','pole','jump'],
+  ['in3','cs2','inferno','flash','flash','atk','exec_a','a_main','a_site','door','edge','lob'],
+  ['in4','cs2','inferno','molly','molly','def','hold','b_site','b_main','box','window','stand'],
+  ['in5','cs2','inferno','smoke','smoke','def','retake_a','def_spawn','a_site','wall_l','antenna','run'],
+  ['nu1','cs2','nuke','smoke','smoke','atk','exec_a','a_main','a_site','wall_l','roof','jt'],
+  ['nu2','cs2','nuke','flash','flash','atk','exec_b','b_main','b_site','corner','edge','lob'],
+  ['nu3','cs2','nuke','molly','molly','def','hold','a_site','a_main','pillar','window','stand'],
+  ['nu4','cs2','nuke','smoke','smoke','def','retake_b','def_spawn','b_site','seam','antenna','stand'],
+].map(([id,game,map,pick,util,side,scen,from,to,stand,aim,th])=>({id,game,map,pick,util,side,scen,from,to,stand,aim,throw:th}));
+// abstract "what you see" sketches for each aim anchor (120×70) with the crosshair point
+const LU_AIM={
+  roof:{d:'M0 58H120M18 58V30L46 14L74 30V58',x:18,y:30},
+  pole:{d:'M0 58H120M70 58V12M62 20H78',x:70,y:12},
+  arch:{d:'M0 58H120M20 58V14H100V58M44 58V34A16 16 0 0176 34V58',x:60,y:20},
+  edge:{d:'M0 58H120M10 58V26H110V58',x:52,y:26},
+  window:{d:'M0 58H120M14 58V10H106V58M28 22H48V38H28ZM72 22H92V38H72Z',x:82,y:38},
+  antenna:{d:'M0 58H120M30 58V30H90V58M66 30V8M60 14H72',x:66,y:8},
+};
+const lu={game:'val',map:{val:'ascent',cs2:'mirage'},pick:'all',side:'atk',scen:'all',sel:null,fav:new Set(),learned:new Set()};
+const luEl={maps:$('#luMaps'),pick:$('#luPick'),pickL:$('#luPickL'),scen:$('#luScen'),list:$('#luList'),count:$('#luCount'),detail:$('#luDetail'),detect:$('#luDetect')};
+const luName=l=>raw('lu.u.'+l.util)+' · '+raw('lu.a.'+l.to);
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+function luThrow(l){ if(Array.isArray(l.throw)){ const [c,b]=l.throw; return t(b===0?'lu.th.bolt0':b===1?'lu.th.bolt1':'lu.th.bolt',{c,b}); } return t('lu.th.'+l.throw); }
+function luBase(){ return LINEUPS.filter(l=>l.game===lu.game&&l.map===lu.map[lu.game]&&l.side===lu.side); }
+function luFiltered(){ return luBase().filter(l=>(lu.pick==='all'||l.pick===lu.pick)&&(lu.scen==='all'||l.scen===lu.scen)); }
+const chip=(attr,v,label,on,dis)=>`<button type="button" class="lu-chip" data-${attr}="${v}" aria-pressed="${on}"${dis?' disabled':''}>${label}</button>`;
+function renderLu(){
+  const G=LU_MAPS[lu.game], curMap=lu.map[lu.game];
+  luEl.maps.innerHTML=Object.entries(G).map(([k,m])=>`<button type="button" data-m="${k}" aria-pressed="${k===curMap}">${m.name}</button>`).join('');
+  $$('#luSides button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.s===lu.side));
+  $$('.lu-game button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.g===lu.game));
+  $('.lu-game').style.setProperty('--gi',lu.game==='cs2'?1:0);
+  setT(luEl.pickL,lu.game==='cs2'?'lu.util':'lu.agent');
+  const base=luBase();
+  if(lu.pick!=='all'&&!base.some(l=>l.pick===lu.pick)) lu.pick='all';
+  luEl.pick.innerHTML=chip('p','all',t('lu.all'),lu.pick==='all')+LU_PICKS[lu.game].map(p=>chip('p',p,esc(raw('lu.ag.'+p)),lu.pick===p,!base.some(l=>l.pick===p))).join('');
+  const byPick=base.filter(l=>lu.pick==='all'||l.pick===lu.pick), scens=[...new Set(byPick.map(l=>l.scen))];
+  if(lu.scen!=='all'&&!scens.includes(lu.scen)) lu.scen='all';
+  luEl.scen.innerHTML=chip('sc','all',t('lu.all'),lu.scen==='all')+scens.map(s=>chip('sc',s,esc(raw('lu.sc.'+s)),lu.scen===s)).join('');
+  const list=luFiltered();
+  if(!list.some(l=>l.id===lu.sel)) lu.sel=list.length?list[0].id:null;
+  setT(luEl.count,'lu.count',{n:list.length});
+  luEl.list.innerHTML=list.length?list.map(l=>`<button type="button" class="lu-card" role="option" data-id="${l.id}" aria-selected="${l.id===lu.sel}"><span class="lu-card-t">${esc(luName(l))}</span><span class="lu-card-s">${esc(raw('lu.ag.'+l.pick))} · ${esc(raw('lu.sc.'+l.scen))}</span><span class="lu-marks">${lu.fav.has(l.id)?'<i class="mk-fav" aria-hidden="true">★</i>':''}${lu.learned.has(l.id)?'<i class="mk-ok" aria-hidden="true">✓</i>':''}</span></button>`).join(''):`<p class="lu-empty">${t('lu.empty')}</p>`;
+  luEl.detect.textContent=t('lu.detect',{g:lu.game==='cs2'?'CS2':'VALORANT'});
+  renderLuDetail();
+}
+function luMapSVG(l){
+  const M=LU_MAPS[l.game][l.map], A=M.areas, c=k=>{ const r=A[k]; return [r[0]+r[2]/2,r[1]+r[3]/2]; };
+  const [sx,sy]=c(l.from), [ex,ey]=c(l.to);
+  const s=[sx+(l.id.charCodeAt(2)%3-1)*3,sy+3], e=[ex+(l.id.charCodeAt(1)%3-1)*3,ey-1];
+  const bounces=Array.isArray(l.throw)?l.throw[1]:0;
+  // throw path: an arc; bolts with bounces get a kink off a wall point
+  let path, rings='';
+  if(bounces){ const bx=(s[0]+e[0])/2+(s[0]<50?-10:10), by=(s[1]+e[1])/2; path=`M${s[0]} ${s[1]} Q${(s[0]+bx)/2} ${Math.min(s[1],by)-8} ${bx} ${by} Q${(bx+e[0])/2} ${Math.min(by,e[1])-6} ${e[0]} ${e[1]}`; rings=`<circle class="lu-bounce" cx="${bx}" cy="${by}" r="1.6"/>`; }
+  else { const mx=(s[0]+e[0])/2, my=Math.min(s[1],e[1])-12; path=`M${s[0]} ${s[1]} Q${mx} ${my} ${e[0]} ${e[1]}`; }
+  const big=['smoke','orb'].includes(l.util), fire=['molly','incen','snake','swarm'].includes(l.util);
+  const areas=Object.entries(A).map(([k,[x,y,w,h]])=>{ const site=/_site$/.test(k); return `<rect class="lu-area${site?' site':''}${/spawn/.test(k)?' spawn':''}" x="${x}" y="${y}" width="${w}" height="${h}" rx="2.5"/>${site?`<text x="${x+w/2}" y="${y+h/2+3.5}" text-anchor="middle">${k[0].toUpperCase()}</text>`:''}`; }).join('');
+  const links=M.links.map(([a,b])=>{ const p=c(a),q=c(b); return `<line class="lu-link" x1="${p[0]}" y1="${p[1]}" x2="${q[0]}" y2="${q[1]}"/>`; }).join('');
+  const label=t('lu.mapAria',{map:M.name,from:raw('lu.a.'+l.from),to:raw('lu.a.'+l.to)});
+  return `<svg class="lu-map" viewBox="0 0 100 100" role="img" aria-label="${esc(label)}">${links}${areas}
+    <path class="lu-path" d="${path}"/>${rings}
+    ${big?`<circle class="lu-zone smoke" cx="${e[0]}" cy="${e[1]}" r="6.5"/>`:fire?`<circle class="lu-zone fire" cx="${e[0]}" cy="${e[1]}" r="4.5"/>`:l.util==='flash'?`<circle class="lu-zone flash" cx="${e[0]}" cy="${e[1]}" r="5"/>`:`<circle class="lu-zone scan" cx="${e[0]}" cy="${e[1]}" r="9"/>`}
+    <circle class="lu-land" cx="${e[0]}" cy="${e[1]}" r="1.8"/>
+    <circle class="lu-stand-r" cx="${s[0]}" cy="${s[1]}" r="3.6"/><circle class="lu-stand" cx="${s[0]}" cy="${s[1]}" r="1.9"/></svg>`;
+}
+function luAimSVG(l){ const a=LU_AIM[l.aim]; return `<svg class="lu-aim" viewBox="0 0 120 70" aria-hidden="true"><path d="${a.d}"/><g transform="translate(${a.x} ${a.y})"><path class="xh" d="M0 -9V-3M0 3V9M-9 0H-3M3 0H9"/><circle class="xd" r="1.2"/></g></svg>`; }
+function renderLuDetail(){
+  const l=LINEUPS.find(x=>x.id===lu.sel);
+  if(!l){ luEl.detail.innerHTML=''; return; }
+  const stand=raw('lu.a.'+l.from)+(LANG==='en'?', ':'，')+raw('lu.st.'+l.stand);
+  luEl.detail.innerHTML=`<div class="lu-d-head"><div><h3>${esc(luName(l))}</h3><p>${esc(LU_MAPS[l.game][l.map].name)} · ${esc(raw('lu.ag.'+l.pick))} · ${esc(raw('lu.sc.'+l.scen))}</p></div><span class="tag-demo">${t('demo')}</span></div>
+  <div class="lu-viz">${luMapSVG(l)}<div class="lu-aim-w">${luAimSVG(l)}<span>${t('lu.lgAim')}</span></div></div>
+  <div class="lu-legend"><span><i class="lg-s"></i>${t('lu.lgStand')}</span><span><i class="lg-l"></i>${t('lu.lgLand')}</span></div>
+  <ol class="lu-steps"><li><b>${t('lu.sStand')}</b><span>${esc(LANG==='en'?cap(stand):stand)}</span></li><li><b>${t('lu.sAim')}</b><span>${esc(raw('lu.aim.'+l.aim))}</span></li><li><b>${t('lu.sThrow')}</b><span>${esc(luThrow(l))}</span></li></ol>
+  <div class="lu-acts"><button type="button" class="lu-act" data-act="fav" aria-pressed="${lu.fav.has(l.id)}"><span aria-hidden="true">${lu.fav.has(l.id)?'★':'☆'}</span>${t('lu.fav')}</button><button type="button" class="lu-act" data-act="learned" aria-pressed="${lu.learned.has(l.id)}"><span aria-hidden="true">✓</span>${t('lu.learned')}</button></div>`;
+}
+$('#luWin').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b||b.disabled) return;
+  if(b.dataset.g){ if(b.dataset.g!==lu.game){ lu.game=b.dataset.g; lu.pick='all'; lu.scen='all'; renderLu(); measure(); } return; }
+  if(b.dataset.m){ lu.map[lu.game]=b.dataset.m; renderLu(); return; }
+  if(b.dataset.s){ lu.side=b.dataset.s; lu.scen='all'; renderLu(); return; }
+  if(b.dataset.p){ lu.pick=b.dataset.p; renderLu(); return; }
+  if(b.dataset.sc){ lu.scen=b.dataset.sc; renderLu(); return; }
+  if(b.dataset.id){ lu.sel=b.dataset.id; $$('.lu-card',luEl.list).forEach(c=>c.setAttribute('aria-selected',c===b)); renderLuDetail(); return; }
+  if(b.dataset.act){ const set=lu[b.dataset.act]; set.has(lu.sel)?set.delete(lu.sel):set.add(lu.sel); renderLu(); }
+});
+renderLu(); langHooks.push(renderLu);
 
 /* ================= ACADEMY tilt ================= */
 $$('.ac').forEach(c=>{
