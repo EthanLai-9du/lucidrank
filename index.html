@@ -1002,6 +1002,27 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
   .adv-found{order:1}.adv-goal{order:2}.adv-today{order:3}.adv-last{order:4}
 }
 
+/* ===== Windows download ===== */
+.hero-dl-meta{margin:14px 0 0;font-size:12.5px;color:var(--t3);opacity:0;transform:translateY(16px);transition:all 1.3s var(--ease) .95s}
+.loaded .hero-dl-meta{opacity:1;transform:none}
+.dl{background:var(--paper);color:var(--d1);padding:clamp(72px,8vw,112px) 0}
+.dl-row{display:flex;align-items:flex-end;justify-content:space-between;gap:28px 48px;flex-wrap:wrap;padding-bottom:clamp(26px,3vw,36px);border-bottom:1px solid var(--d4)}
+.dl-copy{flex:1 1 440px;max-width:620px}
+.dl-copy .h2{margin-bottom:10px}
+.dl-copy .lead{max-width:none;text-wrap:pretty}
+.dl-act{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.dl .btn-dark{height:48px;padding:0 24px}
+.dl-ic{width:16px;height:16px}
+.dl-meta{margin:6px 0 0;font-size:13px;color:var(--d2)}
+.dl-alt{margin:0;font-size:13px;color:var(--d3)}
+.dl-alt a{color:var(--d1);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(0,0,0,.25)}
+.dl-alt a:hover{text-decoration-color:currentColor}
+.dl-notes{list-style:none;margin:clamp(20px,2.4vw,28px) 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 48px;font-size:14px;line-height:1.6;color:var(--d2)}
+.dl-notes li{position:relative;padding-left:14px;text-wrap:pretty}
+.dl-notes li::before{content:"";position:absolute;left:0;top:.65em;width:5px;height:5px;border-radius:50%;background:var(--d3)}
+@media (max-width:760px){.dl-notes{grid-template-columns:1fr}}
+@media (max-width:600px){.dl-act{width:100%}.dl .btn-dark{width:100%}}
+
 </style>
 </head>
 <body>
@@ -1036,7 +1057,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
     <button type="button" data-lang="tc" lang="zh-Hant" aria-label="繁體中文" aria-pressed="false">繁</button>
     <button type="button" data-lang="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
   </div>
-  <a class="nav-cta" href="#join" data-i18n="nav.cta">加入候补</a>
+  <a class="nav-cta" href="#download" data-i18n="nav.download">下载</a>
   <button class="nav-menu" aria-label="打开菜单" aria-expanded="false" data-i18n-attr="aria-label:menu.open"><span></span></button>
   <div class="nav-progress" aria-hidden="true"><i></i></div>
 </header>
@@ -1050,6 +1071,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
   <a href="#academy" data-nav="academy"><span data-i18n="nav.academy">学院</span></a>
   <a href="#trust" data-nav="trust"><span data-i18n="nav.trust">原则</span></a>
   <a href="#join" data-nav="join"><span data-i18n="nav.cta">加入候补</span></a>
+  <a href="#download" data-nav="download"><span data-i18n="nav.download">下载</span></a>
   <div class="lang lang-lg" role="group" aria-label="语言" data-i18n-attr="aria-label:lang.group">
     <button type="button" data-lang="sc" lang="zh-Hans" aria-pressed="true">简体中文</button>
     <button type="button" data-lang="tc" lang="zh-Hant" aria-pressed="false">繁體中文</button>
@@ -1069,9 +1091,10 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
       <p class="hero-promise" aria-hidden="true" data-i18n="tagline">睡醒了再排。</p>
       <p class="hero-sub" data-i18n="hero.sub">开打前花 10 秒签到，打完传一张结算截图。<br class="d-only">记上两三周，就能看出自己哪天打得好。</p>
       <div class="hero-ctas">
-        <a class="btn btn-light magnetic" href="#join" data-i18n="nav.cta">加入候补</a>
+        <a class="btn btn-light magnetic" href="download/LucidRank_0.1.1_x64-setup.exe" download data-i18n="hero.dl">Windows 版下载</a>
         <a class="btn btn-ghost magnetic" href="#checkin"><span data-i18n="hero.try">试试签到</span> <span class="arr">→</span></a>
       </div>
+      <p class="hero-dl-meta" data-i18n="dl.meta">v0.1.1 · Windows 10/11 64 位 · 1.4 MB</p>
     </div>
     <p class="hero-next" aria-hidden="true" data-i18n="hero.next">卡分，<br class="m-only">不一定是枪法问题。</p>
     <div class="scroll-cue" aria-hidden="true"><span data-i18n="hero.scroll">向下滚动</span><i></i></div>
@@ -1450,6 +1473,27 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
     </form>
   </div>
 </section>
+
+<!-- ============ DOWNLOAD ============ -->
+<section id="download" class="dl" data-theme="light" data-label="download" data-n="09">
+  <div class="wrap">
+    <div class="dl-row">
+      <div class="dl-copy">
+        <h2 class="h2" data-i18n="dl.h2">Windows 版可以下了</h2>
+        <p class="lead" data-i18n="dl.lead">签到、记战绩、每周目标、点位小窗都有了。还是早期版本，会经常更新。</p>
+      </div>
+      <div class="dl-act">
+        <a class="btn btn-dark" href="download/LucidRank_0.1.1_x64-setup.exe" download><svg class="dl-ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8.5M4.5 7.5 8 11l3.5-3.5M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="dl.btn">下载安装包</span></a>
+        <p class="dl-meta" data-i18n="dl.meta">v0.1.1 · Windows 10/11 64 位 · 1.4 MB</p>
+        <p class="dl-alt"><span data-i18n="dl.alt">备用地址：</span><a href="https://github.com/EthanLai-9du/lucidrank-app/releases" target="_blank" rel="noopener">GitHub</a></p>
+      </div>
+    </div>
+    <ul class="dl-notes">
+      <li data-i18n="dl.ss">还没做代码签名，Windows 可能会拦一下：点「更多信息」→「仍要运行」就行。</li>
+      <li data-i18n="dl.trust">只看游戏有没有在运行，不读游戏内存，也不盖在游戏画面上。数据只存在你自己电脑里。</li>
+    </ul>
+  </div>
+</section>
 </main>
 
 <footer class="foot" data-theme="dark">
@@ -1462,7 +1506,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next,html[lang=en] 
       <div class="foot-links">
         <div><b data-i18n="ft.product">产品</b><a href="#checkin" data-i18n="ft.checkin">每日签到</a><a href="#scan" data-i18n="ft.scan">截图识别</a><a href="#insights" data-i18n="ft.insights">个人洞察</a></div>
         <div><b data-i18n="ft.grow">成长</b><a href="#advice" data-i18n="ft.plan">每周计划</a><a href="#lineups" data-i18n="ft.lineups">点位助手</a><a href="#academy" data-i18n="ft.academy">LucidRank 学院</a><a href="#trust" data-i18n="ft.trust">我们的原则</a></div>
-        <div><b data-i18n="ft.join">加入</b><a href="#join" data-i18n="ft.list">候补名单</a><a href="#hero" data-i18n="ft.top">回到顶部 ↑</a></div>
+        <div><b data-i18n="ft.join">加入</b><a href="#join" data-i18n="ft.list">候补名单</a><a href="#download" data-i18n="ft.dl">Windows 版下载</a><a href="#hero" data-i18n="ft.top">回到顶部 ↑</a></div>
       </div>
     </div>
     <div class="legal">
@@ -1501,6 +1545,7 @@ const I18N = {
   'nav.lineups': {sc:'点位', tc:'點位', en:'Lineups'},
   'nav.join': {sc:'加入', tc:'加入', en:'Join'},
   'nav.cta': {sc:'加入候补', tc:'加入候補', en:'Join waitlist'},
+  'nav.download': {sc:'下载', tc:'下載', en:'Download'},
   'menu.open': {sc:'打开菜单', tc:'打開選單', en:'Open menu'},
   'menu.close': {sc:'关闭菜单', tc:'關閉選單', en:'Close menu'},
   demo: {sc:'示例数据', tc:'示例數據', en:'Sample data'},
@@ -1510,6 +1555,7 @@ const I18N = {
   'hero.eb2': {sc:'状态工具', tc:'狀態工具', en:'Readiness tool'},
   'hero.sub': {sc:'开打前花 10 秒签到，打完传一张结算截图。<br class="d-only">记上两三周，就能看出自己哪天打得好。', tc:'開打前用 10 秒簽到，打完上載一張結算截圖。<br class="d-only">記錄兩三個星期，就看得出自己哪天打得好。', en:'Check in for 10 seconds before you play. Upload your end screen after.<br class="d-only"> Give it two or three weeks and you’ll see which days you play well.'},
   'hero.try': {sc:'试试签到', tc:'試試簽到', en:'Try check-in'},
+  'hero.dl': {sc:'Windows 版下载', tc:'下載 Windows 版', en:'Download for Windows'},
   'hero.next': {sc:'卡分，<br class="m-only">不一定是枪法问题。', tc:'卡分，<br class="m-only">未必是槍法問題。', en:'Hardstuck?<br class="m-only"> It might not be your aim.'},
   'hero.scroll': {sc:'向下滚动', tc:'向下捲動', en:'Scroll'},
 
@@ -1741,7 +1787,7 @@ const I18N = {
 
   /* ---- join ---- */
   'join.h2': {sc:'明早起来，先别碰手机', tc:'明早起身，先別碰手機', en:'Tomorrow morning, leave your phone alone for a bit'},
-  'join.lead': {sc:'第一版还在做。留个邮箱，内测开了通知你。', tc:'第一版還在開發。留個電郵，內測開始時通知你。', en:'v1 is still being built. Leave your email and we’ll let you know when beta opens.'},
+  'join.lead': {sc:'截图自动识别还在做。留个邮箱，出新版本通知你。', tc:'截圖自動識別還在開發。留個電郵，有新版本就通知你。', en:'Screenshot auto-read is still in the works. Leave your email and we’ll tell you when a new version is out.'},
   'join.srvAria': {sc:'你主要玩哪个游戏', tc:'你主要玩哪個遊戲', en:'Which game do you play?'},
   'join.srv': {sc:['VALORANT','CS2','都玩'], tc:['VALORANT','CS2','兩個都玩'], en:['VALORANT','CS2','Both']},
   'join.srvName': {sc:['VALORANT','CS2','VALORANT 和 CS2'], tc:['VALORANT','CS2','VALORANT 和 CS2'], en:['VALORANT','CS2','VALORANT + CS2']},
@@ -1750,8 +1796,17 @@ const I18N = {
   'join.btn': {sc:'加入候补', tc:'加入候補', en:'Join waitlist'},
   'join.note': {sc:'演示页：邮箱不会被发送或保存。', tc:'示範頁面：電郵不會被傳送或儲存。', en:'Demo page: your email isn’t sent or stored.'},
   'join.okH': {sc:'你在名单上了。', tc:'你已在名單上。', en:'You’re on the list.'},
-  'join.okP': {sc:'内测开放时通知你。', tc:'內測開放時通知你。', en:'We’ll tell you when beta opens.'},
-  'join.okMail': {sc:'{s} 内测开放时，通知 {e}。', tc:'{s} 內測開放時，會通知 {e}。', en:'We’ll email {e} when the {s} beta opens.'},
+  'join.okP': {sc:'出新版本时通知你。', tc:'有新版本時通知你。', en:'We’ll tell you when a new version is out.'},
+  'join.okMail': {sc:'{s} 出新版本时，通知 {e}。', tc:'{s} 有新版本時，會通知 {e}。', en:'We’ll email {e} when a new {s} version is out.'},
+
+  /* ---- download ---- */
+  'dl.h2': {sc:'Windows 版可以下了', tc:'Windows 版可以下載了', en:'The Windows app is out'},
+  'dl.lead': {sc:'签到、记战绩、每周目标、点位小窗都有了。还是早期版本，会经常更新。', tc:'簽到、記戰績、每週目標、點位小窗都有了。仍是早期版本，會經常更新。', en:'Check-ins, match log, weekly goal and the lineup window are all in. It’s early, so expect frequent updates.'},
+  'dl.btn': {sc:'下载安装包', tc:'下載安裝程式', en:'Download installer'},
+  'dl.meta': {sc:'v0.1.1 · Windows 10/11 64 位 · 1.4 MB', tc:'v0.1.1 · Windows 10/11 64 位元 · 1.4 MB', en:'v0.1.1 · Windows 10/11 64-bit · 1.4 MB'},
+  'dl.alt': {sc:'备用地址：', tc:'備用連結：', en:'Mirror: '},
+  'dl.ss': {sc:'还没做代码签名，Windows 可能会拦一下：点「更多信息」→「仍要运行」就行。', tc:'暫時未有程式碼簽署，Windows 可能會攔一下：按「其他資訊」→「仍要執行」就可以。', en:'It isn’t code-signed yet, so Windows SmartScreen may warn you. Click “More info” → “Run anyway”.'},
+  'dl.trust': {sc:'只看游戏有没有在运行，不读游戏内存，也不盖在游戏画面上。数据只存在你自己电脑里。', tc:'只會偵測遊戲有沒有開啟，不讀取遊戲記憶體，也不會蓋住遊戲畫面。數據只存在你自己部電腦。', en:'It only checks whether the game is running. It doesn’t read game memory or draw over the game, and your data stays on your PC.'},
   'join.okSmall': {sc:'演示，未发送任何内容。', tc:'示範，未有傳送任何內容。', en:'Demo. Nothing was sent.'},
   'join.bad': {sc:'邮箱格式不对。', tc:'電郵格式不正確。', en:'That email doesn’t look right.'},
   'join.empty': {sc:'先填邮箱。', tc:'請先填寫電郵。', en:'Enter your email first.'},
@@ -1768,6 +1823,7 @@ const I18N = {
   'ft.trust': {sc:'我们的原则', tc:'我們的原則', en:'Our principles'},
   'ft.join': {sc:'加入', tc:'加入', en:'Join'},
   'ft.list': {sc:'候补名单', tc:'候補名單', en:'Waitlist'},
+  'ft.dl': {sc:'Windows 版下载', tc:'Windows 版下載', en:'Windows download'},
   'ft.top': {sc:'回到顶部 ↑', tc:'返回頂部 ↑', en:'Back to top ↑'},
   'ft.legal1': {sc:'LucidRank 为独立概念产品，与 Riot Games、Valve、腾讯、完美世界均无关联，亦未获其认可。VALORANT、无畏契约 为 Riot Games, Inc. 的商标；Counter-Strike、CS2 为 Valve Corporation 的商标。',
                 tc:'LucidRank 為獨立概念產品，與 Riot Games、Valve、騰訊、完美世界均無關連，亦未獲其認可。VALORANT、無畏契約為 Riot Games, Inc. 的商標；Counter-Strike、CS2 為 Valve Corporation 的商標。',
