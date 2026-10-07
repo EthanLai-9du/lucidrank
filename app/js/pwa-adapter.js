@@ -9,7 +9,7 @@
    Must load before core.js. */
 (function(){
 'use strict';
-const VERSION='0.1.1';
+const VERSION='0.1.2';
 const DB_NAME='lucidrank', DATA_KEY='data', SHOT_PREFIX='lrshot:';
 const LS_DATA='lr-web-data', LS_SHOT='lr-web-shot-';
 
