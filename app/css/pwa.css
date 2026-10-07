@@ -151,7 +151,7 @@ html.sheet-open .side,html.sheet-open .hint{display:none}
   .web #v-today .mrow>:nth-child(5){display:block}
   .web .mrow .shot{min-height:36px}
   .web .mrow>:nth-child(6){max-width:120px;min-width:0}
-  .web .mrow .shot:not(:has(img)){display:block;line-height:36px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .web .mrow .shot:not(:has(img)){display:block;line-height:36px;white-space:nowrap;overflow:hidden;max-width:24px;text-overflow:clip}
   .web .sthumb{height:32px}
   /* sheets */
   .web .inline-host .ci-win.inline{padding:8px 16px 12px}
