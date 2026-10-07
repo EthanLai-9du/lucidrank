@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>LucidRank · 睡醒了再排。</title>
+<title>LucidRank</title>
 <meta name="description" content="LucidRank：给 VALORANT 和 CS2 玩家做的状态记录。开打前 10 秒签到，打完传结算截图，几周后看出自己哪天打得好。">
 <meta name="application-name" content="LucidRank">
 <meta name="theme-color" content="#000000">
@@ -2016,7 +2016,7 @@ const metaDesc=document.querySelector('meta[name=description]');
 function setLang(l,save){
   if(!LANGS[l]) return;
   LANG=l; root.lang=LANGS[l]; root.dataset.lang=l;
-  document.title='LucidRank · '+raw('tagline');
+  document.title='LucidRank';
   if(metaDesc) metaDesc.content=raw('desc');
   applyI18n();
   $$('.lang').forEach(g=>{ g.style.setProperty('--li',LANG_KEYS.indexOf(l)); $$('button',g).forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===l)); });
