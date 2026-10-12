@@ -29,3 +29,13 @@ body{font-family:var(--font)}.brand-name{font-family:var(--font-display);font-si
 .hero-promise,.h2,.hero-next,.sl-final,.wordmark,.brand-name,.step h3,.ct h3,.ac-card h3{font-family:var(--font-display);font-synthesis:none}
 .hero-promise{font-size:clamp(28px,3.2vw,44px);letter-spacing:.035em}.wordmark{letter-spacing:-.02em!important}.route-tabs button>span{font-family:'LR Oxanium',sans-serif}
 @media(max-width:767px){.hero-promise{font-size:28px}}
+
+/* Immediate feedback with short, composited transitions. */
+.ci-progress{grid-template-columns:repeat(14,minmax(0,1fr));gap:3px}.ci-progress i::after{transition-duration:.18s}.qcard{transition:transform .18s ease-out,opacity .18s ease-out;transition-delay:0s}.qcard.enter{transform:translateX(14px)}.qcard.leave{transform:translateX(-10px);transition-duration:.15s}.qcard.enter.back{transform:translateX(-14px)}.qcard.leave.back{transform:translateX(10px)}.qcard[aria-hidden=true]{visibility:hidden}.q-text{font-family:var(--font-display);font-size:24px;line-height:1.4}.ci-demo-skip{margin-top:12px;align-self:flex-start;font:12px var(--font);color:#b9aab6;min-height:36px;padding:6px 0;text-decoration:underline;text-underline-offset:4px}.ci-demo-skip:hover{color:#fff}.ci-done{position:relative;inset:auto;padding:24px 0 18px}.ci-stage:has(.ci-done:not(.leave)){min-height:0}.ci-done .sum>div{transition-delay:0s!important}.ci-demo-note{font-size:12px;color:#b9aab6;line-height:1.6;margin:16px 0 8px}.ci-demo-save{display:block;padding:12px;background:#ff344a;color:white;font-size:13px;font-weight:700}.ci-demo-save:hover{background:#d8203b}.opt,.face{transition:background .12s,transform .12s}.opt:focus-visible,.face:focus-visible,.ci-demo-skip:focus-visible,.route-tabs button:focus-visible{outline:2px solid #ff9aab;outline-offset:3px}.route-panel{animation:route-in .16s ease-out}@keyframes route-in{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.qcard,.opt,.face,.ci-progress i::after,.route-panel{animation:none;transition:none!important}.ci-demo-skip{scroll-behavior:auto}}
+
+.ci-done[aria-hidden=true]{display:none}
+
+#device{scroll-margin-top:88px;scroll-margin-bottom:16px}.q-text{scroll-margin-top:88px}
+/* Keep the keyboard hint and skip action in separate rows. */
+.ci-stage{min-height:450px}.qcard{padding-top:18px}.qcard .q-hint{position:static;margin:0 0 10px;font-size:10px;min-height:14px;order:0}.qcard .q-text{margin:10px 0 16px}.qcard .opts{gap:8px}.qcard .opt{padding:10px 14px;font-size:14px;line-height:1.5}.ci-demo-skip{margin-top:10px}.ci-stage:has(.ci-done:not(.leave)){min-height:0}@media(hover:none){.qcard .q-hint{display:none}}

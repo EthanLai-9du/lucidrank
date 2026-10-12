@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>LucidRank</title>
-<meta name="description" content="LucidRank：给 VALORANT 和 CS2 玩家做的状态记录。开打前 10 秒签到，打完传结算截图，几周后看出自己哪天打得好。">
+<meta name="description" content="LucidRank：给 VALORANT 和 CS2 玩家做的状态记录。开打前记录状态，打完传结算截图，几周后看出自己哪天打得好。">
 <meta name="application-name" content="LucidRank">
 <meta name="theme-color" content="#000000">
 <script>(function(){var M={sc:'zh-Hans',tc:'zh-Hant',en:'en'},l=null,d=document.documentElement;
@@ -16,7 +16,7 @@ d.lang=M[l];d.setAttribute('data-lang',l);})();
 if(location.hash){try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
 scrollTo(0,0);addEventListener('load',function(){scrollTo(0,0);});
 addEventListener('pageshow',function(e){if(e.persisted)scrollTo(0,0);});})();</script>
-<link rel="icon" type="image/svg+xml" href="app/icons/brand.svg?v=0.1.6-type4">
+<link rel="icon" type="image/svg+xml" href="app/icons/brand.svg?v=0.1.7-r3">
 <style>
 :root{
   --black:#000;--ink:#0a0a0c;--ink2:#121216;--ink3:#1b1b21;--paper:#f5f5f7;--white:#fff;
@@ -1021,8 +1021,8 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
 @media (max-width:600px){.dl-act{width:100%}.dl .btn-dark{width:100%}}
 
 </style>
-<link rel="stylesheet" href="app/css/fonts.css?v=0.1.6-type4">
-<link rel="stylesheet" href="css/urban-site.css?v=0.1.6-type4">
+<link rel="stylesheet" href="app/css/fonts.css?v=0.1.7-r3">
+<link rel="stylesheet" href="css/urban-site.css?v=0.1.7-r3">
 </head>
 <body>
 <div class="upgrade-banner"><a href="/app/" data-i18n="upgrade.entry" style="color:inherit;text-decoration:underline">打开 LucidRank 网页版 →</a><span data-i18n="upgrade.demo">下方為戰鬥表現評分 示例，非個人分析。</span></div>
@@ -1092,11 +1092,11 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
       <p class="hero-promise" aria-hidden="true" data-i18n="tagline">先清醒，再上分。</p>
       <p class="hero-sub" data-i18n="hero.sub">开打前花 10 秒签到，打完传一张结算截图。<br class="d-only">记上两三周，就能看出自己哪天打得好。</p>
       <div class="hero-ctas">
-        <a class="btn btn-light" data-windows-download href="https://lucidrank.pages.dev/update/LucidRank_0.1.6_x64-setup.exe" download>Windows · v0.1.6</a>
+        <a class="btn btn-light" data-windows-download href="https://lucidrank.pages.dev/update/LucidRank_0.1.7_x64-setup.exe" download>Windows · v0.1.7</a>
 <a class="btn btn-ghost magnetic" id="heroDl" href="app/" data-i18n="hero.app">打开网页版</a>
         <a class="btn btn-ghost magnetic" href="#checkin"><span data-i18n="hero.try">试试签到</span> <span class="arr">→</span></a>
       </div>
-      <p class="hero-dl-meta" id="heroMeta" data-i18n="hero.meta">v0.1.6 · Windows 10/11 · 22.7 MB · <a href="app/">iPad / 安卓</a></p>
+      <p class="hero-dl-meta" id="heroMeta" data-i18n="hero.meta">v0.1.7 · Windows 10/11 · 22.7 MB · <a href="app/">iPad / 安卓</a></p>
     </div>
     <p class="hero-next" aria-hidden="true" data-i18n="hero.next">卡分，<br class="m-only">不一定是枪法问题。</p>
     <div class="scroll-cue" aria-hidden="true"><span data-i18n="hero.scroll">向下滚动</span><i></i></div>
@@ -1152,8 +1152,8 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
       <h2 class="h2 rv"><span class="ln"><span data-i18n="ci.h2">开打前点 8 下</span></span></h2>
       <p class="lead" data-r data-i18n="ci.lead">不用想太久，凭感觉点就行。</p>
       <ul class="ci-points" data-r>
-        <li><b class="num">8</b><span data-i18n="ci.p1">道题</span></li>
-        <li><b class="num">≈10</b><span data-i18n="ci.p2">秒</span></li>
+        <li><b class="num">14</b><span data-i18n="ci.p1">道题</span></li>
+        <li><b class="num">30–60</b><span data-i18n="ci.p2">秒</span></li>
         <li><b class="num">0</b><span data-i18n="ci.p3">打字</span></li>
       </ul>
     </div>
@@ -1162,7 +1162,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
         <div class="device-top"><span class="dt-day" data-i18n="ci.day">今天 · 开局前</span><span class="dt-timer num" id="ciTimer" data-i18n="ci.sec" data-i18n-args='{"n":"0.0"}'>0.0 秒</span></div>
         <div class="ci-progress" id="ciProg" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
         <div class="ci-stage" id="ciStage" aria-live="polite"></div>
-        <div class="ci-nav"><button class="ci-back" id="ciBack" disabled data-i18n="ci.back">← 上一题</button><span id="ciCount" class="num">1 / 8</span></div>
+        <div class="ci-nav"><button class="ci-back" id="ciBack" disabled data-i18n="ci.back">← 上一题</button><span id="ciCount" class="num">1 / 14</span></div>
       </div>
     </div>
   </div>
@@ -1475,8 +1475,8 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
   <div class="wrap dl-wrap">
     <h2 class="h2" data-i18n="dl.h2">下载</h2>
     <div class="dl-act">
-      <a data-windows-download class="btn btn-dark" href="https://lucidrank.pages.dev/update/LucidRank_0.1.6_x64-setup.exe" download><svg class="dl-ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8.5M4.5 7.5 8 11l3.5-3.5M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="dl.btn">下载 Windows 版</span></a>
-      <p class="dl-meta"><span data-i18n="dl.meta">v0.1.6 · Windows 10/11 · 22.7 MB</span> · <a href="https://github.com/EthanLai-9du/lucidrank-app/releases" target="_blank" rel="noopener">GitHub</a></p>
+      <a data-windows-download class="btn btn-dark" href="https://lucidrank.pages.dev/update/LucidRank_0.1.7_x64-setup.exe" download><svg class="dl-ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8.5M4.5 7.5 8 11l3.5-3.5M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="dl.btn">下载 Windows 版</span></a>
+      <p class="dl-meta"><span data-i18n="dl.meta">v0.1.7 · Windows 10/11 · 22.7 MB</span> · <a href="https://github.com/EthanLai-9du/lucidrank-app/releases" target="_blank" rel="noopener">GitHub</a></p>
       <p class="dl-mobile"><a href="app/" data-i18n="dl.mobile">iPad / 安卓：打开网页版</a></p>
       <p class="dl-ss" data-i18n="dl.ss">被 Windows 拦了？点「更多信息」→「仍要运行」</p>
     </div>
@@ -1519,7 +1519,7 @@ const I18N = {
   'upgrade.demo': {sc:'下方为战斗表现评分 示例，非个人分析。',tc:'下方為戰鬥表現評分 示例，非個人分析。',en:'Performance Score examples below; not your personal analysis.'},
   /* ---- meta / chrome ---- */
   tagline: {"sc": "先清醒，再上分。", "tc": "先清醒，再上分。", "en": "Clear head first. Then climb."},
-  desc: {"sc": "LucidRank：给 VALORANT 和 CS2 玩家做的状态记录。开打前 10 秒签到，打完传结算截图，几周后看出自己哪天打得好。", "tc": "LucidRank：寫給 VALORANT 和 CS2 玩家的狀態記錄。開打前 10 秒簽到，打完上載結算截圖，幾個星期後看得出自己哪天打得好。", "en": "LucidRank: a check-in tool for VALORANT and CS2 players. 10 seconds before you play, a screenshot after, and in a few weeks you'll see which days you play well."},
+  desc: {"sc": "LucidRank：给 VALORANT 和 CS2 玩家做的状态记录。开打前记录状态，打完传结算截图，几周后看出自己哪天打得好。", "tc": "LucidRank：寫給 VALORANT 和 CS2 玩家的狀態記錄。開打前 10 秒簽到，打完上載結算截圖，幾個星期後看得出自己哪天打得好。", "en": "LucidRank: a check-in tool for VALORANT and CS2 players. 10 seconds before you play, a screenshot after, and in a few weeks you'll see which days you play well."},
   'lang.group': {sc:'语言', tc:'語言', en:'Language'},
   skip: {sc:'跳到互动演示', tc:'跳至互動示範', en:'Skip to demo'},
   'nav.aria': {sc:'页面分区', tc:'頁面分區', en:'Sections'},
@@ -1545,7 +1545,7 @@ const I18N = {
   'hero.eb2': {sc:'状态工具', tc:'狀態工具', en:'Readiness tool'},
   'hero.sub': {sc:'开打前花 10 秒签到，打完传一张结算截图。<br class="d-only">记上两三周，就能看出自己哪天打得好。', tc:'開打前用 10 秒簽到，打完上載一張結算截圖。<br class="d-only">記錄兩三個星期，就看得出自己哪天打得好。', en:'Check in for 10 seconds before you play. Upload your end screen after.<br class="d-only"> Give it two or three weeks and you’ll see which days you play well.'},
   'hero.try': {sc:'试试签到', tc:'試試簽到', en:'Try check-in'},
-  'hero.meta': {sc:'v0.1.6 · Windows 10/11 · 22.7 MB · <a href="app/">iPad / 安卓</a>', tc:'v0.1.6 · Windows 10/11 · 22.7 MB · <a href="app/">iPad / Android</a>', en:'v0.1.6 · Windows 10/11 · 22.7 MB · <a href="app/">iPad / Android</a>'},
+  'hero.meta': {sc:'v0.1.7 · Windows 10/11 · 22.7 MB · <a href="app/">iPad / 安卓</a>', tc:'v0.1.7 · Windows 10/11 · 22.7 MB · <a href="app/">iPad / Android</a>', en:'v0.1.7 · Windows 10/11 · 22.7 MB · <a href="app/">iPad / Android</a>'},
   'hero.app': {sc:'打开网页版', tc:'開啟網頁版', en:'Open the web app'},
   'hero.metaM': {sc:'网页版 · 可添加到主屏幕', tc:'網頁版 · 可加入主畫面', en:'Web app · add to Home Screen'},
   'hero.dl': {sc:'Windows 版下载', tc:'下載 Windows 版', en:'Download for Windows'},
@@ -1794,7 +1794,7 @@ const I18N = {
   /* ---- download ---- */
   'dl.h2': {sc:'下载', tc:'下載', en:'Download'},
   'dl.btn': {sc:'下载 Windows 版', tc:'下載 Windows 版', en:'Download for Windows'},
-  'dl.meta': {sc:'v0.1.6 · Windows 10/11 · 22.7 MB', tc:'v0.1.6 · Windows 10/11 · 22.7 MB', en:'v0.1.6 · Windows 10/11 · 22.7 MB'},
+  'dl.meta': {sc:'v0.1.7 · Windows 10/11 · 22.7 MB', tc:'v0.1.7 · Windows 10/11 · 22.7 MB', en:'v0.1.7 · Windows 10/11 · 22.7 MB'},
   'dl.mobile': {sc:'iPad / 安卓：打开网页版', tc:'iPad / Android：開啟網頁版', en:'iPad / Android: open the web app'},
   'dl.ss': {sc:'被 Windows 拦了？点「更多信息」→「仍要运行」', tc:'被 Windows 攔截？按「其他資訊」→「仍要執行」', en:'Blocked by Windows? Click “More info” → “Run anyway”'},
   'join.okSmall': {sc:'演示，未发送任何内容。', tc:'示範，未有傳送任何內容。', en:'Demo. Nothing was sent.'},
@@ -1973,6 +1973,9 @@ const I18N = {
   'lu.th.lob': {sc:'右键轻抛', tc:'右鍵輕拋', en:'Right-click lob'},
   'lu.th.jt': {sc:'跳投（建议绑个跳投键）', tc:'跳投（建議綁定跳投鍵）', en:'Jump-throw (worth binding)'},
 };
+
+Object.assign(I18N,{'scan.error':{sc:'这张图片无法读取，请换成 PNG 或 JPG 后重试。',tc:'這張圖片無法讀取，請換成 PNG 或 JPG 後重試。',en:'This image could not be opened. Try a PNG or JPG file.'}});
+Object.assign(I18N,{"ci.h2": {"sc": "开打前，把状态记清楚", "tc": "開打前，把狀態記清楚", "en": "Check your state before you play"}, "ci.lead": {"sc": "睡眠、身体、饮食和专注，分开记录。不确定就跳过。", "tc": "睡眠、身體、飲食與專注，分開記錄。不確定就跳過。", "en": "Record sleep, health, food and focus separately. Skip anything you are unsure about."}, "ci.skip": {"sc": "不确定，跳过", "tc": "不確定，跳過", "en": "Not sure · skip"}, "ci.unrecorded": {"sc": "未记录", "tc": "未記錄", "en": "Not recorded"}, "ci.logged": {"sc": "演示完成", "tc": "示範完成", "en": "Demo complete"}, "ci.save": {"sc": "打开 App 保存今日记录 →", "tc": "開啟 App 儲存今日記錄 →", "en": "Open app to save today’s check-in →"}, "ci.demoNote": {"sc": "这里仅演示，不会保存健康数据。", "tc": "這裡僅作示範，不會儲存健康資料。", "en": "This demo does not save health data."}, "mf.s1h": {"sc": "签到<b>记录状态</b>", "tc": "簽到<b>記錄狀態</b>", "en": "Check in<b>Record your state</b>"}, "mf.s1p": {"sc": "选你能确认的内容，未知项留空。", "tc": "選擇你能確認的內容，未知項留空。", "en": "Record what you know. Leave unknowns blank."}, "q.meal": {"sc": "过去 24 小时，实际吃了几餐？", "tc": "過去 24 小時，實際吃了幾餐？", "en": "How many meals in the last 24 hours?"}, "q.meal.o": {"sc": ["0 餐", "1 餐", "2 餐", "3 餐", "4 餐或更多"], "tc": ["0 餐", "1 餐", "2 餐", "3 餐", "4 餐或更多"], "en": ["0", "1 meal", "2 meals", "3 meals", "4 or more"]}, "q.meal.s": {"sc": "进餐次数", "tc": "進餐次數", "en": "Meal count"}, "q.recovery": {"sc": "现在有多清醒？", "tc": "現在有多清醒？", "en": "How awake do you feel?"}, "q.recovery.o": {"sc": ["很困", "有点困", "一般", "比较清醒", "很清醒"], "tc": ["很睏", "有點睏", "一般", "比較清醒", "很清醒"], "en": ["Very sleepy", "Somewhat sleepy", "Neutral", "Fairly awake", "Fully awake"]}, "q.recovery.s": {"sc": "清醒程度", "tc": "清醒程度", "en": "Alertness"}, "q.health": {"sc": "这场开打前，身体状态？", "tc": "這場開打前，身體狀態？", "en": "Physical state before this match?"}, "q.health.o": {"sc": ["正常", "生病 / 明显不适", "恢复中", "明显疲劳"], "tc": ["正常", "生病 / 明顯不適", "恢復中", "明顯疲勞"], "en": ["Normal", "Unwell", "Recovering", "Fatigued"]}, "q.health.s": {"sc": "身体状态", "tc": "身體狀態", "en": "Physical state"}, "q.oily": {"sc": "过去 24 小时，有几餐明显油腻？", "tc": "過去 24 小時，有幾餐明顯油膩？", "en": "Clearly oily meals in the last 24 hours?"}, "q.oily.o": {"sc": ["0 餐", "1 餐", "2 餐", "3 餐或更多"], "tc": ["0 餐", "1 餐", "2 餐", "3 餐或更多"], "en": ["0", "1 meal", "2 meals", "3 or more"]}, "q.oily.s": {"sc": "油腻餐数", "tc": "油膩餐數", "en": "Oily meals"}, "q.salty": {"sc": "过去 24 小时，有几餐明显偏咸？", "tc": "過去 24 小時，有幾餐明顯偏鹹？", "en": "Clearly salty meals in the last 24 hours?"}, "q.salty.o": {"sc": ["0 餐", "1 餐", "2 餐", "3 餐或更多"], "tc": ["0 餐", "1 餐", "2 餐", "3 餐或更多"], "en": ["0", "1 meal", "2 meals", "3 or more"]}, "q.salty.s": {"sc": "偏咸餐数", "tc": "偏鹹餐數", "en": "Salty meals"}, "q.water": {"sc": "过去 24 小时，大约喝了多少水？", "tc": "過去 24 小時，大約喝了多少水？", "en": "Approximate water intake in the last 24 hours?"}, "q.water.o": {"sc": ["不到 500 ml", "500–1000 ml", "1000–1500 ml", "1500–2000 ml", "2000 ml 以上"], "tc": ["不足 500 ml", "500–1000 ml", "1000–1500 ml", "1500–2000 ml", "2000 ml 以上"], "en": ["Under 500 ml", "500–1000 ml", "1000–1500 ml", "1500–2000 ml", "2000 ml or more"]}, "q.water.s": {"sc": "饮水估计", "tc": "飲水估計", "en": "Water estimate"}, "q.focus": {"sc": "现在能多稳定地保持专注？", "tc": "現在能多穩定地保持專注？", "en": "How sustained does your focus feel right now?"}, "q.focus.o": {"sc": ["很难集中", "很快分心", "时好时坏", "大多能专注", "能持续专注"], "tc": ["很難集中", "很快分心", "時好時壞", "大多能專注", "能持續專注"], "en": ["Hard to focus", "Easily distracted", "Variable", "Mostly focused", "Consistently focused"]}, "q.focus.s": {"sc": "专注感受", "tc": "專注感受", "en": "Perceived focus"}});
 
 (()=>{
 'use strict';
@@ -2310,9 +2313,10 @@ $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
   const id=a.getAttribute('href'); if(id.length<2) return; const t=$(id); if(!t) return;
   e.preventDefault();
   measure();
-  let y=t.getBoundingClientRect().top+scrollY;
+  const target=t.querySelector(':scope > .wrap')||t;
+  let y=Math.max(0,target.getBoundingClientRect().top+scrollY-$('.nav').getBoundingClientRect().height-20);
   if(id==='#hero') y=0;
-  scrollToY(y,clamp(700+Math.abs(y-scrollY)/vh*60,700,1300));
+  scrollToY(y,clamp(240+Math.abs(y-scrollY)/vh*35,240,550));
 }));
 function canScrollInside(el,dir){
   for(let n=el;n&&n!==document.body&&n!==root;n=n.parentElement){
@@ -2343,22 +2347,20 @@ addEventListener('keydown',e=>{
 // question text / options / summary label: I18N['q.<k>'], ['q.<k>.o'], ['q.<k>.s']
 // sub: follow-up shown only when cond() is true (shares the progress segment of the question before it)
 // multi: multi-select; option 0 ("nothing") is exclusive · flag: answer worth highlighting in the summary
+const answer=key=>ans[Q.findIndex(q=>q.k===key)];
 const Q=[
-  {k:'bed',flag:v=>v>=3},
-  {k:'dur',flag:v=>v<=1},
-  {k:'phone',tag:true,flag:v=>v>=2},
-  {k:'move'},
-  {k:'gap',sub:true,cond:()=>ans[3]>0},
-  {k:'meal',flag:v=>v>=2},
-  {k:'pre',multi:true,flag:v=>v.includes(2)||v.includes(3)},
-  {k:'caf',flag:v=>v>=2},
-  {k:'mood',faces:true,flag:v=>v===0},
+ {k:'bed',flag:v=>v>=3},{k:'dur',flag:v=>v<=1},{k:'phone'},
+ {k:'recovery'},{k:'health'},{k:'move'},
+ {k:'gap',sub:true,cond:()=>answer('move')>0},
+ {k:'meal'},{k:'oily'},{k:'salty'},{k:'water'},
+ {k:'pre',multi:true},{k:'caf'},{k:'mood',faces:true},{k:'focus'}
 ];
 Q.forEach(q=>{ q.n=I18N['q.'+q.k+'.o'].sc.length; });
-const STEPS=Q.filter(q=>!q.sub).length;            // 8 taps (+1 follow-up)
+const STEPS=Q.filter(q=>!q.sub).length;            // 14 questions plus an exercise follow-up
 const seg=i=>Q.slice(0,i+1).filter(q=>!q.sub).length-1;
+$('#ciProg').innerHTML='<i></i>'.repeat(STEPS);
 const stage=$('#ciStage'), prog=$$('#ciProg i'), back=$('#ciBack'), count=$('#ciCount'), timerEl=$('#ciTimer'), device=$('#device');
-let qi=0, ans=[], tStart=0, tRAF=0, busy=false;
+let qi=0, ans=[], tStart=0, tRAF=0, busy=false,lastTimer=0;
 const visible=i=>!Q[i].cond||Q[i].cond();
 function nextIdx(i){ let j=i+1; while(j<Q.length&&!visible(j)) j++; return j; }
 function prevIdx(i){ let j=i-1; while(j>0&&!visible(j)) j--; return j; }
@@ -2376,7 +2378,7 @@ function qHTML(i){
     ? `<div class="faces">${J.map(j=>`<button class="face${isSel(j)?' sel':''}" data-j="${j}" aria-label="${esc(t(ok+'#'+j))}" data-i18n-attr="aria-label:${ok}#${j}">${face(j)}${tag(ok+'#'+j)}</button>`).join('')}</div>`
     : `<div class="opts n${d.n}${d.multi?' multi':''}">${J.map(j=>`<button class="opt${isSel(j)?' sel':''}" data-j="${j}"${d.multi?` aria-pressed="${isSel(j)}"`:''}>${tag(ok+'#'+j)}<kbd>${j+1}</kbd></button>`).join('')}</div>`;
   const idx=String(seg(i)+1).padStart(2,'0')+(d.sub?'b':'');
-  return `<p class="q-hint">${tag('ci.keys')} <kbd>1</kbd>–<kbd>${d.n}</kbd>${d.multi?' · <kbd>Enter</kbd>':''}</p><div class="q-idx">${tag('ci.idx',{n:idx})}${d.tag?tag('q.tag',null,'span','class="q-tag"'):''}${d.multi?tag('ci.multi',null,'span','class="q-tag q-multi"'):''}</div>${tag('q.'+d.k,null,'h3','class="q-text"')}${opts}${d.multi?tag('ci.next',null,'button',`class="ci-next"${(a||[]).length?'':' disabled'}`):''}`;
+  return `<p class="q-hint">${tag('ci.keys')} <kbd>1</kbd>–<kbd>${d.n}</kbd>${d.multi?' · <kbd>Enter</kbd>':''}</p><div class="q-idx">${tag('ci.idx',{n:idx})}${d.tag?tag('q.tag',null,'span','class="q-tag"'):''}${d.multi?tag('ci.multi',null,'span','class="q-tag q-multi"'):''}</div>${tag('q.'+d.k,null,'h3','class="q-text"')}${opts}${d.multi?tag('ci.next',null,'button',`class="ci-next"${(a||[]).length?'':' disabled'}`):''}${tag('ci.skip',null,'button','class="ci-demo-skip" type="button"')}`;
 }
 function updProg(){
   const done=qi>=Q.length, cs=done?STEPS:seg(qi);
@@ -2384,27 +2386,28 @@ function updProg(){
   back.disabled=qi===0||done; count.textContent=done?t('ci.done'):`${cs+1} / ${STEPS}`;
 }
 function show(i,dir=1){
+  const focusNext=stage.contains(document.activeElement)||document.activeElement===back;
   const olds=$$('.qcard:not(.leave),.ci-done:not(.leave)',stage);
   const card=document.createElement('div');
   card.className='qcard enter'+(dir<0?' back':'');
   card.innerHTML=qHTML(i);
   stage.appendChild(card);
   requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.remove('enter','back')));
-  olds.forEach(old=>{ old.classList.add('leave'); if(dir<0) old.classList.add('back'); setTimeout(()=>old.remove(),600); });
-  qi=i; updProg();
+  olds.forEach(old=>{old.inert=true;old.setAttribute('aria-hidden','true');old.classList.add('leave'); if(dir<0) old.classList.add('back'); setTimeout(()=>old.remove(),220); });
+  qi=i;updProg();if(focusNext){card.querySelector('.opt,.face')?.focus({preventScroll:true});const r=device.getBoundingClientRect(),navH=$('.nav').getBoundingClientRect().height;if(r.height<=innerHeight-navH-32&&(r.top<navH+12||r.bottom>innerHeight-12))device.scrollIntoView({block:'nearest',behavior:RM?'instant':'smooth'});else if(r.height>innerHeight-navH-32){const title=card.querySelector('.q-text'),box=title.getBoundingClientRect();if(box.top<navH+12||box.bottom>innerHeight-24)title.scrollIntoView({block:'nearest',behavior:RM?'instant':'smooth'});}}
 }
 function setTimer(n){ setT(timerEl,'ci.sec',{n}); }
-function tick(){ setTimer(((performance.now()-tStart)/1000).toFixed(1)); tRAF=requestAnimationFrame(tick); }
+function tick(){const now=performance.now();if(now-lastTimer>=100){setTimer(((now-tStart)/1000).toFixed(1));lastTimer=now;}tRAF=requestAnimationFrame(tick);}
 function startTimer(){ if(!tStart){ tStart=performance.now(); device.classList.add('timing'); tick(); } }
 function ripple(btn,e){ if(!e||!btn.classList.contains('opt')) return; const r=btn.getBoundingClientRect(); const s=document.createElement('span'); s.className='rip'; const d=Math.max(r.width,r.height)*2; s.style.cssText=`width:${d}px;height:${d}px;left:${(e.clientX||r.left+r.width/2)-r.left-d/2}px;top:${(e.clientY||r.top+r.height/2)-r.top-d/2}px`; btn.appendChild(s); }
 function advance(){
   if(busy) return; busy=true;
   prog[seg(qi)].classList.add('done');
-  setTimeout(()=>{ busy=false; const n=nextIdx(qi); if(n<Q.length) show(n); else finish(); }, RM?60:380);
+  setTimeout(()=>{ busy=false; const n=nextIdx(qi); if(n<Q.length) show(n); else finish(); }, RM?0:150);
 }
 function pick(j,btn,e){
   if(busy) return; startTimer();
-  ans[qi]=j; if(Q[qi].k==='move'&&j===0) ans[4]=undefined;   // no exercise → drop the follow-up answer
+  ans[qi]=j; if(Q[qi].k==='move'&&j===0)ans[Q.findIndex(q=>q.k==='gap')]=undefined;   // no exercise → drop the follow-up answer
   $$('.sel',stage).forEach(b=>b.classList.remove('sel')); btn.classList.add('sel');
   ripple(btn,e); advance();
 }
@@ -2421,23 +2424,25 @@ function finish(){
   cancelAnimationFrame(tRAF); device.classList.remove('timing');
   const secs=((performance.now()-tStart)/1000).toFixed(1);
   setTimer(secs);
-  $$('.qcard:not(.leave)',stage).forEach(old=>{ old.classList.add('leave'); setTimeout(()=>old.remove(),600); });
+  $$('.qcard:not(.leave)',stage).forEach(old=>{ old.classList.add('leave'); setTimeout(()=>old.remove(),220); });
   qi=Q.length; updProg();
   const d=document.createElement('div'); d.className='ci-done';
-  const val=(q,i)=>q.multi?ans[i].map(j=>tag('q.'+q.k+'.o#'+j)).join(tag('ci.sep')):tag('q.'+q.k+'.o#'+ans[i]);
+  const val=(q,i)=>ans[i]===null?tag('ci.unrecorded'):q.multi?ans[i].map(j=>tag('q.'+q.k+'.o#'+j)).join(tag('ci.sep')):tag('q.'+q.k+'.o#'+ans[i]);
   let items=Q.map((q,i)=>[q,i]).filter(([q,i])=>visible(i)&&ans[i]!==undefined);
   items=[...items.filter(([q])=>!q.multi),...items.filter(([q])=>q.multi)];   // multi-select answers go full-width at the end
   const narrow=items.filter(([q])=>!q.multi).length, wide=(q,k)=>q.multi||(narrow%2===1&&k===narrow-1);
   d.innerHTML=`<svg class="done-ring" viewBox="0 0 100 100" aria-hidden="true"><circle class="bg" cx="50" cy="50" r="45"/><circle class="fg" cx="50" cy="50" r="45"/><path d="M34 51l11 11 21-23"/></svg>
   ${tag('ci.logged',null,'h3')}${tag('ci.took',{n:secs},'p','class="sub"')}
-  <div class="sum">${items.map(([q,i],k)=>`<div class="${q.flag&&q.flag(ans[i])?'flag':''}${wide(q,k)?' wide':''}" style="transition-delay:${.5+k*.05}s">${tag('q.'+q.k+'.s',null,'span','class="sk"')}${val(q,i)}</div>`).join('')}</div>
-  ${tag('ci.again',null,'button','class="ci-again" id="ciAgain"')}`;
-  stage.appendChild(d);
+  <div class="sum">${items.map(([q,i],k)=>`<div class="${ans[i]!==null&&q.flag&&q.flag(ans[i])?'flag':''}${wide(q,k)?' wide':''}" style="transition-delay:${.5+k*.05}s">${tag('q.'+q.k+'.s',null,'span','class="sk"')}${val(q,i)}</div>`).join('')}</div>
+  ${tag('ci.demoNote',null,'p','class="ci-demo-note"')}<a class="ci-demo-save" href="app/?action=checkin">${t('ci.save')}</a>${tag('ci.again',null,'button','class="ci-again" id="ciAgain"')}`;
+  stage.appendChild(d);measure();renderDirty=true;requestFrame();
   requestAnimationFrame(()=>requestAnimationFrame(()=>d.classList.add('show')));
   $('#ciAgain',d).addEventListener('click',resetCI);
 }
-function resetCI(){ ans=[]; tStart=0; setTimer('0.0'); show(0,-1); }
+function resetCI(){ans=[];tStart=0;lastTimer=0;setTimer('0.0');show(0,-1);measure();renderDirty=true;requestFrame();}
 stage.addEventListener('click',e=>{
+ if(e.target.closest('.leave'))return;
+ if(e.target.closest('.ci-demo-skip')){if(!busy&&qi<Q.length){startTimer();ans[qi]=null;if(Q[qi].k==='move')ans[Q.findIndex(q=>q.k==='gap')]=undefined;advance();}return;}
   if(e.target.closest('.ci-next')){ if((ans[qi]||[]).length) advance(); return; }
   const b=e.target.closest('.opt,.face'); if(!b||qi>=Q.length) return;
   (Q[qi].multi?toggle:pick)(+b.dataset.j,b,e);
@@ -2490,17 +2495,21 @@ const mockCs2=()=>`<div class="mock mock-cs" role="img" aria-label="${esc(t('sca
     <div class="mk-row"><span class="av"></span><span class="nm" style="width:48%"></span><span class="v">9 / 6 / 19</span><span class="v">33%</span><span class="v">1130</span><span class="v">2</span><span class="v">27</span></div>
   </div></div>`;
 const mockHTML=()=>game==='cs2'?mockCs2():mockVal();
-let scanTimers=[];
-function clearScan(){ scanTimers.forEach(clearTimeout); scanTimers=[]; }
+let scanTimers=[],scanEpoch=0,previewURL=null;
+function releasePreview(){if(previewURL){URL.revokeObjectURL(previewURL);previewURL=null;}}
+function clearScan(){scanEpoch++;scanTimers.forEach(clearTimeout);scanTimers=[];}
 function later(fn,ms){ scanTimers.push(setTimeout(fn,RM?Math.min(ms,50):ms)); }
 let lastShot=null; // {content, own} of the screenshot on screen, so a game switch can re-run it
 function runScan(content, own){
   lastShot={content,own};
-  clearScan(); resetFields();
+  clearScan();const epoch=scanEpoch;resetFields();
   dz.classList.add('has');
   prev.innerHTML=`<div class="shot-col"><div class="shot-file"><i></i>${own?tag('scan.yours',null,'b'):`<b>${GAMES[game].file}</b>`}<span>· ${tag(own?'scan.yoursNote':'scan.sampleNote')}</span></div><div class="shot-wrap">${content}<div class="shot-grid"></div><div class="scanline"></div>${own?tag('scan.ownNote',null,'div','class="own-note"'):''}</div></div>`;
   const wrap=$('.shot-wrap',prev);
+  const fail=()=>{if(epoch!==scanEpoch||!wrap.isConnected)return;clearScan();releasePreview();lastShot=null;dz.classList.remove('has');prev.innerHTML='';resetFields();status.innerHTML=tag('scan.error');};
   const go=()=>{
+    if(epoch!==scanEpoch||!wrap.isConnected)return;
+    if(img&&img.naturalWidth===0){fail();return;}
     wrap.style.setProperty('--h',wrap.offsetHeight+'px');
     status.innerHTML='<span class="sp"></span>'+tag('scan.reading');
     wrap.classList.add('scanning');
@@ -2512,16 +2521,16 @@ function runScan(content, own){
       if(i===FIELDS.length-1) later(()=>{
         wrap.classList.remove('scanning');
         status.innerHTML=`<span class="ok">✓</span>${tag('scan.ok')}${tag('scan.redo',null,'button','class="scan-redo" id="scanRedo"')}`;
-        $('#scanRedo').addEventListener('click',()=>{ clearScan(); lastShot=null; dz.classList.remove('has'); prev.innerHTML=''; resetFields(); status.innerHTML=tag('scan.wait'); });
+        $('#scanRedo').addEventListener('click',()=>{ clearScan();releasePreview();lastShot=null;dz.classList.remove('has'); prev.innerHTML=''; resetFields(); status.innerHTML=tag('scan.wait'); });
       },600);
     },700+i*280));
   };
-  const img=$('img',wrap); if(img && !img.complete) img.onload=go; else go();
+  const img=$('img',wrap);if(img){img.onerror=fail;if(!img.complete)img.onload=go;else go();}else go();
 }
-$('#useSample').addEventListener('click',e=>{ e.stopPropagation(); runScan(mockHTML(),false); });
+$('#useSample').addEventListener('click',e=>{ e.stopPropagation();releasePreview();runScan(mockHTML(),false); });
 const fileIn=$('#fileIn');
 $('#fileLabel').addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); fileIn.click(); } });
-function handleFile(f){ if(!f||!f.type.startsWith('image/')) return; const url=URL.createObjectURL(f); runScan(`<img src="${url}" alt="${esc(t('scan.imgAlt'))}" data-i18n-attr="alt:scan.imgAlt">`,true); }
+function handleFile(f){ if(!f||!f.type.startsWith('image/')) return; releasePreview();const url=URL.createObjectURL(f);previewURL=url;runScan(`<img src="${url}" alt="${esc(t('scan.imgAlt'))}" data-i18n-attr="alt:scan.imgAlt">`,true); }
 fileIn.addEventListener('change',()=>handleFile(fileIn.files[0]));
 ['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{ e.preventDefault(); dz.classList.add('over'); }));
 ['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{ e.preventDefault(); dz.classList.remove('over'); }));
@@ -2834,7 +2843,7 @@ $$('.ac').forEach(c=>{
 /* ================= FORM ================= */
 const form=$('#form'), email=$('#email'), msg=$('#formMsg'), fr=$('#fieldRow');
 let server=0;
-$$('.chip').forEach(c=>c.addEventListener('click',()=>{ $$('.chip').forEach(x=>x.setAttribute('aria-pressed',x===c)); server=+c.dataset.v; }));
+$$('.chip[data-v]',form).forEach(c=>c.addEventListener('click',()=>{ $$('.chip[data-v]',form).forEach(x=>x.setAttribute('aria-pressed',x===c)); server=+c.dataset.v; }));
 form.addEventListener('submit',e=>{
   e.preventDefault();
   const v=email.value.trim();
@@ -2876,7 +2885,7 @@ requestFrame();
 })();
 
 </script>
-<script src="js/urban-site.js?v=0.1.6-type4"></script>
-<script src="release.js?v=0.1.6-type4"></script><script src="content.js?v=0.1.6-type4"></script>
+<script src="js/urban-site.js?v=0.1.7-r3"></script>
+<script src="release.js?v=0.1.7-r3"></script><script src="content.js?v=0.1.7-r3"></script>
 </body>
 </html>

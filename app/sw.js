@@ -1,5 +1,5 @@
 /* LucidRank web: offline app shell. Cache-first for our own files; a new build = new cache name. */
-const CACHE='lucidrank-app-0.1.6-20261011-type4-mobile-1';
+const CACHE='lucidrank-app-0.1.7-20261012-interactions-3';
 const PRECACHE=[
  "./",
  "css/app.css",

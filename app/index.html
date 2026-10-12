@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>LucidRank</title>
-<meta name="description" content="LucidRank web: 10-second check-in, match log, insights and weekly goal for VALORANT / CS2 players. Guest data stays on this device; optional account cloud sync.">
+<meta name="description" content="LucidRank web: state check-in, match log, insights and weekly goal for VALORANT / CS2 players. Guest data stays on this device; optional account cloud sync.">
 <meta name="theme-color" content="#0a0a0c">
 <meta name="color-scheme" content="dark">
 <meta name="mobile-web-app-capable" content="yes">
@@ -16,19 +16,19 @@
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
-<link rel="stylesheet" href="css/app.css?v=0.1.6-type4m">
-<link rel="stylesheet" href="css/pwa.css?v=0.1.6-type4m">
-<link rel="stylesheet" href="css/fonts.css?v=0.1.6-type4m">
-<link rel="stylesheet" href="css/urban.css?v=0.1.6-type4m">
+<link rel="stylesheet" href="css/app.css?v=0.1.7-r3">
+<link rel="stylesheet" href="css/pwa.css?v=0.1.7-r3">
+<link rel="stylesheet" href="css/fonts.css?v=0.1.7-r3">
+<link rel="stylesheet" href="css/urban.css?v=0.1.7-r3">
 <!-- shared with the desktop app (copied unchanged from lucidrank-app/src/js) -->
-<script src="js/i18n.js?v=0.1.6-type4m"></script>
+<script src="js/i18n.js?v=0.1.7-r3"></script>
 <!-- web-only -->
-<script src="js/pwa-i18n.js?v=0.1.6-type4m"></script>
-<script src="js/pwa-adapter.js?v=0.1.6-type4m"></script>
+<script src="js/pwa-i18n.js?v=0.1.7-r3"></script>
+<script src="js/pwa-adapter.js?v=0.1.7-r3"></script>
 <!-- shared -->
-<script src="js/upgrade-i18n.js?v=0.1.6-type4m"></script>
-<script src="js/core.js?v=0.1.6-type4m"></script>
-<script src="js/catalog.js?v=0.1.6-type4m"></script>
+<script src="js/upgrade-i18n.js?v=0.1.7-r3"></script>
+<script src="js/core.js?v=0.1.7-r3"></script>
+<script src="js/catalog.js?v=0.1.7-r3"></script>
 </head>
 <body class="main-body">
 <!-- the shared ring / progress styles reference #gradStroke; on the web it is one flat colour -->
@@ -51,7 +51,7 @@
   </div>
 </aside>
 <div class="main-col">
-<div class="app-toolbar"><a class="btn ghost sm website-back" href="../" data-i18n="website.back">← 返回官网</a><a class="toolbar-brand" href="../">LucidRank / PLAYER JOURNAL</a><button class="btn ghost sm" id="account-open" type="button">登录 / 雲端同步 / Sign in</button><a class="btn ghost sm" data-windows-download href="https://lucidrank.pages.dev/update/LucidRank_0.1.6_x64-setup.exe" download>Windows · v0.1.6</a><a class="btn ghost sm" id="developer-open" href="developer.html" hidden>开发者工作台</a></div>
+<div class="app-toolbar"><a class="btn ghost sm website-back" href="../" data-i18n="website.back">← 返回官网</a><a class="toolbar-brand" href="../">LucidRank / PLAYER JOURNAL</a><button class="btn ghost sm" id="account-open" type="button">登录 / 雲端同步 / Sign in</button><a class="btn ghost sm" data-windows-download href="https://lucidrank.pages.dev/update/LucidRank_0.1.7_x64-setup.exe" download>Windows · v0.1.7</a><a class="btn ghost sm" id="developer-open" href="developer.html" hidden>开发者工作台</a></div>
 <main class="content" id="content">
   <section class="view on" id="v-today"></section>
   <section class="view" id="v-matches"></section>
@@ -65,21 +65,21 @@
 </div>
 <noscript><p style="padding:24px">LucidRank needs JavaScript.</p></noscript>
 <!-- shared with the desktop app -->
-<script src="js/stats.js?v=0.1.6-type4m"></script>
-<script src="js/checkin.js?v=0.1.6-type4m"></script>
-<script src="js/health-i18n.js?v=0.1.6-type4m"></script>
-<script src="js/health-checkin.js?v=0.1.6-type4m"></script>
-<script src="js/lineups-data.js?v=0.1.6-type4m"></script>
-<script src="js/tutorials.js?v=0.1.6-type4m"></script>
-<script src="js/lineups.js?v=0.1.6-type4m"></script>
-<script src="js/library.js?v=0.1.6-type4m"></script>
-<script src="js/training.js?v=0.1.6-type4m"></script>
-<script src="js/ocr.js?v=0.1.6-type4m"></script>
-<script src="js/account.js?v=0.1.6-type4m"></script>
-<script src="js/main.js?v=0.1.6-type4m"></script>
+<script src="js/stats.js?v=0.1.7-r3"></script>
+<script src="js/checkin.js?v=0.1.7-r3"></script>
+<script src="js/health-i18n.js?v=0.1.7-r3"></script>
+<script src="js/health-checkin.js?v=0.1.7-r3"></script>
+<script src="js/lineups-data.js?v=0.1.7-r3"></script>
+<script src="js/tutorials.js?v=0.1.7-r3"></script>
+<script src="js/lineups.js?v=0.1.7-r3"></script>
+<script src="js/library.js?v=0.1.7-r3"></script>
+<script src="js/training.js?v=0.1.7-r3"></script>
+<script src="js/ocr.js?v=0.1.7-r3"></script>
+<script src="js/account.js?v=0.1.7-r3"></script>
+<script src="js/main.js?v=0.1.7-r3"></script>
 <!-- web-only -->
-<script src="js/pwa.js?v=0.1.6-type4m"></script>
-<script src="js/urban.js?v=0.1.6-type4m"></script>
-<script src="../release.js?v=0.1.6-type4m"></script><script src="../content.js?v=0.1.6-type4m"></script>
+<script src="js/pwa.js?v=0.1.7-r3"></script>
+<script src="js/urban.js?v=0.1.7-r3"></script>
+<script src="../release.js?v=0.1.7-r3"></script><script src="../content.js?v=0.1.7-r3"></script>
 </body>
 </html>
