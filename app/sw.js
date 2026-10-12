@@ -1,21 +1,45 @@
 /* LucidRank web: offline app shell. Cache-first for our own files; a new build = new cache name. */
-const CACHE='lucidrank-app-0.1.2-22e0c612f7';
+const CACHE='lucidrank-app-0.1.6-20261011-type4-mobile-1';
 const PRECACHE=[
  "./",
  "css/app.css",
  "css/pwa.css",
+ "css/urban.css",
+ "css/fonts.css",
+ "fonts/display.woff2",
+ "fonts/title-han.woff2",
+ "fonts/smiley-han.woff2",
+ "fonts/oxanium.woff2",
+ "icons/brand.svg",
+ "fonts/space.woff2",
+ "fonts/han-sc.woff2",
+ "fonts/han-tc.woff2",
+ "js/urban.js",
+ "images/urban-banner.svg",
  "icons/apple-touch-icon.png",
  "icons/favicon-32.png",
  "icons/icon-192.png",
  "icons/icon-512.png",
  "icons/maskable-192.png",
  "icons/maskable-512.png",
+ "js/catalog.js",
+ "js/library.js",
+ "js/training.js",
+ "js/ocr.js",
+ "js/upgrade-i18n.js",
  "js/checkin.js",
+ "js/health-i18n.js",
+ "js/health-checkin.js",
  "js/core.js",
  "js/i18n.js",
  "js/lineups-data.js",
  "js/lineups.js",
  "js/main.js",
+ "js/account.js",
+ "js/tutorials.js",
+ "data/tutorials.json",
+ "js/developer.js",
+ "css/developer.css",
  "js/pwa-adapter.js",
  "js/pwa-i18n.js",
  "js/pwa.js",
@@ -34,7 +58,9 @@ self.addEventListener('fetch',e=>{
   const req=e.request;
   if(req.method!=='GET') return;
   const url=new URL(req.url);
+  if(['localhost','127.0.0.1','[::1]'].includes(url.hostname)) return;
   if(url.origin!==location.origin||!url.pathname.startsWith(new URL('./',self.registration.scope).pathname)) return;
+  if(url.pathname.endsWith('/reset-password.html')||url.pathname.endsWith('/reset-password')||url.pathname.endsWith('/developer.html')||url.pathname.endsWith('/developer')) return;
   if(req.mode==='navigate'){
     // the shell is cached under './' (hosts like Cloudflare Pages redirect index.html -> ./)
     e.respondWith(caches.match('./').then(r=>r?clean(r):fetch(req)));

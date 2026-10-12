@@ -56,10 +56,10 @@ onLang(()=>{ if(hintEl) hintEl.innerHTML=hintHTML(); });
 
 /* ---------------- settings (web) ---------------- */
 function renderSettings(){
-  const el=$('#v-settings'), d=store.data, lp=LR.langPref;
+  const el=$('#v-settings'), d=store.data, lp=LR.lang;
   el.innerHTML=`<header class="vh"><div><h1>${t('s.h')}</h1></div></header>
   <div class="card set">
-    <div class="srow"><div><h3>${t('s.lang')}</h3></div><div class="seg">${[['auto',t('s.auto')],['sc','简体'],['tc','繁體'],['en','EN']].map(([k,l])=>`<button data-lang="${k}" aria-pressed="${lp===k}">${l}</button>`).join('')}</div></div>
+    <div class="srow"><div><h3>${t('s.lang')}</h3></div><div class="seg">${[['sc','简中'],['tc','繁中'],['en','English']].map(([k,l])=>`<button data-lang="${k}" aria-pressed="${lp===k}">${l}</button>`).join('')}</div></div>
     <div class="srow"><div><h3>${t('web.install')}</h3><div id="instBody">${installHTML()}</div></div></div>
     <div class="srow"><div><h3>${t('web.remind')}</h3><p class="muted sm">${t('web.remindP')}</p></div></div>
   </div>
@@ -89,12 +89,12 @@ function pickFile(accept){
   });
 }
 const isDay=k=>/^\d{4}-\d{2}-\d{2}$/.test(k);
-function validMatch(m){ return m&&typeof m==='object'&&typeof m.day==='string'&&isDay(m.day)&&['W','L','D'].includes(m.result)&&['val','cs2'].includes(m.game); }
+function validMatch(m){ return m&&typeof m==='object'&&typeof m.day==='string'&&isDay(m.day)&&['W','L','D'].includes(m.result)&&['val','cs2'].includes(m.game)&&LRStats.validMatch(m)&&(!m.at||typeof m.at==='string'); }
 // Merge a desktop or web export into the current data. Same day: the newer check-in wins. Matches: by id.
 function mergeInto(d,inc){
   const fresh=!Object.keys(d.checkins).length&&!d.matches.length;
   Object.entries(inc.checkins&&typeof inc.checkins==='object'?inc.checkins:{}).forEach(([k,v])=>{
-    if(!isDay(k)||!v||!Array.isArray(v.a)) return;
+    if(!isDay(k)||!v||!Array.isArray(v.a)||v.healthLog&&(!window.LRHealth||!LRHealth.valid(v.healthLog))) return;
     const cur=d.checkins[k]; if(!cur||String(v.at||'')>String(cur.at||'')) d.checkins[k]=v;
   });
   const ids=new Set(d.matches.map(m=>m.id));

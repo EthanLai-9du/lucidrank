@@ -16,7 +16,7 @@ d.lang=M[l];d.setAttribute('data-lang',l);})();
 if(location.hash){try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
 scrollTo(0,0);addEventListener('load',function(){scrollTo(0,0);});
 addEventListener('pageshow',function(e){if(e.persisted)scrollTo(0,0);});})();</script>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23000'/%3E%3Ccircle cx='12' cy='12' r='6' fill='none' stroke='%23fff' stroke-width='1.6'/%3E%3Cpath d='M12 3v4M12 17v4M3 12h4M17 12h4' stroke='%23fff' stroke-width='1.6' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='1.6' fill='%23ff6a3d'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="app/icons/brand.svg?v=0.1.6-type4">
 <style>
 :root{
   --black:#000;--ink:#0a0a0c;--ink2:#121216;--ink3:#1b1b21;--paper:#f5f5f7;--white:#fff;
@@ -116,6 +116,12 @@ section{position:relative}
   .has-cursor input[type=email],.has-cursor input[type=text]{cursor:text}
   .has-cursor input[type=range]{cursor:none}
 }
+
+/* Update notice occupies its own row beneath the fixed navigation. */
+.upgrade-banner{position:relative;margin-top:56px;padding:12px var(--pad);background:#12242a;color:#e8f3f4;font-size:13px;line-height:1.6;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px 14px;overflow-wrap:anywhere}
+.upgrade-banner a{min-width:0;max-width:100%;text-underline-offset:3px}
+.upgrade-banner span{min-width:0;max-width:100%}
+@media(max-width:600px){.upgrade-banner{padding:12px 18px;text-align:left;justify-content:flex-start}.upgrade-banner span{flex-basis:100%}}
 
 /* ---------- nav ---------- */
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;height:56px;display:flex;align-items:center;gap:24px;padding:0 var(--pad);color:var(--t1);transition:color .5s,background .5s,transform .6s var(--ease)}
@@ -1015,14 +1021,18 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
 @media (max-width:600px){.dl-act{width:100%}.dl .btn-dark{width:100%}}
 
 </style>
+<link rel="stylesheet" href="app/css/fonts.css?v=0.1.6-type4">
+<link rel="stylesheet" href="css/urban-site.css?v=0.1.6-type4">
 </head>
 <body>
+<div class="upgrade-banner"><a href="/app/" data-i18n="upgrade.entry" style="color:inherit;text-decoration:underline">打开 LucidRank 网页版 →</a><span data-i18n="upgrade.demo">下方為戰鬥表現評分 示例，非個人分析。</span></div>
+
 <a class="skip" href="#checkin" data-i18n="skip">跳到互动演示</a>
 <div class="cursor" aria-hidden="true"><i class="ct"></i><i class="cb"></i><i class="cl"></i><i class="cr"></i><b></b></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="gradStroke" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffc46b"/><stop offset=".5" stop-color="#ff6a3d"/><stop offset="1" stop-color="#ff2e63"/></linearGradient>
-    <symbol id="xh" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 1.5v5M12 17.5v5M1.5 12h5M17.5 12h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="1.6" fill="#ff6a3d"/></symbol>
+    <symbol id="xh" viewBox="0 0 24 24"><path d="M4 4h6v12h6v5H4z" fill="currentColor"/><path d="M13 4h5l4 4v5l-3 3 4 5h-7l-4-6h4l1-1V9h-4z" fill="currentColor"/><path d="m3 2 5 0-3 3H0z" fill="#ff344a"/></symbol>
   </defs>
 </svg>
 
@@ -1044,9 +1054,9 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
   </nav>
   <span class="nav-current" aria-hidden="true"><span class="n">00</span><span class="t">首页</span></span>
   <div class="lang" role="group" aria-label="语言" data-i18n-attr="aria-label:lang.group">
-    <button type="button" data-lang="sc" lang="zh-Hans" aria-label="简体中文" aria-pressed="true">简</button>
-    <button type="button" data-lang="tc" lang="zh-Hant" aria-label="繁體中文" aria-pressed="false">繁</button>
-    <button type="button" data-lang="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
+    <button type="button" data-lang="sc" lang="zh-Hans" aria-label="简体中文" aria-pressed="true">简中</button>
+    <button type="button" data-lang="tc" lang="zh-Hant" aria-label="繁體中文" aria-pressed="false">繁中</button>
+    <button type="button" data-lang="en" lang="en" aria-label="English" aria-pressed="false">English</button>
   </div>
   <a class="nav-cta" href="#download" data-i18n="nav.download">下载</a>
   <button class="nav-menu" aria-label="打开菜单" aria-expanded="false" data-i18n-attr="aria-label:menu.open"><span></span></button>
@@ -1064,8 +1074,8 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
   <a href="#join" data-nav="join"><span data-i18n="nav.cta">加入候补</span></a>
   <a href="#download" data-nav="download"><span data-i18n="nav.download">下载</span></a>
   <div class="lang lang-lg" role="group" aria-label="语言" data-i18n-attr="aria-label:lang.group">
-    <button type="button" data-lang="sc" lang="zh-Hans" aria-pressed="true">简体中文</button>
-    <button type="button" data-lang="tc" lang="zh-Hant" aria-pressed="false">繁體中文</button>
+    <button type="button" data-lang="sc" lang="zh-Hans" aria-pressed="true">简中</button>
+    <button type="button" data-lang="tc" lang="zh-Hant" aria-pressed="false">繁中</button>
     <button type="button" data-lang="en" lang="en" aria-pressed="false">English</button>
   </div>
 </div>
@@ -1082,10 +1092,11 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
       <p class="hero-promise" aria-hidden="true" data-i18n="tagline">先清醒，再上分。</p>
       <p class="hero-sub" data-i18n="hero.sub">开打前花 10 秒签到，打完传一张结算截图。<br class="d-only">记上两三周，就能看出自己哪天打得好。</p>
       <div class="hero-ctas">
-        <a class="btn btn-light magnetic" id="heroDl" href="download/LucidRank_0.1.2_x64-setup.exe" download data-i18n="hero.dl">Windows 版下载</a>
+        <a class="btn btn-light" data-windows-download href="https://lucidrank.pages.dev/update/LucidRank_0.1.6_x64-setup.exe" download>Windows · v0.1.6</a>
+<a class="btn btn-ghost magnetic" id="heroDl" href="app/" data-i18n="hero.app">打开网页版</a>
         <a class="btn btn-ghost magnetic" href="#checkin"><span data-i18n="hero.try">试试签到</span> <span class="arr">→</span></a>
       </div>
-      <p class="hero-dl-meta" id="heroMeta" data-i18n="hero.meta">v0.1.2 · Windows 10/11 · 2.0 MB · <a href="app/">iPad / 安卓</a></p>
+      <p class="hero-dl-meta" id="heroMeta" data-i18n="hero.meta">v0.1.6 · Windows 10/11 · 22.7 MB · <a href="app/">iPad / 安卓</a></p>
     </div>
     <p class="hero-next" aria-hidden="true" data-i18n="hero.next">卡分，<br class="m-only">不一定是枪法问题。</p>
     <div class="scroll-cue" aria-hidden="true"><span data-i18n="hero.scroll">向下滚动</span><i></i></div>
@@ -1145,7 +1156,6 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
         <li><b class="num">≈10</b><span data-i18n="ci.p2">秒</span></li>
         <li><b class="num">0</b><span data-i18n="ci.p3">打字</span></li>
       </ul>
-      <div class="ci-q3" data-r><span class="dot"></span><span data-i18n="ci.q3"><b>有一题比较少见：</b>醒来后在床上刷了多久手机。</span></div>
     </div>
     <div class="ci-demo" data-r>
       <div class="device" id="device" role="group" aria-label="每日签到演示" data-i18n-attr="aria-label:ci.aria">
@@ -1214,7 +1224,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
         </div>
         <p class="ins-stmt" id="insStmt" aria-live="polite"></p>
         <div class="bars" id="bars"></div>
-        <p class="ins-note" data-i18n="ins.note">指标：当天的平均 ACS（CS2 用 ADR）。只看你自己的规律，不当科学结论。</p>
+        <p class="ins-note" data-i18n="ins.note">指标：当天的平均 战斗表现评分（CS2 用 ADR）。只看你自己的规律，不当科学结论。</p>
       </div>
       <div class="card-d tier-card" data-r style="--i:1">
         <div class="ct"><h3 data-i18n="ins.trust">结论可信吗？</h3><span class="tag-demo" data-i18n="demo">示例数据</span></div>
@@ -1222,14 +1232,14 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
         <p class="days-hint" data-i18n="ins.drag">拖动试试</p>
         <input type="range" class="range" id="daysR" min="1" max="21" value="21" aria-label="模拟记录天数" data-i18n-attr="aria-label:ins.range">
         <div class="tiers-list" id="tiers">
-          <div class="tier"><span class="ti"><i></i></span><div><h4 data-i18n="tier.1h">收集中</h4><p data-i18n="tier.1p">只记录</p></div><span class="trng" data-i18n="tier.1r">1–7 天</span></div>
-          <div class="tier"><span class="ti"><i></i></span><div><h4 data-i18n="tier.2h">初步信号</h4><p data-i18n="tier.2p">继续观察</p></div><span class="trng" data-i18n="tier.2r">8–14 天</span></div>
-          <div class="tier"><span class="ti"><i></i></span><div><h4 data-i18n="tier.3h">较有把握</h4><p data-i18n="tier.3p">可以调整</p></div><span class="trng" data-i18n="tier.3r">15 天+</span></div>
+          <div class="tier"><span class="ti"><i></i></span><div><h4 data-i18n="tier.1h">收集中</h4><p data-i18n="tier.1p">只记录</p></div><span class="trng" data-i18n="tier.1r">1–14 天</span></div>
+          <div class="tier"><span class="ti"><i></i></span><div><h4 data-i18n="tier.2h">累积记录</h4><p data-i18n="tier.2p">继续观察</p></div><span class="trng" data-i18n="tier.2r">15–29 天</span></div>
+          <div class="tier"><span class="ti"><i></i></span><div><h4 data-i18n="tier.3h">持续观察</h4><p data-i18n="tier.3p">天数不等于可信度</p></div><span class="trng" data-i18n="tier.3r">30 天+</span></div>
         </div>
       </div>
       <div class="card-d trend" data-r>
-        <div class="ct"><h3 data-i18n="ins.trend">每日 ACS · 21 天</h3><span class="tag-demo" data-i18n="demo">示例数据</span></div>
-        <svg class="chart" id="chart" viewBox="0 0 1000 300" role="img" aria-label="21 天每日 ACS 示例折线图" data-i18n-attr="aria-label:ins.chart"></svg>
+        <div class="ct"><h3 data-i18n="ins.trend">每日 战斗表现评分 · 21 天</h3><span class="tag-demo" data-i18n="demo">示例数据</span></div>
+        <svg class="chart" id="chart" viewBox="0 0 1000 300" role="img" aria-label="21 天每日 战斗表现评分 示例折线图" data-i18n-attr="aria-label:ins.chart"></svg>
         <div class="legend"><span><i class="lg-a"></i><span data-i18n="ins.lgA">醒后刷手机 &gt;30 分钟</span></span><span><i class="lg-b"></i><span data-i18n="ins.lgB">其他日子</span></span><span><i class="lg-c"></i><span data-i18n="ins.lgC">个人基线</span></span></div>
       </div>
     </div>
@@ -1465,8 +1475,8 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
   <div class="wrap dl-wrap">
     <h2 class="h2" data-i18n="dl.h2">下载</h2>
     <div class="dl-act">
-      <a class="btn btn-dark" href="download/LucidRank_0.1.2_x64-setup.exe" download><svg class="dl-ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8.5M4.5 7.5 8 11l3.5-3.5M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="dl.btn">下载 Windows 版</span></a>
-      <p class="dl-meta"><span data-i18n="dl.meta">v0.1.2 · Windows 10/11 · 2.0 MB</span> · <a href="https://github.com/EthanLai-9du/lucidrank-app/releases" target="_blank" rel="noopener">GitHub</a></p>
+      <a data-windows-download class="btn btn-dark" href="https://lucidrank.pages.dev/update/LucidRank_0.1.6_x64-setup.exe" download><svg class="dl-ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8.5M4.5 7.5 8 11l3.5-3.5M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="dl.btn">下载 Windows 版</span></a>
+      <p class="dl-meta"><span data-i18n="dl.meta">v0.1.6 · Windows 10/11 · 22.7 MB</span> · <a href="https://github.com/EthanLai-9du/lucidrank-app/releases" target="_blank" rel="noopener">GitHub</a></p>
       <p class="dl-mobile"><a href="app/" data-i18n="dl.mobile">iPad / 安卓：打开网页版</a></p>
       <p class="dl-ss" data-i18n="dl.ss">被 Windows 拦了？点「更多信息」→「仍要运行」</p>
     </div>
@@ -1505,6 +1515,8 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
    - LucidRank / {"sc": "先清醒，再上分。", "tc": "先清醒，再上分。", "en": "Clear head first. Then climb."} are filled by build.py (tagline lives there).
    ============================================================ */
 const I18N = {
+  'upgrade.entry': {sc:'打开 LucidRank 网页版 →',tc:'開啟 LucidRank 網頁版 →',en:'Open the LucidRank app →'},
+  'upgrade.demo': {sc:'下方为战斗表现评分 示例，非个人分析。',tc:'下方為戰鬥表現評分 示例，非個人分析。',en:'Performance Score examples below; not your personal analysis.'},
   /* ---- meta / chrome ---- */
   tagline: {"sc": "先清醒，再上分。", "tc": "先清醒，再上分。", "en": "Clear head first. Then climb."},
   desc: {"sc": "LucidRank：给 VALORANT 和 CS2 玩家做的状态记录。开打前 10 秒签到，打完传结算截图，几周后看出自己哪天打得好。", "tc": "LucidRank：寫給 VALORANT 和 CS2 玩家的狀態記錄。開打前 10 秒簽到，打完上載結算截圖，幾個星期後看得出自己哪天打得好。", "en": "LucidRank: a check-in tool for VALORANT and CS2 players. 10 seconds before you play, a screenshot after, and in a few weeks you'll see which days you play well."},
@@ -1533,7 +1545,7 @@ const I18N = {
   'hero.eb2': {sc:'状态工具', tc:'狀態工具', en:'Readiness tool'},
   'hero.sub': {sc:'开打前花 10 秒签到，打完传一张结算截图。<br class="d-only">记上两三周，就能看出自己哪天打得好。', tc:'開打前用 10 秒簽到，打完上載一張結算截圖。<br class="d-only">記錄兩三個星期，就看得出自己哪天打得好。', en:'Check in for 10 seconds before you play. Upload your end screen after.<br class="d-only"> Give it two or three weeks and you’ll see which days you play well.'},
   'hero.try': {sc:'试试签到', tc:'試試簽到', en:'Try check-in'},
-  'hero.meta': {sc:'v0.1.2 · Windows 10/11 · 2.0 MB · <a href="app/">iPad / 安卓</a>', tc:'v0.1.2 · Windows 10/11 · 2.0 MB · <a href="app/">iPad / Android</a>', en:'v0.1.2 · Windows 10/11 · 2.0 MB · <a href="app/">iPad / Android</a>'},
+  'hero.meta': {sc:'v0.1.6 · Windows 10/11 · 22.7 MB · <a href="app/">iPad / 安卓</a>', tc:'v0.1.6 · Windows 10/11 · 22.7 MB · <a href="app/">iPad / Android</a>', en:'v0.1.6 · Windows 10/11 · 22.7 MB · <a href="app/">iPad / Android</a>'},
   'hero.app': {sc:'打开网页版', tc:'開啟網頁版', en:'Open the web app'},
   'hero.metaM': {sc:'网页版 · 可添加到主屏幕', tc:'網頁版 · 可加入主畫面', en:'Web app · add to Home Screen'},
   'hero.dl': {sc:'Windows 版下载', tc:'下載 Windows 版', en:'Download for Windows'},
@@ -1566,7 +1578,6 @@ const I18N = {
   'ci.p1': {sc:'道题', tc:'條問題', en:'questions'},
   'ci.p2': {sc:'秒', tc:'秒', en:'seconds'},
   'ci.p3': {sc:'打字', tc:'打字', en:'typing'},
-  'ci.q3': {sc:'<b>有一题比较少见：</b>醒来后在床上刷了多久手机。', tc:'<b>有一題比較少見：</b>醒來後在床上滑了多久手機。', en:'<b>One question you won’t see elsewhere:</b> how long you scrolled in bed.'},
   'ci.aria': {sc:'每日签到演示', tc:'每日簽到示範', en:'Daily check-in demo'},
   'ci.day': {sc:'今天 · 开局前', tc:'今天 · 開局前', en:'Today · Pre-game'},
   'ci.sec': {sc:'{n} 秒', tc:'{n} 秒', en:'{n} s'},
@@ -1638,7 +1649,7 @@ const I18N = {
   'mk.pts': {sc:'得分', tc:'得分', en:'Pts'},
   'mk.you': {sc:'你', tc:'你', en:'YOU'},
   'mk.player': {sc:'玩家', tc:'玩家', en:'Player'},
-  'mk.ps': {sc:'ACS', tc:'ACS', en:'ACS'},
+  'mk.ps': {sc:'战斗表现评分', tc:'戰鬥表現評分', en:'Performance Score'},
   'mk.fk': {sc:'首杀', tc:'首殺', en:'FK'},
   'mk.me': {sc:'你 · 捷风', tc:'你 · Jett', en:'You · Jett'},
   'f.kad': {sc:'K / A / D', tc:'K / A / D', en:'K / A / D'},
@@ -1653,7 +1664,7 @@ const I18N = {
   'f.mode': {sc:'模式', tc:'模式', en:'Mode'},
   'f.agent': {sc:'特工', tc:'特工', en:'Agent'},
   'f.kda': {sc:'K / D / A', tc:'K / D / A', en:'K / D / A'},
-  'f.ps': {sc:'ACS', tc:'ACS', en:'ACS'},
+  'f.ps': {sc:'战斗表现评分', tc:'戰鬥表現評分', en:'Performance Score'},
   'f.fk': {sc:'首杀', tc:'首殺', en:'First kills'},
   'fv.res': {sc:'胜利', tc:'勝利', en:'Victory'},
   'fv.resMock': {sc:'胜利', tc:'勝利', en:'VICTORY'},
@@ -1673,7 +1684,7 @@ const I18N = {
   'ins.tab.caf': {sc:'咖啡因', tc:'咖啡因', en:'Caffeine'},
   'ins.collect': {sc:'<span class="muted">收集中。</span>{n} 天，还不够下结论。', tc:'<span class="muted">收集中。</span>{n} 天，還不夠下結論。', en:'<span class="muted">Collecting.</span> {n} days is too early to tell.'},
   'ins.same': {sc:'{n} 天里，{thing}<em>看不出差别</em>。这也是答案。', tc:'{n} 天裡，{thing}<em>看不出分別</em>。這也是答案。', en:'{n} days in, {thing} <em>makes no difference</em>. That’s an answer too.'},
-  'ins.diff': {sc:'{thing}的日子，ACS 平均{dir} <em>{d}</em>{early}。', tc:'{thing}的日子，ACS 平均{dir} <em>{d}</em>{early}。', en:'{Thing}, your ACS is <em>{d} {dir}</em>{early}.'},
+  'ins.diff': {sc:'{thing}的日子，战斗表现评分 平均{dir} <em>{d}</em>{early}。', tc:'{thing}的日子，戰鬥表現評分 平均{dir} <em>{d}</em>{early}。', en:'{Thing}, your Performance Score is <em>{d} {dir}</em>{early}.'},
   'ins.lower': {sc:'低', tc:'低', en:'lower'},
   'ins.higher': {sc:'高', tc:'高', en:'higher'},
   'ins.early': {sc:'<span class="muted">（初步）</span>', tc:'<span class="muted">（初步）</span>', en:'<span class="muted"> (early)</span>'},
@@ -1686,22 +1697,22 @@ const I18N = {
   'F.dur': {sc:{thing:'睡不到 6 小时',A:'睡不到 6 小时',B:'睡了 6 小时以上'}, tc:{thing:'睡不足 6 小時',A:'睡不足 6 小時',B:'睡夠 6 小時'}, en:{thing:'sleeping under 6 h',Thing:'After under 6 h of sleep',A:'Under 6 h',B:'6 h or more'}},
   'F.bed': {sc:{thing:'2 点后睡',A:'2 点后才睡',B:'2 点前睡'}, tc:{thing:'2 點後才睡',A:'2 點後才睡',B:'2 點前睡'}, en:{thing:'a 2 am+ bedtime',Thing:'After a 2 am+ bedtime',A:'After 2 am',B:'Before 2 am'}},
   'F.caf': {sc:{thing:'喝咖啡因饮料',A:'喝了',B:'没喝'}, tc:{thing:'喝咖啡因飲品',A:'有喝',B:'沒喝'}, en:{thing:'caffeine',Thing:'With caffeine',A:'Had some',B:'None'}},
-  'ins.note': {sc:'指标：当天的平均 ACS（CS2 用 ADR）。只看你自己的规律，不当科学结论。', tc:'指標：當天的平均 ACS（CS2 用 ADR）。只看你自己的規律，不當科學結論。', en:'Metric: average ACS for the day (ADR for CS2). Your own patterns only, not science.'},
+  'ins.note': {sc:'指标：当天的平均 战斗表现评分（CS2 用 ADR）。只看你自己的规律，不当科学结论。', tc:'指標：當天的平均 戰鬥表現評分（CS2 用 ADR）。只看你自己的規律，不當科學結論。', en:'Metric: average Performance Score for the day (ADR for CS2). Your own patterns only, not science.'},
   'ins.trust': {sc:'结论可信吗？', tc:'結論可信嗎？', en:'Can you trust it?'},
   'ins.days': {sc:'天数据', tc:'天數據', en:'days of data'},
   'ins.drag': {sc:'拖动试试', tc:'拖動試試', en:'Drag to try'},
   'ins.range': {sc:'模拟记录天数', tc:'模擬記錄天數', en:'Simulated days logged'},
   'tier.1h': {sc:'收集中', tc:'收集中', en:'Collecting'},
   'tier.1p': {sc:'只记录', tc:'只作記錄', en:'Logging only'},
-  'tier.1r': {sc:'1–7 天', tc:'1–7 天', en:'Days 1–7'},
-  'tier.2h': {sc:'初步信号', tc:'初步訊號', en:'Early signal'},
+  'tier.1r': {sc:'1–14 天', tc:'1–14 天', en:'Days 1–14'},
+  'tier.2h': {sc:'累积记录', tc:'累積紀錄', en:'Building records'},
   'tier.2p': {sc:'继续观察', tc:'繼續觀察', en:'Keep watching'},
-  'tier.2r': {sc:'8–14 天', tc:'8–14 天', en:'Days 8–14'},
-  'tier.3h': {sc:'较有把握', tc:'較有把握', en:'Fairly sure'},
-  'tier.3p': {sc:'可以调整', tc:'可以調整', en:'Time to adjust'},
-  'tier.3r': {sc:'15 天+', tc:'15 天+', en:'Day 15+'},
-  'ins.trend': {sc:'每日 ACS · 21 天', tc:'每日 ACS · 21 天', en:'Daily ACS · 21 days'},
-  'ins.chart': {sc:'21 天每日 ACS 示例折线图', tc:'21 天每日 ACS 示例折線圖', en:'Sample line chart: daily ACS over 21 days'},
+  'tier.2r': {sc:'15–29 天', tc:'15–29 天', en:'Days 15–29'},
+  'tier.3h': {sc:'持续观察', tc:'持續觀察', en:'Keep observing'},
+  'tier.3p': {sc:'天数不等于可信度', tc:'天數不等於可信度', en:'Days alone do not prove reliability'},
+  'tier.3r': {sc:'30 天+', tc:'30 天+', en:'Day 30+'},
+  'ins.trend': {sc:'每日 战斗表现评分 · 21 天', tc:'每日 戰鬥表現評分 · 21 天', en:'Daily Performance Score · 21 days'},
+  'ins.chart': {sc:'21 天每日 战斗表现评分 示例折线图', tc:'21 天每日 戰鬥表現評分 示例折線圖', en:'Sample line chart: daily Performance Score over 21 days'},
   'ins.dayN': {sc:'第{d}天', tc:'第{d}天', en:'Day {d}'},
   'ins.base': {sc:'基线 {m}', tc:'基線 {m}', en:'Baseline {m}'},
   'ins.lgA': {sc:'醒后刷手机 &gt;30 分钟', tc:'醒後滑手機 &gt;30 分鐘', en:'30+ min phone after waking'},
@@ -1783,7 +1794,7 @@ const I18N = {
   /* ---- download ---- */
   'dl.h2': {sc:'下载', tc:'下載', en:'Download'},
   'dl.btn': {sc:'下载 Windows 版', tc:'下載 Windows 版', en:'Download for Windows'},
-  'dl.meta': {sc:'v0.1.2 · Windows 10/11 · 2.0 MB', tc:'v0.1.2 · Windows 10/11 · 2.0 MB', en:'v0.1.2 · Windows 10/11 · 2.0 MB'},
+  'dl.meta': {sc:'v0.1.6 · Windows 10/11 · 22.7 MB', tc:'v0.1.6 · Windows 10/11 · 22.7 MB', en:'v0.1.6 · Windows 10/11 · 22.7 MB'},
   'dl.mobile': {sc:'iPad / 安卓：打开网页版', tc:'iPad / Android：開啟網頁版', en:'iPad / Android: open the web app'},
   'dl.ss': {sc:'被 Windows 拦了？点「更多信息」→「仍要运行」', tc:'被 Windows 攔截？按「其他資訊」→「仍要執行」', en:'Blocked by Windows? Click “More info” → “Run anyway”'},
   'join.okSmall': {sc:'演示，未发送任何内容。', tc:'示範，未有傳送任何內容。', en:'Demo. Nothing was sent.'},
@@ -1836,7 +1847,7 @@ const I18N = {
   'adv.n': {sc:'来自最近 14 天、{n} 局排位', tc:'來自最近 14 天、{n} 局排位', en:'From your last 14 days, {n} ranked games'},
   'adv.games': {sc:'{n} 局', tc:'{n} 局', en:'{n} games'},
   'adv.m.win': {sc:'胜率', tc:'勝率', en:'Win rate'},
-  'adv.m.acs': {sc:'平均 ACS', tc:'平均 ACS', en:'Avg ACS'},
+  'adv.m.acs': {sc:'平均 战斗表现评分', tc:'平均 戰鬥表現評分', en:'Avg Performance Score'},
   'adv.left': {sc:'还差 {n} 次', tc:'還差 {n} 次', en:'{n} to go'},
   'adv.left.one': {en:'1 to go'},
   'adv.tLeft': {sc:'还剩 {n} 件', tc:'還剩 {n} 件', en:'{n} left for today'},
@@ -1854,7 +1865,7 @@ const I18N = {
   'adv.night.last': {sc:'醒来 15 分钟内放下手机', tc:'醒來 15 分鐘內放低手機', en:'Phone down within 15 min of waking'},
   'adv.night.today': {sc:'今晚 1:30 前上床', tc:'今晚 1:30 前上床', en:'In bed by 1:30 tonight'},
   'adv.night.todayT': {sc:'今晚', tc:'今晚', en:'Tonight'},
-  'adv.meals.habit': {sc:'空着肚子开打的日子，平均 ACS <em>{a}</em>。吃过一顿正经饭的是 <em>{b}</em>。', tc:'空肚開打的日子，平均 ACS <em>{a}</em>。有好好吃一餐的是 <em>{b}</em>。', en:'On days you played on an empty stomach, your average ACS was <em>{a}</em>. After a proper meal: <em>{b}</em>.'},
+  'adv.meals.habit': {sc:'空着肚子开打的日子，平均 战斗表现评分 <em>{a}</em>。吃过一顿正经饭的是 <em>{b}</em>。', tc:'空肚開打的日子，平均 戰鬥表現評分 <em>{a}</em>。有好好吃一餐的是 <em>{b}</em>。', en:'On days you played on an empty stomach, your average Performance Score was <em>{a}</em>. After a proper meal: <em>{b}</em>.'},
   'adv.meals.A': {sc:'空腹开打', tc:'空肚開打', en:'Empty stomach'},
   'adv.meals.B': {sc:'吃过饭', tc:'吃過飯', en:'Had a meal'},
   'adv.meals.goal': {sc:'这周 3 次，开打前 1 小时吃顿正经饭', tc:'這星期 3 次，開打前 1 小時吃一餐正經飯', en:'Eat a real meal an hour before playing, 3 times this week'},
@@ -2025,6 +2036,8 @@ function measure(){
   sections.forEach(s=>{ s.top=s.el.getBoundingClientRect().top+scrollY; s.h=s.el.offsetHeight; });
   docH=document.documentElement.scrollHeight;
   buildStops();
+  renderDirty=true;
+  requestFrame();
 }
 /* ---------------- wheel paging: scroll "stops" ---------------- */
 // hero: start + the moment the "next" line is fully in
@@ -2191,11 +2204,11 @@ const feedAt=k=>{ // k = swipes done (0…FEED_SWIPES)
 let feedK=0, feedT=0, storyVis=false;
 function feedTick(){
   feedT=0;
-  if(!storyVis||RM||feedK>=FEED_SWIPES) return;
+  if(document.hidden||!storyVis||RM||feedK>=FEED_SWIPES) return;
   feedAt(++feedK);
   feedT=setTimeout(feedTick,1500);
 }
-function feedRun(){ clearTimeout(feedT); feedT=0; if(RM){ feedK=FEED_SWIPES; feedAt(feedK); return; } if(storyVis) feedT=setTimeout(feedTick,feedK?1500:1200); }
+function feedRun(){ clearTimeout(feedT); feedT=0; if(RM){ feedK=FEED_SWIPES; feedAt(feedK); return; } if(storyVis&&!document.hidden) feedT=setTimeout(feedTick,feedK?1500:1200); }
 new IntersectionObserver(es=>es.forEach(e=>{
   storyVis=e.isIntersecting;
   if(storyVis) story.classList.add('in');
@@ -2206,7 +2219,12 @@ mq.addEventListener&&mq.addEventListener('change',()=>setTimeout(feedRun));  // 
 // manifesto line: plain text, fades in via [data-r] (translated by applyI18n)
 
 /* ---------------- main loop ---------------- */
-let navCur='';
+let navCur='', framePending=false, lastDraw=0, lastSceneY=NaN, renderDirty=true;
+function requestFrame(){
+  if(!document.hidden&&!framePending){ framePending=true; requestAnimationFrame(frame); }
+}
+addEventListener('scroll',requestFrame,{passive:true});
+document.addEventListener('visibilitychange',()=>{ feedRun(); if(!document.hidden){ renderDirty=true; requestFrame(); } });
 const nav=$('#nav'), navLinks=$$('.nav-links a'), sheetLinks=$$('.sheet a'), navInd=$('.nav-ind'), navProg=$('.nav-progress i'), navCurN=$('.nav-current .n'), navCurT=$('.nav-current .t');
 function setNav(id){
   if(id===navCur) return; navCur=id;
@@ -2217,8 +2235,11 @@ function setNav(id){
   else navInd.style.opacity=0;
 }
 function frame(now){
+  framePending=false;
+  if(document.hidden) return;
   ty=scrollY;
   sy=RM?ty:lerp(sy,ty,.26); if(Math.abs(ty-sy)<.3) sy=ty;
+  if(renderDirty||sy!==lastSceneY){
   for(const s of scenes){
     if(sy+vh<s.top-vh*.2 || sy>s.top+s.h+vh*.2) continue;
     const p=clamp((sy-s.top)/Math.max(1,s.h-vh));
@@ -2235,11 +2256,12 @@ function frame(now){
   const lbl=act.label?t('nav.'+act.label):'';
   if(navCurT.textContent!==lbl){ navCurT.textContent=lbl; navCurN.textContent=act.n||''; }
   navProg.style.transform=`scaleX(${ty/Math.max(1,docH-vh)})`;
-  // hero canvas
-  heroVisible=ty<heroEl.offsetHeight;
-  if(heroVisible) drawHero(now);
-  // parallax
-  requestAnimationFrame(frame);
+  lastSceneY=sy; renderDirty=false;
+  }
+  // Draw the visible canvas at most 30 times per second.
+  heroVisible=ty<scenes[0].h;
+  if(heroVisible&&(RM||now-lastDraw>=1000/30)){ drawHero(now); lastDraw=now; }
+  if((heroVisible&&!RM)||sy!==ty) requestFrame();
 }
 
 /* ---------------- reveal ---------------- */
@@ -2247,18 +2269,7 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.ta
 $$('[data-r], .rv').forEach(el=>io.observe(el));
 
 /* ---------------- cursor + magnetic ---------------- */
-if(fine && !RM){
-  root.classList.add('has-cursor');
-  const cur=$('.cursor'); let cx=-100,cy=-100,px=-100,py=-100;
-  addEventListener('pointermove',e=>{ if(e.pointerType!=='mouse'||(e.clientX===0&&e.clientY===0)) return; cx=e.clientX; cy=e.clientY; if(!root.classList.contains('cur-on')){ root.classList.add('cur-on'); px=cx; py=cy; } const t=e.target.closest('a,button,label,[role=button],input[type=range],.ac,.opt,.face'); cur.classList.toggle('hover',!!t); },{passive:true});
-  addEventListener('pointerdown',()=>cur.classList.add('down')); addEventListener('pointerup',()=>cur.classList.remove('down'));
-  document.documentElement.addEventListener('mouseleave',()=>root.classList.remove('cur-on'));
-  (function loop(){ px=lerp(px,cx,.28); py=lerp(py,cy,.28); cur.style.transform=`translate3d(${Math.round(px)}px,${Math.round(py)}px,0)`; requestAnimationFrame(loop); })();
-  $$('.magnetic').forEach(b=>{
-    b.addEventListener('pointermove',e=>{ const r=b.getBoundingClientRect(); const x=e.clientX-r.left-r.width/2, y=e.clientY-r.top-r.height/2; b.style.transform=`translate(${x*.18}px,${y*.3}px)`; });
-    b.addEventListener('pointerleave',()=>{ b.style.transform=''; });
-  });
-}
+// Use the native cursor; no perpetual cursor animation.
 addEventListener('pointermove',e=>{ tmx=e.clientX/vw*2-1; tmy=e.clientY/vh*2-1; },{passive:true});
 
 /* ---------------- mobile menu ---------------- */
@@ -2313,17 +2324,8 @@ function canScrollInside(el,dir){
   }
   return false;
 }
-addEventListener('wheel',e=>{
-  if(RM||e.ctrlKey||document.body.classList.contains('menu-open')) return;
-  let dy=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?vh:1);
-  if(Math.abs(dy)<Math.abs(e.deltaX)||dy===0) return;            // horizontal gesture: leave native
-  const dir=dy>0?1:-1;
-  if(canScrollInside(e.target,dir)) return;
-  e.preventDefault();
-  if(anim) return;                                                  // ignore while gliding
-  if(settling){ clearTimeout(quietT); quietT=setTimeout(()=>{ settling=false; },150); return; }  // trackpad inertia tail
-  page(dir);
-},{passive:false});
+// Native wheel scrolling preserves trackpad momentum and pinch gestures.
+addEventListener('wheel',()=>stopAnim(),{passive:true});
 addEventListener('keydown',e=>{
   if(RM||e.defaultPrevented||e.altKey||e.ctrlKey||e.metaKey) return;
   const k=e.key; let dir=0;
@@ -2457,7 +2459,7 @@ langHooks.push(updProg);
 const GAMES={
   val:{file:'match_result.png',fields:[
     {k:'res',tv:'fv.res',c:99},{k:'score',v:'13 : 9',c:99},{k:'map',tv:'fv.map',c:98},{k:'mode',tv:'fv.mode',c:97},
-    {k:'agent',tv:'fv.agent',c:96},{k:'kda',v:'21 / 14 / 6',c:98},{k:'ps',v:'312',c:95},{k:'fk',v:'4',c:91}]},
+    {k:'agent',tv:'fv.agent',c:96},{k:'kda',v:'21 / 14 / 6',c:98},{k:'ps',v:'386',c:95},{k:'fk',v:'4',c:91}]},
   cs2:{file:'cs2_scoreboard.png',fields:[
     {k:'res',tv:'fv.res',c:99},{k:'score',v:'13 : 10',c:99},{k:'map',tv:'fv.mapCS',c:98},{k:'kad',v:'24 / 5 / 15',c:98},
     {k:'hs',v:'54%',c:94},{k:'adr',v:'2,310 → 100',c:93},{k:'mvp',v:'4',c:96},{k:'pts',v:'58',c:95}]},
@@ -2470,11 +2472,11 @@ const mockVal=()=>`<div class="mock" role="img" aria-label="${esc(t('scan.mockAr
   <div class="mk-top"><div>${tag('fv.resMock',null,'div','class="mk-res" data-f="res"')}<div class="mk-sub">${tag('fv.mode',null,'span','data-f="mode"')} · ${tag('fv.map',null,'span','data-f="map"')}</div></div><div class="mk-score" data-f="score"><b>13</b> : 9</div></div>
   <div class="mk-table">
     <div class="mk-head"><span></span>${tag('mk.player')}<span>K / D / A</span>${tag('mk.ps')}${tag('mk.fk')}</div>
-    <div class="mk-row"><span class="av"></span><span class="nm"></span><span class="v">17 / 12 / 9</span><span class="v">268</span><span class="v">2</span></div>
-    <div class="mk-row me"><span class="av me-av"></span>${tag('mk.me',null,'span','class="nm" data-f="agent"')}<span class="v" data-f="kda">21 / 14 / 6</span><span class="v" data-f="ps">312</span><span class="v" data-f="fk">4</span></div>
-    <div class="mk-row"><span class="av"></span><span class="nm" style="width:55%"></span><span class="v">14 / 13 / 11</span><span class="v">241</span><span class="v">1</span></div>
-    <div class="mk-row"><span class="av"></span><span class="nm" style="width:62%"></span><span class="v">12 / 15 / 4</span><span class="v">199</span><span class="v">2</span></div>
-    <div class="mk-row"><span class="av"></span><span class="nm" style="width:48%"></span><span class="v">9 / 14 / 13</span><span class="v">176</span><span class="v">0</span></div>
+    <div class="mk-row"><span class="av"></span><span class="nm"></span><span class="v">17 / 12 / 9</span><span class="v">321</span><span class="v">2</span></div>
+    <div class="mk-row me"><span class="av me-av"></span>${tag('mk.me',null,'span','class="nm" data-f="agent"')}<span class="v" data-f="kda">21 / 14 / 6</span><span class="v" data-f="ps">386</span><span class="v" data-f="fk">4</span></div>
+    <div class="mk-row"><span class="av"></span><span class="nm" style="width:55%"></span><span class="v">14 / 13 / 11</span><span class="v">298</span><span class="v">1</span></div>
+    <div class="mk-row"><span class="av"></span><span class="nm" style="width:62%"></span><span class="v">12 / 15 / 4</span><span class="v">245</span><span class="v">2</span></div>
+    <div class="mk-row"><span class="av"></span><span class="nm" style="width:48%"></span><span class="v">9 / 14 / 13</span><span class="v">212</span><span class="v">0</span></div>
   </div></div>`;
 // CS2: original drawing of a generic scoreboard (no official art)
 const mockCs2=()=>`<div class="mock mock-cs" role="img" aria-label="${esc(t('scan.mockAria'))}" data-i18n-attr="aria-label:scan.mockAria">
@@ -2537,7 +2539,7 @@ $$('.gtoggle:not(.lu-game) button').forEach(b=>b.addEventListener('click',()=>se
 
 /* ================= INSIGHTS ================= */
 // 21 days demo: [phone(0 none,1 <=30,2 >30), dur(0 <6h,1 6-8,2 8+), bed(0 <12,1 12-2,2 >2), caf(0 none,1+), ps]
-const D=[[2,0,2,1,228],[0,1,1,1,281],[1,1,0,1,270],[2,1,1,0,241],[0,2,0,0,289],[2,0,2,0,219],[1,1,1,1,266],[0,1,1,1,279],[2,1,2,0,247],[0,1,0,0,272],[1,0,1,1,251],[2,1,1,1,238],[0,2,0,1,284],[1,0,1,0,263],[2,0,2,0,232],[0,1,0,1,276],[1,1,1,0,269],[2,1,1,1,245],[0,2,1,0,281],[1,0,0,1,268],[0,1,1,0,274]];
+const D=[[2,0,2,1,314],[0,1,1,1,382],[1,1,0,1,351],[2,1,1,0,290],[0,2,0,0,403],[2,0,2,0,269],[1,1,1,1,365],[0,1,1,1,378],[2,1,2,0,306],[0,1,0,0,372],[1,0,1,1,342],[2,1,1,1,281],[0,2,0,1,395],[1,0,1,0,352],[2,0,2,0,285],[0,1,0,1,380],[1,1,1,0,368],[2,1,1,1,309],[0,2,1,0,397],[1,0,0,1,357],[0,1,1,0,375]];
 // wording per factor: I18N['F.<k>'] → {thing, Thing?, A (bad days), B (other days)}
 const F={
   phone:{i:0,bad:v=>v===2},
@@ -2551,14 +2553,14 @@ const avg=a=>a.reduce((s,x)=>s+x,0)/(a.length||1);
 function renderIns(){
   const f=F[fk], w=raw('F.'+fk), sl=D.slice(0,days);
   const A=sl.filter(d=>f.bad(d[f.i])).map(d=>d[4]), B=sl.filter(d=>!f.bad(d[f.i])).map(d=>d[4]);
-  const enough=days>=8 && A.length>=3 && B.length>=3;
+  const enough=days>=30 && A.length>=15 && B.length>=15;
   const mA=avg(A), mB=avg(B), diff=Math.round(mB-mA);
-  const tierIdx=days<8?0:days<15?1:2;
+  const tierIdx=days<15?0:days<30?1:2;
   tiers.forEach((t,i)=>t.classList.toggle('on',i===tierIdx));
   if(!enough) stmt.innerHTML=t('ins.collect',{n:days});
   else if(Math.abs(diff)<8) stmt.innerHTML=t('ins.same',{n:days,thing:w.thing});
   else stmt.innerHTML=t('ins.diff',{thing:w.thing,Thing:w.Thing||w.thing,dir:'@ins.'+(diff>0?'lower':'higher'),d:Math.abs(diff),early:tierIdx===1?'@ins.early':''});
-  const max=320, min=150;
+  const max=500, min=0;
   const row=(cls,label,arr,m)=>`<div class="bar-row ${enough?cls:'na'}"><div class="bl"><span>${esc(label)}<small>${t('ins.nd',{n:arr.length})}</small></span><b class="num">${enough?Math.round(m):'—'}</b></div><div class="bar"><i style="transform:scaleX(${enough?((m-min)/(max-min)).toFixed(3):(.12+arr.length/21*.3).toFixed(3)})"></i></div></div>`;
   const html=row('good',w.B,B,mB)+row('bad',w.A,A,mA);
   if(!barsEl.children.length) barsEl.innerHTML=html.replace(/scaleX\([^)]+\)/g,'scaleX(0)');
@@ -2569,11 +2571,11 @@ function renderIns(){
 }
 // chart
 const svg=$('#chart'); const small=innerWidth<600; const W=small?420:1000,H=small?320:300,PL=small?36:44,PR=small?8:20,PT=20,PB=40; svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
-const yMin=190,yMax=310;
+const yMin=0,yMax=500;
 const X=i=>PL+(W-PL-PR)*i/20, Y=v=>PT+(H-PT-PB)*(1-(v-yMin)/(yMax-yMin));
 (function buildChart(){
   let g='<defs><linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".14"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><clipPath id="clipR"><rect id="clipRect" x="0" y="0" width="0" height="400"/></clipPath></defs>';
-  [200,250,300].forEach(v=>{ g+=`<line class="gl" x1="${PL}" x2="${W-PR}" y1="${Y(v)}" y2="${Y(v)}"/><text class="ax" x="${PL-10}" y="${Y(v)+4}" text-anchor="end">${v}</text>`; });
+  [0,250,500].forEach(v=>{ g+=`<line class="gl" x1="${PL}" x2="${W-PR}" y1="${Y(v)}" y2="${Y(v)}"/><text class="ax" x="${PL-10}" y="${Y(v)+4}" text-anchor="end">${v}</text>`; });
   (small?[1,7,14,21]:[1,5,10,15,21]).forEach(d=>{ g+=`<text class="ax" x="${X(d-1)}" y="${H-12}" text-anchor="middle" data-i18n="ins.dayN" data-i18n-args='{"d":${d}}'>${t('ins.dayN',{d})}</text>`; });
   const pts=D.map((d,i)=>[X(i),Y(d[4])]);
   // monotone cubic (no overshoot)
@@ -2633,7 +2635,7 @@ function renderAdv(){
   updAdvCount();
   advEl.last.textContent=raw(k+'last');
   advEl.lastDays.textContent=t('adv.lastDays',{d:P.last.days,of:P.last.of});
-  advEl.lastDelta.textContent=(P.last.metric==='win'?t('adv.m.win'):'ACS')+' +'+P.last.delta+(P.last.metric==='win'?'%':'');
+  advEl.lastDelta.textContent=(P.last.metric==='win'?t('adv.m.win'):t('f.ps'))+' +'+P.last.delta+(P.last.metric==='win'?'%':'');
   advEl.lastV.textContent=t('adv.lastV');
   renderTasks();
 }
@@ -2861,18 +2863,20 @@ langHooks.push(()=>{ measure(); const a=$('.nav-links a.active'); if(a){ navInd.
 })();
 
 /* ================= boot ================= */
-function onResize(){ sizeCanvas(); measure(); const a=$('.nav-links a.active'); if(a){ navInd.style.width=a.offsetWidth+'px'; navInd.style.transform=`translateX(${a.offsetLeft}px)`; } }
+function onResize(){ sizeCanvas(); measure(); renderDirty=true; requestFrame(); const a=$('.nav-links a.active'); if(a){ navInd.style.width=a.offsetWidth+'px'; navInd.style.transform=`translateX(${a.offsetLeft}px)`; } }
 addEventListener('resize',onResize);
 addEventListener('load',measure);
 if(document.fonts) document.fonts.ready.then(measure);
 new ResizeObserver(()=>measure()).observe(document.body);
-mq.addEventListener&&mq.addEventListener('change',e=>{ RM=e.matches; root.classList.toggle('rm',RM); measure(); });
+mq.addEventListener&&mq.addEventListener('change',e=>{ RM=e.matches; root.classList.toggle('rm',RM); measure(); renderDirty=true; requestFrame(); });
 setLang(LANG,false);
 onResize();
 requestAnimationFrame(()=>{ document.body.classList.add('loaded'); });
-requestAnimationFrame(frame);
+requestFrame();
 })();
 
 </script>
+<script src="js/urban-site.js?v=0.1.6-type4"></script>
+<script src="release.js?v=0.1.6-type4"></script><script src="content.js?v=0.1.6-type4"></script>
 </body>
 </html>

@@ -2,8 +2,8 @@
    Loaded after the shared js/i18n.js and before core.js. sc = 简体 · tc = 繁體 (HK) · en. */
 Object.assign(I18N,{
   /* overrides: desktop wording that doesn't fit a phone / tablet */
-  'm.ocrP': {sc:'截图只在这台设备上存一张小图，数字先手动填。', tc:'截圖只會在這部裝置存一張小圖，數字先手動填。', en:'Only a small copy of the screenshot is kept on this device. Type the numbers in for now.'},
-  's.dataP': {sc:'数据只存在这台设备的浏览器里。没有账号，不联网。', tc:'數據只存在這部裝置的瀏覽器。沒有帳號，不連網。', en:'Everything stays in this browser on this device. No account, no network.'},
+  'm.ocrP': {sc:'截图保留压缩小图；登录后随记录同步。数值请核对后填写。', tc:'截圖保留壓縮小圖；登入後隨記錄同步。數值請核對後填寫。', en:'A small screenshot copy is kept and synced when signed in. Review numbers before saving.'},
+  's.dataP': {sc:'未登录时保存在本机；登录后可同步到云端。请保存账号恢复码，并定期导出备份。', tc:'未登入時儲存在本機；登入後可同步到雲端。請保存帳戶復原碼，並定期匯出備份。', en:'Guest data stays on this device. Sign in for cloud sync. Save your recovery code and export regular backups.'},
   's.exported': {sc:'已导出 {p}', tc:'已匯出 {p}', en:'Exported {p}'},
 
   /* bottom tab bar (short labels) */
@@ -40,3 +40,5 @@ Object.assign(I18N,{
   'web.shotRemote': {sc:'这张截图在电脑上，这台设备没有。', tc:'這張截圖在電腦上，這部裝置沒有。', en:'That screenshot is on your PC, not this device.'},
   'web.shotGone': {sc:'找不到这张截图了。', tc:'找不到這張截圖。', en:'Screenshot not found.'},
 });
+
+Object.assign(I18N,{'website.back':{sc:'← 返回官网',tc:'← 返回官網',en:'← Back to website'}});

@@ -1,7 +1,7 @@
 {
   "name": "LucidRank",
   "short_name": "LucidRank",
-  "description": "Check-in, match log, insights and weekly goal for VALORANT / CS2 players. Data stays on your device.",
+  "description": "Check-ins, match logs, practice and personal lineups. Optional account with cloud sync.",
   "id": "./",
   "start_url": "./",
   "scope": "./",

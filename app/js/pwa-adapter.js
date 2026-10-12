@@ -9,9 +9,10 @@
    Must load before core.js. */
 (function(){
 'use strict';
-const VERSION='0.1.2';
+const VERSION='0.1.6';
 const DB_NAME='lucidrank', DATA_KEY='data', SHOT_PREFIX='lrshot:';
 const LS_DATA='lr-web-data', LS_SHOT='lr-web-shot-';
+let accountId=localStorage.getItem('lr-account-id')||'';const dataKey=()=>accountId?'data:'+accountId:'data';const shotKey=id=>(accountId?accountId+':':'')+id;const lsKey=k=>k==='data'?LS_DATA:LS_DATA+':'+k;
 
 /* ---------------- tiny IndexedDB key-value wrapper (with localStorage fallback) ---------------- */
 let dbP=null;
@@ -36,22 +37,23 @@ function tx(store,mode,fn){
   });
 }
 const kv={
-  get:k=>tx('kv','readonly',s=>s?s.get(k):(()=>{ throw 0; })()).catch(()=>{ try{ return JSON.parse(localStorage.getItem(LS_DATA)||'null'); }catch(e){ return null; } }),
-  set:(k,v)=>tx('kv','readwrite',s=>{ if(!s) throw 0; return s.put(v,k); }).catch(()=>localStorage.setItem(LS_DATA,JSON.stringify(v))),
-  del:k=>tx('kv','readwrite',s=>{ if(!s) throw 0; return s.delete(k); }).catch(()=>localStorage.removeItem(LS_DATA)),
+  get:k=>tx('kv','readonly',s=>s?s.get(k):(()=>{ throw 0; })()).catch(()=>{ try{ return JSON.parse(localStorage.getItem(lsKey(k))||'null'); }catch(e){ return null; } }),
+  set:(k,v)=>tx('kv','readwrite',s=>{ if(!s) throw 0; return s.put(v,k); }).catch(()=>localStorage.setItem(lsKey(k),JSON.stringify(v))),
+  del:k=>tx('kv','readwrite',s=>{ if(!s) throw 0; return s.delete(k); }).catch(()=>localStorage.removeItem(lsKey(k))),
 };
 const shots={
-  get:id=>tx('shots','readonly',s=>{ if(!s) throw 0; return s.get(id); }).catch(()=>localStorage.getItem(LS_SHOT+id)),
-  put:(id,v)=>tx('shots','readwrite',s=>{ if(!s) throw 0; return s.put(v,id); }).catch(()=>localStorage.setItem(LS_SHOT+id,v)),
-  del:id=>tx('shots','readwrite',s=>{ if(!s) throw 0; return s.delete(id); }).catch(()=>localStorage.removeItem(LS_SHOT+id)),
+  get:id=>tx('shots','readonly',s=>{ if(!s) throw 0; return s.get(shotKey(id)); }).catch(()=>localStorage.getItem(LS_SHOT+shotKey(id))),
+  put:(id,v)=>tx('shots','readwrite',s=>{ if(!s) throw 0; return s.put(v,shotKey(id)); }).catch(()=>localStorage.setItem(LS_SHOT+shotKey(id),v)),
+  del:id=>tx('shots','readwrite',s=>{ if(!s) throw 0; return s.delete(shotKey(id)); }).catch(()=>localStorage.removeItem(LS_SHOT+shotKey(id))),
   keys:()=>tx('shots','readonly',s=>{ if(!s) throw 0; return s.getAllKeys(); }).catch(()=>Object.keys(localStorage).filter(k=>k.startsWith(LS_SHOT)).map(k=>k.slice(LS_SHOT.length))),
-  clear:()=>tx('shots','readwrite',s=>{ if(!s) throw 0; return s.clear(); }).catch(()=>Object.keys(localStorage).filter(k=>k.startsWith(LS_SHOT)).forEach(k=>localStorage.removeItem(k))),
+  clear:async()=>{for(const id of await shots.keys())await shots.del(id);},
 };
 
 /* ---------------- screenshots ---------------- */
 // A match stores shot = "lrshot:<id>/<original file name>", so the shared UI still shows a file name
 // (it takes the part after the last slash) and we can find the thumbnail by id.
 const shotId=ref=>typeof ref==='string'&&ref.startsWith(SHOT_PREFIX)?ref.slice(SHOT_PREFIX.length).split('/')[0]:null;
+const allShotKeys=shots.keys;shots.keys=async()=>{const prefix=accountId?accountId+':':'';return (await allShotKeys()).filter(k=>prefix?k.startsWith(prefix):!k.includes(':')).map(k=>prefix?k.slice(prefix.length):k);};
 const pending=new Set(); // picked but not saved yet: never garbage-collect these
 const MAX_SIDE=640, QUALITY=.72;
 function loadImage(file){
@@ -95,13 +97,13 @@ function gcShots(data){
 /* ---------------- events (other tabs via BroadcastChannel) ---------------- */
 const listeners={};
 const bc='BroadcastChannel' in window?new BroadcastChannel('lucidrank'):null;
-if(bc) bc.onmessage=e=>emit(e.data.ev,e.data.payload);
+if(bc) bc.onmessage=e=>{if(e.data.accountId===accountId)emit(e.data.ev,e.data.payload);};
 function emit(ev,payload){ (listeners[ev]||[]).slice().forEach(fn=>{ try{ fn({event:ev,payload}); }catch(e){ console.error(e); } }); }
 
 /* ---------------- export / import ---------------- */
 const isIOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 async function exportPayload(){
-  const data=(await kv.get(DATA_KEY))||{};
+  const data=(await kv.get(dataKey()))||{};
   const out=JSON.parse(JSON.stringify(data)); delete out.webShots;
   const ws={};
   for(const m of out.matches||[]){ const id=shotId(m.shot); if(id){ const v=await shots.get(id); if(v) ws[id]=v; } }
@@ -123,12 +125,12 @@ async function exportData(){
 
 /* ---------------- the command table (same names as src-tauri/src/lib.rs) ---------------- */
 const cmds={
-  load_data:async()=>(await kv.get(DATA_KEY))||{},
-  save_data:async({data})=>{ const clean=JSON.parse(JSON.stringify(data)); await kv.set(DATA_KEY,clean); gcShots(clean);
+  load_data:async()=>{if(window.LRAccount){await LRAccount.ready;await LRAccount.restoring;}return (await kv.get(dataKey()))||{};},
+  save_data:async({data})=>{ const clean=JSON.parse(JSON.stringify(data)); await kv.set(dataKey(),clean); gcShots(clean); if(window.LRAccount)await LRAccount.changed();
     (clean.matches||[]).forEach(m=>{ const id=shotId(m.shot); if(id) pending.delete(id); });
-    if(bc) bc.postMessage({ev:'data-changed',payload:{from:'other'}}); return null; },
+    if(bc) bc.postMessage({accountId,ev:'data-changed',payload:{from:'other'}}); return null; },
   data_location:()=>'IndexedDB · '+location.host,
-  delete_all_data:async()=>{ await kv.del(DATA_KEY); await shots.clear(); pending.clear(); if(bc) bc.postMessage({ev:'data-changed',payload:{from:'delete'}}); return null; },
+  delete_all_data:async()=>{ await kv.del(dataKey()); await shots.clear(); pending.clear();if(window.LRAccount)await LRAccount.changed(); if(bc) bc.postMessage({accountId,ev:'data-changed',payload:{from:'delete'}}); return null; },
   export_data:()=>exportData(),
   pick_screenshot:()=>pickScreenshot(),
   game_status:()=>null,            // no process detection on phones / tablets
@@ -147,5 +149,5 @@ function invoke(cmd,args){
 function listen(ev,fn){ (listeners[ev]=listeners[ev]||[]).push(fn); return Promise.resolve(()=>{ listeners[ev]=(listeners[ev]||[]).filter(x=>x!==fn); }); }
 
 window.__TAURI__={core:{invoke},event:{listen}};
-window.LRWeb={version:VERSION,isIOS,shots,shotId,kv,exportPayload,emit,SHOT_PREFIX};
+window.LRWeb={get accountId(){return accountId;},dataKey,setAccount:id=>{clearTimeout(gcT);accountId=id||'';if(accountId)localStorage.setItem('lr-account-id',accountId);else localStorage.removeItem('lr-account-id');},version:VERSION,isIOS,shots,shotId,kv,exportPayload,emit,SHOT_PREFIX};
 })();
