@@ -1,10 +1,11 @@
 /* LucidRank web: offline app shell. Cache-first for our own files; a new build = new cache name. */
-const CACHE='lucidrank-app-0.1.7-20261012-interactions-3';
+const CACHE='lucidrank-app-0.1.7c-20261013-navfix';
 const PRECACHE=[
  "./",
  "css/app.css",
  "css/pwa.css",
  "css/urban.css",
+ "css/native.css",
  "css/fonts.css",
  "fonts/display.woff2",
  "fonts/title-han.woff2",
@@ -62,8 +63,11 @@ self.addEventListener('fetch',e=>{
   if(url.origin!==location.origin||!url.pathname.startsWith(new URL('./',self.registration.scope).pathname)) return;
   if(url.pathname.endsWith('/reset-password.html')||url.pathname.endsWith('/reset-password')||url.pathname.endsWith('/developer.html')||url.pathname.endsWith('/developer')) return;
   if(req.mode==='navigate'){
-    // the shell is cached under './' (hosts like Cloudflare Pages redirect index.html -> ./)
-    e.respondWith(caches.match('./').then(r=>r?clean(r):fetch(req)));
+    // network-first so deploys aren't stuck behind an old shell; cache as fallback
+    e.respondWith(fetch(req).then(res=>{
+      if(res.ok){ const copy=res.clone(); caches.open(CACHE).then(c=>{ c.put('./', copy.clone()); c.put(req, copy); }); }
+      return clean(res);
+    }).catch(()=>caches.match('./').then(r=>r?clean(r):caches.match(req))));
     return;
   }
   e.respondWith(caches.match(req,{ignoreSearch:true}).then(r=>r||fetch(req).then(res=>{
