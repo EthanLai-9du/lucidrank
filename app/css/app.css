@@ -109,9 +109,12 @@ html.kbd .sw input:focus-visible+i{outline:2px solid rgba(245,245,247,.55);outli
 html.kbd .wc button:focus-visible{outline-offset:-2px;border-radius:0}
 
 /* modal */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:grid;place-items:center;z-index:60;opacity:0;transition:opacity .2s}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:grid;place-items:center;z-index:60;opacity:0;transition:opacity .2s ease}
 .modal.on{opacity:1}
-.modal-card{width:min(420px,90vw);background:var(--ink3);border:1px solid var(--line2);border-radius:var(--r-lg);padding:20px 22px;font-size:14px;line-height:1.6}
+.modal.modal-out{opacity:0}
+.modal-card{width:min(420px,90vw);background:var(--ink3);border:1px solid var(--line2);border-radius:var(--r-lg);padding:20px 22px;font-size:14px;line-height:1.6;opacity:0;transform:translateY(12px) scale(.98);transition:transform .34s cubic-bezier(.22,1.2,.36,1),opacity .22s ease}
+.modal.on .modal-card{opacity:1;transform:none}
+.modal.modal-out .modal-card{opacity:0;transform:translateY(8px) scale(.985);transition-duration:.2s,.18s;transition-timing-function:cubic-bezier(.4,0,.2,1),ease}
 .modal-card p{margin-bottom:18px}
 .row.end{justify-content:flex-end}
 
@@ -316,6 +319,19 @@ html.kbd .wc button:focus-visible{outline-offset:-2px;border-radius:0}
 /* in-window fallback */
 .inline-host{max-width:none}
 .inline-host .ci-win.inline{max-width:500px;margin:12px auto 0;height:min(660px,calc(100vh - 80px));background:#0c0c0f;border:1px solid var(--line);border-radius:var(--r-lg);padding:14px 24px 14px}
+/* In-app sheet overlay (check-in only) — spring enter/exit; lineups is a normal view */
+#v-inline.view{display:none}
+#v-inline.view.on{display:flex;flex-direction:column;position:fixed;inset:0;z-index:45;margin:0;max-width:none;width:auto;background:#121217;overflow-y:auto;overscroll-behavior:contain;box-shadow:none}
+#v-inline.view.on.sheet-anim{animation:lr-sheet-in .4s cubic-bezier(.22,1.15,.36,1) both}
+#v-inline.view.on.sheet-exit{animation:lr-sheet-out .28s cubic-bezier(.4,0,.2,1) both}
+@keyframes lr-sheet-in{from{opacity:0;transform:translateY(22px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes lr-sheet-out{from{opacity:1;transform:none}to{opacity:0;transform:translateY(14px) scale(.99)}}
+html.sheet-open body{overflow:hidden}
+html.sheet-open .app-toolbar,html.sheet-open .tbar,html.sheet-open .side{visibility:hidden}
+/* Lineups as main content view — keep sidebar; wider than default .view max-width */
+#v-lineups.view.on{max-width:none;width:100%}
+#v-lineups .lu-inline.embed{height:calc(100vh - 120px);min-height:480px}
+#v-lineups .lu-head.embed{margin-top:0;border-radius:var(--r-lg) var(--r-lg) 0 0}
 .link-btn{font-size:12.5px;color:var(--t3);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--t4)}
 .link-btn:hover{color:var(--t1)}
 
@@ -379,7 +395,7 @@ html.kbd .wc button:focus-visible{outline-offset:-2px;border-radius:0}
 #v-today .mrow>:nth-child(5),#v-today .mrow>:nth-child(6){display:none}
 
 /* in-app update card (desktop only, js/updater.js) */
-.upd{position:fixed;right:20px;bottom:20px;width:320px;z-index:40;background:var(--ink3);border:1px solid var(--line2);border-radius:var(--r-lg);padding:14px 16px;font-size:13px;line-height:1.55;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.upd{position:fixed;right:20px;bottom:20px;width:320px;z-index:40;background:var(--ink3);border:1px solid var(--line2);border-radius:var(--r-lg);padding:14px 16px;font-size:13px;line-height:1.55;box-shadow:0 8px 24px rgba(0,0,0,.35);animation:lr-sheet-in .36s cubic-bezier(.22,1.15,.36,1) both}
 .upd-h b{font-weight:600;font-size:13.5px}
 .upd-n{color:var(--t2);margin-top:4px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .upd-p{margin-top:10px;display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--t2)}

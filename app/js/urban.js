@@ -6,11 +6,12 @@ const copy={
  en:{quick:'Quick actions',find:'Find a page or action',empty:'No matching actions',close:'Close',today:'Today',checkin:'Check in',checkinSub:'Sleep, health & follow-through',log:'Log a match',logSub:'Capture this performance',lineups:'Practice a lineup',lineupsSub:'Tutorials, then repetition',training:'Start practice',matches:'Match history',insights:'Your insights',week:'Weekly plan',settings:'Settings',account:'Account & sync',ready:'YOUR NEXT MOVE',done:'CHECKED IN TODAY',recorded:'{n} MATCHES TODAY',hero:'STAY LUCID.\nPLAY SHARP.',next:'Next',back:'Back',body:'Body & sleep',diet:'Food & meals',plan:'Follow-through',step:'Step {n} of 3',live:'MATCH SNAPSHOT',delta:'Kill delta',assist:'Assists',shortcuts:'Type to search · ↑↓ to select · Enter to open',review:'Review today’s check-in'}
 };
 const tr=(k)=> (copy[LR.lang]||copy.sc)[k];
-const names={today:'DAILY / 01',matches:'MATCH LOG / 02',insights:'INSIGHTS / 03',week:'WEEKLY / 04',library:'LIBRARY / 06',training:'PRACTICE / 07',settings:'SYSTEM / 08'};
+const names={today:'DAILY / 01',matches:'MATCH LOG / 02',insights:'INSIGHTS / 03',week:'WEEKLY / 04',lineups:'LINEUPS / 05',library:'LIBRARY / 06',training:'PRACTICE / 07',settings:'SYSTEM / 08'};
 const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
-const content=document.querySelector('#content');if(!content)return;
+const content=document.querySelector('#content');if(!content){const host=document.querySelector('#ciHost');if(host){const update=()=>host.querySelectorAll('.hc-form').forEach(checkinSteps);new MutationObserver(update).observe(host,{childList:true,subtree:true});update();}return;}
 function action(id){
- if(id==='checkin'||id==='lineups'){LRMain.showInline(id==='checkin'?'checkin':'lineups');return;}
+ if(id==='checkin'){LRMain.showInline('checkin');return;}
+ if(id==='lineups'){LRMain.setView('lineups');return;}
  if(id==='account'){LRAccount.open();return;}
  LRMain.setView(id==='log'?'today':id);
  if(id==='log'){const f=document.querySelector('#logForm');f?.scrollIntoView({behavior:reduced()?'instant':'smooth',block:'start'});f?.querySelector('[data-res]')?.focus({preventScroll:true});}
@@ -67,8 +68,8 @@ function openQuick(){
  document.body.append(d);const ids=['today','checkin','log','lineups','training','matches','insights','week','settings','account'],input=d.querySelector('input'),list=d.querySelector('.quick-list');let selected=0;
  function render(){const q=input.value.trim().toLowerCase();list.innerHTML=ids.filter(id=>(tr(id)+' '+id).toLowerCase().includes(q)).map(id=>`<button type="button" data-action="${id}"><span>${tr(id)}</span><span aria-hidden="true">↗</span></button>`).join('')||`<p class="quick-empty">${tr('empty')}</p>`;selected=0;highlight();}
  function highlight(){[...list.querySelectorAll('button')].forEach((b,i)=>b.classList.toggle('selected',i===selected));}
- function close(){d.close();}
- let routed=false;d.addEventListener('close',()=>{d.remove();if(!routed)launcher.focus();},{once:true});d.querySelector('.quick-close').onclick=close;d.addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(b){const id=b.dataset.action;routed=true;close();action(id);}});
+ function close(){const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;const finish=()=>{if(d.open)d.close();};if(reduce||d.classList.contains('quick-exit'))return finish();d.classList.add('quick-exit');setTimeout(finish,180);}
+ let routed=false;d.addEventListener('close',()=>{d.remove();if(!routed)launcher.focus();},{once:true});d.querySelector('.quick-close').onclick=close;d.addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(b){const id=b.dataset.action;routed=true;const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;close();setTimeout(()=>action(id),reduce?0:160);}});
  input.oninput=render;d.addEventListener('keydown',e=>{if(e.target!==input)return;const buttons=[...list.querySelectorAll('button')];if(['ArrowDown','ArrowUp'].includes(e.key)&&buttons.length){e.preventDefault();selected=(selected+(e.key==='ArrowDown'?1:-1)+buttons.length)%buttons.length;highlight();buttons[selected].scrollIntoView?.({block:'nearest'});}if(e.key==='Enter'&&buttons.length){e.preventDefault();buttons[selected].click();}});
  render();d.showModal();input.focus();
 }

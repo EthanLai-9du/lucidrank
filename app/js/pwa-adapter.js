@@ -9,7 +9,7 @@
    Must load before core.js. */
 (function(){
 'use strict';
-const VERSION='0.1.7';
+const VERSION='0.1.6';
 const DB_NAME='lucidrank', DATA_KEY='data', SHOT_PREFIX='lrshot:';
 const LS_DATA='lr-web-data', LS_SHOT='lr-web-shot-';
 let accountId=localStorage.getItem('lr-account-id')||'';const dataKey=()=>accountId?'data:'+accountId:'data';const shotKey=id=>(accountId?accountId+':':'')+id;const lsKey=k=>k==='data'?LS_DATA:LS_DATA+':'+k;
@@ -106,7 +106,7 @@ async function exportPayload(){
   const data=(await kv.get(dataKey()))||{};
   const out=JSON.parse(JSON.stringify(data)); delete out.webShots;
   const ws={};
-  for(const m of out.matches||[]){ const id=shotId(m.shot); if(id){ const v=await shots.get(id); if(v) ws[id]=v; } }
+  for(const m of out.matches||[]){ const id=shotId(m.shot); if(id){ const v=await shots.get(shotKey(id)); if(v) ws[id]=v; } }
   if(Object.keys(ws).length) out.webShots=ws; // extra key: the desktop app keeps it untouched and ignores it
   return out;
 }
@@ -135,8 +135,8 @@ const cmds={
   pick_screenshot:()=>pickScreenshot(),
   game_status:()=>null,            // no process detection on phones / tablets
   skip_today:()=>null,
-  // "windows" are in-page sheets: main.js's in-window mode does the rendering
-  open_window:({kind})=>{ if((kind==='checkin'||kind==='lineups')&&window.LRMain) window.LRMain.showInline(kind); return 'existing'; },
+  // check-in stays an in-page sheet; lineups is a normal sidebar view
+  open_window:({kind})=>{ if(!window.LRMain) return 'existing'; if(kind==='checkin') window.LRMain.showInline('checkin'); else if(kind==='lineups') window.LRMain.setView('lineups'); return 'existing'; },
   close_window:()=>null, close_self:()=>null, window_ready:()=>null,
   win_action:()=>false, win_state:()=>false, set_labels:()=>null,
   autostart_get:()=>false, autostart_set:()=>false,

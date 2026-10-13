@@ -10,7 +10,9 @@ const close=opts.close||(()=>invoke('close_self'));
 let alive=true;
 const end=()=>{ if(!alive) return; alive=false;unsubscribe?.(); removeEventListener('keydown',onKey); close(); };
 if(opts.inline){
-  H.innerHTML=`<div class="lu-inline"><header class="lu-head inline"><button class="btn ghost sm" data-back>${t('fb.back')}</button><h1>${t('lu.h')}</h1><span class="tag-demo">${t('lu.example')}</span><span class="grow"></span><span class="muted sm num" id="luProg"></span><div class="game-pill" id="gamePill"></div></header>
+  const embed=!!opts.embed;
+  const back=embed?'':`<button class="btn ghost sm" data-back>${t('fb.back')}</button>`;
+  H.innerHTML=`<div class="lu-inline${embed?' embed':''}"><header class="lu-head inline${embed?' embed':''}">${back}<h1>${t('lu.h')}</h1><span class="tag-demo">${t('lu.example')}</span><span class="grow"></span><span class="muted sm num" id="luProg"></span><div class="game-pill" id="gamePill"></div></header>
   <div class="lu-grid"><aside class="lu-filters" id="luFilters"></aside><section class="lu-list" id="luList"></section><section class="lu-detail" id="luDetail"></section></div></div>`;
 }
 let st={game:'val',map:'Ascent',agent:'any',util:'any',side:'any',scn:'any',favOnly:false,sel:null,maps:{},query:''};
@@ -108,7 +110,7 @@ const unsubscribe=window.LRTutorials?.subscribe(()=>{if(H.isConnected){refreshIt
 H.addEventListener('change',e=>{const filter=e.target.dataset.compactFilter;if(filter&&['map','agent','util'].includes(filter)){st[filter]=e.target.value;if(filter==='map'){st.maps[st.game]=st.map;st.sel=null;}render();remember();return;} if(e.target.id==='favOnly'){ st.favOnly=e.target.checked; render(); remember(); } });
 function onKey(e){
   if(!H.isConnected){ removeEventListener('keydown',onKey); return; }
-  if(e.key==='Escape'){ end(); return; }
+  if(e.key==='Escape'){ if(opts.embed) return; end(); return; }
   if(e.key==='ArrowDown'||e.key==='ArrowUp'){ const l=filtered(), i=l.findIndex(x=>x.id===st.sel); const n=l[Math.max(0,Math.min(l.length-1,i+(e.key==='ArrowDown'?1:-1)))]; if(n){ st.sel=n.id; renderList(); renderDetail(); e.preventDefault(); } }
 }
 addEventListener('keydown',onKey);

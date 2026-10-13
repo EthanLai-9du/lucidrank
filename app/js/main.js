@@ -152,8 +152,11 @@ function showMatchDetail(m){
  if(!m) return; const d=C.derived(m), fmt=v=>v==null?'—':typeof v==='number'?Math.round(v*10)/10:v;
  const entries=[['K / D / A',[m.k,m.d,m.a].map(v=>v??'—').join(' / ')],['K/D',d.kd],[t('m.delta'),d.delta],[C.metricLabel(m),m.score],['ADR',d.adr],[t('m.dd'),d.dd],[t('m.hs'),m.hs],[t('m.kast'),m.kast],[t('m.firstKills'),m.firstKills],[t('m.firstDeaths'),m.firstDeaths],[t('m.clutches'),m.clutches],[t('m.trades'),m.trades],['Tracker Score',m.trackerScore],[t('m.rr'),m.rr],[t('m.rounds'),m.rounds],[t('m.agent'),C.agentName(m.agent)||'—'],[t('m.role'),m.role?t('m.'+m.role):'—'],[t('m.mode'),m.mode?t('m.'+m.mode):'—'],[t('m.health'),t('m.'+(m.health||'unknown'))],[t('m.patch'),m.patch||'—'],[t('m.source'),m.source?t('m.'+m.source):'—']];
  entries.push([t('m.pressure'),m.pressure],[t('m.sessionMinutes'),m.sessionMinutes],[t('m.rested'),m.rested?t('m.'+m.rested):'—'],[t('m.warmup'),m.warmupType?t('m.warmup-'+m.warmupType):'—'],[t('m.warmupMinutes'),m.warmupMinutes],[t('m.reportTiming'),m.reportTiming?t('m.timing-'+m.reportTiming):'—'],[t('m.anomalies'),m.anomalyStatus==='none'?t('m.issue-none'):m.anomalyStatus==='yes'?(m.anomalies||[]).map(x=>t('m.issue-'+x)).join(' / ')||t('m.issue-yes'):'—']);
- const w=document.createElement('div');w.className='modal on';w.innerHTML=`<div class="modal-card match-detail" role="dialog" aria-modal="true" aria-label="${t('m.details')}"><h2>${esc(C.mapName(m.map)||gameName(m.game))}</h2><div class="detail-grid">${entries.map(([k,v])=>`<div><span class="muted sm">${esc(k)}</span><b>${esc(fmt(v))}</b></div>`).join('')}</div><button class="btn primary" data-close-detail>${t('cancel')}</button></div>`;
- document.body.appendChild(w); const close=()=>{w.remove();removeEventListener('keydown',key);}, key=e=>{if(e.key==='Escape')close();};addEventListener('keydown',key);w.addEventListener('click',e=>{if(e.target===w||e.target.closest('[data-close-detail]'))close();});w.querySelector('button').focus();
+ const w=document.createElement('div');w.className='modal';w.innerHTML=`<div class="modal-card match-detail" role="dialog" aria-modal="true" aria-label="${t('m.details')}"><h2>${esc(C.mapName(m.map)||gameName(m.game))}</h2><div class="detail-grid">${entries.map(([k,v])=>`<div><span class="muted sm">${esc(k)}</span><b>${esc(fmt(v))}</b></div>`).join('')}</div><button class="btn primary" data-close-detail>${t('cancel')}</button></div>`;
+ document.body.appendChild(w); requestAnimationFrame(()=>w.classList.add('on'));
+ const reduce=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const close=()=>{ const done=()=>{w.remove();removeEventListener('keydown',key);}; if(reduce()) return done(); w.classList.remove('on'); w.classList.add('modal-out'); setTimeout(done,220); };
+ const key=e=>{if(e.key==='Escape')close();};addEventListener('keydown',key);w.addEventListener('click',e=>{if(e.target===w||e.target.closest('[data-close-detail]'))close();});w.querySelector('button').focus();
 }
 
 /* ---------------- MATCHES ---------------- */
@@ -275,30 +278,53 @@ function renderSettings(){
 }
 
 /* ---------------- actions ---------------- */
-/* ---------------- secondary windows, with an in-window fallback ----------------
-   The pop-up has to report back (window-ready) within a few seconds; if creating it fails or
-   it never boots, we close it and run the same check-in / lineups inside this window. */
-let inline=null;
-const wait=ms=>new Promise(r=>setTimeout(r,ms));
-async function openSecondary(kind){
-  if(!LR.isTauri) return invoke('open_window',{kind});
-  let ready=false, un=null;
-  try{ un=await listen('window-ready',p=>{ if(p&&p.label===kind) ready=true; }); }catch(e){}
-  let r='error';
-  try{ r=await Promise.race([invoke('open_window',{kind}),wait(8000).then(()=>'timeout')]); }catch(e){ console.error(e); }
-  if(r==='created'||r==='pending'||r==='timeout'){ for(let i=0;i<70&&!ready;i++) await wait(150); }
-  if(typeof un==='function') un();
-  if(r==='existing'||ready) return;
-  invoke('close_window',{label:kind}).catch(()=>{});
-  showInline(kind,true);
+/* In-app sheet for check-in (spring enter/exit). Lineups is a normal nav view
+   (sidebar stays). Tray-created secondary windows from Rust stay as-is. */
+let inline=null, sheetTimer=0, lineupsApp=null;
+const reduceMotion=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+const SHEET_OUT_MS=280;
+function clearSheetHost(host){
+  clearTimeout(sheetTimer);
+  host.innerHTML='';
+  host.classList.remove('on','sheet-anim','sheet-exit');
+  document.documentElement.classList.remove('sheet-open');
+}
+function closeSheet(){
+  const host=$('#v-inline');
+  if(host.dataset.sheetSkip){ inline=null; return; }
+  if(!host.classList.contains('on')){ inline=null; return; }
+  const finish=()=>{ clearTimeout(sheetTimer); inline=null; clearSheetHost(host); };
+  if(reduceMotion()){ finish(); return; }
+  host.classList.remove('sheet-anim');
+  host.classList.add('sheet-exit');
+  let done=false;
+  const go=()=>{ if(done) return; done=true; host.removeEventListener('animationend',onEnd); finish(); };
+  const onEnd=e=>{ if(e.target===host) go(); };
+  host.addEventListener('animationend',onEnd);
+  sheetTimer=setTimeout(go, SHEET_OUT_MS+80);
+}
+function openSecondary(kind){
+  showInline(kind);
+  return Promise.resolve();
 }
 function showInline(kind,failed){
-  if(inline) inline.close();
+  if(kind==='lineups'){ setView('lineups'); return; }
   const host=$('#v-inline');
-  $$('.view').forEach(s=>s.classList.toggle('on',s===host));
+  if(inline){
+    host.dataset.sheetSkip='1';
+    try{ inline.close(); }catch(e){}
+    delete host.dataset.sheetSkip;
+    inline=null;
+  }
+  clearTimeout(sheetTimer);
+  host.classList.remove('sheet-exit');
+  host.classList.add('on');
+  document.documentElement.classList.add('sheet-open');
   invoke('open_window',{kind:'main'}).catch(()=>{});
-  const close=()=>{ inline=null; host.innerHTML=''; setView(view); };
-  inline=kind==='lineups'?LRLineupsApp.boot(host,{inline:true,close}):LRCheckin.boot(host,{inline:true,close});
+  inline=LRCheckin.boot(host,{inline:true,close:closeSheet});
+  host.classList.remove('sheet-anim');
+  void host.offsetWidth;
+  host.classList.add('sheet-anim');
   if(failed) toast(t('fb.note'),3500);
 }
 window.LRMain={showInline,openSecondary,get R(){return R;},render:()=>render(),setView:v=>setView(v)}; /* web build: expose views */
@@ -319,13 +345,25 @@ document.addEventListener('click',async e=>{
   const go=e.target.closest('[data-go]'); if(go){ setView(go.dataset.go); return; }
 });
 $$('#nav button').forEach(b=>b.addEventListener('click',()=>{ if(b.dataset.open) openSecondary(b.dataset.open); else setView(b.dataset.view); }));
+function mountLineups(){
+  const host=$('#v-lineups');
+  if(!host||lineupsApp) return;
+  lineupsApp=LRLineupsApp.boot(host,{inline:true,embed:true,close:()=>{}});
+}
 function setView(v){
-  if(inline){ const i=inline; inline=null; i.close(); }
+  if(inline){
+    const host=$('#v-inline');
+    host.dataset.sheetSkip='1';
+    try{ inline.close(); }catch(e){}
+    delete host.dataset.sheetSkip;
+    inline=null;
+    clearSheetHost(host);
+  }
   captureForm();if(window.LRTraining)LRTraining.stop();if(window.LRLibrary)LRLibrary.release();
   view=v; $$('#nav button[data-view]').forEach(b=>b.classList.toggle('on',b.dataset.view===v));
   $$('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v)); render(); $('#content').scrollTop=0;if(document.documentElement.classList.contains('web'))window.scrollTo({top:0,behavior:'instant'});
 }
-const R={today:renderToday,matches:renderMatches,insights:renderInsights,week:renderWeek,settings:renderSettings,library:()=>LRLibrary.render(),training:()=>LRTraining.mount()};
+const R={today:renderToday,matches:renderMatches,insights:renderInsights,week:renderWeek,lineups:mountLineups,settings:renderSettings,library:()=>LRLibrary.render(),training:()=>LRTraining.mount()};
 function render(skipDraft=false){ if(inline) return;if(!skipDraft)captureForm(); R[view](); }
 onLang(render);
 

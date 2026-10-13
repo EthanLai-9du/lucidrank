@@ -115,7 +115,13 @@ function confirmBox(msg,okLabel,danger){
     const w=document.createElement('div'); w.className='modal';
     w.innerHTML=`<div class="modal-card" role="alertdialog" aria-modal="true"><p>${msg}</p><div class="row gap end"><button class="btn ghost" data-r="0">${t('cancel')}</button><button class="btn ${danger?'danger':'primary'}" data-r="1">${okLabel||'OK'}</button></div></div>`;
     document.body.appendChild(w); requestAnimationFrame(()=>w.classList.add('on'));
-    const done=v=>{ w.remove(); removeEventListener('keydown',key,true); res(v); };
+    const reduce=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const done=v=>{
+      const finish=()=>{ w.remove(); removeEventListener('keydown',key,true); res(v); };
+      if(reduce()||!w.classList.contains('on')) return finish();
+      w.classList.remove('on'); w.classList.add('modal-out');
+      setTimeout(finish,220);
+    };
     const key=e=>{ if(e.key==='Escape'){ e.stopPropagation(); done(false); } };
     addEventListener('keydown',key,true);
     w.addEventListener('click',e=>{ const b=e.target.closest('[data-r]'); if(b) done(b.dataset.r==='1'); else if(e.target===w) done(false); });
