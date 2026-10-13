@@ -9,6 +9,8 @@ const I18N = {
   'nav.insights': {sc:'洞察', tc:'洞察', en:'Insights'},
   'nav.week': {sc:'本周', tc:'本週', en:'This week'},
   'nav.lineups': {sc:'道具点位', tc:'道具點位', en:'Lineups'},
+  'tab.week': {sc:'本周', tc:'本週', en:'Week'},
+  'tab.lineups': {sc:'点位', tc:'點位', en:'Lineups'},
   'nav.settings': {sc:'设置', tc:'設定', en:'Settings'},
   'game.none': {sc:'没在玩', tc:'未有遊戲運行', en:'No game running'},
   'game.on': {sc:'{g} 运行中', tc:'{g} 運行中', en:'{g} is running'},
