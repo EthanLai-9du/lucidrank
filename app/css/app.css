@@ -407,3 +407,8 @@ html.sheet-open .app-toolbar,html.sheet-open .tbar,html.sheet-open .side{visibil
 .upd-avail{color:var(--t1)}
 .upd-err{color:var(--t2)}
 .btn[disabled]{opacity:.5;pointer-events:none}
+
+/* OCR dialog: constrain huge screenshots inside the modal */
+.modal-card.ocr-dialog{width:min(720px,94vw);max-height:min(90dvh,900px);overflow:auto}
+.ocr-dialog [data-ocr-image]{max-height:min(52vh,480px);overflow:auto;border:1px solid var(--line2);border-radius:8px;background:#0a0a0c;margin:12px 0}
+.ocr-canvas{display:block;width:100%;height:auto;cursor:crosshair;touch-action:none}
