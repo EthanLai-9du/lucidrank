@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>LucidRank</title>
-<meta name="description" content="LucidRank：给 VALORANT 和 CS2 玩家做的状态记录。开打前记录状态，打完传结算截图，几周后看出自己哪天打得好。">
+<meta name="description" content="LucidRank：给 VALORANT 和 CS2 玩家做的状态记录。开打前签到，打完花 30 秒记一场，几周后看出自己哪天打得好。">
 <meta name="application-name" content="LucidRank">
 <meta name="theme-color" content="#000000">
 <script>(function(){var M={sc:'zh-Hans',tc:'zh-Hant',en:'en'},l=null,d=document.documentElement;
@@ -1002,6 +1002,16 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
   .adv-found{order:1}.adv-goal{order:2}.adv-today{order:3}.adv-last{order:4}
 }
 
+
+/* log-a-match pitch (replaces OCR demo) */
+.scan-log{display:flex;justify-content:center;margin:0 auto clamp(28px,4vw,48px)}
+.scan-log-card{max-width:520px;width:100%;padding:clamp(28px,3.5vw,44px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px}
+.scan-log-card h3{margin:0;font-size:clamp(18px,2vw,22px);font-weight:650;letter-spacing:.02em}
+.scan-log-fields{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.scan-log-fields li{padding:8px 14px;border-radius:99px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--t1)}
+.scan-log-note{margin:0;font-size:13px;color:var(--t2);line-height:1.5;max-width:36em}
+.scan-log-card .btn{margin-top:6px}
+
 /* ===== Windows download ===== */
 .hero-dl-meta{margin:14px 0 0;font-size:12.5px;color:var(--t3);opacity:0;transform:translateY(16px);transition:all 1.3s var(--ease) .95s}
 .loaded .hero-dl-meta{opacity:1;transform:none}
@@ -1044,7 +1054,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
   <nav class="nav-links" aria-label="页面分区" data-i18n-attr="aria-label:nav.aria">
     <a href="#story" data-nav="story"><span class="n">01</span><span data-i18n="nav.story">故事</span></a>
     <a href="#checkin" data-nav="checkin"><span class="n">02</span><span data-i18n="nav.checkin">签到</span></a>
-    <a href="#scan" data-nav="scan"><span class="n">03</span><span data-i18n="nav.scan">识别</span></a>
+    <a href="#scan" data-nav="scan"><span class="n">03</span><span data-i18n="nav.scan">记一场</span></a>
     <a href="#insights" data-nav="insights"><span class="n">04</span><span data-i18n="nav.insights">洞察</span></a>
     <a href="#advice" data-nav="advice"><span class="n">05</span><span data-i18n="nav.plan">计划</span></a>
     <a href="#lineups" data-nav="lineups"><span class="n">07</span><span data-i18n="nav.lineups">点位</span></a>
@@ -1065,7 +1075,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
 <div class="sheet" id="sheet" aria-hidden="true">
   <a href="#story" data-nav="story"><span data-i18n="nav.story">故事</span></a>
   <a href="#checkin" data-nav="checkin"><span data-i18n="nav.checkin">签到</span></a>
-  <a href="#scan" data-nav="scan"><span data-i18n="nav.scan">识别</span></a>
+  <a href="#scan" data-nav="scan"><span data-i18n="nav.scan">记一场</span></a>
   <a href="#insights" data-nav="insights"><span data-i18n="nav.insights">洞察</span></a>
   <a href="#advice" data-nav="advice"><span data-i18n="nav.plan">计划</span></a>
   <a href="#lineups" data-nav="lineups"><span data-i18n="nav.lineups">点位</span></a>
@@ -1090,7 +1100,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
       <p class="hero-eyebrow"><span data-i18n="hero.eb">给 VALORANT 和 CS2 玩家做的状态记录</span></p>
       <h1 class="hero-title"><span class="wordmark" aria-hidden="true"><span class="wm-a">Lucid</span><span class="wm-b">Rank</span></span><span class="sr-only">LucidRank · <span data-i18n="tagline">先清醒，再上分。</span></span></h1>
       <p class="hero-promise" aria-hidden="true" data-i18n="tagline">先清醒，再上分。</p>
-      <p class="hero-sub" data-i18n="hero.sub">开打前花 10 秒签到，打完传一张结算截图。<br class="d-only">记上两三周，就能看出自己哪天打得好。</p>
+      <p class="hero-sub" data-i18n="hero.sub">开打前花 10 秒签到，打完花 30 秒记一场。<br class="d-only">记上两三周，就能看出自己哪天打得好。</p>
       <div class="hero-ctas">
         <a class="btn btn-light" data-windows-download href="https://lucidrank.pages.dev/update/LucidRank_0.1.7_x64-setup.exe" download>Windows · v0.1.7</a>
 <a class="btn btn-ghost magnetic" id="heroDl" href="app/" data-i18n="hero.app">打开网页版</a>
@@ -1133,8 +1143,8 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
       </div>
       <div class="step" data-r style="--i:1">
         <svg class="si" viewBox="0 0 44 44" aria-hidden="true"><rect x="4" y="9" width="36" height="26" rx="5" fill="none" stroke="#1d1d1f" stroke-width="1.6"/><path d="M4 22h36" stroke="#45e6c4" stroke-width="1.6"/><path d="M10 15v-2h4M34 15v-2h-4M10 29v2h4M34 29v2h-4" stroke="#1d1d1f" stroke-width="1.6" fill="none"/></svg>
-        <h3 data-i18n="mf.s2h">截图<b>5 秒</b></h3>
-        <p data-i18n="mf.s2p">上传结算页，数据自动读出来。</p>
+        <h3 data-i18n="mf.s2h">记一场<b>30 秒</b></h3>
+        <p data-i18n="mf.s2p">胜负 / KDA / 分数 / 地图 / 特工，手填保存。</p>
       </div>
       <div class="step" data-r style="--i:2">
         <svg class="si" viewBox="0 0 44 44" aria-hidden="true"><path d="M5 34l9-10 7 6 9-13 9 8" fill="none" stroke="#1d1d1f" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="30" cy="17" r="3" fill="#ff6a3d"/></svg>
@@ -1172,36 +1182,25 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
 <section id="scan" class="scan" data-theme="dark" data-label="scan" data-n="03">
   <div class="wrap">
     <header class="sec-head center">
-      <h2 class="h2 rv"><span class="ln"><span data-i18n="scan.h2">传张截图就行</span></span></h2>
-      <p class="lead" data-r data-i18n="scan.lead">不用绑账号或装插件，传结算页就行。</p>
+      <h2 class="h2 rv"><span class="ln"><span data-i18n="scan.h2">记一场就行</span></span></h2>
+      <p class="lead" data-r data-i18n="scan.lead">打完花 30 秒记下关键字段，不用绑账号或装插件。</p>
     </header>
-    <div class="gtoggle" role="group" aria-label="选择游戏" data-i18n-attr="aria-label:game.aria" data-r>
-      <button type="button" data-game="val" aria-pressed="true">VALORANT</button>
-      <button type="button" data-game="cs2" aria-pressed="false">CS2</button>
-    </div>
-    <div class="scan-demo" data-r>
-      <div class="panel dropzone" id="dropzone">
-        <div class="dz-idle">
-          <div class="dz-icon"><svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 24V8M11 14l7-7 7 7"/><path d="M6 22v5a3 3 0 003 3h18a3 3 0 003-3v-5"/></svg></div>
-          <h3 data-i18n="scan.drop">拖入对局截图</h3>
-          <p data-i18n="scan.kinds">结算页 · 计分板 · 生涯页</p>
-          <div class="dz-btns">
-            <button class="btn btn-light magnetic" id="useSample" data-i18n="scan.sample">用示例截图</button>
-            <label class="btn btn-ghost" for="fileIn" tabindex="0" id="fileLabel" data-i18n="scan.pick">选择图片</label>
-            <input type="file" id="fileIn" accept="image/*" hidden>
-          </div>
-          <p class="dz-note" data-i18n="scan.local">仅本地预览，不会上传。</p>
-        </div>
-        <div class="dz-preview" id="dzPreview"></div>
-      </div>
-      <div class="panel fields-panel">
-        <div class="fp-head"><h3 data-i18n="scan.res">识别结果</h3><span class="tag-demo" data-i18n="demo">示例数据</span></div>
-        <dl class="fields" id="fields"></dl>
-        <div class="scan-status" id="scanStatus"><span data-i18n="scan.wait">等待截图…</span></div>
+    <div class="scan-log" data-r>
+      <div class="panel scan-log-card">
+        <h3 data-i18n="scan.fieldsH">默认只记这 5 项</h3>
+        <ul class="scan-log-fields">
+          <li data-i18n="scan.fA">胜负</li>
+          <li data-i18n="scan.fB">KDA</li>
+          <li data-i18n="scan.fC">分数</li>
+          <li data-i18n="scan.fD">地图</li>
+          <li data-i18n="scan.fE">特工</li>
+        </ul>
+        <p class="scan-log-note" data-i18n="scan.note">扫描入口暂时收起，不是下线。</p>
+        <a class="btn btn-light magnetic" href="app/" data-i18n="scan.cta">打开网页版，记一场 →</a>
       </div>
     </div>
     <div class="scan-foot" data-r>
-      <span data-i18n="scan.f1">VALORANT · CS2</span><span data-i18n="scan.f2">国服 / 国际服</span><span data-i18n="scan.f3">识别后可删原图</span>
+      <span data-i18n="scan.f1">VALORANT · CS2</span><span data-i18n="scan.f2">国服 / 国际服</span><span data-i18n="scan.f3">记录可导出、可清空</span>
     </div>
   </div>
 </section>
@@ -1445,7 +1444,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
   <svg class="join-xh" aria-hidden="true"><use href="#xh"/></svg>
   <div class="wrap">
     <h2 class="rv"><span class="ln"><span data-i18n="join.h2">明早起来，先别碰手机</span></span></h2>
-    <p class="lead" data-r data-i18n="join.lead">第一版还在做。留个邮箱，内测开了通知你。</p>
+    <p class="lead" data-r data-i18n="join.lead">主路径是 30 秒记一场。留个邮箱，出新版本通知你。</p>
     <form class="form" id="form" novalidate data-r>
       <div class="form-inner">
         <div class="chips" role="group" aria-label="你主要玩哪个服" data-i18n-attr="aria-label:join.srvAria">
@@ -1474,6 +1473,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
 <section id="download" class="dl" data-theme="light" data-label="download" data-n="09">
   <div class="wrap dl-wrap">
     <h2 class="h2" data-i18n="dl.h2">下载</h2>
+    <p class="lead" data-i18n="dl.lead">装好后先签到，再花 30 秒记一场。</p>
     <div class="dl-act">
       <a data-windows-download class="btn btn-dark" href="https://lucidrank.pages.dev/update/LucidRank_0.1.7_x64-setup.exe" download><svg class="dl-ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8.5M4.5 7.5 8 11l3.5-3.5M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="dl.btn">下载 Windows 版</span></a>
       <p class="dl-meta"><span data-i18n="dl.meta">v0.1.7 · Windows 10/11 · 22.7 MB</span> · <a href="https://github.com/EthanLai-9du/lucidrank-app/releases" target="_blank" rel="noopener">GitHub</a></p>
@@ -1492,7 +1492,7 @@ html[lang=en] .h2,html[lang=en] .join h2,html[lang=en] .hero-next{line-height:1.
         <p class="foot-tag" data-i18n="tagline">先清醒，再上分。</p>
       </div>
       <div class="foot-links">
-        <div><b data-i18n="ft.product">产品</b><a href="#checkin" data-i18n="ft.checkin">每日签到</a><a href="#scan" data-i18n="ft.scan">截图识别</a><a href="#insights" data-i18n="ft.insights">个人洞察</a></div>
+        <div><b data-i18n="ft.product">产品</b><a href="#checkin" data-i18n="ft.checkin">每日签到</a><a href="#scan" data-i18n="ft.scan">记一场</a><a href="#insights" data-i18n="ft.insights">个人洞察</a></div>
         <div><b data-i18n="ft.grow">成长</b><a href="#advice" data-i18n="ft.plan">每周计划</a><a href="#lineups" data-i18n="ft.lineups">点位助手</a><a href="#academy" data-i18n="ft.academy">LucidRank 学院</a><a href="#trust" data-i18n="ft.trust">我们的原则</a></div>
         <div><b data-i18n="ft.join">加入</b><a href="#join" data-i18n="ft.list">候补名单</a><a href="#download" data-i18n="ft.dl">Windows 版下载</a><a href="#hero" data-i18n="ft.top">回到顶部 ↑</a></div>
       </div>
@@ -1519,7 +1519,7 @@ const I18N = {
   'upgrade.demo': {sc:'下方为战斗表现评分 示例，非个人分析。',tc:'下方為戰鬥表現評分 示例，非個人分析。',en:'Performance Score examples below; not your personal analysis.'},
   /* ---- meta / chrome ---- */
   tagline: {"sc": "先清醒，再上分。", "tc": "先清醒，再上分。", "en": "Clear head first. Then climb."},
-  desc: {"sc": "LucidRank：给 VALORANT 和 CS2 玩家做的状态记录。开打前记录状态，打完传结算截图，几周后看出自己哪天打得好。", "tc": "LucidRank：寫給 VALORANT 和 CS2 玩家的狀態記錄。開打前 10 秒簽到，打完上載結算截圖，幾個星期後看得出自己哪天打得好。", "en": "LucidRank: a check-in tool for VALORANT and CS2 players. 10 seconds before you play, a screenshot after, and in a few weeks you'll see which days you play well."},
+  desc: {"sc": "LucidRank：给 VALORANT 和 CS2 玩家做的状态记录。开打前签到，打完花 30 秒记一场，几周后看出自己哪天打得好。", "tc": "LucidRank：寫給 VALORANT 和 CS2 玩家的狀態記錄。開打前簽到，打完花 30 秒記一場，幾個星期後看得出自己哪天打得好。", "en": "LucidRank: a check-in tool for VALORANT and CS2 players. Check in before you play, log a match in 30 seconds after, and in a few weeks you'll see which days you play well."},
   'lang.group': {sc:'语言', tc:'語言', en:'Language'},
   skip: {sc:'跳到互动演示', tc:'跳至互動示範', en:'Skip to demo'},
   'nav.aria': {sc:'页面分区', tc:'頁面分區', en:'Sections'},
@@ -1527,7 +1527,7 @@ const I18N = {
   'nav.home': {sc:'首页', tc:'首頁', en:'Home'},
   'nav.story': {sc:'故事', tc:'故事', en:'Story'},
   'nav.checkin': {sc:'签到', tc:'簽到', en:'Check-in'},
-  'nav.scan': {sc:'识别', tc:'識別', en:'Scan'},
+  'nav.scan': {sc:'记一场', tc:'記一場', en:'Log match'},
   'nav.insights': {sc:'洞察', tc:'洞察', en:'Insights'},
   'nav.plan': {sc:'计划', tc:'計劃', en:'Plan'},
   'nav.academy': {sc:'学院', tc:'學院', en:'Academy'},
@@ -1543,7 +1543,7 @@ const I18N = {
   /* ---- hero ---- */
   'hero.eb': {sc:'给 VALORANT 和 CS2 玩家做的状态记录', tc:'寫給 VALORANT 和 CS2 玩家的狀態記錄', en:'A check-in tool for VALORANT and CS2 players'},
   'hero.eb2': {sc:'状态工具', tc:'狀態工具', en:'Readiness tool'},
-  'hero.sub': {sc:'开打前花 10 秒签到，打完传一张结算截图。<br class="d-only">记上两三周，就能看出自己哪天打得好。', tc:'開打前用 10 秒簽到，打完上載一張結算截圖。<br class="d-only">記錄兩三個星期，就看得出自己哪天打得好。', en:'Check in for 10 seconds before you play. Upload your end screen after.<br class="d-only"> Give it two or three weeks and you’ll see which days you play well.'},
+  'hero.sub': {sc:'开打前花 10 秒签到，打完花 30 秒记一场。<br class="d-only">记上两三周，就能看出自己哪天打得好。', tc:'開打前用 10 秒簽到，打完花 30 秒記一場。<br class="d-only">記錄兩三個星期，就看得出自己哪天打得好。', en:'Check in for 10 seconds before you play. Log a match in 30 seconds after.<br class="d-only"> Give it two or three weeks and you’ll see which days you play well.'},
   'hero.try': {sc:'试试签到', tc:'試試簽到', en:'Try check-in'},
   'hero.meta': {sc:'v0.1.7 · Windows 10/11 · 22.7 MB · <a href="app/">iPad / 安卓</a>', tc:'v0.1.7 · Windows 10/11 · 22.7 MB · <a href="app/">iPad / Android</a>', en:'v0.1.7 · Windows 10/11 · 22.7 MB · <a href="app/">iPad / Android</a>'},
   'hero.app': {sc:'打开网页版', tc:'開啟網頁版', en:'Open the web app'},
@@ -1566,8 +1566,8 @@ const I18N = {
   'mf.lit': {sc:'枪法没变，有些天就是打不准。<br>多半跟状态有关：睡了多久，几点起，起床后干了什么。', tc:'槍法沒變，有些日子就是打不中。<br>多數跟狀態有關：睡了多久，幾點起身，起床後做了甚麼。', en:'Your aim didn’t change, but some days nothing hits.<br>Usually it comes down to how you slept, when you got up, and what you did next.'},
   'mf.s1h': {sc:'签到<b>10 秒</b>', tc:'簽到<b>10 秒</b>', en:'Check in<b>10 sec</b>'},
   'mf.s1p': {sc:'开局前，点 8 下。', tc:'開局前，點 8 下。', en:'Eight taps before you queue.'},
-  'mf.s2h': {sc:'截图<b>5 秒</b>', tc:'截圖<b>5 秒</b>', en:'Screenshot<b>5 sec</b>'},
-  'mf.s2p': {sc:'上传结算页，数据自动读出来。', tc:'上載結算頁，數據自動讀取。', en:'Upload the end screen and the stats get read for you.'},
+  'mf.s2h': {sc:'记一场<b>30 秒</b>', tc:'記一場<b>30 秒</b>', en:'Log a match<b>30 sec</b>'},
+  'mf.s2p': {sc:'胜负 / KDA / 分数 / 地图 / 特工，手填保存。', tc:'勝負 / KDA / 分數 / 地圖 / 特工，手填儲存。', en:'Result / KDA / score / map / agent — type and save.'},
   'mf.s3h': {sc:'规律<b>2–3 周</b>', tc:'規律<b>2–3 週</b>', en:'Patterns<b>2–3 wks</b>'},
   'mf.s3p': {sc:'记两三周，规律就出来了。', tc:'記錄兩三個星期，規律就會出來。', en:'After two or three weeks, patterns show up.'},
 
@@ -1620,10 +1620,19 @@ const I18N = {
   'q.mood.o': {sc:['很差','有点烦','一般','不错','很好'], tc:['很差','有點煩','一般','不錯','很好'], en:['Awful','Meh','Okay','Good','Great']},
   'q.mood.s': {sc:'心情', tc:'心情', en:'Mood'},
 
-  /* ---- scan ---- */
-  'scan.eb': {sc:'截图识别', tc:'截圖識別', en:'Screenshot scan'},
-  'scan.h2': {sc:'传张截图就行', tc:'上載一張截圖就可以', en:'Just upload a screenshot'},
-  'scan.lead': {sc:'不用绑账号或装插件，传结算页就行。', tc:'不用綁帳號或裝外掛，上載結算頁就可以。', en:'No account linking or plugins. Upload the end screen and you’re done.'},
+  /* ---- scan (log-a-match; OCR demo removed) ---- */
+  'scan.eb': {sc:'记一场', tc:'記一場', en:'Log a match'},
+  'scan.h2': {sc:'记一场就行', tc:'記一場就可以', en:'Just log a match'},
+  'scan.lead': {sc:'打完花 30 秒记下关键字段，不用绑账号或装插件。', tc:'打完花 30 秒記下關鍵欄位，不用綁帳號或裝外掛。', en:'Spend 30 seconds after a match on the key fields. No account linking or plugins.'},
+
+  'scan.fieldsH': {sc:'默认只记这 5 项', tc:'預設只記這 5 項', en:'Just these five by default'},
+  'scan.fA': {sc:'胜负', tc:'勝負', en:'Result'},
+  'scan.fB': {sc:'KDA', tc:'KDA', en:'KDA'},
+  'scan.fC': {sc:'分数', tc:'分數', en:'Score'},
+  'scan.fD': {sc:'地图', tc:'地圖', en:'Map'},
+  'scan.fE': {sc:'特工', tc:'特工', en:'Agent'},
+  'scan.note': {sc:'扫描入口暂时收起，不是下线。', tc:'掃描入口暫時收起，不是下線。', en:'Scan is temporarily hidden — not removed.'},
+  'scan.cta': {sc:'打开网页版，记一场 →', tc:'開啟網頁版，記一場 →', en:'Open the web app, log a match →'},
   'scan.drop': {sc:'拖入对局截图', tc:'拖入對局截圖', en:'Drop a match screenshot'},
   'scan.kinds': {sc:'结算页 · 计分板 · 生涯页', tc:'結算頁 · 計分板 · 生涯頁', en:'End screen · Scoreboard · Career'},
   'scan.sample': {sc:'用示例截图', tc:'用示例截圖', en:'Use sample'},
@@ -1643,7 +1652,7 @@ const I18N = {
   'scan.f1': {sc:'VALORANT · CS2', tc:'VALORANT · CS2', en:'VALORANT · CS2'},
   'game.aria': {sc:'选择游戏', tc:'選擇遊戲', en:'Choose game'},
   'scan.f2': {sc:'国服 / 国际服', tc:'國服 / 國際服', en:'CN & global servers'},
-  'scan.f3': {sc:'识别后可删原图', tc:'識別後可刪原圖', en:'Delete originals after scan'},
+  'scan.f3': {sc:'记录可导出、可清空', tc:'記錄可匯出、可清空', en:'Export or clear your log'},
   'mk.rounds': {sc:'23 回合', tc:'23 回合', en:'23 rounds'},
   'mk.dmg': {sc:'伤害', tc:'傷害', en:'DMG'},
   'mk.pts': {sc:'得分', tc:'得分', en:'Pts'},
@@ -1775,11 +1784,11 @@ const I18N = {
   'tr.3h': {sc:'数据够了才下结论', tc:'數據夠了才下結論', en:'Enough data before any conclusion'},
   'tr.3p': {sc:'不满一周只记录。每条结论都标明天数。', tc:'未滿一週只作記錄。每條結論都標明天數。', en:'Under a week, we just log. Every insight shows its day count.'},
   'tr.4h': {sc:'数据归你', tc:'數據屬於你', en:'Your data is yours'},
-  'tr.4p': {sc:'原图可删，记录可导出、可清空。不卖数据。', tc:'原圖可刪，記錄可匯出、可清空。不賣數據。', en:'Delete screenshots. Export or wipe your log. We never sell data.'},
+  'tr.4p': {sc:'记录可导出、可清空。不卖数据。', tc:'記錄可匯出、可清空。不賣數據。', en:'Export or wipe your log. We never sell data.'},
 
   /* ---- join ---- */
   'join.h2': {sc:'明早起来，先别碰手机', tc:'明早起身，先別碰手機', en:'Tomorrow morning, leave your phone alone for a bit'},
-  'join.lead': {sc:'截图自动识别还在做。留个邮箱，出新版本通知你。', tc:'截圖自動識別還在開發。留個電郵，有新版本就通知你。', en:'Screenshot auto-read is still in the works. Leave your email and we’ll tell you when a new version is out.'},
+  'join.lead': {sc:'主路径是 30 秒记一场。留个邮箱，出新版本通知你。', tc:'主路徑是 30 秒記一場。留個電郵，有新版本就通知你。', en:'The main path is logging a match in 30 seconds. Leave your email and we’ll tell you when a new version is out.'},
   'join.srvAria': {sc:'你主要玩哪个游戏', tc:'你主要玩哪個遊戲', en:'Which game do you play?'},
   'join.srv': {sc:['VALORANT','CS2','都玩'], tc:['VALORANT','CS2','兩個都玩'], en:['VALORANT','CS2','Both']},
   'join.srvName': {sc:['VALORANT','CS2','VALORANT 和 CS2'], tc:['VALORANT','CS2','VALORANT 和 CS2'], en:['VALORANT','CS2','VALORANT + CS2']},
@@ -1793,6 +1802,7 @@ const I18N = {
 
   /* ---- download ---- */
   'dl.h2': {sc:'下载', tc:'下載', en:'Download'},
+  'dl.lead': {sc:'装好后先签到，再花 30 秒记一场。', tc:'裝好後先簽到，再花 30 秒記一場。', en:'After install: check in, then log a match in 30 seconds.'},
   'dl.btn': {sc:'下载 Windows 版', tc:'下載 Windows 版', en:'Download for Windows'},
   'dl.meta': {sc:'v0.1.7 · Windows 10/11 · 22.7 MB', tc:'v0.1.7 · Windows 10/11 · 22.7 MB', en:'v0.1.7 · Windows 10/11 · 22.7 MB'},
   'dl.mobile': {sc:'iPad / 安卓：打开网页版', tc:'iPad / Android：開啟網頁版', en:'iPad / Android: open the web app'},
@@ -1804,7 +1814,7 @@ const I18N = {
   /* ---- footer ---- */
   'ft.product': {sc:'产品', tc:'產品', en:'Product'},
   'ft.checkin': {sc:'每日签到', tc:'每日簽到', en:'Daily check-in'},
-  'ft.scan': {sc:'截图识别', tc:'截圖識別', en:'Screenshot scan'},
+  'ft.scan': {sc:'记一场', tc:'記一場', en:'Log a match'},
   'ft.insights': {sc:'个人洞察', tc:'個人洞察', en:'Insights'},
   'ft.grow': {sc:'成长', tc:'成長', en:'Grow'},
   'ft.plan': {sc:'每周计划', tc:'每週計劃', en:'Weekly plan'},
@@ -2471,8 +2481,9 @@ const GAMES={
 };
 let game='val', FIELDS=GAMES.val.fields;
 const fieldsEl=$('#fields'), dz=$('#dropzone'), prev=$('#dzPreview'), status=$('#scanStatus');
-function resetFields(){ fieldsEl.innerHTML=FIELDS.map(f=>`<div class="field" data-k="${f.k}">${tag('f.'+f.k,null,'dt')}<dd><span class="ph"></span></dd><div class="conf"><i></i></div></div>`).join(''); }
-resetFields();
+const scanDemoLive=!!(fieldsEl&&dz&&prev&&status);
+function resetFields(){ if(!fieldsEl) return; fieldsEl.innerHTML=FIELDS.map(f=>`<div class="field" data-k="${f.k}">${tag('f.'+f.k,null,'dt')}<dd><span class="ph"></span></dd><div class="conf"><i></i></div></div>`).join(''); }
+if(scanDemoLive) resetFields();
 const mockVal=()=>`<div class="mock" role="img" aria-label="${esc(t('scan.mockAria'))}" data-i18n-attr="aria-label:scan.mockAria">
   <div class="mk-top"><div>${tag('fv.resMock',null,'div','class="mk-res" data-f="res"')}<div class="mk-sub">${tag('fv.mode',null,'span','data-f="mode"')} · ${tag('fv.map',null,'span','data-f="map"')}</div></div><div class="mk-score" data-f="score"><b>13</b> : 9</div></div>
   <div class="mk-table">
@@ -2501,6 +2512,7 @@ function clearScan(){scanEpoch++;scanTimers.forEach(clearTimeout);scanTimers=[];
 function later(fn,ms){ scanTimers.push(setTimeout(fn,RM?Math.min(ms,50):ms)); }
 let lastShot=null; // {content, own} of the screenshot on screen, so a game switch can re-run it
 function runScan(content, own){
+  if(!scanDemoLive) return;
   lastShot={content,own};
   clearScan();const epoch=scanEpoch;resetFields();
   dz.classList.add('has');
@@ -2527,14 +2539,16 @@ function runScan(content, own){
   };
   const img=$('img',wrap);if(img){img.onerror=fail;if(!img.complete)img.onload=go;else go();}else go();
 }
-$('#useSample').addEventListener('click',e=>{ e.stopPropagation();releasePreview();runScan(mockHTML(),false); });
 const fileIn=$('#fileIn');
-$('#fileLabel').addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); fileIn.click(); } });
-function handleFile(f){ if(!f||!f.type.startsWith('image/')) return; releasePreview();const url=URL.createObjectURL(f);previewURL=url;runScan(`<img src="${url}" alt="${esc(t('scan.imgAlt'))}" data-i18n-attr="alt:scan.imgAlt">`,true); }
-fileIn.addEventListener('change',()=>handleFile(fileIn.files[0]));
-['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{ e.preventDefault(); dz.classList.add('over'); }));
-['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{ e.preventDefault(); dz.classList.remove('over'); }));
-dz.addEventListener('drop',e=>handleFile(e.dataTransfer.files[0]));
+function handleFile(f){ if(!scanDemoLive||!f||!f.type.startsWith('image/')) return; releasePreview();const url=URL.createObjectURL(f);previewURL=url;runScan(`<img src="${url}" alt="${esc(t('scan.imgAlt'))}" data-i18n-attr="alt:scan.imgAlt">`,true); }
+if(scanDemoLive){
+  $('#useSample').addEventListener('click',e=>{ e.stopPropagation();releasePreview();runScan(mockHTML(),false); });
+  $('#fileLabel').addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); fileIn.click(); } });
+  fileIn.addEventListener('change',()=>handleFile(fileIn.files[0]));
+  ['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{ e.preventDefault(); dz.classList.add('over'); }));
+  ['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{ e.preventDefault(); dz.classList.remove('over'); }));
+  dz.addEventListener('drop',e=>handleFile(e.dataTransfer.files[0]));
+}
 
 /* game toggle (VALORANT / CS2): shared by the scan demo and the academy */
 function setGame(g){
