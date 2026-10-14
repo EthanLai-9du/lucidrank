@@ -10,7 +10,26 @@ function suggestions(text){
  const metric=detectMetric(text);if(metric==='performanceScore')fields.score=/(?:Performance\s*Score|表現分數|戰鬥表現評分|戰鬥表現分|战斗表现评分|战斗表现分|表现分数)\s*[:：]\s*(\d{1,3}(?:\.\d+)?)/i;else if(metric==='acs')fields.score=/\bACS\b\s*[:：]\s*(\d{1,3}(?:\.\d+)?)/i;else if(metric==='adr')fields.score=/\bADR\b\s*[:：]\s*(\d{1,3}(?:\.\d+)?)/i;
  for(const [k,re]of Object.entries(fields)){const m=text.match(re);if(m)out[k]=Number(m[1]);}return out;
 }
+
+let availableCache=null;
+function available(){
+  if(availableCache!=null) return availableCache;
+  availableCache=fetch(new URL('js/vendor/tesseract.min.js', location.href), {method:'HEAD', cache:'no-store'})
+    .then(r=>{
+      if(!r.ok) return false;
+      const ct=(r.headers.get('content-type')||'').toLowerCase();
+      // SPA fallback returns HTML for missing files
+      if(ct.includes('html')) return false;
+      return ct.includes('javascript')||ct.includes('ecmascript')||ct.includes('octet-stream')||ct===''||ct.includes('text/plain');
+    })
+    .catch(()=>false);
+  return availableCache;
+}
 function open(form){
+ const {t,esc}=LR;
+ available().then(ok=>{ if(!ok){ LR.toast(t('ocr.unavailable')); return; } _open(form); });
+}
+function _open(form){
  const {t,esc}=LR;const w=document.createElement('div');w.className='modal on';let alive=true,worker=null,image=null,rect=null,origin=null,busy=false,detectedMetric=null;const c=document.createElement('canvas'),g=c.getContext('2d');c.className='ocr-canvas';
  w.innerHTML=`<div class="modal-card ocr-dialog" role="dialog" aria-modal="true" aria-label="${t('ocr.h')}"><h2>${t('ocr.h')}</h2><p class="muted sm">${t('ocr.note')}</p><div class="row gap"><button class="btn ghost" data-ocr-pick>${t('ocr.choose')}</button><button class="btn ghost" data-ocr-read disabled>${t('ocr.read')}</button></div><div data-ocr-image></div><p class="muted xs" data-ocr-status aria-live="polite"></p><label class="lbl">${t('ocr.text')}<textarea data-ocr-text rows="4" readonly></textarea></label><div class="fgrid">${['k','d','a','score','hs'].map(k=>`<label class="lbl">${k==='score'?LRCatalog.metricLabel({game:form.dataset.game,metricType:form.elements.metricType?.value||(form.dataset.game==='cs2'?'adr':'performanceScore')}):k==='hs'?t('m.hs'):k.toUpperCase()}<input data-ocr-value="${k}" type="number" min="0" step="${['score','hs'].includes(k)?'.1':'1'}" max="${k==='score'?(form.dataset.game==='val'&&form.elements.metricType?.value==='performanceScore'?500:999):k==='hs'?100:99}"></label>`).join('')}</div><div class="row gap"><button class="btn primary" data-ocr-apply>${t('ocr.apply')}</button><button class="btn ghost" data-ocr-close>${t('cancel')}</button></div></div>`;
  document.body.appendChild(w);w.querySelector('[data-ocr-image]').appendChild(c);const status=w.querySelector('[data-ocr-status]'),read=w.querySelector('[data-ocr-read]');
@@ -82,5 +101,5 @@ function open(form){
  w.querySelector('[data-ocr-apply]').onclick=()=>{let any=false;for(const x of w.querySelectorAll('[data-ocr-value]')){if(x.value==='')continue;if(!x.checkValidity()){x.reportValidity();return;}}
  if(!form.isConnected){close();return;}if(form.elements.metricType&&['acs','performanceScore'].includes(detectedMetric)&&w.querySelector('[data-ocr-value=score]').value!==''){form.elements.metricType.value=detectedMetric;form.elements.metricType.dispatchEvent(new Event('change',{bubbles:true}));}for(const x of w.querySelectorAll('[data-ocr-value]'))if(x.value!==''){form.elements[x.dataset.ocrValue].value=x.value;any=true;}if(any&&form.elements.source)form.elements.source.value='screenshot';close();};
 }
-window.LROCR={open,suggestions,detectMetric};
+window.LROCR={open,suggestions,detectMetric,available};
 })();
