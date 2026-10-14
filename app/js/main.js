@@ -75,17 +75,23 @@ function fieldSelect(name,options,label,value=''){
 function numberField(name,label,min,max,step=1){return `<div><label class="lbl" for="match-${name}">${t(label)}</label><input id="match-${name}" name="${name}" type="number" min="${min}" max="${max}" step="${step}"></div>`;}
 function logForm(){
   const g=form.game;
+  const agentField=g==='val'?fieldSelect('agent',C.agents.map(x=>[x,C.agentName(x)+' · '+x]),'m.agent'):'';
   return `<form class="card logf" id="logForm" data-game="${g}" autocomplete="off">
     <div class="row between"><h2>${t('m.h')}</h2><div class="seg" role="group">${['val','cs2'].map(x=>`<button type="button" data-fgame="${x}" aria-pressed="${g===x}">${gameName(x)}</button>`).join('')}</div></div>
+    <p class="muted xs">${t('m.quickHint')}</p>
     <label class="lbl">${t('m.res')}</label>
     <div class="resbtns">${['W','L','D'].map(r=>`<button type="button" data-res="${r}" class="rb ${r}" aria-pressed="${form.result===r}">${t('m.'+r)}</button>`).join('')}</div>
-    <div class="fgrid">
+    <div class="fgrid match-quick">
       <div><label class="lbl">K / D / A</label><div class="kda-in"><input name="k" type="number" min="0" max="99" placeholder="K" aria-label="K"><input name="d" type="number" min="0" max="99" placeholder="D" aria-label="D"><input name="a" type="number" min="0" max="99" placeholder="A" aria-label="A"></div></div>
       <div><label class="lbl" data-score-label>${g==='cs2'?t('m.adr'):t('m.ps')}</label><input name="score" type="number" min="0" max="${g==='cs2'?999:500}" placeholder="${g==='cs2'?'85':'240'}" step="0.1"></div>
-      <div><label class="lbl">${t('m.map')} <small>${t('optional')}</small></label><select name="map"><option value="">—</option>${MAPS[g].map(m=>`<option value="${m}">${esc(C.mapName(m))} · ${m}</option>`).join('')}</select></div>
-      <div><label class="lbl">${t('m.rank')} <small>${t('optional')}</small></label><input name="rank" maxlength="24" placeholder="${esc(t('m.rankPh'))}"></div>
+      <div><label class="lbl">${t('m.map')}</label><select name="map"><option value="">—</option>${MAPS[g].map(m=>`<option value="${m}">${esc(C.mapName(m))} · ${m}</option>`).join('')}</select></div>
+      ${agentField}
     </div>
-    <div class="fgrid">${fieldSelect('health',['normal','unwell','recovering','fatigued'].map(x=>[x,t('m.'+x)]),'m.health')}</div>
+    <details class="match-advanced"><summary>${t('m.advanced')}</summary>
+    <div class="fgrid">
+      <div><label class="lbl">${t('m.rank')} <small>${t('optional')}</small></label><input name="rank" maxlength="24" placeholder="${esc(t('m.rankPh'))}"></div>
+      ${fieldSelect('health',['normal','unwell','recovering','fatigued'].map(x=>[x,t('m.'+x)]),'m.health')}
+    </div>
     <details class="match-readiness"><input type="hidden" name="stateRecordedAt" value=""><summary>${t('m.readiness')}</summary><p class="muted sm">${t('m.readinessNote')}</p><div class="fgrid">
  ${numberField('pressure','m.pressure',0,10)}${numberField('sessionMinutes','m.sessionMinutes',0,1440)}
  ${fieldSelect('rested',[['yes',t('m.yes')],['no',t('m.no')]],'m.rested')}
@@ -95,7 +101,7 @@ function logForm(){
  ${fieldSelect('anomalyStatus',[['none',t('m.issue-none')],['yes',t('m.issue-yes')]],'m.anomalyStatus')}
  </div><fieldset class="match-issues"><legend>${t('m.anomalies')}</legend>${['stutter','packetLoss','disconnect','interruption','other'].map(x=>`<label><input type="checkbox" name="anomalies" value="${x}">${t('m.issue-'+x)}</label>`).join('')}</fieldset></details>
  <details class="match-context"><summary>${t('m.contextQuick')}</summary><div class="fgrid context-fields">
-      ${g==='val'?fieldSelect('agent',C.agents.map(x=>[x,C.agentName(x)+' · '+x]),'m.agent')+fieldSelect('role',['duelist','controller','initiator','sentinel'].map(x=>[x,t('m.'+x)]),'m.role'):''}
+      ${g==='val'?fieldSelect('role',['duelist','controller','initiator','sentinel'].map(x=>[x,t('m.'+x)]),'m.role'):''}
       ${fieldSelect('mode',['competitive','unrated','swiftplay','premier','other'].map(x=>[x,t('m.'+x)]),'m.mode')}
       ${fieldSelect('party',['solo','group'].map(x=>[x,t('m.'+x)]),'m.party')}
       <div><label class="lbl" for="matchPatch">${t('m.patch')}</label><input id="matchPatch" name="patch" maxlength="20" placeholder="13.06"></div>
@@ -111,8 +117,12 @@ function logForm(){
       ${g==='val'?numberField('trackerScore','m.tracker',0,1000):''}
       ${fieldSelect('source',['manual','screenshot','external'].map(x=>[x,t('m.'+x)]),'m.source','manual')}
     </div><p class="muted xs">${t('m.acsHint')}</p></details>
-    <div class="shotrow"><button type="button" class="btn ghost sm" data-open-ocr>${t('ocr.start')}</button><button type="button" class="btn ghost sm" id="shotBtn">${form.shot?esc(t('m.shotOn',{f:form.shot.split(/[\\/]/).pop()})):t('m.shot')}</button></div>
-    <p class="muted xs">${t('m.ocrP')}</p>
+    </details>
+    <div class="shotrow" data-shot-tools>
+      <button type="button" class="btn ghost sm" data-open-ocr hidden disabled>${t('ocr.start')}</button>
+      <button type="button" class="btn ghost sm" id="shotBtn">${form.shot?esc(t('m.shotOn',{f:form.shot.split(/[\\/]/).pop()})):t('m.shot')}</button>
+    </div>
+    <p class="muted xs" data-ocr-note>${t('m.ocrP')}</p>
     <div class="row between"><span class="formmsg" id="formMsg"></span><button class="btn primary" type="submit">${t('m.save')}</button></div>
   </form>`;
 }
@@ -129,7 +139,24 @@ function bindForm(el){
   if(f.elements.metricType&&!f.elements.metricType.value)f.elements.metricType.value='performanceScore';
   if(f.elements.metricType)f.elements.score.max=f.elements.metricType.value==='performanceScore'?500:999;
   f.querySelector('[data-score-label]').textContent=C.metricLabel({game:form.game,metricType:f.elements.metricType?.value||(form.game==='cs2'?'adr':'performanceScore')});
-  f.querySelector('[data-open-ocr]').onclick=()=>LROCR.open(f);
+  const ocrBtn=f.querySelector('[data-open-ocr]');
+  const ocrNote=f.querySelector('[data-ocr-note]');
+  if(window.LROCR&&LROCR.available){
+    LROCR.available().then(ok=>{
+      if(!ocrBtn.isConnected) return;
+      if(ok){
+        ocrBtn.hidden=false; ocrBtn.disabled=false;
+        ocrBtn.onclick=()=>LROCR.open(f);
+        if(ocrNote) ocrNote.textContent=t('m.ocrP');
+      }else{
+        ocrBtn.hidden=true; ocrBtn.disabled=true;
+        if(ocrNote) ocrNote.textContent=t('ocr.unavailable');
+      }
+    });
+  }else{
+    ocrBtn.hidden=true; ocrBtn.disabled=true;
+    if(ocrNote) ocrNote.textContent=t('ocr.unavailable');
+  }
   const agent=f.elements.agent; if(agent) agent.addEventListener('change',()=>{ f.elements.role.value=C.roleFor(agent.value); });
   if(f.elements.metricType) f.elements.metricType.addEventListener('change',()=>{ f.elements.score.max=f.elements.metricType.value==='performanceScore'?500:999;f.querySelector('[data-score-label]').textContent=C.metricLabel({metricType:f.elements.metricType.value}); });
   $('#shotBtn',f).addEventListener('click',async()=>{ const p=await invoke('pick_screenshot'); if(p){ form.shot=p; $('#shotBtn',f).textContent=t('m.shotOn',{f:p.split(/[\\/]/).pop()}).replace(/&amp;/g,'&'); } });

@@ -194,3 +194,5 @@ html.sheet-open .side,html.sheet-open .hint,html.sheet-open .app-toolbar,html.sh
 #developer-open[hidden]{display:none!important}
 .lu-filters .chips{max-height:240px;overflow:auto}
 .tutorial-detail ol{padding-left:24px;line-height:1.8}.tutorial-detail li{margin-bottom:12px}
+
+.match-advanced{margin:12px 0}.match-advanced>summary{cursor:pointer;padding:8px 0;font-weight:600}.match-quick{margin-bottom:8px}
