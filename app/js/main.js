@@ -120,6 +120,7 @@ function logForm(){
     </details>
     <div class="shotrow" data-shot-tools>
       <button type="button" class="btn ghost sm" data-open-ocr hidden disabled>${t('ocr.start')}</button>
+      <span class="muted xs" data-ocr-crop-hint hidden>${t('ocr.hintCropRow')}</span>
       <button type="button" class="btn ghost sm" id="shotBtn">${form.shot?esc(t('m.shotOn',{f:form.shot.split(/[\\/]/).pop()})):t('m.shot')}</button>
     </div>
     <p class="muted xs" data-ocr-note>${t('m.ocrP')}</p>
@@ -141,20 +142,24 @@ function bindForm(el){
   f.querySelector('[data-score-label]').textContent=C.metricLabel({game:form.game,metricType:f.elements.metricType?.value||(form.game==='cs2'?'adr':'performanceScore')});
   const ocrBtn=f.querySelector('[data-open-ocr]');
   const ocrNote=f.querySelector('[data-ocr-note]');
+  const ocrCropHint=f.querySelector('[data-ocr-crop-hint]');
   if(window.LROCR&&LROCR.available){
     LROCR.available().then(ok=>{
       if(!ocrBtn.isConnected) return;
       if(ok){
         ocrBtn.hidden=false; ocrBtn.disabled=false;
         ocrBtn.onclick=()=>LROCR.open(f);
+        if(ocrCropHint) ocrCropHint.hidden=false;
         if(ocrNote) ocrNote.textContent=t('m.ocrP');
       }else{
         ocrBtn.hidden=true; ocrBtn.disabled=true;
+        if(ocrCropHint) ocrCropHint.hidden=true;
         if(ocrNote) ocrNote.textContent=t('ocr.unavailable');
       }
     });
   }else{
     ocrBtn.hidden=true; ocrBtn.disabled=true;
+    if(ocrCropHint) ocrCropHint.hidden=true;
     if(ocrNote) ocrNote.textContent=t('ocr.unavailable');
   }
   const agent=f.elements.agent; if(agent) agent.addEventListener('change',()=>{ f.elements.role.value=C.roleFor(agent.value); });
