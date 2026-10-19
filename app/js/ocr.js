@@ -18,10 +18,16 @@ function load(){
   return scriptPromise;
 }
 
+/** Tesseract often inserts spaces between CJK glyphs ("表现 评分"). */
+function collapseCjkSpaces(text){
+  return String(text).replace(/([\u3400-\u9fff])\s+(?=[\u3400-\u9fff])/g,'$1');
+}
+
 function detectMetric(text){
-  return /Performance\s*Score|戰鬥表現評分|戰鬥表現分|战斗表现评分|战斗表现分|表现评分|表現評分|表现分数|表現分數/i.test(text)?'performanceScore'
-    :/\bACS\b/i.test(text)?'acs'
-    :/\bADR\b/i.test(text)?'adr'
+  const t=collapseCjkSpaces(text);
+  return /Performance\s*Score|戰鬥表現評分|戰鬥表現分|战斗表现评分|战斗表现分|表现评分|表現評分|表现分数|表現分數/i.test(t)?'performanceScore'
+    :/\bACS\b/i.test(t)?'acs'
+    :/\bADR\b/i.test(t)?'adr'
     :null;
 }
 
@@ -254,7 +260,7 @@ function parseAgent(text,game,hintLine,hintLi){
 function suggestions(text,game){
   const out={};
   const g=game||'val';
-  const raw=String(text||'');
+  const raw=collapseCjkSpaces(String(text||''));
 
   // 1) Labeled K/D/A (English / explicit headers)
   const kda=raw.match(/\bK\s*[/|]\s*D\s*[/|]\s*A\s*[:：]?\s*(\d{1,2})\s*[/|]\s*(\d{1,2})\s*[/|]\s*(\d{1,2})\b/i);
