@@ -140,8 +140,45 @@ test('collapsed newlines whole-text fallback', () => {
   same({ k: s.k, d: s.d, a: s.a, score: s.score }, { k: 30, d: 16, a: 2, score: 474 }, 'collapsed');
 });
 
+test('bare CN header 表现评分 detects performanceScore', () => {
+  const text = `按个人评分排序
+表现评分
+KDA
+BlueLulu 367 22/10/5`;
+  assert(LROCR.detectMetric(text)==='performanceScore', 'detectMetric 表现评分');
+  const s = LROCR.suggestions(text, 'val');
+  same({ k: s.k, d: s.d, a: s.a, score: s.score }, { k: 22, d: 10, a: 5, score: 367 }, 'cn row');
+});
+
+test('alias 表现分数 still detects performanceScore', () => {
+  assert(LROCR.detectMetric('表现分数 200')==='performanceScore', 'alias');
+});
+
+test('EN PERFORMANCE SCORE header detects performanceScore', () => {
+  const text = `PERFORMANCE SCORE
+KDA
+GIM 391 19/10/15`;
+  assert(LROCR.detectMetric(text)==='performanceScore', 'EN header');
+});
+
+test('low performance score 1 still parses', () => {
+  const text = `PERFORMANCE SCORE
+ifwu 1 6/19/2`;
+  const s = LROCR.suggestions(text, 'val');
+  same({ k: s.k, d: s.d, a: s.a, score: s.score }, { k: 6, d: 19, a: 2, score: 1 }, 'score 1');
+});
+
+test('score 0 still parses', () => {
+  const text = `表现评分
+player 0 3/14/0`;
+  const s = LROCR.suggestions(text, 'val');
+  same({ k: s.k, d: s.d, a: s.a, score: s.score }, { k: 3, d: 14, a: 0, score: 0 }, 'score 0');
+});
+
+
 if (!process.exitCode) {
   console.log(`\nAll ${passed} tests passed.`);
 } else {
   console.error(`\nFailed (passed ${passed} before failure).`);
 }
+
