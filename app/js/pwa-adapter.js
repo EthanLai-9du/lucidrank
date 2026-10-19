@@ -9,7 +9,7 @@
    Must load before core.js. */
 (function(){
 'use strict';
-const VERSION='0.1.7m';
+const VERSION='0.1.7n';
 const DB_NAME='lucidrank', DATA_KEY='data', SHOT_PREFIX='lrshot:';
 const LS_DATA='lr-web-data', LS_SHOT='lr-web-shot-';
 let accountId=localStorage.getItem('lr-account-id')||'';const dataKey=()=>accountId?'data:'+accountId:'data';const shotKey=id=>(accountId?accountId+':':'')+id;const lsKey=k=>k==='data'?LS_DATA:LS_DATA+':'+k;
