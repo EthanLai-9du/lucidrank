@@ -168,6 +168,21 @@ ifwu 1 6/19/2`;
   same({ k: s.k, d: s.d, a: s.a, score: s.score }, { k: 6, d: 19, a: 2, score: 1 }, 'score 1');
 });
 
+
+test('OCR-spaced 表现 评分 still detects performanceScore', () => {
+  const text = `按 个 人 评分 排序
+表现 评分
+KDA
+BlueLulu 367 22/10/5`;
+  assert(LROCR.detectMetric(text)==='performanceScore', 'spaced 表现 评分');
+  const s = LROCR.suggestions(text, 'val');
+  same({ k: s.k, d: s.d, a: s.a, score: s.score }, { k: 22, d: 10, a: 5, score: 367 }, 'spaced cn row');
+});
+
+test('fully spaced 表 现 评 分 detects', () => {
+  assert(LROCR.detectMetric('表 现 评 分')==='performanceScore', 'glyph spaces');
+});
+
 test('score 0 still parses', () => {
   const text = `表现评分
 player 0 3/14/0`;
