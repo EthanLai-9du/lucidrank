@@ -220,11 +220,6 @@ Object.assign(I18N,{
     "tc": "歷史 ACS",
     "en": "Legacy ACS"
   },
-  "m.acsHint": {
-    "sc": "旧对局请选择历史 ACS；不能与新评分换算。",
-    "tc": "舊對局請選擇歷史 ACS；不能與新評分換算。",
-    "en": "Choose legacy ACS for old matches; it cannot be converted."
-  },
   "ins.context": {
     "sc": "可比条件",
     "tc": "可比條件",
@@ -235,15 +230,10 @@ Object.assign(I18N,{
     "tc": "全部",
     "en": "All"
   },
-  "ins.exclude": {
-    "sc": "默认只分析正常状态、已填写模式／定位／版本的真实对局。旧记录仍保留在战绩。",
-    "tc": "預設只分析正常狀態、已填寫模式／定位／版本的真實對局。舊紀錄仍保留在戰績。",
-    "en": "Only real matches with normal health and recorded mode/role/patch enter the baseline. Old logs are preserved."
-  },
   "ins.excluded": {
-    "sc": "未纳入：{n} 局；选定同一特务、模式、版本、段位与组队条件后再比较。",
-    "tc": "未納入：{n} 局；選定同一特務、模式、版本、段位與組隊條件後再比較。",
-    "en": "Excluded: {n} matches. Compare the same agent, mode, patch, rank and party."
+    "sc": "未纳入：{n} 局",
+    "tc": "未納入：{n} 局",
+    "en": "Excluded: {n}"
   },
   "ins.ci": {
     "sc": "分数差 95% 重采样区间：{lo} 至 {hi}（按天）",
@@ -307,11 +297,6 @@ Object.assign(I18N,{
     "sc": "个人点位素材库",
     "tc": "個人點位素材庫",
     "en": "Personal lineup library"
-  },
-  "lib.lead": {
-    "sc": "三张原图，一个投法。按你自己的素材练习。",
-    "tc": "三張原圖，一個投法。按你自己的素材練習。",
-    "en": "Three original images per throw. Practice with your own references."
   },
   "lib.import": {
     "sc": "导入图片",
@@ -441,11 +426,6 @@ Object.assign(I18N,{
     "tc": "對局條件 · 自動沿用上一局，可展開修改",
     "en": "Match context · reuse last match, expand to edit"
   },
-  "m.ocrP": {
-    "sc": "能辨就辨，认不全就手填；空白不会当作零。",
-    "tc": "能辨就辨，認不全就手填；空白不會當作零。",
-    "en": "Auto-read when it can; otherwise type it in. Missing values are never zero."
-  },
   "ocr.start": {
     "sc": "截图辨识",
     "tc": "截圖辨識",
@@ -470,11 +450,6 @@ Object.assign(I18N,{
     "sc": "确认并带入",
     "tc": "確認並帶入",
     "en": "Confirm and apply"
-  },
-  "ocr.note": {
-    "sc": "图片只在本机处理。拖动框选自己的战绩区域；不确定的数字留空。只带入你确认的数值。",
-    "tc": "圖片只在本機處理。拖動框選自己的戰績區域；不確定的數字留空。只帶入你確認的數值。",
-    "en": "Processed on this device. Drag over your own stats. Leave uncertain values empty; only confirmed values are applied."
   },
   "ocr.busy": {
     "sc": "正在认结算页…",
@@ -506,11 +481,6 @@ Object.assign(I18N,{
     "tc": "沒認全，請補一下，大約 30 秒",
     "en": "Couldn't read everything — fill in the rest, about 30 seconds."
   },
-  "ocr.verify": {
-    "sc": "请核对本项",
-    "tc": "請核對本項",
-    "en": "Please verify this field"
-  },
   "ocr.hintCropRow": {
     "sc": "尽量只框自己那一行",
     "tc": "盡量只框自己那一行",
@@ -523,11 +493,6 @@ Object.assign(I18N,{
     "sc": "独立瞄准训练",
     "tc": "獨立瞄準訓練",
     "en": "Independent aim practice"
-  },
-  "train.lead": {
-    "sc": "练习与灵敏度试用对比，成绩来自实际操作。",
-    "tc": "練習與靈敏度試用比較，成績來自實際操作。",
-    "en": "Practice and sensitivity trials based on actual inputs."
   },
   "train.limit": {
     "sc": "网页版使用浏览器相对鼠标输入，不等同于 Windows Raw Input，也未校准为游戏内灵敏度。103° FOV 与 0.07° 换算仅为训练预设；建议值需在靶场核对。本工具不读取或修改游戏。",
@@ -846,10 +811,9 @@ Object.assign(I18N,{"ins.healthCompare": {"sc": "分数差：正常状态 {norma
 
 Object.assign(I18N,{'lu.agent':{sc:'英雄',tc:'英雄',en:'Agent'}});
 
-Object.assign(I18N,{"m.readiness": {"sc": "这场的准备与状态", "tc": "這場的準備與狀態", "en": "Preparation & session state"}, "m.readinessNote": {"sc": "按开局前的情况填写，记不清可留空。赛后补记请选择“赛后回忆”。", "tc": "按開局前的情況填寫，記不清可留空。賽後補記請選「賽後回憶」。", "en": "Describe the state before this match. Leave uncertain answers blank; mark retrospective entries as recalled after play."}, "m.pressure": {"sc": "开局前压力 / 烦躁（0–10）", "tc": "開局前壓力 / 煩躁（0–10）", "en": "Pre-match pressure / irritability (0–10)"}, "m.sessionMinutes": {"sc": "开局前已连续玩多久（分钟）", "tc": "開局前已連續玩多久（分鐘）", "en": "Time already playing before this match (min)"}, "m.rested": {"sc": "这段游戏期间离开座位休息过吗", "tc": "這段遊戲期間離開座位休息過嗎", "en": "Did you step away during this session?"}, "m.yes": {"sc": "有", "tc": "有", "en": "Yes"}, "m.no": {"sc": "没有", "tc": "沒有", "en": "No"}, "m.warmup": {"sc": "这场之前的热身", "tc": "這場之前的熱身", "en": "Warm-up before this match"}, "m.warmupMinutes": {"sc": "热身时长（分钟）", "tc": "熱身時長（分鐘）", "en": "Warm-up duration (min)"}, "m.warmup-none": {"sc": "未热身", "tc": "未熱身", "en": "No warm-up"}, "m.warmup-range": {"sc": "训练场", "tc": "訓練場", "en": "Practice range"}, "m.warmup-dm": {"sc": "死斗", "tc": "死鬥", "en": "Deathmatch"}, "m.warmup-aim": {"sc": "瞄准训练", "tc": "瞄準訓練", "en": "Aim training"}, "m.warmup-mixed": {"sc": "混合 / 其他", "tc": "混合 / 其他", "en": "Mixed / other"}, "m.reportTiming": {"sc": "这份状态何时填写", "tc": "這份狀態何時填寫", "en": "When was this state recorded?"}, "m.timing-pre": {"sc": "开局前填写", "tc": "開局前填寫", "en": "Before the match"}, "m.timing-post": {"sc": "赛后回忆", "tc": "賽後回憶", "en": "Recalled after play"}, "m.anomalyStatus": {"sc": "这场有没有设备 / 环境异常", "tc": "這場有沒有設備 / 環境異常", "en": "Technical / environmental issues this match"}, "m.issue-none": {"sc": "明确没有", "tc": "明確沒有", "en": "Confirmed none"}, "m.issue-yes": {"sc": "有异常（勾选下方）", "tc": "有異常（勾選下方）", "en": "Issues occurred (select below)"}, "m.anomalies": {"sc": "异常情况", "tc": "異常情況", "en": "Issues"}, "m.issue-stutter": {"sc": "掉帧 / 卡顿", "tc": "掉幀 / 卡頓", "en": "Frame drops / stutter"}, "m.issue-packetLoss": {"sc": "网络延迟 / 丢包", "tc": "網絡延遲 / 丟包", "en": "Latency / packet loss"}, "m.issue-disconnect": {"sc": "掉线", "tc": "斷線", "en": "Disconnected"}, "m.issue-interruption": {"sc": "被打断", "tc": "被打斷", "en": "Interrupted"}, "m.issue-other": {"sc": "其他异常", "tc": "其他異常", "en": "Other issue"}});
+Object.assign(I18N,{"m.readiness": {"sc": "这场的准备与状态", "tc": "這場的準備與狀態", "en": "Preparation & session state"}, "m.pressure": {"sc": "开局前压力 / 烦躁（0–10）", "tc": "開局前壓力 / 煩躁（0–10）", "en": "Pre-match pressure / irritability (0–10)"}, "m.sessionMinutes": {"sc": "开局前已连续玩多久（分钟）", "tc": "開局前已連續玩多久（分鐘）", "en": "Time already playing before this match (min)"}, "m.rested": {"sc": "这段游戏期间离开座位休息过吗", "tc": "這段遊戲期間離開座位休息過嗎", "en": "Did you step away during this session?"}, "m.yes": {"sc": "有", "tc": "有", "en": "Yes"}, "m.no": {"sc": "没有", "tc": "沒有", "en": "No"}, "m.warmup": {"sc": "这场之前的热身", "tc": "這場之前的熱身", "en": "Warm-up before this match"}, "m.warmupMinutes": {"sc": "热身时长（分钟）", "tc": "熱身時長（分鐘）", "en": "Warm-up duration (min)"}, "m.warmup-none": {"sc": "未热身", "tc": "未熱身", "en": "No warm-up"}, "m.warmup-range": {"sc": "训练场", "tc": "訓練場", "en": "Practice range"}, "m.warmup-dm": {"sc": "死斗", "tc": "死鬥", "en": "Deathmatch"}, "m.warmup-aim": {"sc": "瞄准训练", "tc": "瞄準訓練", "en": "Aim training"}, "m.warmup-mixed": {"sc": "混合 / 其他", "tc": "混合 / 其他", "en": "Mixed / other"}, "m.reportTiming": {"sc": "这份状态何时填写", "tc": "這份狀態何時填寫", "en": "When was this state recorded?"}, "m.timing-pre": {"sc": "开局前填写", "tc": "開局前填寫", "en": "Before the match"}, "m.timing-post": {"sc": "赛后回忆", "tc": "賽後回憶", "en": "Recalled after play"}, "m.anomalyStatus": {"sc": "这场有没有设备 / 环境异常", "tc": "這場有沒有設備 / 環境異常", "en": "Technical / environmental issues this match"}, "m.issue-none": {"sc": "明确没有", "tc": "明確沒有", "en": "Confirmed none"}, "m.issue-yes": {"sc": "有异常（勾选下方）", "tc": "有異常（勾選下方）", "en": "Issues occurred (select below)"}, "m.anomalies": {"sc": "异常情况", "tc": "異常情況", "en": "Issues"}, "m.issue-stutter": {"sc": "掉帧 / 卡顿", "tc": "掉幀 / 卡頓", "en": "Frame drops / stutter"}, "m.issue-packetLoss": {"sc": "网络延迟 / 丢包", "tc": "網絡延遲 / 丟包", "en": "Latency / packet loss"}, "m.issue-disconnect": {"sc": "掉线", "tc": "斷線", "en": "Disconnected"}, "m.issue-interruption": {"sc": "被打断", "tc": "被打斷", "en": "Interrupted"}, "m.issue-other": {"sc": "其他异常", "tc": "其他異常", "en": "Other issue"}});
 
 Object.assign(I18N,{
   "m.advanced": {"sc":"高级（段位 / 状态 / 更多数据）","tc":"進階（段位 / 狀態 / 更多數據）","en":"Advanced (rank / state / more stats)"},
-  "m.quickHint": {"sc":"默认 30 秒：结果 · K/D/A · 表现评分 · 地图 · 英雄。其余点「高级」。","tc":"預設 30 秒：結果 · K/D/A · 表現評分 · 地圖 · 英雄。其餘點「進階」。","en":"Default ~30s: result · K/D/A · performance score · map · agent. Rest under Advanced."},
   "ocr.unavailable": {"sc":"截图辨识暂不可用（缺少辨识组件）。请手填数字；截图仍可单独保存。","tc":"截圖辨識暫不可用（缺少辨識組件）。請手填數字；截圖仍可單獨保存。","en":"Screenshot OCR is unavailable (engine missing). Type numbers; you can still attach a screenshot."}
 });

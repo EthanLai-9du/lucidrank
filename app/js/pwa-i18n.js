@@ -2,7 +2,6 @@
    Loaded after the shared js/i18n.js and before core.js. sc = 简体 · tc = 繁體 (HK) · en. */
 Object.assign(I18N,{
   /* overrides: desktop wording that doesn't fit a phone / tablet */
-  'm.ocrP': {sc:'截图保留压缩小图；登录后随记录同步。数值请核对后填写。', tc:'截圖保留壓縮小圖；登入後隨記錄同步。數值請核對後填寫。', en:'A small screenshot copy is kept and synced when signed in. Review numbers before saving.'},
   's.dataP': {sc:'未登录时保存在本机；登录后可同步到云端。请保存账号恢复码，并定期导出备份。', tc:'未登入時儲存在本機；登入後可同步到雲端。請保存帳戶復原碼，並定期匯出備份。', en:'Guest data stays on this device. Sign in for cloud sync. Save your recovery code and export regular backups.'},
   's.exported': {sc:'已导出 {p}', tc:'已匯出 {p}', en:'Exported {p}'},
 
@@ -12,7 +11,6 @@ Object.assign(I18N,{
 
   /* settings (web) */
   'web.install': {sc:'添加到主屏幕', tc:'加入主畫面', en:'Add to Home Screen'},
-  'web.installP': {sc:'像 App 一样打开，没网也能用。', tc:'像 App 一樣開啟，沒有網絡也能用。', en:'Opens like an app and works offline.'},
   'web.installBtn': {sc:'安装', tc:'安裝', en:'Install'},
   'web.installIOS': {sc:'点 Safari 的分享按钮 {i}，再点「添加到主屏幕」。', tc:'按 Safari 的分享按鈕 {i}，再按「加入主畫面」。', en:'Tap Share {i} in Safari, then “Add to Home Screen”.'},
   'web.installOther': {sc:'在浏览器菜单里选「添加到主屏幕」或「安装应用」。', tc:'在瀏覽器選單揀「加到主畫面」或「安裝應用程式」。', en:'Use the browser menu: “Add to Home screen” or “Install app”.'},

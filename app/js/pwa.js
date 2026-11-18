@@ -32,9 +32,9 @@ async function promptInstall(){
 }
 function installHTML(){
   if(standalone()) return `<p class="muted sm">${t('web.installed')}</p>`;
-  if(deferred) return `<p class="muted sm">${t('web.installP')}</p><div class="row gap"><button class="btn primary" data-web="install">${t('web.installBtn')}</button></div>`;
-  if(isIOS) return `<p class="muted sm">${t('web.installP')} ${t('web.installIOS').replace('{i}',SHARE_ICON)}</p>`;
-  return `<p class="muted sm">${t('web.installP')} ${t('web.installOther')}</p>`;
+  if(deferred) return `<div class="row gap"><button class="btn primary" data-web="install">${t('web.installBtn')}</button></div>`;
+  if(isIOS) return `<p class="muted sm">${t('web.installIOS').replace('{i}',SHARE_ICON)}</p>`;
+  return `<p class="muted sm">${t('web.installOther')}</p>`;
 }
 function refreshInstall(){ const r=$('#instBody'); if(r) r.innerHTML=installHTML(); }
 
@@ -48,7 +48,7 @@ function maybeHint(){
   hintEl.innerHTML=hintHTML(); document.body.appendChild(hintEl); root.classList.add('hint-on');
 }
 function hintHTML(){
-  return `<div class="hint-b"><b>${t('web.install')}</b><p>${isIOS?t('web.installIOS').replace('{i}',SHARE_ICON):t('web.installP')}</p></div>
+  return `<div class="hint-b"><b>${t('web.install')}</b>${isIOS?`<p>${t('web.installIOS').replace('{i}',SHARE_ICON)}</p>`:''}</div>
     <div class="hint-a">${!isIOS&&deferred?`<button class="btn primary" data-web="install">${t('web.installBtn')}</button>`:''}<button class="btn ghost" data-web="hintx">${isIOS?t('web.dismiss'):t('web.later')}</button></div>`;
 }
 function hideHint(){ if(hintEl){ hintEl.remove(); hintEl=null; } root.classList.remove('hint-on'); }
